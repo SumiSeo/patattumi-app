@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "patattumi-app",
-    "slug": "patattumi-app",
+    "name": "patattumi",
+    "slug": "patattumi",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/favicon.png",
     "scheme": "patattumiapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
