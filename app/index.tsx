@@ -1,16 +1,11 @@
-import { Image , StyleSheet, Text, View } from 'react-native';
-import React from "react";
-import patattumiLogo from "../assets/images/favicon.png"
-import { Link } from "expo-router";
+import React, { useState } from "react";
+import { StyleSheet, View } from "react-native";
+import Splash from "../components/Landing/Splash";
 
 const Home = () => {
-  return (
-    <View style={styles.container}>
-      <Image source={patattumiLogo} style={styles.image} />
-      <Text style={styles.title}>Patattumi</Text>
-      <Link href="/koreanCulture">Culture</Link>
-    </View>
-  );
+  const [showSplash, setShowSplash] = useState(true);
+
+  return <View style={styles.container}>{showSplash && <Splash />}</View>;
 };
 
 export default Home;
@@ -21,15 +16,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#fff",
-  },
-  image: {
-    marginVertical: 15,
-    width: 60,
-    height: 60,
-  },
-  title: {
-    color: "black",
-    fontSize: 25,
-    fontWeight: "bold",
   },
 });
