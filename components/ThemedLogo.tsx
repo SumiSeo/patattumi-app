@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, ViewProps, ViewStyle } from "react-native";
+import { Image, StyleSheet, ViewProps, ViewStyle } from "react-native";
 
 interface ThemedViewProps extends ViewProps {
   style?: ViewStyle | ViewStyle[];
@@ -7,7 +7,14 @@ interface ThemedViewProps extends ViewProps {
 }
 
 const ThemedLogo: React.FC<ThemedViewProps> = ({ style, url, ...props }) => {
-  return <Image source={url} />;
+  return <Image style={styles.logo} source={url} />;
 };
 
 export default ThemedLogo;
+
+const styles = StyleSheet.create({
+  logo: {
+    width: 60,
+    height: 60,
+  },
+});

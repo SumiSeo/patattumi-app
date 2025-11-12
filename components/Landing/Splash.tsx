@@ -14,6 +14,9 @@ const Splash = () => {
       <Link style={styles.skip} href="/profile">
         Skip
       </Link>
+      <Link style={styles.skip} href="/login">
+        Login
+      </Link>
     </>
   );
 };
