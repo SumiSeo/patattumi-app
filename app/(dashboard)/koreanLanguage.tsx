@@ -5,10 +5,10 @@ import { StyleSheet } from 'react-native'
 
 const koreanLanguage = () => {
   return (
-    <ThemedView>
-    <ThemedText title>Lanaugae</ThemedText>
-   </ThemedView>
-  )
+    <ThemedView safe={true}>
+      <ThemedText title>Lanaugae</ThemedText>
+    </ThemedView>
+  );
 }
 
 export default koreanLanguage

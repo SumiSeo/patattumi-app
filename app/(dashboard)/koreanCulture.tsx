@@ -5,10 +5,10 @@ import { StyleSheet } from 'react-native'
 
 const koreanculture = () => {
   return (
-   <ThemedView>
-    <ThemedText title>Culture</ThemedText>
-   </ThemedView>
-  )
+    <ThemedView safe={true}>
+      <ThemedText title>Culture</ThemedText>
+    </ThemedView>
+  );
 }
 
 export default koreanculture

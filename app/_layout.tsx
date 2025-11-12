@@ -6,7 +6,7 @@ import { StyleSheet } from "react-native";
 
 const RootLayout = () => {
   return (
-    <ThemedView>
+    <ThemedView safe={true}>
       <StatusBar style="auto" />
       <Stack
         screenOptions={{

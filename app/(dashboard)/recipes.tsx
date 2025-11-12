@@ -5,10 +5,10 @@ import { StyleSheet } from 'react-native'
 
 const recipes = () => {
   return (
-    <ThemedView>
-    <ThemedText title>Recipe</ThemedText>
-   </ThemedView>
-  )
+    <ThemedView safe={true}>
+      <ThemedText title>Recipe</ThemedText>
+    </ThemedView>
+  );
 }
 
 export default recipes

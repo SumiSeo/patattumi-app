@@ -3,10 +3,10 @@ import ThemedView from '@/components/ThemedView'
 import React from 'react'
 const travelKorea = () => {
   return (
-  <ThemedView>
-    <ThemedText title>travel korean</ThemedText>
-   </ThemedView>
-  )
+    <ThemedView safe={true}>
+      <ThemedText title>travel korean</ThemedText>
+    </ThemedView>
+  );
 }
 
 export default travelKorea

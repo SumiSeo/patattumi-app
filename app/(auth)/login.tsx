@@ -12,7 +12,7 @@ const Login = () => {
   };
 
   return (
-    <ThemedView style={styles.container}>
+    <ThemedView safe={true}>
       <ThemedLogo url={PatattumiLogo} />
       <Spacer height={10} />
       <ThemedText title={true}>Patattumi</ThemedText>
