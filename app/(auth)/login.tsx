@@ -6,21 +6,19 @@ import ThemedView from "@/components/ThemedView";
 import React from "react";
 import { StyleSheet } from "react-native";
 
-const login = () => {
+const Login = () => {
   return (
     <ThemedView style={styles.container}>
       <ThemedLogo url={PatattumiLogo} />
-      <Spacer height={20} />
+      <Spacer height={10} />
       <ThemedText title={true}>Patattumi</ThemedText>
       <Spacer height={10} />
-      <ThemedText >
-       Votre avatar coréen vous attend !
-      </ThemedText>
+      <ThemedText>Votre avatar coréen vous attend !</ThemedText>
     </ThemedView>
   );
 };
 
-export default login;
+export default Login;
 
 const styles = StyleSheet.create({
   container: {

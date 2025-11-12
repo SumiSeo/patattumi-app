@@ -1,14 +1,16 @@
-import patattumiLogo from "@/assets/images/favicon.png";
+import PatattumiLogo from "@/assets/images/favicon.png";
 import { Link } from "expo-router";
 import React from "react";
-import { Image, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import Spacer from "../Spacer";
+import ThemedLogo from "../ThemedLogo";
 import ThemedText from "../ThemedText";
 
 const Splash = () => {
   return (
     <>
-      <Image source={patattumiLogo} style={styles.image} />
+      <ThemedLogo url={PatattumiLogo} />
+      <Spacer height={10} />
       <ThemedText title={true}>Patattumi</ThemedText>
       <Spacer height={20} />
       <Link style={styles.skip} href="/profile">
