@@ -9,21 +9,19 @@ import {
 
 interface ThemedButtonProps extends TextProps {
   style?: TextStyle | TextStyle[];
-  text: string;
-  handleSubmit? : ()=>void;
+  text?: string;
+  handleSubmit?: () => void;
 }
 
 const ThemedButton: React.FC<ThemedButtonProps> = ({
   style,
-  text ,
+  text = "Let's GO!",
   handleSubmit,
   ...props
 }) => {
   return (
     <Pressable style={styles.button} onPress={handleSubmit}>
-      <Text style={styles.buttonText}>
-        {text}
-      </Text>
+      <Text style={styles.buttonText}>{text}</Text>
     </Pressable>
   );
 };

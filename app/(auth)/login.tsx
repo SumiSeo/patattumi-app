@@ -19,7 +19,7 @@ const Login = () => {
       <Spacer height={10} />
       <ThemedText>Votre avatar coréen vous attend !</ThemedText>
       <Spacer height={10} />
-      <ThemedButton handleSubmit={handleSubmit} text="Let's GO!" />
+      <ThemedButton handleSubmit={handleSubmit} />
     </ThemedView>
   );
 };
