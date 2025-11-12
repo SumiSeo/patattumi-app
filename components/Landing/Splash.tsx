@@ -1,14 +1,18 @@
+import patattumiLogo from "@/assets/images/favicon.png";
 import { Link } from "expo-router";
 import React from "react";
 import { Image, StyleSheet, Text } from "react-native";
-import patattumiLogo from "../../assets/images/favicon.png";
+import Spacer from "../Spacer";
 
 const Splash = () => {
   return (
     <>
       <Image source={patattumiLogo} style={styles.image} />
       <Text style={styles.title}>Patattumi</Text>
-      <Link style={styles.skip} href="/profile">Skip</Link>
+      <Spacer height={20} />
+      <Link style={styles.skip} href="/profile">
+        Skip
+      </Link>
     </>
   );
 };
@@ -32,9 +36,8 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
   },
-  skip:{
-    paddingTop:30,
-    textDecorationLine:"underline",
-    fontSize:10
-  }
+  skip: {
+    textDecorationLine: "underline",
+    fontSize: 10,
+  },
 });

@@ -5,16 +5,16 @@ interface ThemedViewProps extends ViewProps {
   style?: ViewStyle | ViewStyle[];
 }
 
-const ThemedView: React.FC<ThemedViewProps> = ({ style, ...props }) => {
-  return <View style={[styles.container, style]} {...props} />;
+const ThemedCard: React.FC<ThemedViewProps> = ({ style, ...props }) => {
+  return <View style={[styles.card, style]} {...props} />;
 };
 
 
-export default ThemedView;
+export default ThemedCard;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
+  card: {
+    borderRadius:5,
+    padding:20,
   },
 });
