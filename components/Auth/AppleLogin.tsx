@@ -1,3 +1,4 @@
+import { useUser } from "@/hooks/useUser";
 import * as AppleAuthentication from "expo-apple-authentication";
 import { StyleSheet, View } from "react-native";
 
@@ -10,6 +11,8 @@ type LoginProps = {
 };
 
 export default function AppleLogin({ setLoggedIn, setError }: LoginProps) {
+  const { user, appleLogin, appleRegister } = useUser();
+
   return (
     <View>
       <AppleAuthentication.AppleAuthenticationButton
@@ -18,6 +21,7 @@ export default function AppleLogin({ setLoggedIn, setError }: LoginProps) {
         cornerRadius={5}
         style={styles.button}
         onPress={async () => {
+          console.log("current user", user);
           try {
             const credential = await AppleAuthentication.signInAsync({
               requestedScopes: [
@@ -28,8 +32,14 @@ export default function AppleLogin({ setLoggedIn, setError }: LoginProps) {
             // signed in
             if (credential) {
               console.log("credential", credential);
-              //set up to db, and asyncstorage ->
-              setLoggedIn(true);
+              if (credential.email) {
+                const email = credential.email;
+                const name = `${credential.fullName?.givenName} ${credential.fullName?.givenName}`;
+                appleRegister(email, name);
+              } else {
+                // just normal login
+                // await appleLogin();
+              }
             }
           } catch (e) {
             const err = e as CodedError;
