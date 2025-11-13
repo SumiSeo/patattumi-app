@@ -4,8 +4,12 @@ import { StyleSheet, View } from "react-native";
 interface CodedError extends Error {
   code?: string;
 }
+type LoginProps = {
+  setError: (err: boolean) => void;
+  setLoggedIn: (logged: boolean) => void;
+};
 
-export default function AppleLogin() {
+export default function AppleLogin({ setLoggedIn, setError }: LoginProps) {
   return (
     <View>
       <AppleAuthentication.AppleAuthenticationButton
@@ -25,12 +29,14 @@ export default function AppleLogin() {
             if (credential) {
               console.log("credential", credential);
               //set up to db, and asyncstorage ->
+              setLoggedIn(true);
             }
           } catch (e) {
             const err = e as CodedError;
             if (err.code === "ERR_REQUEST_CANCELED") {
               console.error(err);
-            } 
+              setError(true);
+            }
           }
         }}
       />
