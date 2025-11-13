@@ -35,9 +35,11 @@ export default function AppleLogin({ setLoggedIn, setError }: LoginProps) {
               if (credential.email) {
                 const email = credential.email;
                 const name = `${credential.fullName?.givenName} ${credential.fullName?.givenName}`;
-                appleRegister(email, name);
+                await appleRegister(email, name);
               } else {
                 // just normal login
+                const appleUserId = credential.user;
+                await appleLogin(appleUserId);
                 // await appleLogin();
               }
             }

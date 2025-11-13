@@ -8,7 +8,7 @@ type UserType = {
 };
 type UserContextType = {
   user: UserType | null;
-  appleLogin: (email: string, name: string) => Promise<void>;
+  appleLogin: (userId: string) => Promise<void>;
   appleRegister: (email: string, name: string) => Promise<void>;
   logout: () => Promise<void>;
 };
@@ -18,12 +18,12 @@ export const UserContext = createContext<UserContextType | null>(null);
 export function UserProvider({ children }: UserProviderProps) {
   const [user, setUser] = useState<UserType | null>(null);
 
-  async function appleLogin(email: string, name: string) {}
+  async function appleLogin(userId: string) {}
   async function appleRegister(email: string, name: string) {}
 
   async function logout() {}
   return (
-    <UserContext.Provider value={{ user, appleLogin, logout,appleRegister }}>
+    <UserContext.Provider value={{ user, appleLogin, logout, appleRegister }}>
       {children}
     </UserContext.Provider>
   );
