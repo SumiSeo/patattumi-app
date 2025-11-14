@@ -9,6 +9,7 @@ import { useUser } from "@/hooks/useUser";
 import { useRouter } from "expo-router";
 import { StyleSheet } from "react-native";
 
+import ThemedError from "@/components/ThemedError";
 import React, { useEffect, useState } from "react";
 
 const Login = () => {
@@ -31,8 +32,8 @@ const Login = () => {
   };
 
   useEffect(() => {
+    setError(null);
     if (loggedIn) {
-      console.log("here?");
       router.navigate("/profile");
     }
   }, [loggedIn, router]);
@@ -63,14 +64,16 @@ const Login = () => {
       <Spacer height={20} />
 
       {error !== null && (
-        <ThemedText
-          color="red"
-          style={{
-            fontWeight: "bold",
-          }}
-        >
-          {error}
-        </ThemedText>
+        <ThemedError>
+          <ThemedText
+            color="red"
+            style={{
+              fontWeight: "bold",
+            }}
+          >
+            {error}
+          </ThemedText>
+        </ThemedError>
       )}
       {/* <GoogleLogin /> */}
       {/* <AppleLogin /> */}

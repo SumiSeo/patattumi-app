@@ -36,7 +36,6 @@ export function UserProvider({ children }: UserProviderProps) {
       const appleData = await getAppleUser({
         variables: { provider_id: providerId },
       });
-      console.log(appleData);
       if (appleData.error) throw new Error(appleData.error.message);
 
       const userId = appleData.data?.apple_users_by_pk?.user_id;

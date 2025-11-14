@@ -14,7 +14,9 @@ export default ThemedError;
 const styles = StyleSheet.create({
   card: {
     color: "red",
-    borderRadius: 5,
-    padding: 20,
+    borderRadius: 6,
+    padding: 10,
+    backgroundColor: "#f5c1c8",
+    marginHorizontal: 2,
   },
 });
