@@ -11,12 +11,14 @@ import {
   UserType,
 } from "@/types/UserContextType";
 import { useLazyQuery, useMutation } from "@apollo/client/react";
-import { createContext, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { createContext, useEffect, useState } from "react";
 
 export const UserContext = createContext<UserContextType | null>(null);
 
 export function UserProvider({ children }: UserProviderProps) {
   const [user, setUser] = useState<UserType | null>(null);
+  const [authChecked, setAuthChecked] = useState<boolean>(false);
   const [InsertUser] = useMutation<InsertUserData, InsertUserVars>(
     ADD_USER_ONE
   );
@@ -30,6 +32,24 @@ export function UserProvider({ children }: UserProviderProps) {
     fetchPolicy: "network-only",
     errorPolicy: "all",
   });
+
+  async function getInitialUserValue() {
+    try {
+      const value = await AsyncStorage.getItem("user");
+      if (value) {
+        const userObj = JSON.parse(value);
+        if (value) setUser(userObj);
+      }
+    } catch (error) {
+      if (error instanceof Error) setUser(null);
+    } finally {
+      setAuthChecked(true);
+    }
+  }
+
+  useEffect(() => {
+    getInitialUserValue();
+  }, []);
 
   async function appleSignIn(providerId: string) {
     try {
@@ -47,15 +67,16 @@ export function UserProvider({ children }: UserProviderProps) {
       if (userData.error) throw new Error(userData.error.message);
       const u = userData.data?.users_by_pk;
       if (!u) throw new Error("Something went wrong!");
-
-      setUser({
+      const userObj = {
         id: u.id,
         name: u.name,
         email: u.email,
         country: u.country,
         points: u.points,
         role: u.role,
-      });
+      };
+      setUser(userObj);
+      await AsyncStorage.setItem("user", JSON.stringify(userObj));
     } catch (e: any) {
       throw Error(e.message);
     }
@@ -92,7 +113,9 @@ export function UserProvider({ children }: UserProviderProps) {
 
   async function logout() {}
   return (
-    <UserContext.Provider value={{ user, appleSignIn, logout, appleRegister }}>
+    <UserContext.Provider
+      value={{ user, appleSignIn, logout, appleRegister, authChecked }}
+    >
       {children}
     </UserContext.Provider>
   );

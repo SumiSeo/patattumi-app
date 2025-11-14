@@ -12,6 +12,7 @@ export type UserContextType = {
     provider_id: string
   ) => Promise<void>;
   logout: () => Promise<void>;
+  authChecked: boolean;
 };
 
 export type UserType = {

@@ -1,3 +1,4 @@
+import ThemedCard from "@/components/ThemedCard";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
 import { useUser } from "@/hooks/useUser";
@@ -8,6 +9,9 @@ const Profile = () => {
   return (
     <ThemedView safe={true}>
       <ThemedText title>Profile</ThemedText>
+      <ThemedCard>
+        <ThemedText title>{user?.email}</ThemedText>
+      </ThemedCard>
     </ThemedView>
   );
 };
