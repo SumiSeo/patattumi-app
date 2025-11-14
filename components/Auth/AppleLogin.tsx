@@ -29,18 +29,22 @@ export default function AppleLogin({ setLoggedIn, setError }: LoginProps) {
                 AppleAuthentication.AppleAuthenticationScope.EMAIL,
               ],
             });
-            // signed in
             if (credential) {
-              console.log("credential", credential);
+              // Create new user
               if (credential.email) {
                 const email = credential.email;
                 const name = `${credential.fullName?.givenName} ${credential.fullName?.givenName}`;
-                await appleRegister(email, name);
+                const providerId = credential.user;
+                // await appleRegister(email, name, providerId);
               } else {
-                // just normal login
-                const appleUserId = credential.user;
-                await appleLogin(appleUserId);
-                // await appleLogin();
+                console.log("only login");
+                const providerId = credential.user;
+                await appleLogin(providerId);
+                // await appleRegister(
+                //   "patate-test4",
+                //   "patate-test4@gmail.com",
+                //   "001433.54aa1ea53ed54e49a58e792388df6ccd.1346"
+                // );
               }
             }
           } catch (e) {
