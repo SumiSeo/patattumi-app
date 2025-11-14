@@ -6,37 +6,29 @@ import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
 import ThemedButton from "@/components/ThmedButton";
 import { useUser } from "@/hooks/useUser";
-import { useRouter } from "expo-router";
 import { StyleSheet } from "react-native";
 
 import ThemedError from "@/components/ThemedError";
 import React, { useEffect, useState } from "react";
 
 const Login = () => {
-  const router = useRouter();
   const { appleSignIn } = useUser();
 
   const [error, setError] = useState<string | null>(null);
-  const [loggedIn, setLoggedIn] = useState(false);
 
   const fakeLogin = async () => {
     setError(null);
     try {
       const fake = "001433.54aa1ea53ed54e49a58e792388df6ccd.1346";
       await appleSignIn(fake);
-      setLoggedIn(true);
     } catch (error: any) {
-      setLoggedIn(false);
       setError(error.message);
     }
   };
 
   useEffect(() => {
     setError(null);
-    if (loggedIn) {
-      router.navigate("/profile");
-    }
-  }, [loggedIn, router]);
+  }, []);
 
   return (
     <ThemedView safe={true} style={styles.container}>
@@ -60,7 +52,7 @@ const Login = () => {
 
       <ThemedButton handleSubmit={fakeLogin}></ThemedButton>
       <Spacer height={10} />
-      <AppleLogin setError={setError} setLoggedIn={setLoggedIn} />
+      <AppleLogin setError={setError} />
       <Spacer height={20} />
 
       {error !== null && (

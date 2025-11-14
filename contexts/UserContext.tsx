@@ -111,7 +111,11 @@ export function UserProvider({ children }: UserProviderProps) {
     }
   }
 
-  async function logout() {}
+  async function logout() {
+    await AsyncStorage.removeItem("user");
+    setUser(null);
+  }
+
   return (
     <UserContext.Provider
       value={{ user, appleSignIn, logout, appleRegister, authChecked }}

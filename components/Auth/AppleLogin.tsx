@@ -7,10 +7,9 @@ interface CodedError extends Error {
 }
 type LoginProps = {
   setError: (err: string) => void;
-  setLoggedIn: (logged: boolean) => void;
 };
 
-export default function AppleLogin({ setLoggedIn, setError }: LoginProps) {
+export default function AppleLogin({ setError }: LoginProps) {
   const { user, appleSignIn, appleRegister } = useUser();
 
   return (
@@ -37,7 +36,6 @@ export default function AppleLogin({ setLoggedIn, setError }: LoginProps) {
               } else {
                 const providerId = credential.user;
                 await appleSignIn(providerId);
-                setLoggedIn(true);
               }
             }
           } catch (e) {
