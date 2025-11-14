@@ -33,5 +33,5 @@ const ThemedView: React.FC<ThemedViewProps> = ({
 export default ThemedView;
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff" },
+  container: { flex: 1, backgroundColor: "#fff", paddingHorizontal: 6 },
 });

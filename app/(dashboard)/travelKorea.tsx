@@ -1,12 +1,12 @@
-import ThemedText from '@/components/ThemedText'
-import ThemedView from '@/components/ThemedView'
-import React from 'react'
+import ThemedText from "@/components/ThemedText";
+import ThemedView from "@/components/ThemedView";
+import React from "react";
 const travelKorea = () => {
   return (
     <ThemedView safe={true}>
-      <ThemedText title>travel korean</ThemedText>
+      <ThemedText title>Voyage</ThemedText>
     </ThemedView>
   );
-}
+};
 
-export default travelKorea
+export default travelKorea;

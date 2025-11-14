@@ -6,7 +6,7 @@ import { StyleSheet } from 'react-native'
 const recipes = () => {
   return (
     <ThemedView safe={true}>
-      <ThemedText title>Recipe</ThemedText>
+      <ThemedText title>Recettes</ThemedText>
     </ThemedView>
   );
 }
