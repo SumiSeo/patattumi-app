@@ -21,7 +21,6 @@ export default function AppleLogin({ setLoggedIn, setError }: LoginProps) {
         cornerRadius={5}
         style={styles.button}
         onPress={async () => {
-          console.log("current user", user);
           try {
             const credential = await AppleAuthentication.signInAsync({
               requestedScopes: [

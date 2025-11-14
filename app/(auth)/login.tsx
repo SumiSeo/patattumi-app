@@ -21,23 +21,21 @@ const Login = () => {
   const fakeLogin = async () => {
     setError(null);
     try {
-      await appleSignIn("001433.54aa1ea53ed54e49a58e792388df6ccd.1346");
-    } catch (error) {
-      if (error instanceof Error) setError(error.message);
-      else setError("Unknown login error");
-    } finally {
-      if (error === null) setLoggedIn(true);
+      const fake = "001433.54aa1ea53ed54e49a58e792388df6ccd.1346";
+      await appleSignIn(fake);
+      setLoggedIn(true);
+    } catch (error: any) {
+      setLoggedIn(false);
+      setError(error.message);
     }
   };
 
   useEffect(() => {
     if (loggedIn) {
+      console.log("here?");
       router.navigate("/profile");
     }
-    if (error) {
-      console.log("ERROR");
-    }
-  }, [error, loggedIn, router]);
+  }, [loggedIn, router]);
 
   return (
     <ThemedView safe={true} style={styles.container}>
@@ -64,7 +62,7 @@ const Login = () => {
       <AppleLogin setError={setError} setLoggedIn={setLoggedIn} />
       <Spacer height={10} />
 
-      {error && <ThemedText>{error}</ThemedText>}
+      {error !== null && <ThemedText>{error}</ThemedText>}
       {/* <GoogleLogin /> */}
       {/* <AppleLogin /> */}
     </ThemedView>

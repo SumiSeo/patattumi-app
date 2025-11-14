@@ -22,24 +22,32 @@ export function UserProvider({ children }: UserProviderProps) {
   );
   const [InsertAppleUser] =
     useMutation<InsertAppleUserData>(ADD_APPLE_USER_ONE);
-  const [getAppleUser] = useLazyQuery<AppleUserData>(QUERY_APPLE_USER);
-  const [getUserById] = useLazyQuery<UserData>(QUERY_USER_ONE);
+  const [getAppleUser] = useLazyQuery<AppleUserData>(QUERY_APPLE_USER, {
+    fetchPolicy: "network-only",
+    errorPolicy: "all",
+  });
+  const [getUserById] = useLazyQuery<UserData>(QUERY_USER_ONE, {
+    fetchPolicy: "network-only",
+    errorPolicy: "all",
+  });
 
   async function appleSignIn(providerId: string) {
     try {
       const appleData = await getAppleUser({
         variables: { provider_id: providerId },
       });
+      console.log(appleData);
+      if (appleData.error) throw new Error(appleData.error.message);
 
       const userId = appleData.data?.apple_users_by_pk?.user_id;
-      if (!userId) throw new Error("Apple user not found");
+      if (!userId) throw new Error("Something went wrong!");
 
       const userData = await getUserById({
         variables: { id: userId },
       });
-
+      if (userData.error) throw new Error(userData.error.message);
       const u = userData.data?.users_by_pk;
-      if (!u) throw new Error("User not found");
+      if (!u) throw new Error("Something went wrong!");
 
       setUser({
         id: u.id,
@@ -49,10 +57,8 @@ export function UserProvider({ children }: UserProviderProps) {
         points: u.points,
         role: u.role,
       });
-    } catch (e) {
-      console.error(e);
-      if (e instanceof Error) throw e;
-      throw new Error("Unknown error during Apple sign in");
+    } catch (e: any) {
+      throw Error(e.message);
     }
   }
 
