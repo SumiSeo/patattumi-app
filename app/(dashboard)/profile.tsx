@@ -3,7 +3,7 @@ import ThemedView from "@/components/ThemedView";
 import React from "react";
 import { StyleSheet } from "react-native";
 
-const profile = () => {
+const Profile = () => {
   return (
     <ThemedView safe={true}>
       <ThemedText title>Profile</ThemedText>
@@ -11,6 +11,6 @@ const profile = () => {
   );
 };
 
-export default profile;
+export default Profile;
 
 const styles = StyleSheet.create({});
