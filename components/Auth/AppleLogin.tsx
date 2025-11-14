@@ -6,7 +6,7 @@ interface CodedError extends Error {
   code?: string;
 }
 type LoginProps = {
-  setError: (err: boolean) => void;
+  setError: (err: string) => void;
   setLoggedIn: (logged: boolean) => void;
 };
 
@@ -45,7 +45,7 @@ export default function AppleLogin({ setLoggedIn, setError }: LoginProps) {
             const err = e as CodedError;
             if (err.code === "ERR_REQUEST_CANCELED") {
               console.error(err);
-              setError(true);
+              // setError(true);
             }
           }
         }}

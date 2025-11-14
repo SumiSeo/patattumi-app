@@ -51,6 +51,8 @@ export function UserProvider({ children }: UserProviderProps) {
       });
     } catch (e) {
       console.error(e);
+      if (e instanceof Error) throw e;
+      throw new Error("Unknown error during Apple sign in");
     }
   }
 
@@ -79,9 +81,7 @@ export function UserProvider({ children }: UserProviderProps) {
         if (providerId) await appleSignIn(providerId);
       }
     } catch (e) {
-      if (e instanceof Error) {
-        console.error(e.message);
-      }
+      if (e instanceof Error) throw Error(e.message);
     }
   }
 

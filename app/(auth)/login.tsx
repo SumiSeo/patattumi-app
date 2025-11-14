@@ -15,12 +15,19 @@ const Login = () => {
   const router = useRouter();
   const { appleSignIn } = useUser();
 
-  const [error, setError] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
   const [loggedIn, setLoggedIn] = useState(false);
 
   const fakeLogin = async () => {
-    await appleSignIn("001433.54aa1ea53ed54e49a58e792388df6ccd.1346");
-    setLoggedIn(true);
+    setError(null);
+    try {
+      await appleSignIn("001433.54aa1ea53ed54e49a58e792388df6ccd.1346");
+    } catch (error) {
+      if (error instanceof Error) setError(error.message);
+      else setError("Unknown login error");
+    } finally {
+      if (error === null) setLoggedIn(true);
+    }
   };
 
   useEffect(() => {
@@ -56,6 +63,8 @@ const Login = () => {
       <Spacer height={10} />
       <AppleLogin setError={setError} setLoggedIn={setLoggedIn} />
       <Spacer height={10} />
+
+      {error && <ThemedText>{error}</ThemedText>}
       {/* <GoogleLogin /> */}
       {/* <AppleLogin /> */}
     </ThemedView>
