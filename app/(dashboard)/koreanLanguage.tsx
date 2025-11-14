@@ -6,7 +6,7 @@ import { StyleSheet } from 'react-native'
 const koreanLanguage = () => {
   return (
     <ThemedView safe={true}>
-      <ThemedText title>Lanaugae</ThemedText>
+      <ThemedText title>Coréen</ThemedText>
     </ThemedView>
   );
 }

@@ -1,10 +1,10 @@
 import React from "react";
 import {
-    Pressable,
-    StyleSheet,
-    Text,
-    TextProps,
-    TextStyle,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextProps,
+  TextStyle,
 } from "react-native";
 
 interface ThemedButtonProps extends TextProps {
@@ -38,8 +38,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 120,
     paddingVertical: 12,
     cursor: "pointer",
-    borderRadius: 10,
-
+    borderRadius: 20,
   },
   pressed: {
     opacity: 0.8,
@@ -47,6 +46,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 14,
     color: "#fff",
-    fontWeight:"bold"
+    fontWeight: "bold",
+    textAlign: "center",
   },
 });
