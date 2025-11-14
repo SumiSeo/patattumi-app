@@ -7,10 +7,10 @@ import ThemedView from "@/components/ThemedView";
 import ThemedButton from "@/components/ThmedButton";
 import { useUser } from "@/hooks/useUser";
 import { useRouter } from "expo-router";
+import { StyleSheet } from "react-native";
 
 import React, { useEffect, useState } from "react";
 
-import { StyleSheet } from "react-native";
 const Login = () => {
   const router = useRouter();
   const { appleSignIn } = useUser();
@@ -60,9 +60,18 @@ const Login = () => {
       <ThemedButton handleSubmit={fakeLogin}></ThemedButton>
       <Spacer height={10} />
       <AppleLogin setError={setError} setLoggedIn={setLoggedIn} />
-      <Spacer height={10} />
+      <Spacer height={20} />
 
-      {error !== null && <ThemedText>{error}</ThemedText>}
+      {error !== null && (
+        <ThemedText
+          color="red"
+          style={{
+            fontWeight: "bold",
+          }}
+        >
+          {error}
+        </ThemedText>
+      )}
       {/* <GoogleLogin /> */}
       {/* <AppleLogin /> */}
     </ThemedView>
