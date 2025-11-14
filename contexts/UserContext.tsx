@@ -2,6 +2,7 @@ import { ADD_APPLE_USER_ONE, ADD_USER_ONE } from "@/mutations/AddUser";
 import { QUERY_APPLE_USER, QUERY_USER_ONE } from "@/queries/UserQuery";
 import {
   AppleUserData,
+  InsertAppleUserData,
   InsertUserData,
   InsertUserVars,
   UserContextType,
@@ -19,11 +20,12 @@ export function UserProvider({ children }: UserProviderProps) {
   const [InsertUser] = useMutation<InsertUserData, InsertUserVars>(
     ADD_USER_ONE
   );
-  const [InsertAppleUser] = useMutation(ADD_APPLE_USER_ONE);
+  const [InsertAppleUser] =
+    useMutation<InsertAppleUserData>(ADD_APPLE_USER_ONE);
   const [getAppleUser] = useLazyQuery<AppleUserData>(QUERY_APPLE_USER);
   const [getUserById] = useLazyQuery<UserData>(QUERY_USER_ONE);
 
-  async function appleLogin(providerId: string) {
+  async function appleSignIn(providerId: string) {
     try {
       const appleData = await getAppleUser({
         variables: { provider_id: providerId },
@@ -67,12 +69,14 @@ export function UserProvider({ children }: UserProviderProps) {
       });
       if (result) {
         const id = result.data?.insert_users_one?.id;
-        await InsertAppleUser({
+        const res = await InsertAppleUser({
           variables: {
             provider_id,
             user_id: id,
           },
         });
+        const providerId = res.data?.insert_apple_users_one?.provider_id;
+        if (providerId) await appleSignIn(providerId);
       }
     } catch (e) {
       if (e instanceof Error) {
@@ -83,7 +87,7 @@ export function UserProvider({ children }: UserProviderProps) {
 
   async function logout() {}
   return (
-    <UserContext.Provider value={{ user, appleLogin, logout, appleRegister }}>
+    <UserContext.Provider value={{ user, appleSignIn, logout, appleRegister }}>
       {children}
     </UserContext.Provider>
   );

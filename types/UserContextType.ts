@@ -5,7 +5,7 @@ export interface UserProviderProps {
 }
 export type UserContextType = {
   user: UserType | null;
-  appleLogin: (providerId: string) => Promise<void>;
+  appleSignIn: (providerId: string) => Promise<void>;
   appleRegister: (
     email: string,
     name: string,
@@ -13,7 +13,6 @@ export type UserContextType = {
   ) => Promise<void>;
   logout: () => Promise<void>;
 };
-
 
 export type UserType = {
   id: string;
@@ -23,7 +22,6 @@ export type UserType = {
   points?: number;
   role?: string;
 };
-
 
 export type AppleUserData = {
   apple_users_by_pk: {
@@ -48,6 +46,12 @@ export type InsertUserData = {
     name: string;
     email: string;
     provider: string;
+  } | null;
+};
+
+export type InsertAppleUserData = {
+  insert_apple_users_one: {
+    provider_id: string;
   } | null;
 };
 

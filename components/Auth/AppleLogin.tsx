@@ -11,7 +11,7 @@ type LoginProps = {
 };
 
 export default function AppleLogin({ setLoggedIn, setError }: LoginProps) {
-  const { user, appleLogin, appleRegister } = useUser();
+  const { user, appleSignIn, appleRegister } = useUser();
 
   return (
     <View>
@@ -37,7 +37,7 @@ export default function AppleLogin({ setLoggedIn, setError }: LoginProps) {
                 await appleRegister(email, name, providerId);
               } else {
                 const providerId = credential.user;
-                await appleLogin(providerId);
+                await appleSignIn(providerId);
                 setLoggedIn(true);
               }
             }

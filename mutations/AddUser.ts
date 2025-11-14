@@ -20,6 +20,7 @@ export const ADD_APPLE_USER_ONE = gql`
       object: { provider_id: $provider_id, user_id: $user_id }
     ) {
       id
+      provider_id
     }
   }
 `;

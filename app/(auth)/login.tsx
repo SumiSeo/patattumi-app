@@ -4,6 +4,8 @@ import Spacer from "@/components/Spacer";
 import ThemedLogo from "@/components/ThemedLogo";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
+import ThemedButton from "@/components/ThmedButton";
+import { useUser } from "@/hooks/useUser";
 import { useRouter } from "expo-router";
 
 import React, { useEffect, useState } from "react";
@@ -11,9 +13,15 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 const Login = () => {
   const router = useRouter();
+  const { appleSignIn } = useUser();
 
   const [error, setError] = useState<boolean>(false);
   const [loggedIn, setLoggedIn] = useState(false);
+
+  const fakeLogin = async () => {
+    await appleSignIn("001433.54aa1ea53ed54e49a58e792388df6ccd.1346");
+    setLoggedIn(true);
+  };
 
   useEffect(() => {
     if (loggedIn) {
@@ -44,6 +52,8 @@ const Login = () => {
       </ThemedText>
       <Spacer height={30} />
 
+      <ThemedButton handleSubmit={fakeLogin}></ThemedButton>
+      <Spacer height={10} />
       <AppleLogin setError={setError} setLoggedIn={setLoggedIn} />
       <Spacer height={10} />
       {/* <GoogleLogin /> */}
