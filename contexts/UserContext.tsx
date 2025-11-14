@@ -1,16 +1,23 @@
 import { ADD_APPLE_USER_ONE, ADD_USER_ONE } from "@/mutations/AddUser";
-import { useMutation } from "@apollo/client/react";
+import { QUERY_APPLE_USER, QUERY_USER_ONE } from "@/queries/UserQuery";
+import { useLazyQuery, useMutation } from "@apollo/client/react";
 import { createContext, ReactNode, useState } from "react";
 interface UserProviderProps {
   children: ReactNode;
 }
+
 type UserType = {
+  id: string;
   name: string;
   email: string;
+  country?: string;
+  points?: number;
+  role?: string;
 };
+
 type UserContextType = {
   user: UserType | null;
-  appleLogin: (userId: string) => Promise<void>;
+  appleLogin: (providerId: string) => Promise<void>;
   appleRegister: (
     email: string,
     name: string,
@@ -18,6 +25,24 @@ type UserContextType = {
   ) => Promise<void>;
   logout: () => Promise<void>;
 };
+
+type AppleUserData = {
+  apple_users_by_pk: {
+    user_id: string;
+  } | null;
+};
+
+type UserData = {
+  users_by_pk: {
+    id: string;
+    name: string;
+    email: string;
+    country?: string;
+    points?: number;
+    role?: string;
+  } | null;
+};
+
 type InsertUserData = {
   insert_users_one: {
     id: string;
@@ -36,14 +61,43 @@ type InsertUserVars = {
 export const UserContext = createContext<UserContextType | null>(null);
 
 export function UserProvider({ children }: UserProviderProps) {
+  const [user, setUser] = useState<UserType | null>(null);
   const [InsertUser] = useMutation<InsertUserData, InsertUserVars>(
     ADD_USER_ONE
   );
   const [InsertAppleUser] = useMutation(ADD_APPLE_USER_ONE);
+  const [getAppleUser] = useLazyQuery<AppleUserData>(QUERY_APPLE_USER);
+  const [getUserById] = useLazyQuery<UserData>(QUERY_USER_ONE);
 
-  const [user, setUser] = useState<UserType | null>(null);
+  async function appleLogin(providerId: string) {
+    try {
+      const appleData = await getAppleUser({
+        variables: { provider_id: providerId },
+      });
 
-  async function appleLogin(userId: string) {}
+      const userId = appleData.data?.apple_users_by_pk?.user_id;
+      if (!userId) throw new Error("Apple user not found");
+
+      const userData = await getUserById({
+        variables: { id: userId },
+      });
+
+      const u = userData.data?.users_by_pk;
+      if (!u) throw new Error("User not found");
+
+      setUser({
+        id: u.id,
+        name: u.name,
+        email: u.email,
+        country: u.country,
+        points: u.points,
+        role: u.role,
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   async function appleRegister(
     email: string,
     name: string,

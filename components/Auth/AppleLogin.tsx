@@ -30,21 +30,15 @@ export default function AppleLogin({ setLoggedIn, setError }: LoginProps) {
               ],
             });
             if (credential) {
-              // Create new user
               if (credential.email) {
                 const email = credential.email;
                 const name = `${credential.fullName?.givenName} ${credential.fullName?.givenName}`;
                 const providerId = credential.user;
-                // await appleRegister(email, name, providerId);
+                await appleRegister(email, name, providerId);
               } else {
-                console.log("only login");
                 const providerId = credential.user;
                 await appleLogin(providerId);
-                // await appleRegister(
-                //   "patate-test4",
-                //   "patate-test4@gmail.com",
-                //   "001433.54aa1ea53ed54e49a58e792388df6ccd.1346"
-                // );
+                setLoggedIn(true);
               }
             }
           } catch (e) {
