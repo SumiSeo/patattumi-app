@@ -1,62 +1,16 @@
 import { ADD_APPLE_USER_ONE, ADD_USER_ONE } from "@/mutations/AddUser";
 import { QUERY_APPLE_USER, QUERY_USER_ONE } from "@/queries/UserQuery";
+import {
+  AppleUserData,
+  InsertUserData,
+  InsertUserVars,
+  UserContextType,
+  UserData,
+  UserProviderProps,
+  UserType,
+} from "@/types/UserContextType";
 import { useLazyQuery, useMutation } from "@apollo/client/react";
-import { createContext, ReactNode, useState } from "react";
-interface UserProviderProps {
-  children: ReactNode;
-}
-
-type UserType = {
-  id: string;
-  name: string;
-  email: string;
-  country?: string;
-  points?: number;
-  role?: string;
-};
-
-type UserContextType = {
-  user: UserType | null;
-  appleLogin: (providerId: string) => Promise<void>;
-  appleRegister: (
-    email: string,
-    name: string,
-    provider_id: string
-  ) => Promise<void>;
-  logout: () => Promise<void>;
-};
-
-type AppleUserData = {
-  apple_users_by_pk: {
-    user_id: string;
-  } | null;
-};
-
-type UserData = {
-  users_by_pk: {
-    id: string;
-    name: string;
-    email: string;
-    country?: string;
-    points?: number;
-    role?: string;
-  } | null;
-};
-
-type InsertUserData = {
-  insert_users_one: {
-    id: string;
-    name: string;
-    email: string;
-    provider: string;
-  } | null;
-};
-
-type InsertUserVars = {
-  email: string;
-  name: string;
-  provider: string;
-};
+import { createContext, useState } from "react";
 
 export const UserContext = createContext<UserContextType | null>(null);
 
