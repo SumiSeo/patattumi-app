@@ -3,11 +3,13 @@ import ThemedCard from "@/components/ThemedCard";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
 import { useRecipe } from "@/hooks/useRecipes";
+import { useRouter } from "expo-router";
 import React, { useEffect } from "react";
 import { FlatList, Image, Pressable, StyleSheet, View } from "react-native";
 
 const RecipesComp = () => {
   const { recipes, fetchRecipes } = useRecipe();
+  const router = useRouter();
 
   useEffect(() => {
     fetchRecipes();
@@ -20,7 +22,7 @@ const RecipesComp = () => {
       {recipes && (
         <FlatList
           renderItem={({ item }) => (
-            <Pressable>
+            <Pressable onPress={() => router.push(`/recipes/${item.id}`)}>
               <ThemedCard style={styles.card}>
                 <Image
                   source={{
@@ -30,7 +32,9 @@ const RecipesComp = () => {
                 />
                 <View>
                   <ThemedText title style={{ fontSize: 16, marginBottom: 4 }}>
-                    {item.name}
+                    {item.name.length < 25
+                      ? item.name
+                      : item.name.slice(0, 24) + "..."}
                   </ThemedText>
                   <ThemedText
                     numberOfLines={2}
@@ -78,6 +82,6 @@ const styles = StyleSheet.create({
     // layout
     flexDirection: "row",
     alignItems: "center",
-    gap: 14,
+    gap: 12,
   },
 });

@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 export interface RecipeProviderProps {
   children: ReactNode;
 }
+
 export type RecipeType = {
   id: number;
   name: string;
@@ -11,24 +12,20 @@ export type RecipeType = {
   youtube: string;
   insta: number;
   tiktok: string;
+  recipe: string;
 };
 
 export type RecipeContextType = {
-  recipes: RecipeType[] | null;
+  recipe: RecipeType | null;
+  recipes: RecipeType[];
   fetchRecipes: () => Promise<void>;
-  fetchRecipeById: (id: number) => Promise<void>;
+  fetchRecipeById: (id: number) => Promise<RecipeType | null>;
 };
 
-export type RecipeData = {
-  id: number;
-  name: string;
-  description: string;
-  image: string;
-  youtube: string;
-  insta: number;
-  tiktok: string;
+export type RecipesResponse = {
+  recipes: RecipeType[];
 };
 
-export type RecipeDatas = {
-  recipes: RecipeData[];
+export type RecipeByIdResponse = {
+  recipes_by_pk: RecipeType | null;
 };

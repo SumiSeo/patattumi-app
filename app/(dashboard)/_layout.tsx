@@ -70,7 +70,7 @@ const DashboardLayout = () => {
           }}
         />
         <Tabs.Screen
-          name="profil"
+          name="profile"
           options={{
             title: "Profil",
             tabBarIcon: ({ focused }) => (
@@ -80,6 +80,12 @@ const DashboardLayout = () => {
                 name={focused ? "person" : "person-outline"}
               />
             ),
+          }}
+        />
+        <Tabs.Screen
+          name="recipes/[id]"
+          options={{
+            href: null,
           }}
         />
       </Tabs>
