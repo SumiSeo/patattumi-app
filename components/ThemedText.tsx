@@ -18,7 +18,7 @@ const ThemedText: React.FC<ThemedTextProps> = ({
       style={[
         {
           color,
-          fontSize: title ? 20 : 14,
+          fontSize: title ? 24 : 14,
           fontWeight: title ? "bold" : "normal",
         },
         style,

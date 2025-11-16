@@ -6,11 +6,11 @@ interface CodedError extends Error {
   code?: string;
 }
 type LoginProps = {
-  setError: (err: string) => void;
+  setError: (err: string | null) => void;
 };
 
 export default function AppleLogin({ setError }: LoginProps) {
-  const { user, appleSignIn, appleRegister } = useUser();
+  const { appleSignIn, appleRegister } = useUser();
 
   return (
     <View>
@@ -20,6 +20,7 @@ export default function AppleLogin({ setError }: LoginProps) {
         cornerRadius={5}
         style={styles.button}
         onPress={async () => {
+          setError(null);
           try {
             const credential = await AppleAuthentication.signInAsync({
               requestedScopes: [
@@ -42,7 +43,7 @@ export default function AppleLogin({ setError }: LoginProps) {
             const err = e as CodedError;
             if (err.code === "ERR_REQUEST_CANCELED") {
               console.error(err);
-              // setError(true);
+              setError("Apple login Failed");
             }
           }
         }}

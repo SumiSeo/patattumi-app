@@ -12,11 +12,14 @@ export const QUERY_USER_ONE = gql`
   query QueryUser($id: uuid!) {
     users_by_pk(id: $id) {
       id
-      country
+      language
       email
       name
       points
       role
+      age
+      korean_name
+      totem
     }
   }
 `;
