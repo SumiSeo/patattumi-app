@@ -6,7 +6,7 @@ import {
   RecipeType,
 } from "@/types/RecipeContextType";
 import { useLazyQuery } from "@apollo/client/react";
-import { createContext, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 export const RecipeContext = createContext<RecipeContextType | null>(null);
 
 export function RecipeProvider({ children }: RecipeProviderProps) {
@@ -17,15 +17,14 @@ export function RecipeProvider({ children }: RecipeProviderProps) {
 
   const [recipes, setRecipes] = useState<RecipeType[]>([]);
 
-  async function fetchRecipes() {
+  const fetchRecipes = useCallback(async () => {
     try {
       const datas = await getRecipes();
-      if (!datas.data) return;
-      setRecipes(datas.data.recipes);
+      if (datas.data) setRecipes(datas.data.recipes);
     } catch (err) {
       if (err instanceof Error) console.error(err.message);
     }
-  }
+  }, [getRecipes]);
 
   async function fetchRecipeById(id: number) {}
   return (
