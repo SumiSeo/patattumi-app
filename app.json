@@ -11,9 +11,7 @@
     "ios": {
       "supportsTablet": true,
       "usesAppleSignIn": true,
-      "icon": {
-        "light": "./assets/icons/ios-light.png"
-      }
+      "icon": "./assets/icons/ios-light.png"
     },
     "android": {
       "adaptiveIcon": {
@@ -34,7 +32,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/icons/splash-icon-dark.png",
+          "image": "./assets/images/splash-icon-dark.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"

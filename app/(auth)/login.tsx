@@ -34,14 +34,14 @@ const Login = () => {
     <ThemedView safe={true} style={styles.container}>
       <ThemedLogo url={PatattumiLogo} />
       <Spacer height={10} />
-      <ThemedText title={true} style={{ fontSize: 25 }}>
+      <ThemedText title={true} style={{ fontSize: 0 }}>
         Patattumi
       </ThemedText>
-      <Spacer height={20} />
-      <ThemedText style={{ fontSize: 18, fontWeight: "bold" }}>
+      <Spacer height={30} />
+      <ThemedText style={{ fontSize: 16, fontWeight: "bold" }}>
         Votre avatar coréen vous attend !
       </ThemedText>
-      <Spacer height={15} />
+      <Spacer height={20} />
       <ThemedText style={{ fontSize: 14, textAlign: "center" }}>
         Découvrez la langue et la culture coréenne
       </ThemedText>
@@ -54,7 +54,6 @@ const Login = () => {
       <Spacer height={10} />
       <AppleLogin setError={setError} />
       <Spacer height={20} />
-
       {error !== null && (
         <ThemedError>
           <ThemedText
