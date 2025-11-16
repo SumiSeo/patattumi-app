@@ -1,4 +1,5 @@
 import ThemedView from "@/components/ThemedView";
+import { RecipeProvider } from "@/contexts/RecipeContext";
 import { UserProvider } from "@/contexts/UserContext";
 import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
 import { ApolloProvider } from "@apollo/client/react";
@@ -22,22 +23,26 @@ const RootLayout = () => {
   return (
     <ApolloProvider client={client}>
       <UserProvider>
-        <ThemedView safe={true}>
-          <StatusBar style="auto" />
-          <Stack
-            screenOptions={{
-              headerTintColor: "#333",
-            }}
-          >
-            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-            {/* <Stack.Screen name="(auth)" options={{ headerShown: false }} /> */}
-            <Stack.Screen name="(dashboard)" options={{ headerShown: false }} />
-            <Stack.Screen
-              name="index"
-              options={{ title: "Home", headerShown: false }}
-            />
-          </Stack>
-        </ThemedView>
+        <RecipeProvider>
+          <ThemedView safe={true}>
+            <StatusBar style="auto" />
+            <Stack
+              screenOptions={{
+                headerTintColor: "#333",
+              }}
+            >
+              <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+              <Stack.Screen
+                name="(dashboard)"
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="index"
+                options={{ title: "Home", headerShown: false }}
+              />
+            </Stack>
+          </ThemedView>
+        </RecipeProvider>
       </UserProvider>
     </ApolloProvider>
   );

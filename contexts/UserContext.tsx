@@ -71,7 +71,10 @@ export function UserProvider({ children }: UserProviderProps) {
         id: u.id,
         name: u.name,
         email: u.email,
-        country: u.country,
+        korean_name: u.korean_name,
+        age: u.age,
+        totem: u.totem,
+        language: u.language,
         points: u.points,
         role: u.role,
       };
