@@ -34,14 +34,14 @@ const Login = () => {
     <ThemedView safe={true} style={styles.container}>
       <ThemedLogo url={PatattumiLogo} />
       <Spacer height={10} />
-      <ThemedText title={true} style={{ fontSize: 0 }}>
+      <ThemedText title={true} style={{ fontSize: 30 }}>
         Patattumi
       </ThemedText>
-      <Spacer height={30} />
+      <Spacer height={10} />
       <ThemedText style={{ fontSize: 16, fontWeight: "bold" }}>
         Votre avatar coréen vous attend !
       </ThemedText>
-      <Spacer height={20} />
+      <Spacer height={30} />
       <ThemedText style={{ fontSize: 14, textAlign: "center" }}>
         Découvrez la langue et la culture coréenne
       </ThemedText>

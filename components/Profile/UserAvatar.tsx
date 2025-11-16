@@ -9,7 +9,11 @@ const UserAvatar = () => {
   const { user } = useUser();
 
   return (
-    <ThemedCard style={{ flexDirection: "row" }}>
+    <ThemedCard
+      style={{
+        flexDirection: "row",
+      }}
+    >
       <View>
         <Image style={styles.img} source={patateImg} />
       </View>
