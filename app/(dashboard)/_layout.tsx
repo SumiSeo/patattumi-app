@@ -70,9 +70,9 @@ const DashboardLayout = () => {
           }}
         />
         <Tabs.Screen
-          name="profile"
+          name="profil"
           options={{
-            title: "Profile",
+            title: "Profil",
             tabBarIcon: ({ focused }) => (
               <Ionicons
                 size={20}
