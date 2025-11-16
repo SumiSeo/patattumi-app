@@ -10,7 +10,7 @@ export type RecipeType = {
   description: string;
   image: string;
   youtube: string;
-  insta: number;
+  insta: string;
   tiktok: string;
   recipe: string;
 };

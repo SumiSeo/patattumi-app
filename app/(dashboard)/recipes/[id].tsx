@@ -1,3 +1,4 @@
+import RecetteVideo from "@/components/RecetteVideo";
 import ThemedCard from "@/components/ThemedCard";
 import ThemedLoader from "@/components/ThemedLoader";
 import ThemedText from "@/components/ThemedText";
@@ -7,7 +8,7 @@ import { RecipeType } from "@/types/RecipeContextType";
 import { useQuery } from "@apollo/client/react";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
-import { Image } from "react-native";
+import { Image, ScrollView } from "react-native";
 
 const RecipeDetail = () => {
   const { id } = useLocalSearchParams();
@@ -15,7 +16,7 @@ const RecipeDetail = () => {
     QUERY_RECIPE,
     {
       variables: { id: Number(id) },
-      fetchPolicy: "network-only", 
+      fetchPolicy: "network-only",
     }
   );
 
@@ -46,26 +47,34 @@ const RecipeDetail = () => {
   };
   return (
     <ThemedView safe={true}>
-      <ThemedCard style={{ margin: 10, padding: 10, justifyContent: "center" }}>
-        <Image
-          source={{
-            uri: `https://media.aboutsauce.com/${recipeInfo.id}.jpg?quality=100`,
-          }}
-          style={{ width: 300, height: 300, borderRadius: 10 }}
-        />
-        <ThemedText style={{ marginVertical: 10, fontSize: 18 }} title>
-          {recipeInfo.name}
-        </ThemedText>
-        <ThemedText
-          style={{ fontSize: 14, fontWeight: "bold", marginBottom: 10 }}
+      <ScrollView contentContainerStyle={{ padding: 10 }}>
+        <ThemedCard
+          style={{ margin: 10, padding: 10, justifyContent: "center" }}
         >
-          {recipeInfo.description}
-        </ThemedText>
-        {chunkRecipe(recipeInfo.recipe)}
-      </ThemedCard>
+          <Image
+            source={{
+              uri: `https://media.aboutsauce.com/${recipeInfo.id}.jpg?quality=100`,
+            }}
+            style={{ width: 300, height: 200, borderRadius: 10 }}
+          />
+          <ThemedText style={{ marginVertical: 10, fontSize: 18 }} title>
+            {recipeInfo.name}
+          </ThemedText>
+          <ThemedText
+            style={{ fontSize: 13, fontWeight: "bold", marginBottom: 20 }}
+          >
+            {recipeInfo.description}
+          </ThemedText>
+          {chunkRecipe(recipeInfo.recipe)}
+        </ThemedCard>
+        <RecetteVideo
+          youtube={recipeInfo.youtube}
+          tiktok={recipeInfo.tiktok}
+          insta={recipeInfo.insta}
+        />
+      </ScrollView>
     </ThemedView>
   );
 };
-
 
 export default RecipeDetail;
