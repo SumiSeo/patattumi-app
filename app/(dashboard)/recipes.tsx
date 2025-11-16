@@ -1,16 +1,21 @@
-import ThemedText from '@/components/ThemedText'
-import ThemedView from '@/components/ThemedView'
-import React from 'react'
-import { StyleSheet } from 'react-native'
+import ThemedText from "@/components/ThemedText";
+import ThemedView from "@/components/ThemedView";
+import { useRecipe } from "@/hooks/useRecipes";
+import React, { useEffect } from "react";
+import { StyleSheet } from "react-native";
 
-const recipes = () => {
+const RecipesComp = () => {
+  const { recipes, fetchRecipes } = useRecipe();
+  useEffect(() => {
+    fetchRecipes();
+  }, []);
   return (
     <ThemedView safe={true}>
       <ThemedText title>Recettes</ThemedText>
     </ThemedView>
   );
-}
+};
 
-export default recipes
+export default RecipesComp;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
