@@ -11,7 +11,6 @@ const Profile = () => {
     { name: "person", title: "Prénom" },
     { name: "age", title: "Âge" },
     { name: "language", title: "Langue préférée" },
-    { name: "size", title: "Taille" },
     { name: "animal", title: "Animal totem" },
   ];
   const displayProfileAssets = () => {
