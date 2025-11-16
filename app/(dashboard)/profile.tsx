@@ -1,27 +1,54 @@
-import ThemedCard from "@/components/ThemedCard";
+import Logout from "@/components/Profile/Logout";
+import ProfileAssetCard from "@/components/Profile/ProfileAssetCard";
+import UserAvatar from "@/components/Profile/UserAvatar";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
-import { useUser } from "@/hooks/useUser";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { Pressable, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 const Profile = () => {
-  const handleLogout = async () => {
-    await logout();
+  const profileAssets = [
+    { name: "person", title: "Prénom" },
+    { name: "age", title: "Âge" },
+    { name: "language", title: "Langue préférée" },
+    { name: "animal", title: "Animal totem" },
+  ];
+  const displayProfileAssets = () => {
+    return profileAssets.map((asset) => {
+      return (
+        <ProfileAssetCard
+          key={asset.name}
+          name={asset.name}
+          title={asset.title}
+        />
+      );
+    });
   };
-
-  const { user, logout } = useUser();
   return (
     <ThemedView safe={true}>
       <View style={styles.profileNav}>
         <ThemedText title>Profile</ThemedText>
-        <Pressable onPress={handleLogout}>
-          <Ionicons size={24} name="log-out-outline" />
-        </Pressable>
+        <Logout />
       </View>
-      <ThemedCard>
-        <ThemedText title>{user?.email}</ThemedText>
-      </ThemedCard>
+      <UserAvatar />
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          marginHorizontal: 10,
+          marginBottom: 10,
+        }}
+      >
+        <ThemedText style={{ fontWeight: "bold" }}>
+          Votre alter ego coréen
+        </ThemedText>
+        <Ionicons
+          size={16}
+          name="heart-half-outline"
+          style={{ marginLeft: 5 }}
+        />
+      </View>
+      {displayProfileAssets()}
     </ThemedView>
   );
 };
@@ -32,5 +59,6 @@ const styles = StyleSheet.create({
   profileNav: {
     flexDirection: "row",
     justifyContent: "space-between",
+    marginBottom: 5,
   },
 });

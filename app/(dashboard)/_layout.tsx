@@ -25,7 +25,7 @@ const DashboardLayout = () => {
               <Ionicons
                 size={20}
                 color={focused ? "black" : "#687076"}
-                name={focused ? "game-controller" : "game-controller-outline"}
+                name={focused ? "airplane" : "airplane-outline"}
               />
             ),
           }}
@@ -44,14 +44,14 @@ const DashboardLayout = () => {
           }}
         />
         <Tabs.Screen
-          name="travelKorea"
+          name="chat"
           options={{
-            title: "Voyage",
+            title: "Chat",
             tabBarIcon: ({ focused }) => (
               <Ionicons
-                color={focused ? "black" : "#687076"}
                 size={20}
-                name={focused ? "airplane" : "airplane-outline"}
+                color={focused ? "black" : "#687076"}
+                name={focused ? "chatbubbles" : "chatbubbles-outline"}
               />
             ),
           }}

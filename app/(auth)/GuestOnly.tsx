@@ -1,7 +1,7 @@
+import ThemedLoader from "@/components/ThemedLoader";
 import { useUser } from "@/hooks/useUser";
 import { useRouter } from "expo-router";
 import React, { ReactNode, useEffect } from "react";
-import { Text } from "react-native";
 
 const GuestOnly = ({ children }: { children: ReactNode }) => {
   const { user, authChecked } = useUser();
@@ -10,8 +10,8 @@ const GuestOnly = ({ children }: { children: ReactNode }) => {
     if (authChecked && user !== null) {
       router.replace("/profile");
     }
-  }, [user, authChecked,router]);
-  if (!authChecked || user) return <Text>Loading...</Text>;
+  }, [user, authChecked, router]);
+  if (!authChecked || user) return <ThemedLoader />;
   return children;
 };
 

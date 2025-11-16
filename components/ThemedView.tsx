@@ -19,7 +19,7 @@ const ThemedView: React.FC<ThemedViewProps> = ({
     <View
       style={[
         {
-          paddingTop: insets.top,
+          paddingTop: insets.top / 1.5,
           paddingBottom: insets.bottom,
         },
         style,
