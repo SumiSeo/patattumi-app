@@ -3,14 +3,14 @@ import ThemedView from '@/components/ThemedView'
 import React from 'react'
 import { StyleSheet } from 'react-native'
 
-const koreanculture = () => {
+const chat = () => {
   return (
     <ThemedView safe={true}>
-      <ThemedText title>Culture & Voyage</ThemedText>
+      <ThemedText title>Chat</ThemedText>
     </ThemedView>
   );
 }
 
-export default koreanculture
+export default chat
 
 const styles = StyleSheet.create({})

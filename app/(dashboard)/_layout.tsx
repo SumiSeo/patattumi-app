@@ -25,7 +25,7 @@ const DashboardLayout = () => {
               <Ionicons
                 size={20}
                 color={focused ? "black" : "#687076"}
-                name={focused ? "game-controller" : "game-controller-outline"}
+                name={focused ? "airplane" : "airplane-outline"}
               />
             ),
           }}
@@ -43,7 +43,7 @@ const DashboardLayout = () => {
             ),
           }}
         />
-        <Tabs.Screen
+        {/* <Tabs.Screen
           name="travelKorea"
           options={{
             title: "Voyage",
@@ -55,7 +55,7 @@ const DashboardLayout = () => {
               />
             ),
           }}
-        />
+        /> */}
         <Tabs.Screen
           name="recipes"
           options={{
@@ -65,6 +65,19 @@ const DashboardLayout = () => {
                 size={20}
                 color={focused ? "black" : "#687076"}
                 name={focused ? "fish" : "fish-outline"}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="chat"
+          options={{
+            title: "Chat",
+            tabBarIcon: ({ focused }) => (
+              <Ionicons
+                size={20}
+                color={focused ? "black" : "#687076"}
+                name={focused ? "chatbubbles" : "chatbubbles-outline"}
               />
             ),
           }}
