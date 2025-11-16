@@ -1,38 +1,12 @@
 import { QUERY_RECIPES } from "@/queries/RecipQuery";
+import {
+  RecipeContextType,
+  RecipeDatas,
+  RecipeProviderProps,
+  RecipeType,
+} from "@/types/RecipeContextType";
 import { useLazyQuery } from "@apollo/client/react";
-import { createContext, ReactNode, useState } from "react";
-export interface RecipeProviderProps {
-  children: ReactNode;
-}
-export type RecipeType = {
-  id: number;
-  name: string;
-  description: string;
-  image: string;
-  youtube: string;
-  insta: number;
-  tiktok: string;
-};
-
-export type RecipeContextType = {
-  recipes: RecipeType[] | null;
-  fetchRecipes: () => Promise<void>;
-  fetchRecipeById: (id: number) => Promise<void>;
-};
-
-export type RecipeData = {
-  id: number;
-  name: string;
-  description: string;
-  image: string;
-  youtube: string;
-  insta: number;
-  tiktok: string;
-};
-
-export type RecipeDatas = {
-  recipes: RecipeData[];
-};
+import { createContext, useState } from "react";
 export const RecipeContext = createContext<RecipeContextType | null>(null);
 
 export function RecipeProvider({ children }: RecipeProviderProps) {
