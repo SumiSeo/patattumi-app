@@ -3,6 +3,18 @@ import { ReactNode } from "react";
 export interface UserProviderProps {
   children: ReactNode;
 }
+export type UserType = {
+  id: string;
+  name: string;
+  email: string;
+  language?: string;
+  korean_name?: string;
+  age?: string;
+  totem?: string;
+  points?: number;
+  role?: string;
+};
+
 export type UserContextType = {
   user: UserType | null;
   appleSignIn: (providerId: string) => Promise<void>;
@@ -13,15 +25,6 @@ export type UserContextType = {
   ) => Promise<void>;
   logout: () => Promise<void>;
   authChecked: boolean;
-};
-
-export type UserType = {
-  id: string;
-  name: string;
-  email: string;
-  country?: string;
-  points?: number;
-  role?: string;
 };
 
 export type AppleUserData = {
@@ -35,7 +38,10 @@ export type UserData = {
     id: string;
     name: string;
     email: string;
-    country?: string;
+    language?: string;
+    korean_name?: string;
+    age?: string;
+    totem?: string;
     points?: number;
     role?: string;
   } | null;

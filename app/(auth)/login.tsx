@@ -66,8 +66,6 @@ const Login = () => {
           </ThemedText>
         </ThemedError>
       )}
-      {/* <GoogleLogin /> */}
-      {/* <AppleLogin /> */}
     </ThemedView>
   );
 };

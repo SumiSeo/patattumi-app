@@ -23,7 +23,7 @@ const ProfileAssetCard = ({ name, title }: ProfileAssetCardProps) => {
       <View style={styles.card}>
         <Ionicons
           style={styles.icon}
-          size={16}
+          size={18}
           name={iconsMap[name as IconName]}
         />
         <ThemedText style={{ fontSize: 14 }}>{title}</ThemedText>

@@ -27,7 +27,7 @@ const Profile = () => {
   return (
     <ThemedView safe={true}>
       <View style={styles.profileNav}>
-        <ThemedText title>Profile</ThemedText>
+        <ThemedText title>Profil</ThemedText>
         <Logout />
       </View>
       <UserAvatar />

@@ -72,7 +72,7 @@ const DashboardLayout = () => {
         <Tabs.Screen
           name="profile"
           options={{
-            title: "Profile",
+            title: "Profil",
             tabBarIcon: ({ focused }) => (
               <Ionicons
                 size={20}
@@ -80,6 +80,12 @@ const DashboardLayout = () => {
                 name={focused ? "person" : "person-outline"}
               />
             ),
+          }}
+        />
+        <Tabs.Screen
+          name="recipes/[id]"
+          options={{
+            href: null,
           }}
         />
       </Tabs>
