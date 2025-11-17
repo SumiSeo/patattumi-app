@@ -8,10 +8,10 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 const Profile = () => {
   const profileAssets = [
-    { name: "person", title: "Prénom" },
-    { name: "age", title: "Âge" },
-    { name: "language", title: "Langue préférée" },
-    { name: "animal", title: "Animal totem" },
+    { name: "person", title: "Prénom", value: "koreanName" },
+    { name: "age", title: "Âge", value: "koreanAge" },
+    { name: "language", title: "Langue préférée", value: "language" },
+    { name: "animal", title: "Animal totem", value: "koreanTotem" },
   ];
   const displayProfileAssets = () => {
     return profileAssets.map((asset) => {
@@ -20,6 +20,7 @@ const Profile = () => {
           key={asset.name}
           name={asset.name}
           title={asset.title}
+          value={asset.value}
         />
       );
     });
