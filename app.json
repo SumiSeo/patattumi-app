@@ -9,11 +9,13 @@
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "ios": {
+      "bundleIdentifier": "com.anonymous.patattumiapp",
       "supportsTablet": true,
       "usesAppleSignIn": true,
       "icon": "./assets/icons/ios-light.png"
     },
     "android": {
+      "package": "com.anonymous.patattumiapp",
       "adaptiveIcon": {
         "foregroundImage": "./assets/icons/adaptive-icon.png",
         "monochromeImage": "./assets/icons/adaptive-icon.png",
