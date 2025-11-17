@@ -12,14 +12,14 @@ export default {
     newArchEnabled: true,
 
     ios: {
-      bundleIdentifier: "com.anonymous.patattumiapp",
+      bundleIdentifier: "com.patattumi.app",
       supportsTablet: true,
       usesAppleSignIn: true,
       icon: "./assets/icons/ios-light.png",
     },
 
     android: {
-      package: "com.anonymous.patattumiapp",
+      package: "com.patattumi.app",
       adaptiveIcon: {
         foregroundImage: "./assets/icons/adaptive-icon.png",
         monochromeImage: "./assets/icons/adaptive-icon.png",

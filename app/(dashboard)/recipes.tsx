@@ -1,5 +1,6 @@
 import Spacer from "@/components/Spacer";
 import ThemedCard from "@/components/ThemedCard";
+import ThemedLoader from "@/components/ThemedLoader";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
 import { useRecipe } from "@/hooks/useRecipes";
@@ -19,7 +20,7 @@ const RecipesComp = () => {
     <ThemedView safe={true}>
       <ThemedText title>Recettes</ThemedText>
       <Spacer height={20} />
-      {recipes && (
+      {recipes ? (
         <FlatList
           renderItem={({ item }) => (
             <Pressable onPress={() => router.push(`/recipes/${item.id}`)}>
@@ -51,6 +52,8 @@ const RecipesComp = () => {
           data={recipes}
           keyExtractor={(item) => item.id.toString()}
         />
+      ) : (
+        <ThemedLoader />
       )}
     </ThemedView>
   );
