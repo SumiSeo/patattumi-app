@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "type": "culture",
+    "course": "Cours de culture 01.",
+    "title": "Découvir animal totem selon votre année de naissance.",
+    "description":
+      "En Corée, selon l'année de naissance, chaque personne estassociée à un des 12 animaux du zodiaque chinois."
+  },
+  {
+    "id": 2,
+    "type": "culture",
+    "course": "Cours de culture 02.",
+    "title":
+      "Vous saviez que l'âge coréen se calcule différemment de l'âge français ?",
+    "description": "Découvrez votre âge coréen en un clin d'œil !"
+  },
+  {
+   "id": 3,
+   "type": "culture",
+    "course": "Cours de culture 03.",
+    "title": "Apprenez les bonnes manières coréennes avec ce jeu interactif.",
+    "description":
+      "Découvrez les usages et règles de politesse en Corée tout en jouant !"
+  },
+  {
+   "id": 4,
+   "type": "culture",
+    "course": "Cours de culture 04.",
+    "title": "Créez votre nom coréen personnalisé facilement.",
+    "description":
+      "Plus de noms coréens bizarres 😳 Générez un nom coréen selon vos préférences."
+  },
+  {
+   "id": 5,
+   "type": "culture",
+    "course": "Cours de culture 05.",
+    "title": "Créez facilement des émoticons amusants en Hangeul.",
+    "description":
+      "Inventez vos propres émoticons en coréen et amusez-vous à communiquer avec les Coréens !"
+  },
+  {
+   "id": 6,
+   "type": "culture",
+    "course": "Cours de culture 06.",
+    "title": "Calculez votre anniversaire en fonction du calendrier lunaire.",
+    "description":
+      "En Corée, on calcule son anniversaire selon le calendrier lunaire 🌙"
+  },
+  {
+   "id": 7,
+   "type": "travel",
+    "course": "Astuces voyage 01.",
+    "title": "Vérifiez les jours fériés coréens avant de voyager.",
+    "description":
+      "Les jours fériés coréens diffèrent des autres. Découvrez-les pour mieux profiter de votre voyage."
+  },
+  {
+   "id": 8,
+   "type": "travel",
+    "course":  "Astuces voyage 02.",
+    "title": "Les tailles 🇫🇷 et 🇰🇷 sont différentes.",
+    "description":
+      "Les tailles de vêtements et de chaussures varient entre la France et la Corée. Vérifiez bien votre taille avant de faire du shopping."
+  }
+]
