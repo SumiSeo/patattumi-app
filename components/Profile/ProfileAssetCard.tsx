@@ -1,4 +1,6 @@
+import { useUser } from "@/hooks/useUser";
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import React from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 import ThemedText from "../ThemedText";
@@ -6,8 +8,19 @@ import ThemedText from "../ThemedText";
 type ProfileAssetCardProps = {
   name: string;
   title: string;
+  value: string;
+  id: number;
 };
-const ProfileAssetCard = ({ name, title }: ProfileAssetCardProps) => {
+
+const ProfileAssetCard = ({
+  name,
+  title,
+  value,
+  id,
+}: ProfileAssetCardProps) => {
+  const { user } = useUser();
+  const router = useRouter();
+
   const iconsMap = {
     person: "person-outline",
     size: "shirt-outline",
@@ -16,11 +29,24 @@ const ProfileAssetCard = ({ name, title }: ProfileAssetCardProps) => {
     animal: "bug-outline",
   } as const;
 
+  const userInfo = {
+    koreanName: user?.korean_name,
+    koreanAge: user?.age,
+    koreanTotem: user?.totem,
+    language: user?.language,
+  } as const;
+
   type IconName = keyof typeof iconsMap;
+  type UserInfoValue = keyof typeof userInfo;
 
   return (
-    <Pressable>
-      <View style={styles.card}>
+    <View style={styles.card}>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
         <Ionicons
           style={styles.icon}
           size={18}
@@ -28,7 +54,14 @@ const ProfileAssetCard = ({ name, title }: ProfileAssetCardProps) => {
         />
         <ThemedText style={{ fontSize: 14 }}>{title}</ThemedText>
       </View>
-    </Pressable>
+      <ThemedText style={{ fontSize: 14 }}>
+        {userInfo[value as UserInfoValue] ?? (
+          <Pressable onPress={() => router.push(`/culture/${id}`)}>
+            <Ionicons size={18} name="arrow-forward-outline" />
+          </Pressable>
+        )}
+      </ThemedText>
+    </View>
   );
 };
 
@@ -40,6 +73,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginHorizontal: 10,
     marginVertical: 20,
+    justifyContent: "space-between",
   },
   icon: {
     marginRight: 10,

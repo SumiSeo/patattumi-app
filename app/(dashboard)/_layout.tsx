@@ -88,6 +88,12 @@ const DashboardLayout = () => {
             href: null,
           }}
         />
+        <Tabs.Screen
+          name="culture/[id]"
+          options={{
+            href: null,
+          }}
+        />
       </Tabs>
     </UserOnly>
   );

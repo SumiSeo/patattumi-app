@@ -8,18 +8,20 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 const Profile = () => {
   const profileAssets = [
-    { name: "person", title: "Prénom" },
-    { name: "age", title: "Âge" },
-    { name: "language", title: "Langue préférée" },
-    { name: "animal", title: "Animal totem" },
+    { name: "person", title: "Prénom", value: "koreanName", id: 4 },
+    { name: "age", title: "Âge", value: "koreanAge", id: 2 },
+    { name: "language", title: "Langue préférée", value: "language", id: 0 },
+    { name: "animal", title: "Animal totem", value: "koreanTotem", id: 1 },
   ];
   const displayProfileAssets = () => {
     return profileAssets.map((asset) => {
       return (
         <ProfileAssetCard
+          id={asset.id}
           key={asset.name}
           name={asset.name}
           title={asset.title}
+          value={asset.value}
         />
       );
     });

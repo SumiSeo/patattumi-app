@@ -1,0 +1,31 @@
+[
+  {
+    "id": 1,
+    "type": "culture",
+    "course": "Cours de culture 01.",
+    "title": "Trois films sur la vie scolaire en Corée",
+    "header": "Je vous présente trois films qui dépeignent la vie réelle des collégiens et lycéens en Corée. Le premier raconte l'histoire d'un élève livré à lui-même par des parents négligents, qui exerce la violence à l'école en intimidant d'autres élèves. Le deuxième montre comment les élèves dits “chefs de l'école” (school jjang) finissent par se lier au milieu des gangs. Enfin, le troisième se déroule dans un lycée de filles et met en scène les rivalités entre différents groupes d'elèves dominantes. Ce film rend également hommage à une scène culte du film français La Boum.",
+    "header-paragrph1": "1. Bleak Night (파수꾼)",
+    "header-paragrph2": "2. Wish (바람)",
+    "header-paragrph3": "3. Sunny (써니)",
+    "paragraph1": "Un jour, Gi-tae, le fils, meurt soudainement. Son père cherche alors à découvrir la vérité derrière cette tragédie. Il rencontre Dong-yoon et Hee-jun, qui semblaient être les amis de Gi-tae, mais plus il avance dans son enquête, plus les zones d'ombre s'accumulent. Peu à peu, se dévoile une histoire complexe, faite de secrets et de liens entrecroisés.",
+    "paragraph2": "Ayant grandi dans une famille très stricte, Jjang-gu rêve de vivre une vie lycéenne pleine de liberté et de style. Contrairement à son frère et à sa sœur, il choisit de ne pas intégrer un lycée prestigieux et s'inscrit à Gwangchun, un établissement technique tristement célèbre dans la région de Busan. Un jour, il se retrouve impliqué dans une affaire de violence scolaire et finit en détention avec ses amis. Heureusement, Jjang-gu parvient à retourner à l'école, mais une organisation illégale du lycée, appelée “Monster”, l'y attend déjà.",
+    "paragraph3": "Dans les années 1980, six lycéennes de Jindeok — Chun-hwa, Jang-mi, Jin-hee, Geum-ok, Bok-hee et Su-ji — se lient d'amitié avec Nami, une nouvelle élève moquée à cause de son accent régional. À travers diverses aventures et mésaventures, les sept jeunes filles deviennent inséparables et forment un groupe qu'elles baptisent Sunny, scellant ainsi une amitié éternelle."
+  },
+  {
+    "id": 2,
+    "type": "culture",
+    "course": "Cours de culture 01.",
+    "title": "Chuseok, la deuxième plus grande fête en Corée",
+    "header": "S'il y a Noël en France, il y a deux fêtes traditionnelles coréennes en Corée. La première est Seollal (설날), qui a lieu au début de l'année et dont la date change chaque année. C'est le Nouvel An lunaire coréen, un moment où les familles se réunissent, rendent hommage aux ancêtres et partagent des repas traditionnels. La deuxième est Chuseok, qui a lieu en automne.",
+    "header-paragrph1": "C'est quoi Chuseok ?",
+    "header-paragrph2": " Pendant Chuseok, toutes les familles se réunissent pour honorer les ancêtres et partager des repas dans la joie, mais, Chuseok est en train de disparaître... ",
+    "paragraph1": "Chuseok est l'une des fêtes traditionnelles les plus importantes en Corée. Elle a lieu chaque automne et marque la fin des récoltes, un moment où les familles se rassemblent pour célébrer et rendre hommage à leurs ancêtres. La fête dure généralement trois jours, mais les préparatifs commencent souvent plusieurs jours avant.",
+    "paragraph2": "Chuseok est l'une des fêtes traditionnelles les plus importantes en Corée. Elle a lieu chaque automne et marque la fin des récoltes, un moment où les familles se rassemblent pour célébrer et rendre hommage à leurs ancêtres. La fête dure généralement trois jours, mais les préparatifs commencent souvent plusieurs jours avant.",
+    "paragraph3": "Un aspect central de Chuseok est le rituel ancestral appelé charye(차례). Les familles organisent une table d'offrandes avec des fruits, du riz, de la viande et d'autres mets pour honorer les ancêtres et exprimer leur respect et leur reconnaissance. C'est un moment solennel, mais aussi convivial, car il permet aux différentes générations de se retrouver et de partager des histoires familiales.",
+    "paragraph4": "En plus des repas et des rituels, Chuseok est l'occasion de participer à des jeux traditionnels, de visiter les tombes des ancêtres et de profiter du temps en famille. C'est une fête qui allie spiritualité, culture et lien familial, reflétant profondément l'importance des traditions et du respect des ancêtres dans la société coréenne.",
+    "paragraph5":"Cependant, dans la culture coréenne encore très patriarcale, la préparation des plats et le rangement de la table du rituel(차례) ont toujours été considérés comme une responsabilité féminine. En particulier, pour l'épouse du fils aîné(장손 며느리), il est souvent attendu qu'elle prépare non seulement les plats de sa propre famille, mais aussi ceux des autres membres de la fratrie. Bien que les belles-filles(며느리) s'entraident parfois, leur travail reste rarement reconnu et est perçu comme une obligation naturelle.",
+    "paragrpah6":"La société coréenne accorde toujours un traitement privilégié aux hommes — et surtout aux fils. Dans de nombreuses familles, il n'est pas rare que la belle-mère (시어머니) exerce une pression constante, voire intentionnelle, sur ses belles-filles. Ce type de tension, très répandu, est connu sous le nom de « conflit belle-mère / belle-fille » (고부 갈등). Avec l'évolution de la société coréenne et l'élévation du statut social des jeunes femmes, de plus en plus de voix s'élèvent aujourd'hui pour dénoncer et rejeter ces traditions inégalitaires.",
+    "parapgrah7":"Ce système, profondément enraciné dans la culture, a conduit de nombreuses femmes à éprouver un véritable rejet envers les fêtes traditionnelles. Ainsi, dans la société coréenne moderne, un nombre croissant de familles préfèrent désormais remplacer les rituels de Chuseok par un simple repas partagé ou une sortie au restaurant. Quant aux filles qui ont grandi en voyant leurs mères se fatiguer chaque année, beaucoup d'entre elles finissent par détester ces fêtes et, une fois mariées, choisissent parfois de ne plus y participer."
+  }
+]

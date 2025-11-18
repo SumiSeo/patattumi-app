@@ -12,7 +12,7 @@ const RecetteVideo = ({ insta, youtube, tiktok }: RecetteVideoProps) => {
   return (
     <View style={styles.container}>
       <ThemedText
-        style={{ fontSize: 13, fontWeight: "bold", marginBottom: 10 }}
+        style={{ fontSize: 13, fontWeight: "bold", marginVertical: 10 }}
       >
         Voir la vidéo de la recette
       </ThemedText>
@@ -47,8 +47,7 @@ export default RecetteVideo;
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 20,
-    marginVertical:10
+    marginTop: 7,
   },
   box: {
     flexDirection: "row",
