@@ -14,7 +14,8 @@ export default ThemedCard;
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius:5,
-    padding:20,
+    borderRadius: 5,
+    padding: 20,
+    boxSizing: "border-box",
   },
 });

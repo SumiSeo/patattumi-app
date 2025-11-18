@@ -11,6 +11,7 @@ import img6 from "@/assets/images/courses/6.jpg";
 import img7 from "@/assets/images/courses/7.jpg";
 import img8 from "@/assets/images/courses/8.jpg";
 import img9 from "@/assets/images/courses/9.jpg";
+import AnimalTotem from "@/components/culture/AnimalTotem";
 import ThemedCard from "@/components/ThemedCard";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
@@ -58,6 +59,7 @@ const CultureDetail = () => {
               margin: "auto",
             }}
           />
+          {id === "1" && <AnimalTotem />}
         </ThemedCard>
       </ScrollView>
     </ThemedView>
@@ -73,6 +75,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     backgroundColor: "#fff",
     marginBottom: 10,
+    boxSizing: "border-box",
 
     // iOS shadow
     shadowColor: "#000",

@@ -49,8 +49,7 @@ const Login = () => {
         de façon ludique en vous inscrivant.
       </ThemedText>
       <Spacer height={30} />
-
-      <ThemedButton handleSubmit={fakeLogin}></ThemedButton>
+      <ThemedButton handleSubmit={fakeLogin} />
       <Spacer height={10} />
       <AppleLogin setError={setError} />
       <Spacer height={20} />
