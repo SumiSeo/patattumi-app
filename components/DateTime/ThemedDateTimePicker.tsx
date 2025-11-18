@@ -1,20 +1,31 @@
-import DateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePicker, {
+  DateTimePickerEvent,
+} from "@react-native-community/datetimepicker";
 import React, { useState } from "react";
 import ThemedCard from "../ThemedCard";
 
 type ThemedDateTimePickerProps = {
   open: boolean;
   setOpen: (open: boolean) => void;
+  setConfirmDate: (date: number) => void;
 };
 
-const ThemedDateTimePicker = ({ open, setOpen }: ThemedDateTimePickerProps) => {
+const ThemedDateTimePicker = ({
+  open,
+  setOpen,
+  setConfirmDate,
+}: ThemedDateTimePickerProps) => {
   const [date, setDate] = useState(new Date());
-  const onChange = ({ type }, selectedDate: any) => {
+  const onChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
     console.log(selectedDate);
-    if (type === "set") {
+    if (event.type === "set") {
       const currentDate = selectedDate;
-      setDate(currentDate);
-    } else setOpen(!open);
+      const year = currentDate?.getFullYear();
+      if (year) {
+        setConfirmDate(year);
+        setOpen(!open);
+      }
+    }
   };
 
   return (
@@ -31,7 +42,7 @@ const ThemedDateTimePicker = ({ open, setOpen }: ThemedDateTimePickerProps) => {
           onChange={onChange}
           value={date}
           mode="date"
-          display="calendar"
+          display="spinner"
         />
       )}
     </ThemedCard>

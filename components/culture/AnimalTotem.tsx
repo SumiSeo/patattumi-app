@@ -1,11 +1,27 @@
+import { calculate12God } from "@/utils/games/calcAnimalTotem";
 import React, { useState } from "react";
 import ThemedDateTimePicker from "../DateTime/ThemedDateTimePicker";
 import Spacer from "../Spacer";
 import ThemedText from "../ThemedText";
 import ThemedButton from "../ThmedButton";
-
 const AnimalTotem = () => {
   const [open, setOpen] = useState(false);
+  const [confirmDate, setConfirmDate] = useState<number>(0);
+
+  const displayTotemExplain = () => {
+    const character = calculate12God(confirmDate);
+    return (
+      <>
+        <ThemedText title style={{ fontSize: 16 }}>
+          Né(e) en {confirmDate}, {character?.frenchGod}({character?.god}) et
+          vous êtes...
+        </ThemedText>
+        <ThemedText style={{ marginTop: 5, fontSize: 14 }}>
+          {character?.signification}
+        </ThemedText>
+      </>
+    );
+  };
   return (
     <>
       <ThemedText style={{ marginTop: 10 }}>
@@ -21,7 +37,12 @@ const AnimalTotem = () => {
       </ThemedText>
       <Spacer height={20} />
       <ThemedButton handleSubmit={() => setOpen(!open)}></ThemedButton>
-      <ThemedDateTimePicker open={open} setOpen={setOpen} />
+      <ThemedDateTimePicker
+        open={open}
+        setOpen={setOpen}
+        setConfirmDate={setConfirmDate}
+      />
+      {confirmDate && displayTotemExplain()}
     </>
   );
 };
