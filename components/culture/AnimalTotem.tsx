@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import ThemedDateTimePicker from "../DateTime/ThemedDateTimePicker";
 import Spacer from "../Spacer";
 import ThemedText from "../ThemedText";
 import ThemedButton from "../ThmedButton";
 
 const AnimalTotem = () => {
+  const [open, setOpen] = useState(false);
   return (
     <>
       <ThemedText style={{ marginTop: 10 }}>
@@ -17,9 +19,9 @@ const AnimalTotem = () => {
         12 ans et est censé influencer les traits de caractère des personnes
         nées cette année-là.
       </ThemedText>
-      <Spacer height={20}/>
-      <ThemedButton></ThemedButton>
-      {/* <ThemedDateTimePicker /> */}
+      <Spacer height={20} />
+      <ThemedButton handleSubmit={() => setOpen(!open)}></ThemedButton>
+      <ThemedDateTimePicker open={open} setOpen={setOpen} />
     </>
   );
 };
