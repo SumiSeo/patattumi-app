@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     backgroundColor: "#fff",
     marginBottom: 10,
+
     // iOS shadow
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
