@@ -54,7 +54,7 @@ const RecipeDetail = () => {
               uri: `https://media.aboutsauce.com/${recipeInfo.id}.jpg?quality=100`,
             }}
             style={{
-              width: 200,
+              width: 250,
               height: 150,
               borderRadius: 10,
               margin: "auto",
@@ -92,6 +92,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     backgroundColor: "#fff",
     marginBottom: 10,
+    boxSizing: "border-box",
 
     // iOS shadow
     shadowColor: "#000",

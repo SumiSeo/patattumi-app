@@ -43,10 +43,10 @@ const CultureDetail = () => {
       <ScrollView contentContainerStyle={{ padding: 10 }}>
         <ThemedCard style={styles.card}>
           <ThemedText title style={{ fontSize: 16, marginBottom: 10 }}>
-            {selectedData.course}
+            {selectedData?.course}
           </ThemedText>
           <ThemedText title style={{ fontSize: 13 }}>
-            {selectedData.title}
+            {selectedData?.title}
           </ThemedText>
           <Image
             source={images[key]}
