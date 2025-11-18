@@ -17,7 +17,7 @@ const KoreanCulture = () => {
       <Spacer height={20} />
       <FlatList
         renderItem={({ item }) => (
-          <Pressable onPress={() => router.push(`/recipes/${item.id}`)}>
+          <Pressable onPress={() => router.push(`/culture/${item.id}`)}>
             <ThemedCard style={styles.card}>
               <Ionicons
                 size={35}
