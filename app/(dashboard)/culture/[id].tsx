@@ -12,6 +12,7 @@ import img7 from "@/assets/images/courses/7.jpg";
 import img8 from "@/assets/images/courses/8.jpg";
 import img9 from "@/assets/images/courses/9.jpg";
 import AnimalTotem from "@/components/culture/AnimalTotem";
+import KoreanAge from "@/components/culture/KoreanAge";
 import ThemedCard from "@/components/ThemedCard";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
@@ -39,6 +40,11 @@ const CultureDetail = () => {
   const key = id as keyof typeof images;
   const selectedData = data.find((item) => item.id === Number(id));
 
+  const findCorrectGame = () => {
+    if (id === "1") return <AnimalTotem />;
+    if (id === "2") return <KoreanAge />;
+    return;
+  };
   return (
     <ThemedView safe={true}>
       <ScrollView contentContainerStyle={{ padding: 10 }}>
@@ -59,7 +65,7 @@ const CultureDetail = () => {
               margin: "auto",
             }}
           />
-          {id === "1" && <AnimalTotem />}
+          {findCorrectGame()}
         </ThemedCard>
       </ScrollView>
     </ThemedView>

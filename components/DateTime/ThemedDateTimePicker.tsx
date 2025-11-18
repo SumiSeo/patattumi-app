@@ -7,7 +7,7 @@ import ThemedCard from "../ThemedCard";
 type ThemedDateTimePickerProps = {
   open: boolean;
   setOpen: (open: boolean) => void;
-  setConfirmDate: (date: number) => void;
+  setConfirmDate: (date: Date) => void;
 };
 
 const ThemedDateTimePicker = ({
@@ -19,9 +19,8 @@ const ThemedDateTimePicker = ({
   const onChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
     if (event.type === "set") {
       const currentDate = selectedDate;
-      const year = currentDate?.getFullYear();
-      if (year) {
-        setConfirmDate(year);
+      if (currentDate) {
+        setConfirmDate(currentDate);
         setOpen(!open);
       }
     }

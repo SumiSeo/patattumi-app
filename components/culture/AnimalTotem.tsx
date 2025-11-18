@@ -6,24 +6,26 @@ import ThemedText from "../ThemedText";
 import ThemedButton from "../ThmedButton";
 const AnimalTotem = () => {
   const [open, setOpen] = useState(false);
-  const [confirmDate, setConfirmDate] = useState<number>(0);
+  const [confirmDate, setConfirmDate] = useState<Date | null>(null);
 
   const displayTotemExplain = () => {
-    const character = calculate12God(confirmDate);
-    if (!character) {
-      return null;
+    const year = confirmDate?.getFullYear();
+    if (year) {
+      const character = calculate12God(year);
+      if (!character) return null;
+
+      return (
+        <>
+          <ThemedText title style={{ fontSize: 16 }}>
+            Né(e) en {confirmDate?.getFullYear()}, {character?.frenchGod}(
+            {character?.god}) et vous êtes...
+          </ThemedText>
+          <ThemedText style={{ marginTop: 5, fontSize: 14 }}>
+            {character?.signification}
+          </ThemedText>
+        </>
+      );
     }
-    return (
-      <>
-        <ThemedText title style={{ fontSize: 16 }}>
-          Né(e) en {confirmDate}, {character?.frenchGod}({character?.god}) et
-          vous êtes...
-        </ThemedText>
-        <ThemedText style={{ marginTop: 5, fontSize: 14 }}>
-          {character?.signification}
-        </ThemedText>
-      </>
-    );
   };
   return (
     <>
