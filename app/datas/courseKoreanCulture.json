@@ -57,29 +57,29 @@
   },
   {
     "id": 9,
-    "type": "blog",
-    "course": "Découverte de la Corée 01.",
+    "type": "travel",
+    "course": "Astuces voyage 03.",
     "title": "Découvrir un village de saunas coréens à Yangju.",
     "description": "Près de Séoul, à Yangju, il y a un village de saunas traditionnels coréens, appelés « bulgama »."
   },
   {
     "id": 10,
-    "type": "blog",
-    "course": "Découverte de la Corée 02.",
+    "type": "travel",
+    "course": "Astuces voyage 04.",
     "title": "Découvrir les villages de Hanok à Séoul.",
     "description": "Venez passer du temps avec moi au village hanok de Bukchon."
   },
   {
     "id": 11,
     "type": "blog",
-    "course": "Découverte de la Corée 03.",
+    "course": "Découverte de la Corée 01.",
     "title": "Trois films sur la vie scolaire en Corée.",
     "description": "Recommendation : trois œuvres qui ont profondément marqué la société coréenne en dépeignant la réalité de la vie scolaire en Corée."
   },
   {
     "id": 12,
     "type": "blog",
-    "course": "Découverte de la Corée 04.",
+    "course": "Découverte de la Corée 02.",
     "title": "Chuseok, la deuxième plus grande fête en Corée.",
     "description": "S'il y a Noël en France où toute la famille se réunit, en Corée il y a deux jours similaires, dont l'un est Chuseok."
   }

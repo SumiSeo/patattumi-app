@@ -1,15 +1,25 @@
 import { useUser } from "@/hooks/useUser";
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import React from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 import ThemedText from "../ThemedText";
+
 type ProfileAssetCardProps = {
   name: string;
   title: string;
   value: string;
+  id: number;
 };
-const ProfileAssetCard = ({ name, title, value }: ProfileAssetCardProps) => {
+
+const ProfileAssetCard = ({
+  name,
+  title,
+  value,
+  id,
+}: ProfileAssetCardProps) => {
   const { user } = useUser();
+  const router = useRouter();
 
   const iconsMap = {
     person: "person-outline",
@@ -46,7 +56,7 @@ const ProfileAssetCard = ({ name, title, value }: ProfileAssetCardProps) => {
       </View>
       <ThemedText style={{ fontSize: 14 }}>
         {userInfo[value as UserInfoValue] ?? (
-          <Pressable>
+          <Pressable onPress={() => router.push(`/culture/${id}`)}>
             <Ionicons size={18} name="arrow-forward-outline" />
           </Pressable>
         )}
