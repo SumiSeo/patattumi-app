@@ -12,6 +12,7 @@ import img7 from "@/assets/images/courses/7.jpg";
 import img8 from "@/assets/images/courses/8.jpg";
 import img9 from "@/assets/images/courses/9.jpg";
 import AnimalTotem from "@/components/culture/AnimalTotem";
+import CalendarLunarYear from "@/components/culture/CalendarLunarYear";
 import KoreanAge from "@/components/culture/KoreanAge";
 import ThemedCard from "@/components/ThemedCard";
 import ThemedText from "@/components/ThemedText";
@@ -43,6 +44,7 @@ const CultureDetail = () => {
   const findCorrectGame = () => {
     if (id === "1") return <AnimalTotem />;
     if (id === "2") return <KoreanAge />;
+    if (id === "6") return <CalendarLunarYear />;
     return;
   };
   return (

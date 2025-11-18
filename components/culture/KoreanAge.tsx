@@ -32,6 +32,7 @@ const KoreanAge = () => {
         déjà un an dès la naissance, et qu&apos;on vieillissait tous ensemble au
         nouvel an.
       </ThemedText>
+      <Spacer height={5} />
       <ThemedText style={{ marginTop: 5 }}>
         Même si la loi a changé et que l&apos;âge international est désormais
         utilisé, beaucoup de Coréens continuent d&apos;employer “l&apos;âge

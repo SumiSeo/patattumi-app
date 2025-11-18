@@ -34,6 +34,7 @@ const AnimalTotem = () => {
         naissance sont associées à un cycle de douze animaux, appelés les 12
         Jisin (십이지신).
       </ThemedText>
+      <Spacer height={5} />
       <ThemedText style={{ marginTop: 5 }}>
         C&apos;est un concept dérivé de l&apos;astrologie chinoise (appelé le
         Tti(띠) en coréen). Chaque animal représente une année dans un cycle de
