@@ -19,16 +19,17 @@ const KoreanCulture = () => {
         renderItem={({ item }) => (
           <Pressable onPress={() => router.push(`/culture/${item.id}`)}>
             <ThemedCard style={styles.card}>
-              <Ionicons
-                size={35}
-                name={
-                  item.type === "culture"
-                    ? "game-controller-outline"
-                    : "earth-outline"
-                }
-              />
+              {item.type === "culture" && (
+                <Ionicons size={35} name="game-controller-outline" />
+              )}
+              {item.type === "travel" && (
+                <Ionicons size={35} name="earth-outline" />
+              )}
+              {item.type === "blog" && (
+                <Ionicons size={35} name="glasses-outline" />
+              )}
               <View style={{ marginLeft: 10 }}>
-                <ThemedText title style={{ fontSize: 15, marginBottom: 4 }}>
+                <ThemedText title style={{ fontSize: 17, marginBottom: 4 }}>
                   {item.course}
                 </ThemedText>
                 <ThemedText
