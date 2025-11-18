@@ -10,6 +10,9 @@ const AnimalTotem = () => {
 
   const displayTotemExplain = () => {
     const character = calculate12God(confirmDate);
+    if (!character) {
+      return null;
+    }
     return (
       <>
         <ThemedText title style={{ fontSize: 16 }}>

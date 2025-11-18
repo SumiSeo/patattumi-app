@@ -17,7 +17,6 @@ const ThemedDateTimePicker = ({
 }: ThemedDateTimePickerProps) => {
   const [date, setDate] = useState(new Date());
   const onChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
-    console.log(selectedDate);
     if (event.type === "set") {
       const currentDate = selectedDate;
       const year = currentDate?.getFullYear();
