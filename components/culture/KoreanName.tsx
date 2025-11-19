@@ -1,6 +1,6 @@
 import names from "@/app/datas/koreanNames.json";
 import React, { useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 import InputPicker from "../Picker/InputPicker";
 import ThemedModal from "../ThemedModal";
 import ThemedText from "../ThemedText";
@@ -95,16 +95,17 @@ const KoreanNameNative = () => {
       >
         <>
           <InputPicker choices={["femme", "non binaire", "homme"]} />
-          <Pressable style={styles.submitButton} onPress={handleSubmit}>
-            <Text style={styles.submitText}>Générer votre nom coréen.</Text>
+          <InputPicker choices={["femme", "non binaire", "homme"]} />
+          <Pressable>
+            <ThemedButton onPress={handleSubmit} text="Générer votre nom" />
           </Pressable>
         </>
       </ThemedModal>
       {selectedName && (
-        <View style={styles.resultCard}>
-          <Text style={styles.resultLabel}>Ton nom coréen est...</Text>
-          <Text style={styles.resultName}>✨ {selectedName} ✨</Text>
-        </View>
+        <>
+          <Text>Ton nom coréen est...</Text>
+          <Text>✨ {selectedName} ✨</Text>
+        </>
       )}
     </>
   );
@@ -112,72 +113,4 @@ const KoreanNameNative = () => {
 
 export default KoreanNameNative;
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-    alignItems: "center",
-  },
-  title: {
-    fontWeight: "600",
-    fontSize: 18,
-    marginBottom: 12,
-    textAlign: "center",
-  },
-  label: {
-    fontWeight: "500",
-    fontSize: 14,
-    marginTop: 12,
-    marginBottom: 6,
-  },
-  sexContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 12,
-  },
-  sexButton: {
-    borderWidth: 1,
-    borderColor: "#333",
-    borderRadius: 8,
-    paddingVertical: 6,
-    marginHorizontal: 4,
-  },
-  sexText: { color: "#333" },
-  selectedButton: {
-    backgroundColor: "#333",
-  },
-  selectedText: { color: "#fff", fontWeight: "600" },
-  traitButton: {
-    // flex: 1,
-    borderWidth: 1,
-    borderColor: "#333",
-    borderRadius: 8,
-    padding: 4,
-    margin: 2,
-    alignItems: "center",
-  },
-  traitText: { color: "#333" },
-  submitButton: {
-    marginTop: 16,
-    backgroundColor: "#000",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 8,
-  },
-  submitText: { color: "#fff", fontWeight: "600" },
-  resultCard: {
-    marginTop: 20,
-    width: "100%",
-    backgroundColor: "#fff",
-    borderRadius: 12,
-    padding: 12,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
-    elevation: 4,
-  },
-  resultLabel: { fontWeight: "500", marginBottom: 6 },
-  resultName: { fontSize: 20, fontWeight: "600", marginBottom: 12 },
-  resultImage: { width: 100, height: 100, borderRadius: 50 },
-});
+const styles = StyleSheet.create({});

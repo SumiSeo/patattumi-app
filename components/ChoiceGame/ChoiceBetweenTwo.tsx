@@ -24,15 +24,15 @@ const images = {
   "8": img8,
 } as const;
 
-export type KoreanPolitesseProps = {
+export type ChoiceBetweenTwoProps = {
   situations: Situation[];
   correctResponses: number[];
 };
 
-const KoreanPolitesse = ({
+const ChoiceBetweenTwo = ({
   situations,
   correctResponses,
-}: KoreanPolitesseProps) => {
+}: ChoiceBetweenTwoProps) => {
   const [response, setResponse] = useState<number[]>([]);
   const [page, setPage] = useState(1);
   const [gameEnd, setGameEnd] = useState(false);
@@ -136,4 +136,4 @@ const KoreanPolitesse = ({
   );
 };
 
-export default KoreanPolitesse;
+export default ChoiceBetweenTwo;

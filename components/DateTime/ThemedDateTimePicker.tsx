@@ -1,8 +1,9 @@
 import DateTimePicker, {
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import ThemedCard from "../ThemedCard";
+import ThemedButton from "../ThmedButton";
 
 type ThemedDateTimePickerProps = {
   open: boolean;
@@ -14,33 +15,22 @@ const ThemedDateTimePicker = ({
   open,
   setOpen,
   setConfirmDate,
-}: ThemedDateTimePickerProps) => {
+  onConfirm, // 새 prop 추가
+}: ThemedDateTimePickerProps & { onConfirm?: () => void }) => {
   const [date, setDate] = useState(new Date());
-  const debounceTimer = useRef<number | null>(null);
 
-  const onChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
-    if (event.type === "set") {
-      if (debounceTimer.current) clearTimeout(debounceTimer.current);
+  const onChange = (_event: DateTimePickerEvent, selectedDate?: Date) => {
+    if (selectedDate) setDate(selectedDate);
+  };
 
-      debounceTimer.current = setTimeout(() => {
-        if (selectedDate) {
-          setDate(selectedDate);
-          setConfirmDate(selectedDate);
-          setOpen(false);
-        }
-      }, 2500);
-    }
+  const handleSubmit = () => {
+    setConfirmDate(date);
+    if (onConfirm) onConfirm();
+    setOpen(false);
   };
 
   return (
-    <ThemedCard
-      style={{
-        alignItems: "center",
-        width: 200,
-        justifyContent: "center",
-        marginHorizontal: "auto",
-      }}
-    >
+    <ThemedCard style={{ paddingHorizontal: 20 }}>
       {open && (
         <DateTimePicker
           onChange={onChange}
@@ -49,6 +39,7 @@ const ThemedDateTimePicker = ({
           display="spinner"
         />
       )}
+      <ThemedButton text="Confirmer" handleSubmit={handleSubmit} />
     </ThemedCard>
   );
 };
