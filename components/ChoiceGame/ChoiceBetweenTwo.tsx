@@ -9,7 +9,8 @@ import img8 from "@/assets/images/courses/politesse01/8.jpg";
 import { useFocusEffect } from "@react-navigation/native";
 import React, { useCallback, useEffect, useState } from "react";
 
-import { Image, Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { Situation } from "@/types/SituationType";
+import { Image, Pressable, ScrollView, View } from "react-native";
 import ThemedText from "../ThemedText";
 
 const images = {
@@ -23,19 +24,15 @@ const images = {
   "8": img8,
 } as const;
 
-type Situation = {
-  id: number;
-  text: string;
+export type KoreanPolitesseProps = {
+  situations: Situation[];
+  correctResponses: number[];
 };
 
-const situations: Situation[] = [
-  { id: 1, text: "Avec une personne plus âgée" },
-  { id: 3, text: "Pendant le repas" },
-  { id: 5, text: "Avec une personne rencontrée pour la première fois" },
-  { id: 7, text: "Dans les transports" },
-];
-
-const KoreanPolitesse = () => {
+const KoreanPolitesse = ({
+  situations,
+  correctResponses,
+}: KoreanPolitesseProps) => {
   const [response, setResponse] = useState<number[]>([]);
   const [page, setPage] = useState(1);
   const [gameEnd, setGameEnd] = useState(false);
@@ -54,9 +51,8 @@ const KoreanPolitesse = () => {
 
   useEffect(() => {
     if (!gameEnd) return;
-    const goodResponses = [2, 1, 2, 2];
-    const corrects = goodResponses.filter(
-      (good, i) => good === response[i]
+    const corrects = correctResponses.filter(
+      (correct, i) => correct === response[i]
     ).length;
 
     if (corrects < 1) setPolitesse("Tu es très très impoli(e) !");
@@ -73,11 +69,10 @@ const KoreanPolitesse = () => {
       setPolitesse("Je dirais que tu es coréen(ne) !");
       setScore(4);
     }
-  }, [gameEnd]);
+  }, [gameEnd, response, correctResponses]);
 
   const handleSelect = (index: number) => {
     setResponse((prev) => [...prev, index]);
-
     if (page < 7) {
       setPage((prev) => prev + 2);
     } else {
@@ -91,7 +86,7 @@ const KoreanPolitesse = () => {
     const currentSituation = situations.find((s) => s.id === page);
 
     return (
-      <View style={{ alignItems: "center"  }}>
+      <View style={{ alignItems: "center" }}>
         <ThemedText style={{ marginVertical: 10 }}>
           Situation: {currentSituation ? currentSituation.text : ""}
         </ThemedText>
@@ -102,7 +97,7 @@ const KoreanPolitesse = () => {
           />
           <ThemedText
             title
-            style={{ position: "absolute", marginTop: 0, left: -30}}
+            style={{ position: "absolute", marginTop: 0, left: -30 }}
           >
             1.
           </ThemedText>
@@ -114,7 +109,7 @@ const KoreanPolitesse = () => {
           />
           <ThemedText
             title
-            style={{ position: "absolute", marginTop: 0, left: -30}}
+            style={{ position: "absolute", marginTop: 0, left: -30 }}
           >
             2.
           </ThemedText>
@@ -140,6 +135,5 @@ const KoreanPolitesse = () => {
   );
 };
 
-const styles = StyleSheet.create({});
 
 export default KoreanPolitesse;
