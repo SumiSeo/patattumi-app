@@ -9,8 +9,8 @@ import {
     TextInput,
     View,
 } from "react-native";
+import ThemedQuote from "../ThemedQuote";
 import ThemedText from "../ThemedText";
-
 
 const KoreanEmojiNative = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -22,9 +22,9 @@ const KoreanEmojiNative = () => {
   useFocusEffect(
     useCallback(() => {
       setMsg("");
-      setSelectedBadge(null)
-      setInputValue("")
-      setCurrentIndex(0)
+      setSelectedBadge(null);
+      setInputValue("");
+      setCurrentIndex(0);
     }, [])
   );
 
@@ -63,11 +63,10 @@ const KoreanEmojiNative = () => {
       <ThemedText title style={{ fontSize: 14, marginBottom: 10 }}>
         Devinez l&apos;émotion de l&apos;emoji ci-dessous.
       </ThemedText>
-      <View style={styles.blockquote}>
-        <Text style={styles.emoji}>{currentEmoji.emoji}</Text>
-        <Text style={styles.description}>{currentEmoji.description}</Text>
-      </View>
-
+      <ThemedQuote
+        header={currentEmoji.emoji}
+        body={currentEmoji.description}
+      />
       <View style={styles.badgeContainer}>
         {currentEmoji.badges.map((text, index) => (
           <Pressable
@@ -112,21 +111,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
   },
-  blockquote: {
-    backgroundColor: "#f0f0f0",
-    padding: 12,
-    borderRadius: 8,
-    alignItems: "center",
-    marginBottom: 16,
-  },
-  emoji: {
-    fontSize: 32,
-    marginBottom: 6,
-  },
-  description: {
-    fontSize: 14,
-    color: "#555",
-  },
+
   badgeContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
