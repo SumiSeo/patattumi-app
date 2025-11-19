@@ -166,11 +166,12 @@ export default KoreanNameNative;
 
 const styles = StyleSheet.create({
   sexeButton: {
-    borderWidth: 1,
-    borderRadius: 20,
-    marginVertical: 5,
+    paddingVertical: 6,
     paddingHorizontal: 10,
-    paddingVertical: 7,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: "#000",
+    margin: 2,
   },
   sexeText: {
     color: "#000",
@@ -185,13 +186,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   chip: {
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderWidth: 1,
+    paddingVertical: 4,
+    paddingHorizontal: 10,
     borderRadius: 20,
-    marginRight: 8,
-    marginBottom: 8,
+    borderWidth: 1,
     borderColor: "#000",
+    margin: 2,
   },
   chipSelected: {
     backgroundColor: "#000",
