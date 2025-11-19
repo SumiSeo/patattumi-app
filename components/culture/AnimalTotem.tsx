@@ -2,12 +2,12 @@ import { calculate12God } from "@/utils/games/calcAnimalTotem";
 import { useFocusEffect } from "@react-navigation/native";
 import React, { useCallback, useState } from "react";
 import { View } from "react-native";
-
 import ThemedDateTimePicker from "../DateTime/ThemedDateTimePicker";
 import Spacer from "../Spacer";
 import ThemedModal from "../ThemedModal";
 import ThemedText from "../ThemedText";
 import ThemedButton from "../ThmedButton";
+
 const AnimalTotem = () => {
   const [open, setOpen] = useState(false);
   const [confirmDate, setConfirmDate] = useState<Date | null>(null);
@@ -19,7 +19,7 @@ const AnimalTotem = () => {
     }, [])
   );
   const handleSubmit = () => {
-    setOpen(!open);
+    setOpen(true);
     setModalVisible(true);
   };
 

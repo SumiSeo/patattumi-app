@@ -29,16 +29,13 @@ const ThemedButton: React.FC<ThemedButtonProps> = ({
 export default ThemedButton;
 
 const styles = StyleSheet.create({
-  container: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
   button: {
     backgroundColor: "black",
     paddingHorizontal: 80,
     paddingVertical: 12,
     cursor: "pointer",
     borderRadius: 20,
+    marginHorizontal: 10,
   },
   pressed: {
     opacity: 0.8,

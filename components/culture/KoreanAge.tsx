@@ -1,13 +1,27 @@
 import { calcKoreanAge } from "@/utils/games/calcAgeKorean";
-import React, { useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import React, { useCallback, useState } from "react";
 import ThemedDateTimePicker from "../DateTime/ThemedDateTimePicker";
 import Spacer from "../Spacer";
+import ThemedModal from "../ThemedModal";
 import ThemedText from "../ThemedText";
 import ThemedButton from "../ThmedButton";
 
 const KoreanAge = () => {
   const [open, setOpen] = useState(false);
   const [confirmDate, setConfirmDate] = useState<Date | null>(null);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  useFocusEffect(
+    useCallback(() => {
+      setConfirmDate(null);
+    }, [])
+  );
+
+  const handleSubmit = () => {
+    setOpen(true);
+    setModalVisible(true);
+  };
 
   const displayKoreanAnge = () => {
     if (confirmDate) {
@@ -40,12 +54,19 @@ const KoreanAge = () => {
         coréen” dans la vie quotidienne.
       </ThemedText>
       <Spacer height={20} />
-      <ThemedButton handleSubmit={() => setOpen(!open)}></ThemedButton>
-      <ThemedDateTimePicker
-        open={open}
-        setOpen={setOpen}
-        setConfirmDate={setConfirmDate}
-      />
+      <ThemedButton handleSubmit={handleSubmit} />
+      <ThemedModal
+        visible={modalVisible}
+        onDismiss={() => setModalVisible(false)}
+      >
+        <ThemedDateTimePicker
+          open={open}
+          setOpen={setOpen}
+          setConfirmDate={setConfirmDate}
+          onConfirm={() => setModalVisible(false)}
+        />
+      </ThemedModal>
+      <Spacer height={20} />
       {confirmDate && displayKoreanAnge()}
     </>
   );
