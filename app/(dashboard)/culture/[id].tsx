@@ -14,6 +14,7 @@ import img9 from "@/assets/images/courses/9.jpg";
 import AnimalTotem from "@/components/culture/AnimalTotem";
 import CalendarLunarYear from "@/components/culture/CalendarLunarYear";
 import KoreanAge from "@/components/culture/KoreanAge";
+import KoreanPolitesse from "@/components/culture/KoreanPolitesse";
 import ThemedCard from "@/components/ThemedCard";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
@@ -45,6 +46,7 @@ const CultureDetail = () => {
     if (id === "1") return <AnimalTotem />;
     if (id === "2") return <KoreanAge />;
     if (id === "6") return <CalendarLunarYear />;
+    if (id === "3") return <KoreanPolitesse />;
     return;
   };
   return (
