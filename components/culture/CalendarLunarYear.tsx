@@ -1,12 +1,28 @@
 import { lunarBirthdayToSolar } from "@/utils/games/calcLunarYear";
-import React, { useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import React, { useCallback, useState } from "react";
+import { View } from "react-native";
 import ThemedDateTimePicker from "../DateTime/ThemedDateTimePicker";
 import Spacer from "../Spacer";
+import ThemedModal from "../ThemedModal";
 import ThemedText from "../ThemedText";
 import ThemedButton from "../ThmedButton";
+
 const CalendarLunarYear = () => {
   const [open, setOpen] = useState(false);
   const [confirmDate, setConfirmDate] = useState<Date | null>(null);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  useFocusEffect(
+    useCallback(() => {
+      setConfirmDate(null);
+    }, [])
+  );
+
+  const handleSubmit = () => {
+    setOpen(true);
+    setModalVisible(true);
+  };
 
   const displayKoreanLunarYear = () => {
     if (confirmDate) {
@@ -37,16 +53,26 @@ const CalendarLunarYear = () => {
         surtout pour garder les habitudes anciennes ou pour certaines
         cérémonies.
       </ThemedText>
-      <ThemedText title style={{ marginTop: 5,fontSize:14 }}>
-       Ici, vous devez mettre votre date dans le calendrier lunaire de cette année.
+      <ThemedText title style={{ marginTop: 5, fontSize: 14 }}>
+        Ici, vous devez mettre votre date dans le calendrier lunaire de cette
+        année.
       </ThemedText>
       <Spacer height={20} />
-      <ThemedButton handleSubmit={() => setOpen(!open)}></ThemedButton>
-      <ThemedDateTimePicker
-        open={open}
-        setOpen={setOpen}
-        setConfirmDate={setConfirmDate}
-      />
+      <ThemedButton handleSubmit={handleSubmit} />
+      <ThemedModal
+        visible={modalVisible}
+        onDismiss={() => setModalVisible(false)}
+      >
+        <View style={{ width: 300, alignItems: "center" }}>
+          <ThemedDateTimePicker
+            open={open}
+            setOpen={setOpen}
+            setConfirmDate={setConfirmDate}
+            onConfirm={() => setModalVisible(false)}
+          />
+        </View>
+      </ThemedModal>
+      <Spacer height={20} />
       {confirmDate && displayKoreanLunarYear()}
     </>
   );

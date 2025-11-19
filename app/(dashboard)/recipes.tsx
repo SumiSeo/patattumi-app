@@ -18,7 +18,7 @@ const RecipesComp = () => {
 
   return (
     <ThemedView safe={true}>
-      {recipes ? (
+      {recipes.length > 0 ? (
         <>
           <ThemedText title>Recettes</ThemedText>
           <Spacer height={20} />

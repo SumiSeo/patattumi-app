@@ -14,7 +14,8 @@ const RecetteVideo = ({ insta, youtube, tiktok }: RecetteVideoProps) => {
       <ThemedText
         style={{ fontSize: 13, fontWeight: "bold", marginVertical: 10 }}
       >
-        Voir la vidéo de la recette
+        Voir la vidéo de la recette.(Cette vidéo s’ouvrira dans une page
+        externe.)
       </ThemedText>
       <View style={styles.box}>
         <TouchableOpacity

@@ -8,7 +8,7 @@ const zodiacTraits: { [key: string]: string } = {
   용띠: "Créature mystique et majestueuse, le dragon symbolise l'autorité et la responsabilité. Aventurier mais parfois arrogant et impulsif.",
   뱀띠: "Le serpent symbolise la prospérité et la fertilité. Sa mue représente le renouveau et il est perçu comme rusé et bavard.",
   말띠: "Le cheval est dynamique et rapide, plein de vitalité. Il est charmant et humoristique mais peut être changeant et dépensier.",
-  양띠: "Douce et paisible, la chèvre symbolise la beauté et attire la chance. Cependant, elle peut être plaintive et craintive.",
+  양띠: "Douce et paisible, la mouton symbolise la beauté et attire la chance. Cependant, elle peut être plaintive et craintive.",
   원숭이띠:
     "Malicieux mais intelligent et minutieux, le singe est positif et actif, reflétant l'animal le plus proche de l'humain.",
   닭띠: "Le coq symbolise l'intelligence et le courage. Il est habile, vigilant et parfois un peu égoïste.",

@@ -3,6 +3,7 @@ import DateTimePicker, {
 } from "@react-native-community/datetimepicker";
 import React, { useState } from "react";
 import ThemedCard from "../ThemedCard";
+import ThemedButton from "../ThmedButton";
 
 type ThemedDateTimePickerProps = {
   open: boolean;
@@ -14,27 +15,22 @@ const ThemedDateTimePicker = ({
   open,
   setOpen,
   setConfirmDate,
-}: ThemedDateTimePickerProps) => {
+  onConfirm, // 새 prop 추가
+}: ThemedDateTimePickerProps & { onConfirm?: () => void }) => {
   const [date, setDate] = useState(new Date());
-  const onChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
-    if (event.type === "set") {
-      const currentDate = selectedDate;
-      if (currentDate) {
-        setConfirmDate(currentDate);
-        setOpen(!open);
-      }
-    }
+
+  const onChange = (_event: DateTimePickerEvent, selectedDate?: Date) => {
+    if (selectedDate) setDate(selectedDate);
+  };
+
+  const handleSubmit = () => {
+    setConfirmDate(date);
+    if (onConfirm) onConfirm();
+    setOpen(false);
   };
 
   return (
-    <ThemedCard
-      style={{
-        alignItems: "center",
-        width: 200,
-        justifyContent: "center",
-        marginHorizontal: "auto",
-      }}
-    >
+    <ThemedCard style={{ paddingHorizontal: 20 }}>
       {open && (
         <DateTimePicker
           onChange={onChange}
@@ -43,6 +39,7 @@ const ThemedDateTimePicker = ({
           display="spinner"
         />
       )}
+      <ThemedButton text="Confirmer" handleSubmit={handleSubmit} />
     </ThemedCard>
   );
 };

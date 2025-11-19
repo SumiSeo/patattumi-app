@@ -11,12 +11,6 @@ import img6 from "@/assets/images/courses/6.jpg";
 import img7 from "@/assets/images/courses/7.jpg";
 import img8 from "@/assets/images/courses/8.jpg";
 import img9 from "@/assets/images/courses/9.jpg";
-import AnimalTotem from "@/components/culture/AnimalTotem";
-import CalendarLunarYear from "@/components/culture/CalendarLunarYear";
-import KoreanAge from "@/components/culture/KoreanAge";
-import KoreanEmoji from "@/components/culture/KoreanEmoji";
-import KoreanName from "@/components/culture/KoreanName";
-import KoreanPolitesse from "@/components/culture/KoreanPolitesse";
 import ThemedCard from "@/components/ThemedCard";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
@@ -39,20 +33,11 @@ const images = {
   "12": img12,
 } as const;
 
-const CultureDetail = () => {
+const KoreanLessonDetail = () => {
   const { id } = useLocalSearchParams();
   const key = id as keyof typeof images;
   const selectedData = data.find((item) => item.id === Number(id));
 
-  const findCorrectGame = () => {
-    if (id === "1") return <AnimalTotem />;
-    if (id === "2") return <KoreanAge />;
-    if (id === "3") return <KoreanPolitesse />;
-    if (id === "4") return <KoreanName />;
-    if (id === "5") return <KoreanEmoji />;
-    if (id === "6") return <CalendarLunarYear />;
-    return;
-  };
   return (
     <ThemedView safe={true}>
       <ScrollView contentContainerStyle={{ padding: 10 }}>
@@ -73,14 +58,13 @@ const CultureDetail = () => {
               margin: "auto",
             }}
           />
-          {findCorrectGame()}
         </ThemedCard>
       </ScrollView>
     </ThemedView>
   );
 };
 
-export default CultureDetail;
+export default KoreanLessonDetail;
 
 const styles = StyleSheet.create({
   card: {
