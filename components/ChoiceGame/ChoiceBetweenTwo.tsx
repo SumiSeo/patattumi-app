@@ -54,21 +54,22 @@ const KoreanPolitesse = ({
     const corrects = correctResponses.filter(
       (correct, i) => correct === response[i]
     ).length;
-
-    if (corrects < 1) setPolitesse("Tu es très très impoli(e) !");
-    else if (corrects === 1) {
-      setPolitesse("Tu es très impoli(e) !");
-      setScore(1);
-    } else if (corrects === 2) {
-      setPolitesse("Tu peux survivre en Corée !");
-      setScore(2);
-    } else if (corrects === 3) {
-      setPolitesse("Tu seras le/la bienvenu(e) en Corée !");
-      setScore(3);
-    } else {
-      setPolitesse("Je dirais que tu es coréen(ne) !");
-      setScore(4);
-    }
+if (corrects < 1) {
+  setPolitesse("Tu es très impoli...");
+  setScore(0);
+} else if (corrects === 1) {
+  setPolitesse("Tu es impoli...");
+  setScore(1);
+} else if (corrects === 2) {
+  setPolitesse("Tu peux survivre en Corée.");
+  setScore(2);
+} else if (corrects === 3) {
+  setPolitesse("Bienvenu en Corée.");
+  setScore(3);
+} else {
+  setPolitesse("On dirait que tu es coréen.");
+  setScore(4);
+}
   }, [gameEnd, response, correctResponses]);
 
   const handleSelect = (index: number) => {
