@@ -94,6 +94,12 @@ const DashboardLayout = () => {
             href: null,
           }}
         />
+        <Tabs.Screen
+          name="korean/[id]"
+          options={{
+            href: null,
+          }}
+        />
       </Tabs>
     </UserOnly>
   );

@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "type": "question",
+    "course": "Cours de coréen 01.",
+    "title": "Découvir animal totem selon votre année de naissance.",
+    "description": "En Corée, selon l'année de naissance, chaque personne estassociée à un des 12 animaux du zodiaque chinois."
+  },
+  {
+    "id": 2,
+    "type": "solution",
+    "course": "Explication du cours 01.",
+    "title": "Vous saviez que l'âge coréen se calcule différemment de l'âge français ?",
+    "description": "Découvrez votre âge coréen en un clin d'œil !"
+  }
+]
