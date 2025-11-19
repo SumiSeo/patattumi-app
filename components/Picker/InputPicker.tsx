@@ -10,24 +10,16 @@ const InputPicker = ({ choices }: InputPickerProps) => {
     string | undefined
   >();
 
-  function open() {
-    pickerRef.current?.focus();
-  }
-
-  function close() {
-    pickerRef.current?.blur();
-  }
-
   return (
-      <Picker
-        ref={pickerRef}
-        selectedValue={selectedLanguage}
-        onValueChange={(itemValue) => setSelectedLanguage(itemValue)}
-      >
-        {choices.map((choice) => (
-          <Picker.Item key={choice} label={choice} value={choice} />
-        ))}
-      </Picker>
+    <Picker
+      ref={pickerRef}
+      selectedValue={selectedLanguage}
+      onValueChange={(itemValue) => setSelectedLanguage(itemValue)}
+    >
+      {choices.map((choice) => (
+        <Picker.Item key={choice} label={choice} value={choice} />
+      ))}
+    </Picker>
   );
 };
 

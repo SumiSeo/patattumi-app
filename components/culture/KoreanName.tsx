@@ -2,7 +2,9 @@ import names from "@/app/datas/koreanNames.json";
 import React, { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import InputPicker from "../Picker/InputPicker";
+import ThemedModal from "../ThemedModal";
 import ThemedText from "../ThemedText";
+import ThemedButton from "../ThmedButton";
 
 const characterOptions = [
   "beau",
@@ -40,6 +42,7 @@ const KoreanNameNative = () => {
   const [sexe, setSexe] = useState<string | null>(null);
   const [selectedName, setSelectedName] = useState<string | null>(null);
   const [selectedLanguage, setSelectedLanguage] = useState();
+  const [modalVisible, setModalVisible] = useState(false);
 
   const handleSubmit = () => {
     const filteredNames = Object.entries(names)
@@ -80,20 +83,23 @@ const KoreanNameNative = () => {
         Chaque caractère a un sens spécifique, comme « sagesse » ou « élégance
         ».
       </ThemedText>
-      <ThemedText style={{ marginTop: 5 }}>
+      <ThemedText style={{ marginVertical: 10 }}>
         Le nom détermine le sens des caractères, à partir duquel on peut
         imaginer des images personnalisées.
       </ThemedText>
 
-      <ThemedText title style={{ marginTop: 15, fontSize: 14 }}>
-        Choisissez votre sexe.
-      </ThemedText>
-      <InputPicker choices={["femme", "non binaire", "homme"]} />
-
-      <Text style={styles.label}>Choisissez votre caractère</Text>
-      <Pressable style={styles.submitButton} onPress={handleSubmit}>
-        <Text style={styles.submitText}>Générer votre nom coréen.</Text>
-      </Pressable>
+      <ThemedButton handleSubmit={() => setModalVisible(true)} />
+      <ThemedModal
+        visible={modalVisible}
+        onDismiss={() => setModalVisible(false)}
+      >
+        <>
+          <InputPicker choices={["femme", "non binaire", "homme"]} />
+          <Pressable style={styles.submitButton} onPress={handleSubmit}>
+            <Text style={styles.submitText}>Générer votre nom coréen.</Text>
+          </Pressable>
+        </>
+      </ThemedModal>
       {selectedName && (
         <View style={styles.resultCard}>
           <Text style={styles.resultLabel}>Ton nom coréen est...</Text>
