@@ -1,7 +1,7 @@
 import DateTimePicker, {
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import ThemedCard from "../ThemedCard";
 
 type ThemedDateTimePickerProps = {
@@ -16,13 +16,19 @@ const ThemedDateTimePicker = ({
   setConfirmDate,
 }: ThemedDateTimePickerProps) => {
   const [date, setDate] = useState(new Date());
+  const debounceTimer = useRef<number | null>(null);
+
   const onChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
     if (event.type === "set") {
-      const currentDate = selectedDate;
-      if (currentDate) {
-        setConfirmDate(currentDate);
-        setOpen(!open);
-      }
+      if (debounceTimer.current) clearTimeout(debounceTimer.current);
+
+      debounceTimer.current = setTimeout(() => {
+        if (selectedDate) {
+          setDate(selectedDate);
+          setConfirmDate(selectedDate);
+          setOpen(false);
+        }
+      }, 2500);
     }
   };
 

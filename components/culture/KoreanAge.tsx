@@ -16,8 +16,9 @@ const KoreanAge = () => {
       return (
         <>
           <ThemedText title style={{ fontSize: 16 }}>
-            Tu as {data.koreanAge} selon l&apos;age coréen🇰🇷, mais {data.frenchAge}
-            selon &apos;age français🇫🇷.
+            Tu as {data.koreanAge} selon l&apos;âge coréen🇰🇷, mais{" "}
+            {data.frenchAge}
+            selon l&apos;âge français🇫🇷.
           </ThemedText>
         </>
       );
