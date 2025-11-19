@@ -1,0 +1,44 @@
+[
+  {
+    "emoji": "ㅡ_ㅡ",
+    "description": "Voyelle \"ㅡ\" (euh-)",
+    "badges": ["Je n'aime pas", "Rigoler", "J'adore", "J'ai faim", "Quoi?"],
+    "answer": "Je n'aime pas ça…",
+    "correctBadge": 0
+  },
+  {
+    "emoji": "ㅠ_ㅠ",
+    "description": "Voyelle \"ㅠ\" (yoo-)",
+    "badges": ["En colère", "Triste", "Surpris", "Fatigué", "Non!"],
+    "answer": "Je suis triste… tellement frustré…",
+    "correctBadge": 1
+  },
+  {
+    "emoji": "-ㅅ-",
+    "description": "Voyelle \"ㅅ\" (si-)",
+    "badges": ["Rigoler", "Intéressant", "Bizarre", "Hmm…", "Je pense pas"],
+    "answer": "Hmm… vraiment…",
+    "correctBadge": 3
+  },
+  {
+    "emoji": "ㅇㅅㅇ",
+    "description": "Voyelle \"ㅇ\" (ng-)",
+    "badges": ["Curieux", "Content", "Étonné", "Surpris", "Bizarre"],
+    "answer": "D'accord… si tu dis ça (un peu surpris)",
+    "correctBadge": 3
+  },
+  {
+    "emoji": "ㅇ_ㅇ",
+    "description": "Voyelle \"ㅇ\" (ng-)",
+    "badges": ["Hmm…", "Pas d'accord", "Compris", "Intéressant", "MDR"],
+    "answer": "D'accord… je t'écoute, mais je ne suis pas convaincu.",
+    "correctBadge": 1
+  },
+  {
+    "emoji": "ㅋ_ㅋ",
+    "description": "Voyelle \"ㅋ\" (k-)",
+    "badges": ["Rire", "Amusé", "Satisfait", "Mouais", "Je ne sais pas"],
+    "answer": "Rire satisfait",
+    "correctBadge": 2
+  }
+]
