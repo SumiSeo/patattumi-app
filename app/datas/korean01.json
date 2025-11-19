@@ -1,0 +1,22 @@
+[
+  { "id": 1, "korean": "안녕하세요", "pronounciation": "An-Nyeong-Ha-Se-Yo", "signification": "Bonjour / Salut (formel)" },
+  { "id": 2, "korean": "안녕", "pronounciation": "An-Nyeong", "signification": "Salut (informel)" },
+  { "id": 3, "korean": "좋은 아침이에요", "pronounciation": "Jo-Heun A-Chim-I-E-Yo", "signification": "Bonjour (matin)" },
+  { "id": 4, "korean": "좋은 저녁이에요", "pronounciation": "Jo-Heun Jeo-Nyeok-I-E-Yo", "signification": "Bonsoir" },
+  { "id": 5, "korean": "잘 지냈어요?", "pronounciation": "Jal Ji-Nae-Sseo-Yo?", "signification": "Comment ça va ?" },
+  { "id": 6, "korean": "잘 지냈어?", "pronounciation": "Jal Ji-Nae-Sseo?", "signification": "Comment ça va ? (informel)" },
+  { "id": 7, "korean": "반갑습니다", "pronounciation": "Ban-Gap-Seum-Ni-Da", "signification": "Enchanté de vous rencontrer" },
+  { "id": 8, "korean": "반가워요", "pronounciation": "Ban-Ga-Wo-Yo", "signification": "Ravi de te voir" },
+  { "id": 9, "korean": "안녕히 가세요", "pronounciation": "An-Nyeong-Hi Ga-Se-Yo", "signification": "Au revoir (à celui qui part)" },
+  { "id": 10, "korean": "안녕히 계세요", "pronounciation": "An-Nyeong-Hi Gye-Se-Yo", "signification": "Au revoir (à celui qui reste)" },
+  { "id": 11, "korean": "잘 가요", "pronounciation": "Jal Ga-Yo", "signification": "Salut / Au revoir (informel)" },
+  { "id": 12, "korean": "좋은 하루 되세요", "pronounciation": "Jo-Heun Ha-Ru Dwe-Se-Yo", "signification": "Bonne journée" },
+  { "id": 13, "korean": "잘 있어요", "pronounciation": "Jal I-Sseo-Yo", "signification": "Reste bien / prends soin de toi" },
+  { "id": 14, "korean": "잘 있어", "pronounciation": "Jal I-Sseo", "signification": "Reste bien (informel)" },
+  { "id": 15, "korean": "오랜만이에요", "pronounciation": "O-Raen-Man-I-E-Yo", "signification": "Ça fait longtemps" },
+  { "id": 16, "korean": "오랜만이야", "pronounciation": "O-Raen-Man-I-Ya", "signification": "Ça fait longtemps (informel)" },
+  { "id": 17, "korean": "처음 뵙겠습니다", "pronounciation": "Cheo-Eum Boep-Ge-Sseum-Ni-Da", "signification": "Ravi de faire votre connaissance (formel)" },
+  { "id": 18, "korean": "수고하세요", "pronounciation": "Su-Go-Ha-Se-Yo", "signification": "Bon travail / merci pour ton effort" },
+  { "id": 19, "korean": "수고했어요", "pronounciation": "Su-Go-Hae-Sseo-Yo", "signification": "Bravo pour ton effort / Bien joué" },
+  { "id": 20, "korean": "화이팅!", "pronounciation": "Hwa-I-Ting!", "signification": "Allez ! / Courage !" }
+]
