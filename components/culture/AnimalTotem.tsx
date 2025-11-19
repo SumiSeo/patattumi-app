@@ -18,6 +18,7 @@ const AnimalTotem = () => {
       setConfirmDate(null);
     }, [])
   );
+
   const handleSubmit = () => {
     setOpen(true);
     setModalVisible(true);
