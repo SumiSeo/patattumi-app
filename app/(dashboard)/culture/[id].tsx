@@ -15,6 +15,7 @@ import AnimalTotem from "@/components/culture/AnimalTotem";
 import CalendarLunarYear from "@/components/culture/CalendarLunarYear";
 import KoreanAge from "@/components/culture/KoreanAge";
 import KoreanEmoji from "@/components/culture/KoreanEmoji";
+import KoreanHolidayCalendar from "@/components/culture/KoreanHolidayCalendar";
 import KoreanName from "@/components/culture/KoreanName";
 import KoreanPolitesse from "@/components/culture/KoreanPolitesse";
 import ThemedCard from "@/components/ThemedCard";
@@ -51,6 +52,7 @@ const CultureDetail = () => {
     if (id === "4") return <KoreanName />;
     if (id === "5") return <KoreanEmoji />;
     if (id === "6") return <CalendarLunarYear />;
+    if (id === "7") return <KoreanHolidayCalendar />;
     return;
   };
   return (
