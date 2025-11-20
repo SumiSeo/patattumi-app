@@ -26,13 +26,19 @@ const KoreanAge = () => {
   const displayKoreanAnge = () => {
     if (confirmDate) {
       const data = calcKoreanAge(confirmDate?.toString());
-
+      if (data.frenchAge === "" && data.koreanAge === "")
+        return (
+          <>
+            <ThemedText title style={{ fontSize: 16 }}>
+              Soit tu as un an, soit tu n’es même pas encore né(e)🇰🇷🇫🇷
+            </ThemedText>
+          </>
+        );
       return (
         <>
           <ThemedText title style={{ fontSize: 16 }}>
-            Tu as {data.koreanAge} selon l&apos;âge coréen🇰🇷, mais{" "}
-            {data.frenchAge}
-            selon l&apos;âge français🇫🇷.
+            Tu as {data.koreanAge} ans selon l&apos;âge coréen🇰🇷, mais
+            {data.frenchAge} ans selon l&apos;âge français🇫🇷.
           </ThemedText>
         </>
       );
