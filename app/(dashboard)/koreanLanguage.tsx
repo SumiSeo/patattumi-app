@@ -13,7 +13,7 @@ const KoreanLanguage = () => {
 
   return (
     <ThemedView safe={true}>
-      <ThemedText title>Culture & Voyage</ThemedText>
+      <ThemedText title>Apprendre le coréen</ThemedText>
       <Spacer height={20} />
       <FlatList
         renderItem={({ item }) => (
