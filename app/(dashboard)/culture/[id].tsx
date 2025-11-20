@@ -22,6 +22,7 @@ import KoreanSize from "@/components/culture/KoreanSize";
 import ThemedCard from "@/components/ThemedCard";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
+import ThemedVlog from "@/components/Vlog/ThemedVlog";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
 import { Image, ScrollView, StyleSheet } from "react-native";
@@ -55,6 +56,8 @@ const CultureDetail = () => {
     if (id === "6") return <CalendarLunarYear />;
     if (id === "7") return <KoreanHolidayCalendar />;
     if (id === "8") return <KoreanSize />;
+    if (id === "9") return <ThemedVlog data={selectedData} />;
+    if (id === "10") return <ThemedVlog data={selectedData} />;
     return;
   };
   return (

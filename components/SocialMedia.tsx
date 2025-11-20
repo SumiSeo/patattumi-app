@@ -3,19 +3,19 @@ import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { Linking, StyleSheet, TouchableOpacity, View } from "react-native";
 
-type RecetteVideoProps = {
-  insta: string;
-  youtube: string;
-  tiktok: string;
+type SocialMediaProps = {
+  insta?: string;
+  youtube?: string;
+  tiktok?: string;
+  title:string;
 };
-const RecetteVideo = ({ insta, youtube, tiktok }: RecetteVideoProps) => {
+const SocialMedia = ({title, insta, youtube, tiktok }: SocialMediaProps) => {
   return (
     <View style={styles.container}>
       <ThemedText
         style={{ fontSize: 13, fontWeight: "bold", marginVertical: 10 }}
       >
-        Voir la vidéo de la recette.(Cette vidéo s’ouvrira dans une page
-        externe.)
+       {title}
       </ThemedText>
       <View style={styles.box}>
         <TouchableOpacity
@@ -44,7 +44,7 @@ const RecetteVideo = ({ insta, youtube, tiktok }: RecetteVideoProps) => {
   );
 };
 
-export default RecetteVideo;
+export default SocialMedia;
 
 const styles = StyleSheet.create({
   container: {

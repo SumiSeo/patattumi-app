@@ -1,4 +1,4 @@
-import RecetteVideo from "@/components/RecetteVideo";
+import SocialMedia from "@/components/SocialMedia";
 import ThemedCard from "@/components/ThemedCard";
 import ThemedLoader from "@/components/ThemedLoader";
 import ThemedText from "@/components/ThemedText";
@@ -70,7 +70,8 @@ const RecipeDetail = () => {
           </ThemedText>
           {chunkRecipe(recipeInfo.recipe)}
           <View style={{ alignSelf: "flex-start" }}>
-            <RecetteVideo
+            <SocialMedia
+              title="Voir la vidéo de la recette.(cette vidéo s'ouvrira dans une page externe)"
               youtube={recipeInfo.youtube}
               tiktok={recipeInfo.tiktok}
               insta={recipeInfo.insta}
