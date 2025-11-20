@@ -1,0 +1,22 @@
+[
+  { "id": 1, "korean": "지하철", "pronounciation": "Ji-Ha-Cheol", "signification": "Métro / Subway" },
+  { "id": 2, "korean": "버스", "pronounciation": "Beo-Seu", "signification": "Bus" },
+  { "id": 3, "korean": "버스정류장", "pronounciation": "Beo-Seu Jeong-Ryu-Jang", "signification": "Arrêt de bus" },
+  { "id": 4, "korean": "역", "pronounciation": "Yeok", "signification": "Station (de métro ou train)" },
+  { "id": 5, "korean": "승차", "pronounciation": "Seung-Cha", "signification": "Monter dans le bus / métro" },
+  { "id": 6, "korean": "하차", "pronounciation": "Ha-Cha", "signification": "Descendre du bus / métro" },
+  { "id": 7, "korean": "환승", "pronounciation": "Hwan-Seung", "signification": "Correspondance / Changement de ligne" },
+  { "id": 8, "korean": "요금", "pronounciation": "Yo-Geum", "signification": "Tarif / Prix du ticket" },
+  { "id": 9, "korean": "교통카드", "pronounciation": "Gyo-Tong Ka-Deu", "signification": "Carte de transport" },
+  { "id": 10, "korean": "출입문", "pronounciation": "Chul-Ip-Mun", "signification": "Porte d’entrée / sortie du bus ou métro" },
+  { "id": 11, "korean": "좌석", "pronounciation": "Jwa-Seok", "signification": "Siège" },
+  { "id": 12, "korean": "입석", "pronounciation": "Ip-Seok", "signification": "Debout (place debout dans le bus/métro)" },
+  { "id": 13, "korean": "정류장 안내", "pronounciation": "Jeong-Ryu-Jang An-Nae", "signification": "Annonce d’arrêt" },
+  { "id": 14, "korean": "막차", "pronounciation": "Mak-Cha", "signification": "Dernier métro / dernier bus" },
+  { "id": 15, "korean": "첫차", "pronounciation": "Cheot-Cha", "signification": "Premier métro / premier bus" },
+  { "id": 16, "korean": "혼잡", "pronounciation": "Hon-Jap", "signification": "Bousculade / Foule" },
+  { "id": 17, "korean": "출근 시간", "pronounciation": "Chul-Geun Si-Gan", "signification": "Heure de pointe du matin" },
+  { "id": 18, "korean": "퇴근 시간", "pronounciation": "Toe-Geun Si-Gan", "signification": "Heure de pointe du soir" },
+  { "id": 19, "korean": "지하철 노선도", "pronounciation": "Ji-Ha-Cheol No-Seon-Do", "signification": "Plan du métro" },
+  { "id": 20, "korean": "버스 시간표", "pronounciation": "Beo-Seu Si-Gan-Pyo", "signification": "Horaire de bus" }
+]

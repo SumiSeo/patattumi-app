@@ -1,0 +1,22 @@
+[
+  { "id": 1, "korean": "약국", "pronounciation": "Yak-Guk", "signification": "Pharmacie" },
+  { "id": 2, "korean": "약", "pronounciation": "Yak", "signification": "Médicament" },
+  { "id": 3, "korean": "감기", "pronounciation": "Gam-Gi", "signification": "Rhume" },
+  { "id": 4, "korean": "목감기", "pronounciation": "Mok-Gam-Gi", "signification": "Mal de gorge" },
+  { "id": 5, "korean": "위", "pronounciation": "Wi", "signification": "Estomac" },
+  { "id": 6, "korean": "장", "pronounciation": "Jang", "signification": "Intestin" },
+  { "id": 7, "korean": "두통", "pronounciation": "Du-Tong", "signification": "Mal de tête" },
+  { "id": 8, "korean": "열", "pronounciation": "Yeol", "signification": "Fièvre" },
+  { "id": 9, "korean": "기침", "pronounciation": "Gi-Chim", "signification": "Toux" },
+  { "id": 10, "korean": "병원", "pronounciation": "Byeong-Won", "signification": "Hôpital" },
+  { "id": 11, "korean": "진료", "pronounciation": "Jin-Ryo", "signification": "Consultation médicale" },
+  { "id": 12, "korean": "주사", "pronounciation": "Ju-Sa", "signification": "Injection" },
+  { "id": 13, "korean": "간호사", "pronounciation": "Gan-Ho-Sa", "signification": "Infirmier / Infirmière" },
+  { "id": 14, "korean": "의사", "pronounciation": "Ui-Sa", "signification": "Médecin" },
+  { "id": 15, "korean": "혈압", "pronounciation": "Hyeol-Ap", "signification": "Tension artérielle" },
+  { "id": 16, "korean": "주치의", "pronounciation": "Ju-Chi-Eui", "signification": "Médecin traitant" },
+  { "id": 17, "korean": "증상", "pronounciation": "Jeung-Sang", "signification": "Symptôme" },
+  { "id": 18, "korean": "약물", "pronounciation": "Yak-Mul", "signification": "Médication / substance médicamenteuse" },
+  { "id": 19, "korean": "피검사", "pronounciation": "Pi-Geom-Sa", "signification": "Analyse de sang" },
+  { "id": 20, "korean": "X-레이", "pronounciation": "X-Ray", "signification": "Radiographie" }
+]
