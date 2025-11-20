@@ -1,0 +1,137 @@
+{
+  "1월1일": {
+    "fr": "Nouvel An",
+    "signification": "Premier jour de l'année selon le calendrier grégorien.",
+    "is_public": true
+  },
+  "임시공휴일": {
+    "fr": "Jour férié exceptionnel",
+    "signification": "Jour de congé temporaire décidé par le gouvernement.",
+    "is_public": true
+  },
+  "설날": {
+    "fr": "Nouvel An lunaire (Seollal)",
+    "signification": "Fête traditionnelle coréenne marquant le Nouvel An lunaire.",
+    "is_public": true
+  },
+  "삼일절": {
+    "fr": "Jour du Mouvement du 1er mars",
+    "signification": "Commémoration du mouvement d'indépendance coréen contre la colonisation japonaise en 1919.",
+    "is_public": true
+  },
+  "대체공휴일": {
+    "fr": "Jour de remplacement",
+    "signification": "Jour férié de substitution lorsqu'un jour férié tombe un week-end.",
+    "is_public": true
+  },
+  "어린이날": {
+    "fr": "Journée des enfants",
+    "signification": "Jour pour célébrer et honorer les enfants.",
+    "is_public": true
+  },
+  "부처님오신날": {
+    "fr": "Anniversaire de Bouddha",
+    "signification": "Célébration de la naissance de Bouddha selon le calendrier lunaire.",
+    "is_public": true
+  },
+  "임시공휴일(제21대 대통령 선거)": {
+    "fr": "Jour férié exceptionnel (Élection présidentielle)",
+    "signification": "Jour de vote pour la 21ᵉ élection présidentielle en Corée.",
+    "is_public": true
+  },
+  "현충일": {
+    "fr": "Jour du Souvenir",
+    "signification": "Jour pour honorer les soldats morts au combat.",
+    "is_public": true
+  },
+  "광복절": {
+    "fr": "Jour de la Libération nationale",
+    "signification": "Commémoration de la libération de la Corée du Japon en 1945.",
+    "is_public": true
+  },
+  "개천절": {
+    "fr": "Jour de la Fondation nationale",
+    "signification": "Célébration de la fondation légendaire de la Corée par Dangun.",
+    "is_public": true
+  },
+  "추석": {
+    "fr": "Fête des moissons (Chuseok)",
+    "signification": "Grande fête coréenne pour remercier les ancêtres et partager les récoltes.",
+    "is_public": true
+  },
+  "한글날": {
+    "fr": "Jour du Hangeul",
+    "signification": "Célébration de la création de l'alphabet coréen, le Hangeul.",
+    "is_public": true
+  },
+  "기독탄신일": {
+    "fr": "Noël",
+    "signification": "Célébration de la naissance de Jésus-Christ.",
+    "is_public": true
+  },
+  "전국동시지방선거": {
+    "fr": "Élections locales simultanées nationales",
+    "signification": "Élections locales qui se tiennent simultanément dans tout le pays.",
+    "is_public": true
+  },
+  "다이어리데이": {
+    "fr": "Diary Day",
+    "signification": "Journée pour écrire et partager son journal.",
+    "is_public": false
+  },
+  "발렌타인데이": {
+    "fr": "Valentine Day",
+    "signification": "Journée dédiée à l'expression de l'amour avec des cadeaux.",
+    "is_public": false
+  },
+  "화이트데이": {
+    "fr": "White Day",
+    "signification": "Journée où l'on offre des cadeaux en retour pour la Saint-Valentin.",
+    "is_public": false
+  },
+  "블랙데이": {
+    "fr": "Black Day",
+    "signification": "Journée où les célibataires mangent des nouilles noires.",
+    "is_public": false
+  },
+  "로즈데이": {
+    "fr": "Rose Day",
+    "signification": "Journée où l'on offre des roses pour exprimer ses sentiments.",
+    "is_public": false
+  },
+  "키스데이": {
+    "fr": "Kiss Day",
+    "signification": "Journée dédiée aux baisers pour montrer son affection.",
+    "is_public": false
+  },
+  "실버데이": {
+    "fr": "Silver Day",
+    "signification": "Journée où l'on offre des cadeaux en argent pour célébrer l'amour.",
+    "is_public": false
+  },
+  "그린데이": {
+    "fr": "Green Day",
+    "signification": "Journée pour apprécier la nature et l'environnement.",
+    "is_public": false
+  },
+  "포토데이": {
+    "fr": "Photo Day",
+    "signification": "Journée pour prendre et partager des photos avec ses proches.",
+    "is_public": false
+  },
+  "와인데이": {
+    "fr": "Wine Day",
+    "signification": "Journée pour déguster et partager du vin.",
+    "is_public": false
+  },
+  "빼빼로데이": {
+    "fr": "Pepero Day",
+    "signification": "Journée où l'on offre des bâtonnets chocolatés à ses proches.",
+    "is_public": false
+  },
+  "허그데이": {
+    "fr": "Hug Day",
+    "signification": "Journée dédiée aux câlins pour montrer son affection.",
+    "is_public": false
+  }
+}

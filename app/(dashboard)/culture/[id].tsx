@@ -15,11 +15,14 @@ import AnimalTotem from "@/components/culture/AnimalTotem";
 import CalendarLunarYear from "@/components/culture/CalendarLunarYear";
 import KoreanAge from "@/components/culture/KoreanAge";
 import KoreanEmoji from "@/components/culture/KoreanEmoji";
+import KoreanHolidayCalendar from "@/components/culture/KoreanHolidayCalendar";
 import KoreanName from "@/components/culture/KoreanName";
 import KoreanPolitesse from "@/components/culture/KoreanPolitesse";
+import KoreanSize from "@/components/culture/KoreanSize";
 import ThemedCard from "@/components/ThemedCard";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
+import ThemedVlog from "@/components/Vlog/ThemedVlog";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
 import { Image, ScrollView, StyleSheet } from "react-native";
@@ -51,6 +54,10 @@ const CultureDetail = () => {
     if (id === "4") return <KoreanName />;
     if (id === "5") return <KoreanEmoji />;
     if (id === "6") return <CalendarLunarYear />;
+    if (id === "7") return <KoreanHolidayCalendar />;
+    if (id === "8") return <KoreanSize />;
+    if (id === "9") return <ThemedVlog data={selectedData} />;
+    if (id === "10") return <ThemedVlog data={selectedData} />;
     return;
   };
   return (

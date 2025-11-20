@@ -1,0 +1,22 @@
+[
+  { "id": 1, "korean": "안녕하세요", "pronounciation": "An-Nyeong-Ha-Se-Yo", "signification": "Bonjour / Salut (formel)" },
+  { "id": 2, "korean": "안녕", "pronounciation": "An-Nyeong", "signification": "Salut (informel)" },
+  { "id": 3, "korean": "잘 지냈어요?", "pronounciation": "Jal Ji-Nae-Sseo-Yo?", "signification": "Comment ça va ?" },
+  { "id": 4, "korean": "오랜만이에요", "pronounciation": "O-Raen-Man-I-E-Yo", "signification": "Ça fait longtemps" },
+  { "id": 5, "korean": "감사합니다", "pronounciation": "Gam-Sa-Ham-Ni-Da", "signification": "Merci (formel)" },
+  { "id": 6, "korean": "고마워", "pronounciation": "Go-Ma-Weo", "signification": "Merci (informel)" },
+  { "id": 7, "korean": "죄송합니다", "pronounciation": "Jwe-Song-Ham-Ni-Da", "signification": "Je suis désolé (formel)" },
+  { "id": 8, "korean": "미안해", "pronounciation": "Mi-An-Hae", "signification": "Je suis désolé (informel)" },
+  { "id": 9, "korean": "좋은 하루 되세요", "pronounciation": "Jo-Heun Ha-Ru Dwe-Se-Yo", "signification": "Bonne journée" },
+  { "id": 10, "korean": "잘 자요", "pronounciation": "Jal Ja-Yo", "signification": "Bonne nuit" },
+  { "id": 11, "korean": "대박이다", "pronounciation": "Dae-Bak-I-Da", "signification": "C’est incroyable / génial !" },
+  { "id": 12, "korean": "헐 진짜?", "pronounciation": "Heol Jin-Jja?", "signification": "Oh wow / Vraiment ?" },
+  { "id": 13, "korean": "뭐야 이거", "pronounciation": "Mwo-Ya I-Geo", "signification": "C’est quoi ça ?" },
+  { "id": 14, "korean": "심심하다", "pronounciation": "Sim-Sim-Ha-Da", "signification": "Je m’ennuie" },
+  { "id": 15, "korean": "배고프다", "pronounciation": "Bae-Go-Peu-Da", "signification": "J’ai faim" },
+  { "id": 16, "korean": "졸리다", "pronounciation": "Jol-Li-Da", "signification": "J’ai sommeil" },
+  { "id": 17, "korean": "좋아요!", "pronounciation": "Jo-Ah-Yo!", "signification": "C’est bien ! / J’aime !" },
+  { "id": 18, "korean": "싫어요", "pronounciation": "Sil-Heo-Yo", "signification": "Je n’aime pas / Je refuse" },
+  { "id": 19, "korean": "괜찮아요?", "pronounciation": "Gwaen-Chan-Ah-Yo?", "signification": "Ça va ? / Tout va bien ?" },
+  { "id": 20, "korean": "정말?", "pronounciation": "Jung-Mal?", "signification": "Vraiment ? / Sérieusement ?" }
+]

@@ -1,18 +1,18 @@
 import data from "@/app/datas/courseKoreanLanguage.json";
-// import img10 from "@/assets/images/courses/korean/10.jpg";
-// import img11 from "@/assets/images/courses/korean/11.jpg";
-// import img12 from "@/assets/images/courses/korean/12.jpg";
+import course01 from "@/app/datas/koreanWords/korean01.json";
+import course02 from "@/app/datas/koreanWords/korean02.json";
+import course03 from "@/app/datas/koreanWords/korean03.json";
+import course04 from "@/app/datas/koreanWords/korean04.json";
+import course05 from "@/app/datas/koreanWords/korean05.json";
+import course06 from "@/app/datas/koreanWords/korean06.json";
+import img1 from "@/assets/images/courses/korean/1.jpg";
 import img2 from "@/assets/images/courses/korean/2.jpg";
 import img3 from "@/assets/images/courses/korean/3.jpg";
 import img4 from "@/assets/images/courses/korean/4.jpg";
 import img5 from "@/assets/images/courses/korean/5.jpg";
 import img6 from "@/assets/images/courses/korean/6.jpg";
-// import img7 from "@/assets/images/courses/korean/7.jpg";
-// import img8 from "@/assets/images/courses/korean/8.jpg";
-// import img9 from "@/assets/images/courses/korean/9.jpg";
-import course01 from "@/app/datas/korean01.json";
-import img1 from "@/assets/images/courses/korean/1.jpg";
 import KoreanClockGame from "@/components/korean/KoreanClockGame";
+import KoreanWord from "@/components/korean/KoreanWord";
 import ThemedCard from "@/components/ThemedCard";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
@@ -21,17 +21,17 @@ import React from "react";
 import { Image, ScrollView, StyleSheet } from "react-native";
 const images = {
   "1": img1,
-  "2": img2,
-  "3": img3,
-  "4": img4,
-  "5": img5,
-  "6": img6,
-  // "7": img7,
-  // "8": img8,
-  // "9": img9,
-  // "10": img10,
-  // "11": img11,
-  // "12": img12,
+  "2": img1,
+  "3": img2,
+  "4": img2,
+  "5": img3,
+  "6": img3,
+  "7": img4,
+  "8": img4,
+  "9": img5,
+  "10": img5,
+  "11": img6,
+  "12": img6,
 } as const;
 
 const KoreanLessonDetail = () => {
@@ -40,7 +40,17 @@ const KoreanLessonDetail = () => {
   const selectedData = data.find((item) => item.id === Number(id));
   const findCorrectGame = () => {
     if (id === "1") return <KoreanClockGame data={course01} />;
-    return;
+    if (id === "2") return <KoreanWord data={course01} />;
+    if (id === "3") return <KoreanClockGame data={course02} />;
+    if (id === "4") return <KoreanWord data={course02} />;
+    if (id === "5") return <KoreanClockGame data={course03} />;
+    if (id === "6") return <KoreanWord data={course03} />;
+    if (id === "7") return <KoreanClockGame data={course04} />;
+    if (id === "8") return <KoreanWord data={course04} />;
+    if (id === "9") return <KoreanClockGame data={course05} />;
+    if (id === "10") return <KoreanWord data={course05} />;
+    if (id === "11") return <KoreanClockGame data={course06} />;
+    if (id === "12") return <KoreanWord data={course06} />;
   };
   return (
     <ThemedView safe={true}>
