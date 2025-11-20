@@ -1,20 +1,19 @@
 import { Picker } from "@react-native-picker/picker";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 
 type InputPickerProps = {
   choices: string[];
+  value: string | null;
+  onChange: (value: string) => void;
 };
-const InputPicker = ({ choices }: InputPickerProps) => {
+const InputPicker = ({ choices, value, onChange }: InputPickerProps) => {
   const pickerRef = useRef<Picker<string>>(null);
-  const [selectedLanguage, setSelectedLanguage] = useState<
-    string | undefined
-  >();
 
   return (
     <Picker
       ref={pickerRef}
-      selectedValue={selectedLanguage}
-      onValueChange={(itemValue) => setSelectedLanguage(itemValue)}
+      selectedValue={value}
+      onValueChange={(itemValue) => onChange(value)}
     >
       {choices.map((choice) => (
         <Picker.Item key={choice} label={choice} value={choice} />
