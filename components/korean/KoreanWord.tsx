@@ -19,7 +19,7 @@ const KoreanWord = ({ data }: wordsData) => {
         key={word.id}
         style={{
           flexDirection: "row",
-          paddingVertical: 8,
+          padding: 6,
           borderBottomWidth: 0.2,
           borderColor: "black",
         }}
@@ -49,7 +49,7 @@ const KoreanWord = ({ data }: wordsData) => {
       <View
         style={{
           flexDirection: "row",
-          paddingVertical: 10,
+          padding: 6,
           backgroundColor: "black",
           borderBottomWidth: 2,
         }}
