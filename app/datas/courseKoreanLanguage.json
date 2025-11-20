@@ -2,29 +2,29 @@
   {
     "id": 1,
     "type": "question",
-    "course": "Jeu de mots en coréen 01.",
+    "course": "Cours de coréen 01.",
     "title": "Apprenez des EASY expression coréennes en 100 secondes",
     "description": "Découvrez des EASY expressions coréennes, apprenez leur prononciation et comprenez leur signification pour les utiliser facilement au quotidien"
   },
   {
     "id": 2,
     "type": "solution",
-    "course": "Cours de coréen 01.",
+    "course": "Explication de coréen 01.",
     "title": "Apprenez des EASY expression coréennes.",
     "description": "Découvrez des EASY expressions coréennes, apprenez leur prononciation et comprenez leur signification pour les utiliser facilement au quotidien"
   },
   {
     "id": 3,
     "type": "question",
-    "course": "Jeu de mots en coréen 02.",
+    "course": "Cours de coréen 01.",
     "title": "Apprenez 10 expressions coréennes pratiques en 100 secondes",
     "description": "En seulement 100 secondes, découvrez et mémorisez 10 expressions coréennes utiles pour vos conversations quotidiennes "
   },
   {
-     "id": 4,
-     "type": "solution",
-     "course": "Jeu de mots en coréen 02.",
-     "title": "Apprenez 10 expressions coréennes pratiques en 100 secondes",
-     "description": "En seulement 100 secondes, découvrez et mémorisez 10 expressions coréennes utiles pour vos conversations quotidiennes "
-   }
+    "id": 4,
+    "type": "solution",
+    "course": "Explication de coréen 02.",
+    "title": "Apprenez 10 expressions coréennes pratiques en 100 secondes",
+    "description": "En seulement 100 secondes, découvrez et mémorisez 10 expressions coréennes utiles pour vos conversations quotidiennes "
+  }
 ]

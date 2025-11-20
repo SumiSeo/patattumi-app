@@ -13,6 +13,7 @@ import img6 from "@/assets/images/courses/korean/6.jpg";
 import course01 from "@/app/datas/korean01.json";
 import img1 from "@/assets/images/courses/korean/1.jpg";
 import KoreanClockGame from "@/components/korean/KoreanClockGame";
+import KoreanWord from "@/components/korean/KoreanWord";
 import ThemedCard from "@/components/ThemedCard";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
@@ -40,6 +41,7 @@ const KoreanLessonDetail = () => {
   const selectedData = data.find((item) => item.id === Number(id));
   const findCorrectGame = () => {
     if (id === "1") return <KoreanClockGame data={course01} />;
+    if (id === "2") return <KoreanWord data={course01} />;
     return;
   };
   return (
