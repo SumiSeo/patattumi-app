@@ -33,6 +33,7 @@ const ThemedDateTimePicker = ({
     <ThemedCard style={{ paddingHorizontal: 20 }}>
       {open && (
         <DateTimePicker
+          textColor="black"
           onChange={onChange}
           value={date}
           mode="date"

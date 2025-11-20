@@ -2,15 +2,29 @@
   {
     "id": 1,
     "type": "question",
-    "course": "Cours de coréen 01.",
-    "title": "Découvir animal totem selon votre année de naissance.",
-    "description": "En Corée, selon l'année de naissance, chaque personne estassociée à un des 12 animaux du zodiaque chinois."
+    "course": "Jeu de mots en coréen 01.",
+    "title": "Apprenez des EASY expression coréennes en 100 secondes",
+    "description": "Découvrez des EASY expressions coréennes, apprenez leur prononciation et comprenez leur signification pour les utiliser facilement au quotidien"
   },
   {
     "id": 2,
     "type": "solution",
-    "course": "Explication du cours 01.",
-    "title": "Vous saviez que l'âge coréen se calcule différemment de l'âge français ?",
-    "description": "Découvrez votre âge coréen en un clin d'œil !"
-  }
+    "course": "Cours de coréen 01.",
+    "title": "Apprenez des EASY expression coréennes.",
+    "description": "Découvrez des EASY expressions coréennes, apprenez leur prononciation et comprenez leur signification pour les utiliser facilement au quotidien"
+  },
+  {
+    "id": 3,
+    "type": "question",
+    "course": "Jeu de mots en coréen 02.",
+    "title": "Apprenez 10 expressions coréennes pratiques en 100 secondes",
+    "description": "En seulement 100 secondes, découvrez et mémorisez 10 expressions coréennes utiles pour vos conversations quotidiennes "
+  },
+  {
+     "id": 4,
+     "type": "solution",
+     "course": "Jeu de mots en coréen 02.",
+     "title": "Apprenez 10 expressions coréennes pratiques en 100 secondes",
+     "description": "En seulement 100 secondes, découvrez et mémorisez 10 expressions coréennes utiles pour vos conversations quotidiennes "
+   }
 ]

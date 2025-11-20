@@ -20,7 +20,7 @@ const KoreanLanguage = () => {
           <Pressable onPress={() => router.push(`/korean/${item.id}`)}>
             <ThemedCard style={styles.card}>
               {item.type === "question" && (
-                <Ionicons size={35} name="document-text-outline" />
+                <Ionicons size={35} name="alarm-outline" />
               )}
               {item.type === "solution" && (
                 <Ionicons size={35} name="bulb-outline" />
