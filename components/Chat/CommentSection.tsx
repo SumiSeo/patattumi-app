@@ -7,10 +7,9 @@ import {
 import { useQuery } from "@apollo/client/react";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
-import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import ThemedModal from "../ThemedModal";
 import ThemedText from "../ThemedText";
-import ThemedButton from "../ThmedButton";
 import WriteComment from "./WriteComment";
 
 export type PublicationComment = {
@@ -40,6 +39,7 @@ export type CommentSectionProps = {
 
 const CommentSection = ({ location, id }: CommentSectionProps) => {
   const [comments, setComments] = useState<CommentType[]>([]);
+  const [showComments, setShowComments] = useState(false);
   const [count, setCount] = useState(0);
   const [open, setOpen] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -76,20 +76,25 @@ const CommentSection = ({ location, id }: CommentSectionProps) => {
     setCount(newComments.length);
   }, [franceData, koreaData, location]);
 
-  const renderComment = ({ item }: { item: CommentType }) => {
-    return (
-      <View style={styles.commentBox}>
-        {item.author === "patattumi" ? (
-          <Image source={patattumi} style={styles.avatar} />
-        ) : (
-          <Image source={patate} style={styles.avatar} />
-        )}
-        <View>
-          <Text style={styles.author}>{item.author}</Text>
-          <Text style={styles.content}>{item.content}</Text>
+  const handleShowComments = () => {
+    setShowComments(!showComments);
+  };
+  const createCommentsList = () => {
+    return comments.map((comment: CommentType) => {
+      return (
+        <View key={comment.id} style={styles.commentBox}>
+          {comment.author === "patattumi" ? (
+            <Image source={patattumi} style={styles.avatar} />
+          ) : (
+            <Image source={patate} style={styles.avatar} />
+          )}
+          <View>
+            <Text style={styles.author}>{comment.author}</Text>
+            <Text style={styles.content}>{comment.content}</Text>
+          </View>
         </View>
-      </View>
-    );
+      );
+    });
   };
 
   return (
@@ -97,32 +102,42 @@ const CommentSection = ({ location, id }: CommentSectionProps) => {
       <View
         style={{
           flexDirection: "row",
-          gap: 4,
           alignItems: "center",
-          marginTop: 5,
+          justifyContent: "space-between",
+          marginTop: 10,
         }}
       >
-        <Ionicons size={14} name="chatbubble-outline" />
-        <ThemedText title style={{ fontSize: 10 }}>
-          {count}
-        </ThemedText>
+        <Pressable
+          onPress={handleShowComments}
+          style={{
+            flexDirection: "row",
+            gap: 4,
+            alignItems: "center",
+          }}
+        >
+          <Ionicons size={15} name="chatbubble-outline" />
+          <ThemedText title style={{ fontSize: 13 }}>
+            {count}
+          </ThemedText>
+        </Pressable>
+        <Pressable onPress={handleSubmit}>
+          <View style={styles.writeButton}>
+            <ThemedText title style={{ fontSize: 9, color: "white" }}>
+              Écrire
+            </ThemedText>
+          </View>
+        </Pressable>
+        <ThemedModal
+          visible={modalVisible}
+          onDismiss={() => setModalVisible(false)}
+        >
+          <WriteComment
+            id={id}
+            country={location === "france" ? "france" : "korea"}
+          />
+        </ThemedModal>
       </View>
-      <FlatList
-        data={comments}
-        keyExtractor={(item) => item.id}
-        renderItem={renderComment}
-        style={styles.commentList}
-      />
-      <ThemedButton text="Écrire" handleSubmit={handleSubmit} />
-      <ThemedModal
-        visible={modalVisible}
-        onDismiss={() => setModalVisible(false)}
-      >
-        <WriteComment
-          id={id}
-          country={location === "france" ? "france" : "korea"}
-        />
-      </ThemedModal>
+      {comments && showComments && createCommentsList()}
     </View>
   );
 };
@@ -130,13 +145,11 @@ const CommentSection = ({ location, id }: CommentSectionProps) => {
 export default CommentSection;
 
 const styles = StyleSheet.create({
-  commentList: {
-    maxHeight: 200,
-  },
   commentBox: {
-    marginTop: 10,
+    marginTop: 5,
     flexDirection: "row",
     alignItems: "flex-start",
+    backgroundColor: "red",
   },
   avatar: {
     width: 15,
@@ -153,5 +166,11 @@ const styles = StyleSheet.create({
   content: {
     fontSize: 10,
     color: "#000",
+  },
+  writeButton: {
+    backgroundColor: "black",
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 20,
   },
 });
