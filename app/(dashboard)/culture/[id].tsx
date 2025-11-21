@@ -47,9 +47,7 @@ const images = {
 const CultureDetail = () => {
   const { id } = useLocalSearchParams();
   const key = id as keyof typeof images;
-  const selectedData = data.find(
-    (d) => d.id === Number(id) && d.type === "vlog"
-  ) as Vlog | undefined;
+  const selectedData = data.find((d) => d.id === Number(id)) as Vlog;
 
   const findCorrectGame = () => {
     if (id === "1") return <AnimalTotem />;
