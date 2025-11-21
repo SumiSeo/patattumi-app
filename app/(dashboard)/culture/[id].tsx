@@ -22,7 +22,9 @@ import KoreanSize from "@/components/culture/KoreanSize";
 import ThemedCard from "@/components/ThemedCard";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
+import ThemedArticle from "@/components/Vlog/ThemedArticle";
 import ThemedVlog from "@/components/Vlog/ThemedVlog";
+import { Vlog } from "@/types/ThemedVlogPType";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
 import { Image, ScrollView, StyleSheet } from "react-native";
@@ -45,7 +47,9 @@ const images = {
 const CultureDetail = () => {
   const { id } = useLocalSearchParams();
   const key = id as keyof typeof images;
-  const selectedData = data.find((item) => item.id === Number(id));
+  const selectedData = data.find(
+    (d) => d.id === Number(id) && d.type === "vlog"
+  ) as Vlog | undefined;
 
   const findCorrectGame = () => {
     if (id === "1") return <AnimalTotem />;
@@ -58,6 +62,8 @@ const CultureDetail = () => {
     if (id === "8") return <KoreanSize />;
     if (id === "9") return <ThemedVlog data={selectedData} />;
     if (id === "10") return <ThemedVlog data={selectedData} />;
+    if (id === "11") return <ThemedArticle data={selectedData} />;
+    if (id === "12") return <ThemedArticle data={selectedData} />;
     return;
   };
   return (

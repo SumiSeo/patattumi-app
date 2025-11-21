@@ -1,23 +1,17 @@
 import { ThemedVlogProps } from "@/types/ThemedVlogPType";
 import React from "react";
-import SocialMedia from "../SocialMedia";
 import Spacer from "../Spacer";
 import ThemedText from "../ThemedText";
 
-const ThemedVlog = ({ data }: ThemedVlogProps) => {
+const ThemedArticle = ({ data }: ThemedVlogProps) => {
+
   return (
     <>
       <ThemedText style={{ marginTop: 10 }}>{data?.articles}</ThemedText>
       <Spacer height={5} />
-      <SocialMedia
-        insta={data?.insta}
-        tiktok={data?.tiktok}
-        youtube={data?.youtube}
-        title="Voir la vidéo de Vlog(cette vidéo s'ouvrira dans une page externe)"
-      />
       <Spacer height={10} />
     </>
   );
 };
 
-export default ThemedVlog;
+export default ThemedArticle;
