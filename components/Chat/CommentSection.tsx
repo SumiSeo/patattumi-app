@@ -88,7 +88,7 @@ const CommentSection = ({ location, id }: CommentSectionProps) => {
           ) : (
             <Image source={patate} style={styles.avatar} />
           )}
-          <View>
+          <View style={styles.commentContent}>
             <Text style={styles.author}>{comment.author}</Text>
             <Text style={styles.content}>{comment.content}</Text>
           </View>
@@ -149,7 +149,6 @@ const styles = StyleSheet.create({
     marginTop: 5,
     flexDirection: "row",
     alignItems: "flex-start",
-    backgroundColor: "red",
   },
   avatar: {
     width: 15,
@@ -157,6 +156,9 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginRight: 5,
     marginTop: 2,
+  },
+  commentContent: {
+    flex: 1,
   },
   author: {
     fontSize: 12,

@@ -1,3 +1,5 @@
+import patate from "@/assets/images/patate-baby.jpg";
+import patattumi from "@/assets/images/patattumi.jpg";
 import ChatLocation from "@/components/Chat/ChatLocation";
 import CommentSection from "@/components/Chat/CommentSection";
 import ThemedCard from "@/components/ThemedCard";
@@ -8,7 +10,7 @@ import { QUERY_LIFE_IN_FRANCE, QUERY_LIFE_IN_KOREA } from "@/queries/ChatQuery";
 import { dateFormatter } from "@/utils/games/dateFormatter";
 import { useQuery } from "@apollo/client/react";
 import React, { useEffect, useState } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { Image, ScrollView, StyleSheet, View } from "react-native";
 interface Publication {
   id: string;
   author: string;
@@ -52,9 +54,16 @@ const Chat = () => {
       return (
         <ThemedCard key={publication?.id} style={styles.card}>
           <View style={styles.cardBox}>
-            <ThemedText title style={{ fontSize: 10, color: "#333" }}>
-              {publication.author}
-            </ThemedText>
+            <View style={styles.cardBox}>
+              {publication.author === "patattumi" ? (
+                <Image source={patattumi} style={styles.avatar} />
+              ) : (
+                <Image source={patate} style={styles.avatar} />
+              )}
+              <ThemedText title style={{ fontSize: 10, color: "#333" }}>
+                {publication.author}
+              </ThemedText>
+            </View>
             <ThemedText style={{ fontSize: 8, color: "#333" }}>
               {dateFormatter(publication?.created_at)}
             </ThemedText>
@@ -117,9 +126,17 @@ const styles = StyleSheet.create({
     // Android shadow
     elevation: 4,
   },
+
   cardBox: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+  },
+  avatar: {
+    width: 20,
+    height: 20,
+    borderRadius: 15,
+    marginRight: 5,
+    marginTop: 2,
   },
 });
