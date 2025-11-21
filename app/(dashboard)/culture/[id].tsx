@@ -3,6 +3,7 @@ import img1 from "@/assets/images/courses/1.jpg";
 import img10 from "@/assets/images/courses/10.jpg";
 import img11 from "@/assets/images/courses/11.jpg";
 import img12 from "@/assets/images/courses/12.jpg";
+import img13 from "@/assets/images/courses/13.jpg";
 import img2 from "@/assets/images/courses/2.jpg";
 import img3 from "@/assets/images/courses/3.jpg";
 import img4 from "@/assets/images/courses/4.jpg";
@@ -42,6 +43,7 @@ const images = {
   "10": img10,
   "11": img11,
   "12": img12,
+  "13": img13,
 } as const;
 
 const CultureDetail = () => {
@@ -62,6 +64,7 @@ const CultureDetail = () => {
     if (id === "10") return <ThemedVlog data={selectedData} />;
     if (id === "11") return <ThemedArticle data={selectedData} />;
     if (id === "12") return <ThemedArticle data={selectedData} />;
+    if (id === "13") return <ThemedArticle data={selectedData} />;
     return;
   };
   return (
@@ -99,7 +102,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 12,
     backgroundColor: "#fff",
-    marginBottom: 10,
+    marginVertical: 20,
     boxSizing: "border-box",
 
     // iOS shadow

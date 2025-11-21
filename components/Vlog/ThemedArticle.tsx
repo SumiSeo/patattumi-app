@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
   header_paragraph: {
     fontSize: 18,
     fontStyle: "italic",
+    marginTop: 10,
   },
   paragraph: {
     fontSize: 14,

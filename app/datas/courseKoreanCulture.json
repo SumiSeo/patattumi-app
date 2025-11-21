@@ -90,5 +90,12 @@
     "course": "Découverte de la Corée 02.",
     "title": "Chuseok, la deuxième plus grande fête en Corée.",
     "description": "S'il y a Noël en France où toute la famille se réunit, en Corée il y a deux jours similaires, dont l'un est Chuseok."
+  },
+  {
+    "id": 13,
+    "type": "blog",
+    "course": "Découverte de la Corée 03.",
+    "title": "Pas que la K-pop ! Découvrez d'autres musiques coréennes",
+    "description": "En Corée, il n'y a pas que la K-pop — découvrez des genres variés comme le rock, le hip-hop et le R&B !"
   }
 ]
