@@ -61,14 +61,14 @@ const WriteComment = ({ id, country }: WriteCommentProps) => {
   };
 
   return (
-    <View style={{ marginTop: 10 }}>
-      <ThemedText title style={{ fontSize: 12, marginBottom: 4 }}>
+    <View>
+      <ThemedText title style={{ fontSize: 14, marginBottom: 4 }}>
         {user?.name}
       </ThemedText>
 
       <TextInput
         style={styles.input}
-        placeholder="Comment"
+        placeholder="Votre commentaire..."
         value={comment}
         onChangeText={setComment}
         multiline
@@ -89,9 +89,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 8,
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    marginVertical: 2,
+    padding: 10,
+    marginTop: 10,
+    marginBottom: 20,
+    height: 100,
   },
   inputError: {
     borderColor: "red",
