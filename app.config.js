@@ -17,7 +17,6 @@ export default {
       usesAppleSignIn: true,
       icon: "./assets/icons/ios-light.png",
 
-      // ✅ 여기 추가 (캘린더 권한)
       infoPlist: {
         NSCalendarsUsageDescription:
           "Cette application nécessite l'accès au calendrier.",
