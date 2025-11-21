@@ -60,7 +60,7 @@ const Chat = () => {
               ) : (
                 <Image source={patate} style={styles.avatar} />
               )}
-              <ThemedText title style={{ fontSize: 10, color: "#333" }}>
+              <ThemedText title style={{ fontSize: 12, color: "#333" }}>
                 {publication.author}
               </ThemedText>
             </View>
