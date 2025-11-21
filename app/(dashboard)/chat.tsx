@@ -1,4 +1,4 @@
-import ChatPlace from "@/components/Chat/ChatPlace";
+import ChatLocation from "@/components/Chat/ChatLocation";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
 import React from "react";
@@ -9,7 +9,7 @@ const chat = () => {
     <ThemedView safe={true}>
       <View style={styles.profileNav}>
         <ThemedText title>Chat</ThemedText>
-        <ChatPlace />
+        <ChatLocation />
       </View>
     </ThemedView>
   );
