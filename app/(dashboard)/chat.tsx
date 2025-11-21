@@ -2,15 +2,17 @@ import patate from "@/assets/images/patate-baby.jpg";
 import patattumi from "@/assets/images/patattumi.jpg";
 import ChatLocation from "@/components/Chat/ChatLocation";
 import CommentSection from "@/components/Chat/CommentSection";
+import WritePublicaton from "@/components/Chat/WritePublicaton";
 import ThemedCard from "@/components/ThemedCard";
 import ThemedLoader from "@/components/ThemedLoader";
+import ThemedModal from "@/components/ThemedModal";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
 import { QUERY_LIFE_IN_FRANCE, QUERY_LIFE_IN_KOREA } from "@/queries/ChatQuery";
 import { dateFormatter } from "@/utils/games/dateFormatter";
 import { useQuery } from "@apollo/client/react";
 import React, { useEffect, useState } from "react";
-import { Image, ScrollView, StyleSheet, View } from "react-native";
+import { Image, Pressable, ScrollView, StyleSheet, View } from "react-native";
 interface Publication {
   id: string;
   author: string;
@@ -29,6 +31,8 @@ interface LifeInKoreaData {
 const Chat = () => {
   const [isFrance, setIsFrance] = useState<boolean>(true);
   const [publications, setPublications] = useState<Publication[]>([]);
+  const [open, setOpen] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const { data, loading, refetch } = useQuery<
     LifeInFranceData | LifeInKoreaData
@@ -47,6 +51,10 @@ const Chat = () => {
   const handleChatLocation = async () => {
     setIsFrance(!isFrance);
     refetch();
+  };
+  const handleSubmit = () => {
+    setOpen(true);
+    setModalVisible(true);
   };
 
   const createPublications = () => {
@@ -96,6 +104,24 @@ const Chat = () => {
           />
         </View>
         {loading && <ThemedLoader />}
+
+        <Pressable onPress={handleSubmit}>
+          <View style={styles.writeButton}>
+            <ThemedText title style={{ fontSize: 12, color: "white" }}>
+              Écrire
+            </ThemedText>
+          </View>
+        </Pressable>
+        <ThemedModal
+          visible={modalVisible}
+          onDismiss={() => setModalVisible(false)}
+        >
+          <WritePublicaton
+            setModalVisible={setModalVisible}
+            setOpen={setOpen}
+            country={isFrance ? "france" : "korea"}
+          />
+        </ThemedModal>
         {publications && createPublications()}
       </ScrollView>
     </ThemedView>
@@ -138,5 +164,13 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginRight: 5,
     marginTop: 2,
+  },
+  writeButton: {
+    backgroundColor: "black",
+    padding: 10,
+    borderRadius: 10,
+    alignSelf: "flex-start",
+    marginLeft: 10,
+    marginBottom: 5,
   },
 });
