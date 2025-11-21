@@ -8,18 +8,24 @@ import {
 import { useUser } from "@/hooks/useUser";
 import { useMutation } from "@apollo/client/react";
 import React, { useState } from "react";
-import { Alert, StyleSheet, TextInput, View } from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
 import ThemedText from "../ThemedText";
 import ThemedButton from "../ThmedButton";
 
 export type WriteCommentProps = {
   id: string;
   country: "france" | "korea";
+  setModalVisible: (modalVisible: boolean) => void;
+  setOpen: (open: boolean) => void;
 };
 
-const WriteComment = ({ id, country }: WriteCommentProps) => {
+const WriteComment = ({
+  id,
+  country,
+  setModalVisible,
+  setOpen,
+}: WriteCommentProps) => {
   const { user } = useUser();
-  const [author, setAuthor] = useState("");
   const [comment, setComment] = useState("");
   const [insertCommentFrance, { loading: loadingFrance }] = useMutation(
     INSERT_COMMENT_IN_FRANCE_PUBLICATION
@@ -31,32 +37,35 @@ const WriteComment = ({ id, country }: WriteCommentProps) => {
   const loading = loadingFrance || loadingKorea;
 
   const handleSubmit = async () => {
-    const finalAuthor = author;
-    if (!finalAuthor.trim() || !comment.trim() || loading) return;
-
-    try {
-      if (country === "korea") {
-        await insertCommentKorea({
-          variables: { postId: id, author: finalAuthor, content: comment },
-          refetchQueries: [
-            { query: QUERY_COMMENTS_IN_KOREA_BY_ID, variables: { postId: id } },
-          ],
-        });
-      } else {
-        await insertCommentFrance({
-          variables: { postId: id, author: finalAuthor, content: comment },
-          refetchQueries: [
-            {
-              query: QUERY_COMMENTS_IN_FRANCE_BY_ID,
-              variables: { postId: id },
-            },
-          ],
-        });
+    if (comment && user?.name) {
+      try {
+        if (country === "korea") {
+          await insertCommentKorea({
+            variables: { postId: id, author: user?.name, content: comment },
+            refetchQueries: [
+              {
+                query: QUERY_COMMENTS_IN_KOREA_BY_ID,
+                variables: { postId: id },
+              },
+            ],
+          });
+        } else {
+          await insertCommentFrance({
+            variables: { postId: id, author: user?.name, content: comment },
+            refetchQueries: [
+              {
+                query: QUERY_COMMENTS_IN_FRANCE_BY_ID,
+                variables: { postId: id },
+              },
+            ],
+          });
+        }
+        setComment("");
+        setModalVisible(false);
+        setOpen(false);
+      } catch (e) {
+        if (e instanceof Error) console.log(e);
       }
-      setAuthor("");
-      setComment("");
-    } catch (e) {
-      Alert.alert("Error", "Failed to post comment.");
     }
   };
 
@@ -65,7 +74,6 @@ const WriteComment = ({ id, country }: WriteCommentProps) => {
       <ThemedText title style={{ fontSize: 14, marginBottom: 4 }}>
         {user?.name}
       </ThemedText>
-
       <TextInput
         style={styles.input}
         placeholder="Votre commentaire..."
@@ -75,7 +83,7 @@ const WriteComment = ({ id, country }: WriteCommentProps) => {
       />
       <ThemedButton
         text={loading ? "Loading..." : "Écrire"}
-        onPress={handleSubmit}
+        handleSubmit={handleSubmit}
         disabled={loading}
       />
     </View>

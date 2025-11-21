@@ -132,6 +132,8 @@ const CommentSection = ({ location, id }: CommentSectionProps) => {
           onDismiss={() => setModalVisible(false)}
         >
           <WriteComment
+            setModalVisible={setModalVisible}
+            setOpen={setOpen}
             id={id}
             country={location === "france" ? "france" : "korea"}
           />
