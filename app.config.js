@@ -16,6 +16,13 @@ export default {
       supportsTablet: true,
       usesAppleSignIn: true,
       icon: "./assets/icons/ios-light.png",
+
+      infoPlist: {
+        NSCalendarsUsageDescription:
+          "Cette application nécessite l'accès au calendrier.",
+        NSRemindersUsageDescription:
+          "Cette application nécessite l'accès aux rappels.",
+      },
     },
 
     android: {
@@ -38,18 +45,16 @@ export default {
       "expo-router",
       "expo-apple-authentication",
 
-      // Splash Screen Plugin (완벽하게 복사)
       [
         "expo-splash-screen",
         {
-          image: "./assets/images/splash-icon-dark.png",
+          image: "./assets/icons/splash-icon-dark.png",
           imageWidth: 200,
           resizeMode: "contain",
           backgroundColor: "#ffffff",
         },
       ],
 
-      // Google Sign-In Plugin
       [
         "@react-native-google-signin/google-signin",
         {

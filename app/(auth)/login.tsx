@@ -4,7 +4,6 @@ import Spacer from "@/components/Spacer";
 import ThemedLogo from "@/components/ThemedLogo";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
-import ThemedButton from "@/components/ThmedButton";
 import { useUser } from "@/hooks/useUser";
 import { StyleSheet } from "react-native";
 
@@ -49,7 +48,7 @@ const Login = () => {
         de façon ludique en vous inscrivant.
       </ThemedText>
       <Spacer height={30} />
-      <ThemedButton handleSubmit={fakeLogin} />
+      {/* <ThemedButton handleSubmit={fakeLogin} /> */}
       <Spacer height={10} />
       <AppleLogin setError={setError} />
       <Spacer height={20} />

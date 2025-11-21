@@ -9,8 +9,8 @@ import ThemedText from "../ThemedText";
 import ThemedButton from "../ThmedButton";
 
 const AnimalTotem = () => {
-  const [open, setOpen] = useState(false);
   const [confirmDate, setConfirmDate] = useState<Date | null>(null);
+  const [open, setOpen] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
   useFocusEffect(
