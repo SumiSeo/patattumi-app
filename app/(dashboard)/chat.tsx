@@ -1,4 +1,5 @@
 import ChatLocation from "@/components/Chat/ChatLocation";
+import CommentSection from "@/components/Chat/CommentSection";
 import ThemedCard from "@/components/ThemedCard";
 import ThemedLoader from "@/components/ThemedLoader";
 import ThemedText from "@/components/ThemedText";
@@ -8,7 +9,6 @@ import { dateFormatter } from "@/utils/games/dateFormatter";
 import { useQuery } from "@apollo/client/react";
 import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-
 interface Publication {
   id: string;
   author: string;
@@ -67,6 +67,10 @@ const Chat = () => {
               {publication.content}
             </ThemedText>
           </View>
+          <CommentSection
+            location={isFrance ? "france" : "korea"}
+            id={publication.id}
+          />
         </ThemedCard>
       );
     });
