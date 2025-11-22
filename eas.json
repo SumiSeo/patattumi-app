@@ -1,0 +1,29 @@
+{
+  "cli": {
+    "version": ">= 16.28.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal"
+    },
+    "production": {
+      "autoIncrement": true,
+      "env": {
+        "EXPO_PUBLIC_IOS_URL_SCHEME": "com.googleusercontent.apps.989994337201-v68moe6gb6qrni608ik4or3v3gm50g6t",
+        "EXPO_PUBLIC_GOOGLE_CLIEND_ID": "989994337201-v68moe6gb6qrni608ik4or3v3gm50g6t.apps.googleusercontent.com",
+        "EXPO_PUBLIC_HASURA_ADMIN_SECRET": "oAAb4RKzcOZk24nzcOyKw6Pk30uCZMvTqqsM7LNt15xX4S8DpHqj4aGYbFbTHZol",
+        "EXPO_PUBLIC_HASURA_URI": "https://sumyseo.hasura.app/v1/graphql",
+        "EXPO_PUBLIC_AUTH_SECRET": "b5277aefe58b08d05d799f4177a3fd6135d95e9e23074c8ad6b2d81b5d6a5198",
+        "EXPO_PUBLIC_DATA_KOREAN_PUBLIC_HOLIDAY_API_KEY": "9822b39da2da2adb070f54659859e614b1ce79f35118e9e315c687de43b8fd39"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
