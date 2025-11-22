@@ -1,7 +1,6 @@
 import { useUser } from "@/hooks/useUser";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 import ThemedText from "../ThemedText";
 
@@ -25,7 +24,6 @@ const ProfileAssetCard = ({
     person: "person-outline",
     size: "shirt-outline",
     age: "hourglass-outline",
-    language: "globe-outline",
     animal: "bug-outline",
   } as const;
 
@@ -33,7 +31,6 @@ const ProfileAssetCard = ({
     koreanName: user?.korean_name,
     koreanAge: user?.age,
     koreanTotem: user?.totem,
-    language: user?.language,
   } as const;
 
   type IconName = keyof typeof iconsMap;

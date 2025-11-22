@@ -8,7 +8,7 @@ import { useUser } from "@/hooks/useUser";
 import { StyleSheet } from "react-native";
 
 import ThemedError from "@/components/ThemedError";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const Login = () => {
   const { appleSignIn } = useUser();

@@ -4,13 +4,11 @@ import UserAvatar from "@/components/Profile/UserAvatar";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
 import { Ionicons } from "@expo/vector-icons";
-import React from "react";
 import { StyleSheet, View } from "react-native";
 const Profile = () => {
   const profileAssets = [
     { name: "person", title: "Prénom", value: "koreanName", id: 4 },
     { name: "age", title: "Âge", value: "koreanAge", id: 2 },
-    { name: "language", title: "Langue préférée", value: "language", id: 0 },
     { name: "animal", title: "Animal totem", value: "koreanTotem", id: 1 },
   ];
   const displayProfileAssets = () => {
