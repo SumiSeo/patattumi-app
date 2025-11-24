@@ -1,14 +1,13 @@
 import PatattumiLogo from "@/assets/images/favicon.png";
 import AppleLogin from "@/components/Auth/AppleLogin";
 import Spacer from "@/components/Spacer";
+import ThemedError from "@/components/ThemedError";
 import ThemedLogo from "@/components/ThemedLogo";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
 import { useUser } from "@/hooks/useUser";
-import { StyleSheet } from "react-native";
-
-import ThemedError from "@/components/ThemedError";
 import { useEffect, useState } from "react";
+import { StyleSheet } from "react-native";
 
 const Login = () => {
   const { appleSignIn } = useUser();
@@ -37,9 +36,6 @@ const Login = () => {
         Patattumi
       </ThemedText>
       <Spacer height={10} />
-      <ThemedText style={{ fontSize: 16, fontWeight: "bold" }}>
-        Votre avatar coréen vous attend !
-      </ThemedText>
       <Spacer height={30} />
       <ThemedText style={{ fontSize: 14, textAlign: "center" }}>
         Découvrez la langue et la culture coréenne
@@ -48,7 +44,6 @@ const Login = () => {
         de façon ludique en vous inscrivant.
       </ThemedText>
       <Spacer height={30} />
-      {/* <ThemedButton handleSubmit={fakeLogin} /> */}
       <Spacer height={10} />
       <AppleLogin setError={setError} />
       <Spacer height={20} />
