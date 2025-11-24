@@ -80,6 +80,7 @@ export function UserProvider({ children }: UserProviderProps) {
       };
       setUser(userObj);
       await AsyncStorage.setItem("user", JSON.stringify(userObj));
+      setAuthChecked(true);
     } catch (e: any) {
       throw Error(e.message);
     }
