@@ -53,9 +53,11 @@ export function UserProvider({ children }: UserProviderProps) {
 
   async function appleSignIn(providerId: string) {
     try {
+      console.log(providerId);
       const appleData = await getAppleUser({
         variables: { provider_id: providerId },
       });
+      console.log("apple", appleData);
       if (appleData.error) throw new Error(appleData.error.message);
 
       const userId = appleData.data?.apple_users_by_pk?.user_id;
@@ -80,9 +82,10 @@ export function UserProvider({ children }: UserProviderProps) {
       };
       setUser(userObj);
       await AsyncStorage.setItem("user", JSON.stringify(userObj));
-      setAuthChecked(true);
     } catch (e: any) {
       throw Error(e.message);
+    } finally {
+      setAuthChecked(true);
     }
   }
 
@@ -101,14 +104,13 @@ export function UserProvider({ children }: UserProviderProps) {
       });
       if (result) {
         const id = result.data?.insert_users_one?.id;
-        const res = await InsertAppleUser({
+        await InsertAppleUser({
           variables: {
-            provider_id,
+            provider_id: provider_id,
             user_id: id,
           },
         });
-        const providerId = res.data?.insert_apple_users_one?.provider_id;
-        if (providerId) await appleSignIn(providerId);
+        if (provider_id) await appleSignIn(provider_id);
       }
     } catch (e) {
       if (e instanceof Error) throw Error(e.message);
