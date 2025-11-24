@@ -6,13 +6,19 @@ import React, { ReactNode, useEffect } from "react";
 const UserOnly = ({ children }: { children: ReactNode }) => {
   const { user, authChecked } = useUser();
   const router = useRouter();
+
   useEffect(() => {
     if (authChecked && user === null) {
       router.replace("/login");
     }
-  }, [user, authChecked, router]);
-  if (!authChecked || !user) return <ThemedLoader />;
+  }, [authChecked, user]);
+
+  if (!authChecked) return <ThemedLoader />;
+
+  if (authChecked && user === null) return null;
+
   return children;
 };
+
 
 export default UserOnly;
