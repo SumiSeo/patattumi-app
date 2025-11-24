@@ -53,11 +53,9 @@ export function UserProvider({ children }: UserProviderProps) {
 
   async function appleSignIn(providerId: string) {
     try {
-      console.log(providerId);
       const appleData = await getAppleUser({
         variables: { provider_id: providerId },
       });
-      console.log("apple", appleData);
       if (appleData.error) throw new Error(appleData.error.message);
 
       const userId = appleData.data?.apple_users_by_pk?.user_id;
