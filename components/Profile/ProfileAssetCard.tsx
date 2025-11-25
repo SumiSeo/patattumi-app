@@ -3,6 +3,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { Pressable, StyleSheet, View } from "react-native";
 import DeleteAccount from "../Auth/DeleteAccount";
+import Urgence from "../ExtraComp/Urgence";
 import ThemedText from "../ThemedText";
 
 type ProfileAssetCardProps = {
@@ -26,6 +27,7 @@ const ProfileAssetCard = ({
     size: "shirt-outline",
     age: "hourglass-outline",
     animal: "bug-outline",
+    urgence: "alert-circle-outline",
     delete: "trash-outline",
   } as const;
 
@@ -55,13 +57,16 @@ const ProfileAssetCard = ({
       </View>
       <ThemedText style={{ fontSize: 14 }}>
         {userInfo[value as UserInfoValue] ??
-          (id === -1 ? (
-            <DeleteAccount />
-          ) : (
-            <Pressable onPress={() => router.push(`/culture/${id}`)}>
-              <Ionicons size={18} name="arrow-forward-outline" />
-            </Pressable>
-          ))}
+          (() => {
+            if (id === -1) return <DeleteAccount />;
+            if (id === -2) return <Urgence />;
+
+            return (
+              <Pressable onPress={() => router.push(`/culture/${id}`)}>
+                <Ionicons size={18} name="arrow-forward-outline" />
+              </Pressable>
+            );
+          })()}
       </ThemedText>
     </View>
   );

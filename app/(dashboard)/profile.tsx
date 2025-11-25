@@ -11,6 +11,12 @@ const Profile = () => {
     { name: "age", title: "Âge", value: "koreanAge", id: 2 },
     { name: "animal", title: "Animal totem", value: "koreanTotem", id: 1 },
     {
+      name: "urgence",
+      title: "Urgence",
+      value: "urgence",
+      id: -2,
+    },
+    {
       name: "delete",
       title: "Supprimer mon compte",
       value: "delete",
