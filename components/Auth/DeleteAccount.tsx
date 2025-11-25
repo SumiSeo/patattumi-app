@@ -1,0 +1,41 @@
+import { useUser } from "@/hooks/useUser";
+import { Ionicons } from "@expo/vector-icons";
+import React, { useState } from "react";
+import { Pressable } from "react-native";
+import ThemedModal from "../ThemedModal";
+import ThemedText from "../ThemedText";
+import ThemedView from "../ThemedView";
+import ThemedButton from "../ThmedButton";
+
+const DeleteAccount = () => {
+  const { user, appleDeleteUser } = useUser();
+
+  const [open, setOpen] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const handleSubmit = () => {
+    setOpen(true);
+    setModalVisible(true);
+  };
+  const confrimDeleteUser = async () => {
+    if (user?.id) await appleDeleteUser(user?.id);
+  };
+  return (
+    <ThemedView>
+      <Pressable onPress={handleSubmit}>
+        <Ionicons size={18} name="arrow-forward-outline" />
+      </Pressable>
+      <ThemedModal
+        style={{ marginHorizontal: 10 }}
+        visible={modalVisible}
+        onDismiss={() => setModalVisible(false)}
+      >
+        <ThemedText title style={{ fontSize: 16, marginVertical: 15 }}>
+          Vous souhaitez supprimer votre compte sur Patattumi ?
+        </ThemedText>
+        <ThemedButton handleSubmit={confrimDeleteUser} text="Confirmer" />
+      </ThemedModal>
+    </ThemedView>
+  );
+};
+
+export default DeleteAccount;

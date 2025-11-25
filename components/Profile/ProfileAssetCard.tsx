@@ -2,6 +2,7 @@ import { useUser } from "@/hooks/useUser";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { Pressable, StyleSheet, View } from "react-native";
+import DeleteAccount from "../Auth/DeleteAccount";
 import ThemedText from "../ThemedText";
 
 type ProfileAssetCardProps = {
@@ -55,9 +56,7 @@ const ProfileAssetCard = ({
       <ThemedText style={{ fontSize: 14 }}>
         {userInfo[value as UserInfoValue] ??
           (id === -1 ? (
-            <Pressable>
-              <Ionicons size={18} name="arrow-forward-outline" />
-            </Pressable>
+            <DeleteAccount />
           ) : (
             <Pressable onPress={() => router.push(`/culture/${id}`)}>
               <Ionicons size={18} name="arrow-forward-outline" />

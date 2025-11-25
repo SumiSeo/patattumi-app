@@ -1,4 +1,5 @@
 import { ADD_APPLE_USER_ONE, ADD_USER_ONE } from "@/mutations/AddUser";
+import { DELETE_USER_ONE } from "@/mutations/DeleteUser";
 import { QUERY_APPLE_USER, QUERY_USER_ONE } from "@/queries/UserQuery";
 import {
   AppleUserData,
@@ -22,6 +23,7 @@ export function UserProvider({ children }: UserProviderProps) {
   const [InsertUser] = useMutation<InsertUserData, InsertUserVars>(
     ADD_USER_ONE
   );
+  const [deleteUser] = useMutation(DELETE_USER_ONE);
   const [InsertAppleUser] =
     useMutation<InsertAppleUserData>(ADD_APPLE_USER_ONE);
   const [getAppleUser] = useLazyQuery<AppleUserData>(QUERY_APPLE_USER, {
@@ -51,6 +53,17 @@ export function UserProvider({ children }: UserProviderProps) {
     getInitialUserValue();
   }, []);
 
+  async function userExists(providerId: string) {
+    try {
+      const appleData = await getAppleUser({
+        variables: { provider_id: providerId },
+      });
+      if (appleData?.data?.apple_users_by_pk !== null) return true;
+      else return false;
+    } catch (e: any) {
+      throw Error(e.message);
+    }
+  }
   async function appleSignIn(providerId: string) {
     try {
       const appleData = await getAppleUser({
@@ -101,6 +114,7 @@ export function UserProvider({ children }: UserProviderProps) {
           provider: "apple",
         },
       });
+      console.log(result);
       if (result) {
         const id = result.data?.insert_users_one?.id;
         await InsertAppleUser({
@@ -121,9 +135,29 @@ export function UserProvider({ children }: UserProviderProps) {
     setUser(null);
   }
 
+  async function appleDeleteUser(id: string) {
+    const result = await deleteUser({
+      variables: {
+        id,
+      },
+    });
+    if (result) {
+      console.log(result);
+      await logout();
+    }
+  }
+
   return (
     <UserContext.Provider
-      value={{ user, appleSignIn, logout, appleRegister, authChecked }}
+      value={{
+        user,
+        appleSignIn,
+        logout,
+        appleRegister,
+        authChecked,
+        appleDeleteUser,
+        userExists,
+      }}
     >
       {children}
     </UserContext.Provider>
