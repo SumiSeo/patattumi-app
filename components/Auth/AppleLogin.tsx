@@ -28,6 +28,7 @@ export default function AppleLogin({ setError }: LoginProps) {
               ],
             });
             if (credential) {
+              console.log(credential);
               if (credential.email) {
                 const email = credential.email;
                 const name = `${credential.fullName?.givenName} ${credential.fullName?.givenName}`;

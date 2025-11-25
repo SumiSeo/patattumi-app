@@ -25,6 +25,7 @@ const ProfileAssetCard = ({
     size: "shirt-outline",
     age: "hourglass-outline",
     animal: "bug-outline",
+    delete: "trash-outline",
   } as const;
 
   const userInfo = {
@@ -52,11 +53,16 @@ const ProfileAssetCard = ({
         <ThemedText style={{ fontSize: 14 }}>{title}</ThemedText>
       </View>
       <ThemedText style={{ fontSize: 14 }}>
-        {userInfo[value as UserInfoValue] ?? (
-          <Pressable onPress={() => router.push(`/culture/${id}`)}>
-            <Ionicons size={18} name="arrow-forward-outline" />
-          </Pressable>
-        )}
+        {userInfo[value as UserInfoValue] ??
+          (id === -1 ? (
+            <Pressable>
+              <Ionicons size={18} name="arrow-forward-outline" />
+            </Pressable>
+          ) : (
+            <Pressable onPress={() => router.push(`/culture/${id}`)}>
+              <Ionicons size={18} name="arrow-forward-outline" />
+            </Pressable>
+          ))}
       </ThemedText>
     </View>
   );

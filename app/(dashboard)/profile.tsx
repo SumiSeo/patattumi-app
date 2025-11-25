@@ -10,6 +10,12 @@ const Profile = () => {
     { name: "person", title: "Prénom", value: "koreanName", id: 4 },
     { name: "age", title: "Âge", value: "koreanAge", id: 2 },
     { name: "animal", title: "Animal totem", value: "koreanTotem", id: 1 },
+    {
+      name: "delete",
+      title: "Supprimer mon compte",
+      value: "delete",
+      id: -1,
+    },
   ];
   const displayProfileAssets = () => {
     return profileAssets.map((asset) => {

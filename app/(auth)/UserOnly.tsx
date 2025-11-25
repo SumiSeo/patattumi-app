@@ -4,20 +4,14 @@ import { useRouter } from "expo-router";
 import React, { ReactNode, useEffect } from "react";
 
 const UserOnly = ({ children }: { children: ReactNode }) => {
-  console.log("hi");
   const { user, authChecked } = useUser();
   const router = useRouter();
-
   useEffect(() => {
     if (authChecked && user === null) {
       router.replace("/login");
     }
-  }, [authChecked, user]);
-
-  if (!authChecked) return <ThemedLoader />;
-
-  if (authChecked && user === null) return null;
-
+  }, [user, authChecked, router]);
+  if (!authChecked || !user) return <ThemedLoader />;
   return children;
 };
 

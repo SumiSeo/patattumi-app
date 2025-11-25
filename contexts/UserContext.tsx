@@ -79,6 +79,7 @@ export function UserProvider({ children }: UserProviderProps) {
         role: u.role,
       };
       setUser(userObj);
+      console.log(userObj);
       await AsyncStorage.setItem("user", JSON.stringify(userObj));
     } catch (e: any) {
       throw Error(e.message);

@@ -1,19 +1,26 @@
 {
   "expo": {
-    "name": "patattumi",
-    "slug": "patattumi",
+    "name": "Patattumi",
+    "slug": "Patattumi",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icons/ios-light.png",
     "scheme": "patattumiapp",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+
     "ios": {
       "bundleIdentifier": "com.patattumi.app",
       "supportsTablet": true,
       "usesAppleSignIn": true,
-      "icon": "./assets/icons/ios-light.png"
+      "icon": "./assets/icons/ios-light.png",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSCalendarsUsageDescription": "Cette application nécessite l'accès au calendrier.",
+        "NSRemindersUsageDescription": "Cette application nécessite l'accès aux rappels."
+      }
     },
+
     "android": {
       "package": "com.patattumi.app",
       "adaptiveIcon": {
@@ -24,17 +31,19 @@
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
+
     "web": {
       "output": "static",
       "favicon": "./assets/icons/ios-light.png"
     },
+
     "plugins": [
       "expo-router",
       "expo-apple-authentication",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon-dark.png",
+          "image": "./assets/icons/splash-icon-dark.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
@@ -47,6 +56,7 @@
         }
       ]
     ],
+
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
