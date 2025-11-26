@@ -1,8 +1,9 @@
 import { useUser } from "@/hooks/useUser";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React from "react";
 import { Pressable, StyleSheet, View } from "react-native";
+import DeleteAccount from "../Auth/DeleteAccount";
+import Urgence from "../ExtraComp/Urgence";
 import ThemedText from "../ThemedText";
 
 type ProfileAssetCardProps = {
@@ -25,15 +26,15 @@ const ProfileAssetCard = ({
     person: "person-outline",
     size: "shirt-outline",
     age: "hourglass-outline",
-    language: "globe-outline",
     animal: "bug-outline",
+    urgence: "alert-circle-outline",
+    delete: "trash-outline",
   } as const;
 
   const userInfo = {
     koreanName: user?.korean_name,
     koreanAge: user?.age,
     koreanTotem: user?.totem,
-    language: user?.language,
   } as const;
 
   type IconName = keyof typeof iconsMap;
@@ -55,11 +56,17 @@ const ProfileAssetCard = ({
         <ThemedText style={{ fontSize: 14 }}>{title}</ThemedText>
       </View>
       <ThemedText style={{ fontSize: 14 }}>
-        {userInfo[value as UserInfoValue] ?? (
-          <Pressable onPress={() => router.push(`/culture/${id}`)}>
-            <Ionicons size={18} name="arrow-forward-outline" />
-          </Pressable>
-        )}
+        {userInfo[value as UserInfoValue] ??
+          (() => {
+            if (id === -1) return <DeleteAccount />;
+            if (id === -2) return <Urgence />;
+
+            return (
+              <Pressable onPress={() => router.push(`/culture/${id}`)}>
+                <Ionicons size={18} name="arrow-forward-outline" />
+              </Pressable>
+            );
+          })()}
       </ThemedText>
     </View>
   );

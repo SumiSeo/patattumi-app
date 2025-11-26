@@ -18,6 +18,7 @@ export default {
       icon: "./assets/icons/ios-light.png",
 
       infoPlist: {
+        ITSAppUsesNonExemptEncryption: false,
         NSCalendarsUsageDescription:
           "Cette application nécessite l'accès au calendrier.",
         NSRemindersUsageDescription:
@@ -58,7 +59,16 @@ export default {
       [
         "@react-native-google-signin/google-signin",
         {
-          iosUrlScheme: "com.googleusercontent.apps._some_id_here_",
+          iosUrlScheme:
+            "com.googleusercontent.apps.989994337201-v68moe6gb6qrni608ik4or3v3gm50g6t",
+        },
+      ],
+      [
+        "expo-build-properties",
+        {
+          android: {
+            usesCleartextTraffic: true,
+          },
         },
       ],
     ],
@@ -69,6 +79,9 @@ export default {
     },
 
     extra: {
+      eas: {
+        projectId: "cadbabd6-b763-487b-9497-3e198c9ac77e",
+      },
       HASURA_SECRET: process.env.EXPO_PUBLIC_HASURA_ADMIN_SECRET,
       HASURA_URI: process.env.EXPO_PUBLIC_HASURA_URI,
     },

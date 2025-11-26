@@ -17,6 +17,7 @@ export type UserType = {
 
 export type UserContextType = {
   user: UserType | null;
+  userExists: (providerId: string) => Promise<boolean>;
   appleSignIn: (providerId: string) => Promise<void>;
   appleRegister: (
     email: string,
@@ -25,6 +26,7 @@ export type UserContextType = {
   ) => Promise<void>;
   logout: () => Promise<void>;
   authChecked: boolean;
+  appleDeleteUser: (id: string) => Promise<void>;
 };
 
 export type AppleUserData = {
