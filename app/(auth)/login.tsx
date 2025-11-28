@@ -36,8 +36,7 @@ const Login = () => {
       <ThemedText title={true} style={{ fontSize: 30 }}>
         Patattumi
       </ThemedText>
-      <Spacer height={10} />
-      <Spacer height={30} />
+      <Spacer height={20} />
       <ThemedText style={{ fontSize: 14, textAlign: "center" }}>
         Découvrez la langue et la culture coréenne
       </ThemedText>
@@ -45,10 +44,8 @@ const Login = () => {
         de façon ludique en vous inscrivant.
       </ThemedText>
       <Spacer height={30} />
-      <Spacer height={10} />
       <AppleLogin setError={setError} />
       <GoogleLogin />
-      <Spacer height={20} />
       {error !== null && (
         <ThemedError>
           <ThemedText
