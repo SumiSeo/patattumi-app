@@ -67,10 +67,11 @@ export function UserProvider({ children }: UserProviderProps) {
       const appleData = await getAppleUser({
         variables: { provider_id: providerId },
       });
-      if (appleData?.data?.apple_users_by_pk !== null && 
-        &&
-       appleData?.data?.apple_users_by_pk !== undefined
-      ) return true;
+      if (
+        appleData?.data?.apple_users_by_pk !== null &&
+        appleData?.data?.apple_users_by_pk !== undefined
+      )
+        return true;
       else return false;
     } catch (e: any) {
       throw Error(e.message);

@@ -45,7 +45,7 @@ const Login = () => {
       </ThemedText>
       <Spacer height={30} />
       <AppleLogin setError={setError} />
-      <GoogleLogin />
+      <GoogleLogin setError={setError} />
       {error !== null && (
         <ThemedError>
           <ThemedText

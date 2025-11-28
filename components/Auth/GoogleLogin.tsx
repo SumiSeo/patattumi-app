@@ -7,8 +7,14 @@ import {
   isSuccessResponse,
 } from "@react-native-google-signin/google-signin";
 import React, { useEffect, useState } from "react";
+interface CodedError extends Error {
+  code?: string;
+}
+type LoginProps = {
+  setError: (err: string | null) => void;
+};
 
-const GoogleLogin = () => {
+const GoogleLogin = ({ setError }: LoginProps) => {
   const { googleSignIn, googleUserExists, googleRegister } = useUser();
 
   const [isInProgress, setIsInProgress] = useState(false);
@@ -22,6 +28,7 @@ const GoogleLogin = () => {
 
   const handleGoogleSignIn = async () => {
     try {
+      setError(null);
       await GoogleSignin.hasPlayServices();
       const response = await GoogleSignin.signIn();
       if (isSuccessResponse(response)) {
@@ -38,10 +45,14 @@ const GoogleLogin = () => {
           console.log("signup");
         }
       } else {
-        throw new Error("Google Sign was canceled");
+        throw new Error("Google login Failed");
       }
     } catch (error) {
-      console.error(error);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError(String(error));
+      }
     }
   };
   return (
