@@ -34,7 +34,7 @@ const GoogleLogin = ({ setError }: LoginProps) => {
       if (isSuccessResponse(response)) {
         const { idToken, user } = response.data;
         const { name, email, id } = user;
-
+        console.log(user);
         const result = await googleUserExists(id);
         console.log(result);
         if (result) {
