@@ -82,8 +82,8 @@ export default {
       eas: {
         projectId: "cadbabd6-b763-487b-9497-3e198c9ac77e",
       },
-      HASURA_SECRET: process.env.EXPO_PUBLIC_HASURA_ADMIN_SECRET,
-      HASURA_URI: process.env.EXPO_PUBLIC_HASURA_URI,
+      HASURA_SECRET: process.env.HASURA_ADMIN_SECRET,
+      HASURA_URI: process.env.HASURA_URI,
     },
   },
 };

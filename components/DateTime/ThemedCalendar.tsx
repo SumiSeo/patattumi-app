@@ -67,7 +67,7 @@ export default function KoreaHoliday() {
   const [holiday, setHoliday] = useState<HolidyData[]>(fixedDays);
   const [loading, setLoading] = useState(false);
 
-  const serviceKey = process.env.EXPO_PUBLIC_DATA_KOREAN_PUBLIC_HOLIDAY_API_KEY;
+  const serviceKey = process.env.DATA_KOREAN_PUBLIC_HOLIDAY_API_KEY;
   const koreanHoliday: Record<string, HolidayInfo> = koreanHolidayJson;
 
   const fetchHoliday = async () => {
