@@ -18,8 +18,14 @@ export type UserType = {
 export type UserContextType = {
   user: UserType | null;
   userExists: (providerId: string) => Promise<boolean>;
+  googleUserExists: (providerId: string) => Promise<boolean>;
   appleSignIn: (providerId: string) => Promise<void>;
   appleRegister: (
+    email: string,
+    name: string,
+    provider_id: string
+  ) => Promise<void>;
+  googleRegister: (
     email: string,
     name: string,
     provider_id: string
@@ -36,6 +42,11 @@ export type AppleUserData = {
   } | null;
 };
 
+export type GoogleUserData = {
+  google_users_by_pk: {
+    user_id: string;
+  } | null;
+};
 export type UserData = {
   users_by_pk: {
     id: string;

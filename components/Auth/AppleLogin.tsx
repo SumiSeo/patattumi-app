@@ -46,7 +46,6 @@ export default function AppleLogin({ setError }: LoginProps) {
                   );
                 }
               } else {
-                console.log("hre?");
                 if (providerId) await appleSignIn(providerId);
               }
             }

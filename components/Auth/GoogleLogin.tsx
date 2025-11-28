@@ -4,10 +4,13 @@ import { StyleSheet } from "react-native";
 import {
   GoogleSignin,
   GoogleSigninButton,
+  isSuccessResponse,
 } from "@react-native-google-signin/google-signin";
 import React, { useEffect, useState } from "react";
 
 const GoogleLogin = () => {
+  const { googleSignIn, googleUserExists, googleRegister } = useUser();
+
   const [isInProgress, setIsInProgress] = useState(false);
   useEffect(() => {
     GoogleSignin.configure({
@@ -17,14 +20,28 @@ const GoogleLogin = () => {
     });
   }, []);
 
-  const { googleSignIn } = useUser();
   const handleGoogleSignIn = async () => {
     try {
-      setIsInProgress(true);
-      await googleSignIn();
-      setIsInProgress(false);
-    } catch (e) {
-      console.log(e);
+      await GoogleSignin.hasPlayServices();
+      const response = await GoogleSignin.signIn();
+      if (isSuccessResponse(response)) {
+        const { idToken, user } = response.data;
+        const { name, email, id } = user;
+
+        const result = await googleUserExists(id);
+        console.log(result);
+        if (result) {
+          // find is user exist?
+          console.log("login");
+        } else {
+          // else register
+          console.log("signup");
+        }
+      } else {
+        throw new Error("Google Sign was canceled");
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
   return (

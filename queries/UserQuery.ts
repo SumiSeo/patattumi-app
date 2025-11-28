@@ -23,3 +23,11 @@ export const QUERY_USER_ONE = gql`
     }
   }
 `;
+
+export const QUERY_GOOGLE_USER = gql`
+  query QueryGoogleUser($provider_id: String!) {
+    google_users_by_pk(provider_id: $provider_id) {
+      id
+    }
+  }
+`;
