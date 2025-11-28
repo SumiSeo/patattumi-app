@@ -84,6 +84,7 @@ export default {
       },
       HASURA_SECRET: process.env.HASURA_ADMIN_SECRET,
       HASURA_URI: process.env.HASURA_URI,
+      GOOGLE_IOS_CLIENT_ID: process.env.GOOGLE_IOS_CLIENT_ID,
     },
   },
 };

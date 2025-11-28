@@ -1,5 +1,6 @@
 import PatattumiLogo from "@/assets/images/favicon.png";
 import AppleLogin from "@/components/Auth/AppleLogin";
+import GoogleLogin from "@/components/Auth/GoogleLogin";
 import Spacer from "@/components/Spacer";
 import ThemedError from "@/components/ThemedError";
 import ThemedLogo from "@/components/ThemedLogo";
@@ -46,6 +47,7 @@ const Login = () => {
       <Spacer height={30} />
       <Spacer height={10} />
       <AppleLogin setError={setError} />
+      <GoogleLogin />
       <Spacer height={20} />
       {error !== null && (
         <ThemedError>

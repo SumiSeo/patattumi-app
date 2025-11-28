@@ -1,22 +1,38 @@
-import { GoogleSignin } from "@react-native-google-signin/google-signin";
-import React from "react";
-import { Pressable, Text } from "react-native";
+import { useUser } from "@/hooks/useUser";
 
-const onGoogleLogin = async () => {
-  try {
-    await GoogleSignin.hasPlayServices();
-    const response = await GoogleSignin.signIn();
-    console.log(response);
-  } catch (error) {
-    console.error(error);
-  }
-};
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+} from "@react-native-google-signin/google-signin";
+import React, { useEffect, useState } from "react";
 
 const GoogleLogin = () => {
+  const [isInProgress, setIsInProgress] = useState(false);
+  useEffect(() => {
+    GoogleSignin.configure({
+      iosClientId:
+        "989994337201-v68moe6gb6qrni608ik4or3v3gm50g6t.apps.googleusercontent.com",
+      profileImageSize: 150,
+    });
+  }, []);
+
+  const { googleSignIn } = useUser();
+  const handleGoogleSignIn = async () => {
+    try {
+      setIsInProgress(false);
+      await googleSignIn();
+      setIsInProgress(true);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
-    <Pressable onPress={onGoogleLogin}>
-      <Text>Sign in with Google</Text>
-    </Pressable>
+    <GoogleSigninButton
+      size={GoogleSigninButton.Size.Wide}
+      color={GoogleSigninButton.Color.Light}
+      onPress={handleGoogleSignIn}
+      disabled={isInProgress}
+    />
   );
 };
 

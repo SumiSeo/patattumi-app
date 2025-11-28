@@ -13,8 +13,11 @@ import {
 } from "@/types/UserContextType";
 import { useLazyQuery, useMutation } from "@apollo/client/react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  GoogleSignin,
+  isSuccessResponse,
+} from "@react-native-google-signin/google-signin";
 import { createContext, useEffect, useState } from "react";
-
 export const UserContext = createContext<UserContextType | null>(null);
 
 export function UserProvider({ children }: UserProviderProps) {
@@ -64,6 +67,7 @@ export function UserProvider({ children }: UserProviderProps) {
       throw Error(e.message);
     }
   }
+
   async function appleSignIn(providerId: string) {
     try {
       const appleData = await getAppleUser({
@@ -92,12 +96,28 @@ export function UserProvider({ children }: UserProviderProps) {
         role: u.role,
       };
       setUser(userObj);
-      console.log(userObj);
       await AsyncStorage.setItem("user", JSON.stringify(userObj));
     } catch (e: any) {
       throw Error(e.message);
     } finally {
       setAuthChecked(true);
+    }
+  }
+
+  async function googleSignIn() {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const response = await GoogleSignin.signIn();
+      if (isSuccessResponse(response)) {
+        const { idToken, user } = response.data;
+        console.log(user);
+        console.log(idToken);
+        const { name, email, photo } = user;
+      } else {
+        console.log("Google Sign was canceld");
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
 
@@ -114,7 +134,6 @@ export function UserProvider({ children }: UserProviderProps) {
           provider: "apple",
         },
       });
-      console.log(result);
       if (result) {
         const id = result.data?.insert_users_one?.id;
         await InsertAppleUser({
@@ -157,6 +176,7 @@ export function UserProvider({ children }: UserProviderProps) {
         authChecked,
         appleDeleteUser,
         userExists,
+        googleSignIn,
       }}
     >
       {children}

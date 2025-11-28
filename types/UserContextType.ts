@@ -27,6 +27,7 @@ export type UserContextType = {
   logout: () => Promise<void>;
   authChecked: boolean;
   appleDeleteUser: (id: string) => Promise<void>;
+  googleSignIn: () => Promise<void>;
 };
 
 export type AppleUserData = {
