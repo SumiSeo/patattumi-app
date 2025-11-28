@@ -13,7 +13,7 @@ export default ({ config }) => {
     scheme,
 
     ios: {
-      ...(config.ios ?? {}), // ⬅️ ios가 없을 때 대비해 기본값 적용
+      ...(config.ios ?? {}),
       bundleIdentifier: "com.patattumi.app",
       supportsTablet: true,
       usesAppleSignIn: true,
