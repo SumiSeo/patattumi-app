@@ -1,32 +1,38 @@
 import 'dotenv/config';
 
-export default {
-  expo: {
-    name: "Patattumi",
-    slug: "Patattumi",
-    version: "1.0.0",
-    orientation: "portrait",
-    icon: "./assets/icons/ios-light.png",
-    scheme: "patattumiapp",
-    userInterfaceStyle: "light",
-    newArchEnabled: true,
+export default ({ config }) => {
+  const profile = process.env.EAS_PROFILE;
+  const isDev = profile === "development";
+
+  const schemeBase = "patattumiapp";
+  const scheme = isDev ? `${schemeBase}-dev` : schemeBase;
+
+  return {
+    ...config,
+
+    scheme,
 
     ios: {
+      ...(config.ios ?? {}), // ⬅️ ios가 없을 때 대비해 기본값 적용
       bundleIdentifier: "com.patattumi.app",
       supportsTablet: true,
       usesAppleSignIn: true,
       icon: "./assets/icons/ios-light.png",
 
       infoPlist: {
+        ...(config.ios?.infoPlist ?? {}),
         ITSAppUsesNonExemptEncryption: false,
         NSCalendarsUsageDescription:
           "Cette application nécessite l'accès au calendrier.",
         NSRemindersUsageDescription:
           "Cette application nécessite l'accès aux rappels.",
       },
+
+      associatedDomains: ["applinks:patattumi.app"],
     },
 
     android: {
+      ...(config.android ?? {}),
       package: "com.patattumi.app",
       adaptiveIcon: {
         foregroundImage: "./assets/icons/adaptive-icon.png",
@@ -37,48 +43,8 @@ export default {
       predictiveBackGestureEnabled: false,
     },
 
-    web: {
-      output: "static",
-      favicon: "./assets/icons/ios-light.png",
-    },
-
-    plugins: [
-      "expo-router",
-      "expo-apple-authentication",
-
-      [
-        "expo-splash-screen",
-        {
-          image: "./assets/icons/splash-icon-dark.png",
-          imageWidth: 200,
-          resizeMode: "contain",
-          backgroundColor: "#ffffff",
-        },
-      ],
-
-      [
-        "@react-native-google-signin/google-signin",
-        {
-          iosUrlScheme:
-            "com.googleusercontent.apps.989994337201-v68moe6gb6qrni608ik4or3v3gm50g6t",
-        },
-      ],
-      [
-        "expo-build-properties",
-        {
-          android: {
-            usesCleartextTraffic: true,
-          },
-        },
-      ],
-    ],
-
-    experiments: {
-      typedRoutes: true,
-      reactCompiler: true,
-    },
-
     extra: {
+      ...(config.extra ?? {}),
       eas: {
         projectId: "cadbabd6-b763-487b-9497-3e198c9ac77e",
       },
@@ -86,5 +52,16 @@ export default {
       HASURA_URI: process.env.HASURA_URI,
       GOOGLE_IOS_CLIENT_ID: process.env.GOOGLE_IOS_CLIENT_ID,
     },
-  },
+
+    plugins: [
+      ...(config.plugins ?? []),
+      [
+        "@react-native-google-signin/google-signin",
+        {
+          iosUrlScheme:
+            "com.googleusercontent.apps.989994337201-v68moe6gb6qrni608ik4or3v3gm50g6t",
+        },
+      ],
+    ],
+  };
 };

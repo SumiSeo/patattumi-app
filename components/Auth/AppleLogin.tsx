@@ -29,7 +29,9 @@ export default function AppleLogin({ setError }: LoginProps) {
               ],
             });
             if (credential) {
+              console.log(credential);
               const result = await userExists(credential.user);
+              console.log(result);
               const providerId = credential.user;
               if (!result) {
                 if (credential.email) {
@@ -44,6 +46,7 @@ export default function AppleLogin({ setError }: LoginProps) {
                   );
                 }
               } else {
+                console.log("hre?");
                 if (providerId) await appleSignIn(providerId);
               }
             }

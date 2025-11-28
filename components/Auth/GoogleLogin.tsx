@@ -1,4 +1,5 @@
 import { useUser } from "@/hooks/useUser";
+import { StyleSheet } from "react-native";
 
 import {
   GoogleSignin,
@@ -19,15 +20,16 @@ const GoogleLogin = () => {
   const { googleSignIn } = useUser();
   const handleGoogleSignIn = async () => {
     try {
-      setIsInProgress(false);
-      await googleSignIn();
       setIsInProgress(true);
+      await googleSignIn();
+      setIsInProgress(false);
     } catch (e) {
       console.log(e);
     }
   };
   return (
     <GoogleSigninButton
+      style={styles.button}
       size={GoogleSigninButton.Size.Wide}
       color={GoogleSigninButton.Color.Light}
       onPress={handleGoogleSignIn}
@@ -37,3 +39,11 @@ const GoogleLogin = () => {
 };
 
 export default GoogleLogin;
+
+const styles = StyleSheet.create({
+  button: {
+    width: 200,
+    height: 44,
+    marginTop: 10,
+  },
+});

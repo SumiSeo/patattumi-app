@@ -142,6 +142,7 @@ export function UserProvider({ children }: UserProviderProps) {
             user_id: id,
           },
         });
+
         if (provider_id) await appleSignIn(provider_id);
       }
     } catch (e) {
