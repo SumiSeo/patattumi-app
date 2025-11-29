@@ -6,7 +6,12 @@ import {
   GoogleSigninButton,
   isSuccessResponse,
 } from "@react-native-google-signin/google-signin";
+import Constants from "expo-constants";
 import React, { useEffect, useState } from "react";
+
+console.log(Constants.expoConfig?.ios?.bundleIdentifier);
+
+
 interface CodedError extends Error {
   code?: string;
 }

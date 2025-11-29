@@ -9,7 +9,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet } from "react-native";
 
-
+console.log(Constants.expoConfig?.extra?.HASURA_URI);
 const client = new ApolloClient({
   link: new HttpLink({
     uri: Constants.expoConfig?.extra?.HASURA_URI,
