@@ -1,24 +1,25 @@
+import GoogleLogo from "@/assets/icons/google.png";
 import { useUser } from "@/hooks/useUser";
-import { StyleSheet } from "react-native";
-
 import {
   GoogleSignin,
-  GoogleSigninButton,
   isSuccessResponse,
 } from "@react-native-google-signin/google-signin";
 import React, { useEffect, useState } from "react";
-
-interface CodedError extends Error {
-  code?: string;
-}
-type LoginProps = {
+import {
+  ActivityIndicator,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+interface LoginProps {
   setError: (err: string | null) => void;
-};
-
+}
 const GoogleLogin = ({ setError }: LoginProps) => {
   const { googleSignIn, googleUserExists, googleRegister } = useUser();
-
   const [isInProgress, setIsInProgress] = useState(false);
+
   useEffect(() => {
     GoogleSignin.configure({
       iosClientId:
@@ -37,32 +38,39 @@ const GoogleLogin = ({ setError }: LoginProps) => {
         const { idToken, user } = response.data;
         const { name, email, id } = user;
 
-        const result = await googleUserExists(id);
-        if (result) {
+        const exists = await googleUserExists(id);
+        if (exists) {
           await googleSignIn(id);
         } else {
           if (name && email && id) await googleRegister(email, name, id);
         }
-        setIsInProgress(false);
       } else {
-        throw new Error("Google login Failed");
+        throw new Error("Google login failed");
       }
     } catch (error) {
-      if (error instanceof Error) {
-        setError(error.message);
-      } else {
-        setError(String(error));
-      }
+      if (error instanceof Error) setError(error.message);
+      else setError(String(error));
+    } finally {
+      setIsInProgress(false);
     }
   };
+
   return (
-    <GoogleSigninButton
+    <TouchableOpacity
       style={styles.button}
-      size={GoogleSigninButton.Size.Wide}
-      color={GoogleSigninButton.Color.Light}
+      activeOpacity={0.8}
       onPress={handleGoogleSignIn}
       disabled={isInProgress}
-    />
+    >
+      {isInProgress ? (
+        <ActivityIndicator color="#000" />
+      ) : (
+        <View style={styles.content}>
+          <Image source={GoogleLogo} style={styles.icon} />
+          <Text style={styles.text}>Se connecter avec Google</Text>
+        </View>
+      )}
+    </TouchableOpacity>
   );
 };
 
@@ -70,8 +78,27 @@ export default GoogleLogin;
 
 const styles = StyleSheet.create({
   button: {
-    width: 200,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    width: 250,
     height: 44,
-    marginTop: 10,
+    backgroundColor: "#F2F2F2",
+    borderRadius: 5,
+    marginVertical: 10,
+  },
+  content: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  icon: {
+    width: 24,
+    height: 24,
+    marginRight: 10,
+  },
+  text: {
+    color: "#000",
+    fontSize: 15,
+    fontWeight: "500",
   },
 });

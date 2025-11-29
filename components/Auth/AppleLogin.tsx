@@ -62,7 +62,7 @@ export default function AppleLogin({ setError }: LoginProps) {
 
 const styles = StyleSheet.create({
   button: {
-    width: 200,
+    width: 250,
     height: 44,
   },
 });

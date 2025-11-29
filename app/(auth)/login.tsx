@@ -15,16 +15,6 @@ const Login = () => {
 
   const [error, setError] = useState<string | null>(null);
 
-  const fakeLogin = async () => {
-    setError(null);
-    try {
-      const fake = "001433.54aa1ea53ed54e49a58e792388df6ccd.1346";
-      await appleSignIn(fake);
-    } catch (error: any) {
-      setError(error.message);
-    }
-  };
-
   useEffect(() => {
     setError(null);
   }, []);
