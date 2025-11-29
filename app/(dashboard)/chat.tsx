@@ -8,7 +8,11 @@ import ThemedLoader from "@/components/ThemedLoader";
 import ThemedModal from "@/components/ThemedModal";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
-import { QUERY_LIFE_IN_FRANCE, QUERY_LIFE_IN_KOREA } from "@/queries/ChatQuery";
+import {
+  QUERY_LIFE_IN_FRANCE,
+  QUERY_LIFE_IN_FRANCOPHONE,
+  QUERY_LIFE_IN_KOREA,
+} from "@/queries/ChatQuery";
 import { dateFormatter } from "@/utils/games/dateFormatter";
 import { useQuery } from "@apollo/client/react";
 import React, { useEffect, useState } from "react";
@@ -21,6 +25,9 @@ interface Publication {
   content: string;
 }
 
+interface LifeInFrancophoneData {
+  life_in_francophone: Publication[];
+}
 interface LifeInFranceData {
   life_in_france: Publication[];
 }
@@ -29,29 +36,46 @@ interface LifeInKoreaData {
   life_in_korea: Publication[];
 }
 const Chat = () => {
-  const [isFrance, setIsFrance] = useState<boolean>(true);
+  const [location, setLocation] = useState<string>("france");
   const [publications, setPublications] = useState<Publication[]>([]);
   const [open, setOpen] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
   const { data, loading, refetch } = useQuery<
-    LifeInFranceData | LifeInKoreaData
-  >(isFrance ? QUERY_LIFE_IN_FRANCE : QUERY_LIFE_IN_KOREA);
+    LifeInFranceData | LifeInKoreaData | LifeInFrancophoneData
+  >(
+    location === "france"
+      ? QUERY_LIFE_IN_FRANCE
+      : location === "korea"
+      ? QUERY_LIFE_IN_KOREA
+      : QUERY_LIFE_IN_FRANCOPHONE
+  );
 
   useEffect(() => {
     if (data) {
-      if (isFrance && "life_in_france" in data) {
+      if (location === "france" && "life_in_france" in data) {
         setPublications(data.life_in_france);
-      } else if (!isFrance && "life_in_korea" in data) {
+      } else if (location === "korea" && "life_in_korea" in data) {
         setPublications(data.life_in_korea);
+      } else if (location === "francophone" && "life_in_francophone" in data) {
+        setPublications(data.life_in_francophone);
       }
     }
-  }, [data, isFrance]);
+  }, [data, location]);
 
-  const handleChatLocation = async () => {
-    setIsFrance(!isFrance);
+  const locations = ["france", "korea", "francophone"] as const;
+
+  const handleChatLocation = () => {
+    setLocation((prev) => {
+      const currentIndex = locations.indexOf(
+        prev as (typeof locations)[number]
+      );
+      const nextIndex = (currentIndex + 1) % locations.length;
+      return locations[nextIndex];
+    });
     refetch();
   };
+
   const handleSubmit = () => {
     setOpen(true);
     setModalVisible(true);
@@ -84,10 +108,7 @@ const Chat = () => {
               {publication.content}
             </ThemedText>
           </View>
-          <CommentSection
-            location={isFrance ? "france" : "korea"}
-            id={publication.id}
-          />
+          <CommentSection location={location} id={publication.id} />
         </ThemedCard>
       );
     });
@@ -98,20 +119,23 @@ const Chat = () => {
       <ScrollView>
         <View style={styles.profileNav}>
           <ThemedText title>Chat</ThemedText>
-          <ChatLocation
-            isFrance={isFrance}
-            handleChatLocation={handleChatLocation}
-          />
         </View>
         {loading && <ThemedLoader />}
 
-        <Pressable onPress={handleSubmit}>
-          <View style={styles.writeButton}>
-            <ThemedText title style={{ fontSize: 12, color: "white" }}>
-              Écrire
-            </ThemedText>
-          </View>
-        </Pressable>
+        <View style={styles.location}>
+          <ChatLocation
+            location={location}
+            handleChatLocation={handleChatLocation}
+          />
+          <Pressable onPress={handleSubmit}>
+            <View style={styles.writeButton}>
+              <ThemedText title style={{ fontSize: 12, color: "white" }}>
+                Écrire
+              </ThemedText>
+            </View>
+          </Pressable>
+        </View>
+
         <ThemedModal
           visible={modalVisible}
           onDismiss={() => setModalVisible(false)}
@@ -119,7 +143,7 @@ const Chat = () => {
           <WritePublicaton
             setModalVisible={setModalVisible}
             setOpen={setOpen}
-            country={isFrance ? "france" : "korea"}
+            country={location}
           />
         </ThemedModal>
         {publications && createPublications()}
@@ -167,10 +191,15 @@ const styles = StyleSheet.create({
   },
   writeButton: {
     backgroundColor: "black",
-    padding: 10,
+    padding: 8,
     borderRadius: 10,
     alignSelf: "flex-start",
     marginLeft: 10,
     marginBottom: 5,
+  },
+  location: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    margin: 5,
   },
 });
