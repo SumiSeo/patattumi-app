@@ -20,6 +20,7 @@ export const QUERY_USER_ONE = gql`
       age
       korean_name
       totem
+      provider
     }
   }
 `;

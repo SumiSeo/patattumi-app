@@ -3,7 +3,10 @@ import {
   ADD_GOOGLE_USER_ONE,
   ADD_USER_ONE,
 } from "@/mutations/AddUser";
-import { DELETE_USER_ONE } from "@/mutations/DeleteUser";
+import {
+  DELETE_GOOGLE_USER_ONE,
+  DELETE_USER_ONE,
+} from "@/mutations/DeleteUser";
 import {
   QUERY_APPLE_USER,
   QUERY_GOOGLE_USER,
@@ -29,15 +32,21 @@ export const UserContext = createContext<UserContextType | null>(null);
 export function UserProvider({ children }: UserProviderProps) {
   const [user, setUser] = useState<UserType | null>(null);
   const [authChecked, setAuthChecked] = useState<boolean>(false);
+
+  // delete
+  const [deleteUser] = useMutation(DELETE_USER_ONE);
+  const [deleteGoogleUser] = useMutation(DELETE_GOOGLE_USER_ONE);
+
+  // insert
   const [InsertUser] = useMutation<InsertUserData, InsertUserVars>(
     ADD_USER_ONE
   );
-  const [deleteUser] = useMutation(DELETE_USER_ONE);
   const [InsertAppleUser] =
     useMutation<InsertAppleUserData>(ADD_APPLE_USER_ONE);
   const [InsertGoogleUser] =
     useMutation<InsertGoogleUserData>(ADD_GOOGLE_USER_ONE);
 
+  //queries
   const [getAppleUser] = useLazyQuery<AppleUserData>(QUERY_APPLE_USER, {
     fetchPolicy: "network-only",
     errorPolicy: "all",
@@ -112,6 +121,7 @@ export function UserProvider({ children }: UserProviderProps) {
         language: u.language,
         points: u.points,
         role: u.role,
+        provider: u.provider,
       };
       setUser(userObj);
       await AsyncStorage.setItem("user", JSON.stringify(userObj));
@@ -130,13 +140,11 @@ export function UserProvider({ children }: UserProviderProps) {
       if (googleData.error) throw new Error(googleData.error.message);
 
       const userId = googleData.data?.google_users_by_pk?.user_id;
-      console.log("userId", userId);
       if (!userId) throw new Error("Something went wrong with Google Login.");
 
       const userData = await getUserById({
         variables: { id: userId },
       });
-      console.log(userData);
 
       if (userData.error) throw new Error(userData.error.message);
       const u = userData.data?.users_by_pk;
@@ -151,6 +159,7 @@ export function UserProvider({ children }: UserProviderProps) {
         language: u.language,
         points: u.points,
         role: u.role,
+        provider: u.provider,
       };
       setUser(userObj);
       await AsyncStorage.setItem("user", JSON.stringify(userObj));
@@ -166,7 +175,6 @@ export function UserProvider({ children }: UserProviderProps) {
       const googleData = await getGoogleUser({
         variables: { provider_id: providerId },
       });
-      console.log(googleData.data);
       if (
         googleData?.data?.google_users_by_pk !== null &&
         googleData?.data?.google_users_by_pk !== undefined
@@ -230,7 +238,6 @@ export function UserProvider({ children }: UserProviderProps) {
         });
 
         if (provider_id) await googleSignIn(provider_id);
-        console.log(provider_id);
       }
     } catch (e) {
       if (e instanceof Error) throw Error(e.message);
@@ -249,7 +256,17 @@ export function UserProvider({ children }: UserProviderProps) {
       },
     });
     if (result) {
-      console.log(result);
+      await logout();
+    }
+  }
+
+  async function googleDeleteUser(id: string) {
+    const result = await deleteGoogleUser({
+      variables: {
+        id,
+      },
+    });
+    if (result) {
       await logout();
     }
   }
@@ -267,6 +284,7 @@ export function UserProvider({ children }: UserProviderProps) {
         googleSignIn,
         googleUserExists,
         googleRegister,
+        googleDeleteUser,
       }}
     >
       {children}

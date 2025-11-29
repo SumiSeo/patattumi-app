@@ -6,11 +6,7 @@ import {
   GoogleSigninButton,
   isSuccessResponse,
 } from "@react-native-google-signin/google-signin";
-import Constants from "expo-constants";
 import React, { useEffect, useState } from "react";
-
-console.log(Constants.expoConfig?.ios?.bundleIdentifier);
-
 
 interface CodedError extends Error {
   code?: string;
@@ -34,18 +30,20 @@ const GoogleLogin = ({ setError }: LoginProps) => {
   const handleGoogleSignIn = async () => {
     try {
       setError(null);
+      setIsInProgress(true);
       await GoogleSignin.hasPlayServices();
       const response = await GoogleSignin.signIn();
       if (isSuccessResponse(response)) {
         const { idToken, user } = response.data;
         const { name, email, id } = user;
-        console.log(user);
+
         const result = await googleUserExists(id);
         if (result) {
           await googleSignIn(id);
         } else {
           if (name && email && id) await googleRegister(email, name, id);
         }
+        setIsInProgress(false);
       } else {
         throw new Error("Google login Failed");
       }

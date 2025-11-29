@@ -13,6 +13,7 @@ export type UserType = {
   totem?: string;
   points?: number;
   role?: string;
+  provider?: string;
 };
 
 export type UserContextType = {
@@ -33,6 +34,7 @@ export type UserContextType = {
   logout: () => Promise<void>;
   authChecked: boolean;
   appleDeleteUser: (id: string) => Promise<void>;
+  googleDeleteUser: (id: string) => Promise<void>;
   googleSignIn: (providerId: string) => Promise<void>;
 };
 
@@ -58,6 +60,7 @@ export type UserData = {
     totem?: string;
     points?: number;
     role?: string;
+    provider?: string;
   } | null;
 };
 
