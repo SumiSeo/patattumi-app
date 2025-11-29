@@ -24,3 +24,16 @@ export const ADD_APPLE_USER_ONE = gql`
     }
   }
 `;
+
+
+export const ADD_GOOGLE_USER_ONE = gql`
+  mutation InsertGoogleUser($provider_id: String!, $user_id: uuid!) {
+    insert_google_users_one(
+      object: { provider_id: $provider_id, user_id: $user_id }
+    ) {
+      id
+      provider_id
+    }
+  }
+`;
+

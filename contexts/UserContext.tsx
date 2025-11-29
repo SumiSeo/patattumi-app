@@ -1,4 +1,8 @@
-import { ADD_APPLE_USER_ONE, ADD_USER_ONE } from "@/mutations/AddUser";
+import {
+  ADD_APPLE_USER_ONE,
+  ADD_GOOGLE_USER_ONE,
+  ADD_USER_ONE,
+} from "@/mutations/AddUser";
 import { DELETE_USER_ONE } from "@/mutations/DeleteUser";
 import {
   QUERY_APPLE_USER,
@@ -9,6 +13,7 @@ import {
   AppleUserData,
   GoogleUserData,
   InsertAppleUserData,
+  InsertGoogleUserData,
   InsertUserData,
   InsertUserVars,
   UserContextType,
@@ -30,6 +35,9 @@ export function UserProvider({ children }: UserProviderProps) {
   const [deleteUser] = useMutation(DELETE_USER_ONE);
   const [InsertAppleUser] =
     useMutation<InsertAppleUserData>(ADD_APPLE_USER_ONE);
+  const [InsertGoogleUser] =
+    useMutation<InsertGoogleUserData>(ADD_GOOGLE_USER_ONE);
+
   const [getAppleUser] = useLazyQuery<AppleUserData>(QUERY_APPLE_USER, {
     fetchPolicy: "network-only",
     errorPolicy: "all",
@@ -114,21 +122,42 @@ export function UserProvider({ children }: UserProviderProps) {
     }
   }
 
-  async function googleSignIn() {
+  async function googleSignIn(providerId: string) {
     try {
-    } catch (error) {
-      console.error(error);
-    }
-  }
+      const googleData = await getGoogleUser({
+        variables: { provider_id: providerId },
+      });
+      if (googleData.error) throw new Error(googleData.error.message);
 
-  async function googleRegister(
-    email: string,
-    name: string,
-    provider_id: string
-  ) {
-    try {
-    } catch (error) {
-      console.error(error);
+      const userId = googleData.data?.google_users_by_pk?.user_id;
+      console.log("userId", userId);
+      if (!userId) throw new Error("Something went wrong with Google Login.");
+
+      const userData = await getUserById({
+        variables: { id: userId },
+      });
+      console.log(userData);
+
+      if (userData.error) throw new Error(userData.error.message);
+      const u = userData.data?.users_by_pk;
+      if (!u) throw new Error("Something went wrong with Google Login");
+      const userObj = {
+        id: u.id,
+        name: u.name,
+        email: u.email,
+        korean_name: u.korean_name,
+        age: u.age,
+        totem: u.totem,
+        language: u.language,
+        points: u.points,
+        role: u.role,
+      };
+      setUser(userObj);
+      await AsyncStorage.setItem("user", JSON.stringify(userObj));
+    } catch (e: any) {
+      throw Error(e.message);
+    } finally {
+      setAuthChecked(true);
     }
   }
 
@@ -172,6 +201,36 @@ export function UserProvider({ children }: UserProviderProps) {
         });
 
         if (provider_id) await appleSignIn(provider_id);
+      }
+    } catch (e) {
+      if (e instanceof Error) throw Error(e.message);
+    }
+  }
+
+  async function googleRegister(
+    email: string,
+    name: string,
+    provider_id: string
+  ) {
+    try {
+      const result = await InsertUser({
+        variables: {
+          email,
+          name,
+          provider: "google",
+        },
+      });
+      if (result) {
+        const id = result.data?.insert_users_one?.id;
+        await InsertGoogleUser({
+          variables: {
+            provider_id: provider_id,
+            user_id: id,
+          },
+        });
+
+        if (provider_id) await googleSignIn(provider_id);
+        console.log(provider_id);
       }
     } catch (e) {
       if (e instanceof Error) throw Error(e.message);

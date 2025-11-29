@@ -41,13 +41,10 @@ const GoogleLogin = ({ setError }: LoginProps) => {
         const { name, email, id } = user;
         console.log(user);
         const result = await googleUserExists(id);
-        console.log(result);
         if (result) {
-          // find is user exist?
-          console.log("login");
+          await googleSignIn(id);
         } else {
-          // else register
-          console.log("signup");
+          if (name && email && id) await googleRegister(email, name, id);
         }
       } else {
         throw new Error("Google login Failed");

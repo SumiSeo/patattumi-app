@@ -33,7 +33,7 @@ export type UserContextType = {
   logout: () => Promise<void>;
   authChecked: boolean;
   appleDeleteUser: (id: string) => Promise<void>;
-  googleSignIn: () => Promise<void>;
+  googleSignIn: (providerId: string) => Promise<void>;
 };
 
 export type AppleUserData = {
@@ -72,6 +72,12 @@ export type InsertUserData = {
 
 export type InsertAppleUserData = {
   insert_apple_users_one: {
+    provider_id: string;
+  } | null;
+};
+
+export type InsertGoogleUserData = {
+  insert_google_users_one: {
     provider_id: string;
   } | null;
 };
