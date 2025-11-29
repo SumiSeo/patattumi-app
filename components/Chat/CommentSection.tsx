@@ -1,8 +1,9 @@
 import patate from "@/assets/images/patate-baby.jpg";
 import patattumi from "@/assets/images/patattumi.jpg";
 import {
-    QUERY_COMMENTS_IN_FRANCE_BY_ID,
-    QUERY_COMMENTS_IN_KOREA_BY_ID,
+  QUERY_COMMENTS_IN_FRANCE_BY_ID,
+  QUERY_COMMENTS_IN_FRANCOPHONE_BY_ID,
+  QUERY_COMMENTS_IN_KOREA_BY_ID,
 } from "@/queries/ChatQuery";
 import { useQuery } from "@apollo/client/react";
 import { Ionicons } from "@expo/vector-icons";
@@ -24,6 +25,10 @@ interface LifeInFranceComments {
 
 interface LifeInKoreaComments {
   comments_life_in_korea: PublicationComment[];
+}
+
+interface LifeInFrancophoneComments {
+  comments_life_in_francophone: PublicationComment[];
 }
 
 export type CommentType = {
@@ -60,6 +65,13 @@ const CommentSection = ({ location, id }: CommentSectionProps) => {
     }
   );
 
+  const { data: francophoneData } = useQuery<LifeInFrancophoneComments>(
+    QUERY_COMMENTS_IN_FRANCOPHONE_BY_ID,
+    {
+      variables: { postId: id },
+      skip: location !== "francophone",
+    }
+  );
   const handleSubmit = () => {
     setOpen(true);
     setModalVisible(true);
@@ -71,10 +83,12 @@ const CommentSection = ({ location, id }: CommentSectionProps) => {
       newComments = franceData.comments_life_in_france;
     } else if (location === "korea" && koreaData) {
       newComments = koreaData.comments_life_in_korea;
+    } else if (location === "francophone" && francophoneData) {
+      newComments = francophoneData.comments_life_in_francophone;
     }
     setComments(newComments);
     setCount(newComments.length);
-  }, [franceData, koreaData, location]);
+  }, [franceData, koreaData, location, francophoneData]);
 
   const handleShowComments = () => {
     setShowComments(!showComments);
@@ -135,7 +149,7 @@ const CommentSection = ({ location, id }: CommentSectionProps) => {
             setModalVisible={setModalVisible}
             setOpen={setOpen}
             id={id}
-            country={location === "france" ? "france" : "korea"}
+            country={location}
           />
         </ThemedModal>
       </View>

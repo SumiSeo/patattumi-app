@@ -1,7 +1,9 @@
 import INSERT_COMMENT_IN_FRANCE_PUBLICATION from "@/mutations/AddCommentFrance";
+import INSERT_COMMENT_IN_FRANCOPHONE_PUBLICATION from "@/mutations/AddCommentFrancophone";
 import INSERT_COMMENT_IN_KOREA_PUBLICATION from "@/mutations/AddCommentKorea";
 import {
   QUERY_COMMENTS_IN_FRANCE_BY_ID,
+  QUERY_COMMENTS_IN_FRANCOPHONE_BY_ID,
   QUERY_COMMENTS_IN_KOREA_BY_ID,
 } from "@/queries/ChatQuery";
 
@@ -14,7 +16,7 @@ import ThemedButton from "../ThmedButton";
 
 export type WriteCommentProps = {
   id: string;
-  country: "france" | "korea";
+  country: string;
   setModalVisible: (modalVisible: boolean) => void;
   setOpen: (open: boolean) => void;
 };
@@ -33,8 +35,10 @@ const WriteComment = ({
   const [insertCommentKorea, { loading: loadingKorea }] = useMutation(
     INSERT_COMMENT_IN_KOREA_PUBLICATION
   );
+  const [insertCommentFrancophone, { loading: loadingFrancophone }] =
+    useMutation(INSERT_COMMENT_IN_FRANCOPHONE_PUBLICATION);
 
-  const loading = loadingFrance || loadingKorea;
+  const loading = loadingFrance || loadingKorea || loadingFrancophone;
 
   const handleSubmit = async () => {
     if (comment && user?.name) {
@@ -49,12 +53,22 @@ const WriteComment = ({
               },
             ],
           });
-        } else {
+        } else if (country === "france") {
           await insertCommentFrance({
             variables: { postId: id, author: user?.name, content: comment },
             refetchQueries: [
               {
                 query: QUERY_COMMENTS_IN_FRANCE_BY_ID,
+                variables: { postId: id },
+              },
+            ],
+          });
+        } else {
+          await insertCommentFrancophone({
+            variables: { postId: id, author: user?.name, content: comment },
+            refetchQueries: [
+              {
+                query: QUERY_COMMENTS_IN_FRANCOPHONE_BY_ID,
                 variables: { postId: id },
               },
             ],

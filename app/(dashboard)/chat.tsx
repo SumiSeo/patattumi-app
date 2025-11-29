@@ -121,7 +121,6 @@ const Chat = () => {
           <ThemedText title>Chat</ThemedText>
         </View>
         {loading && <ThemedLoader />}
-
         <View style={styles.location}>
           <ChatLocation
             location={location}
