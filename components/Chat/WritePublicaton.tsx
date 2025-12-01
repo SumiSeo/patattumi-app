@@ -1,7 +1,12 @@
 import { useUser } from "@/hooks/useUser";
 import INSERT_FRANCE_PUBLICATION from "@/mutations/AddPublicationFrance";
+import INSERT_FRANCOPHONE_PUBLICATION from "@/mutations/AddPublicationFrancophone";
 import INSERT_KOREA_PUBLICATION from "@/mutations/AddPublicationKorea";
-import { QUERY_LIFE_IN_FRANCE, QUERY_LIFE_IN_KOREA } from "@/queries/ChatQuery";
+import {
+  QUERY_LIFE_IN_FRANCE,
+  QUERY_LIFE_IN_FRANCOPHONE,
+  QUERY_LIFE_IN_KOREA,
+} from "@/queries/ChatQuery";
 import { useMutation } from "@apollo/client/react";
 import React, { useState } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
@@ -29,6 +34,8 @@ const WritePublicaton = ({
   const [insertCommentKorea, { loading: loadingKorea }] = useMutation(
     INSERT_KOREA_PUBLICATION
   );
+  const [insertCommentFrancophone, { loading: loadingFrancophone }] =
+    useMutation(INSERT_FRANCOPHONE_PUBLICATION);
 
   const loading = loadingFrance || loadingKorea;
 
@@ -49,7 +56,7 @@ const WritePublicaton = ({
               },
             ],
           });
-        } else {
+        } else if (country === "france") {
           await insertCommentFrance({
             variables: {
               author: user?.name,
@@ -60,6 +67,20 @@ const WritePublicaton = ({
             refetchQueries: [
               {
                 query: QUERY_LIFE_IN_FRANCE,
+              },
+            ],
+          });
+        } else {
+          await insertCommentFrancophone({
+            variables: {
+              author: user?.name,
+              title: title,
+              content: comment,
+              id: uuid(),
+            },
+            refetchQueries: [
+              {
+                query: QUERY_LIFE_IN_FRANCOPHONE,
               },
             ],
           });

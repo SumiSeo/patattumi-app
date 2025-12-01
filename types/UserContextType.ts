@@ -13,13 +13,20 @@ export type UserType = {
   totem?: string;
   points?: number;
   role?: string;
+  provider?: string;
 };
 
 export type UserContextType = {
   user: UserType | null;
   userExists: (providerId: string) => Promise<boolean>;
+  googleUserExists: (providerId: string) => Promise<boolean>;
   appleSignIn: (providerId: string) => Promise<void>;
   appleRegister: (
+    email: string,
+    name: string,
+    provider_id: string
+  ) => Promise<void>;
+  googleRegister: (
     email: string,
     name: string,
     provider_id: string
@@ -27,6 +34,8 @@ export type UserContextType = {
   logout: () => Promise<void>;
   authChecked: boolean;
   appleDeleteUser: (id: string) => Promise<void>;
+  googleDeleteUser: (id: string) => Promise<void>;
+  googleSignIn: (providerId: string) => Promise<void>;
 };
 
 export type AppleUserData = {
@@ -35,6 +44,11 @@ export type AppleUserData = {
   } | null;
 };
 
+export type GoogleUserData = {
+  google_users_by_pk: {
+    user_id: string;
+  } | null;
+};
 export type UserData = {
   users_by_pk: {
     id: string;
@@ -46,6 +60,7 @@ export type UserData = {
     totem?: string;
     points?: number;
     role?: string;
+    provider?: string;
   } | null;
 };
 
@@ -60,6 +75,12 @@ export type InsertUserData = {
 
 export type InsertAppleUserData = {
   insert_apple_users_one: {
+    provider_id: string;
+  } | null;
+};
+
+export type InsertGoogleUserData = {
+  insert_google_users_one: {
     provider_id: string;
   } | null;
 };

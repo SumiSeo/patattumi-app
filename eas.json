@@ -8,12 +8,14 @@
       "developmentClient": true,
       "distribution": "internal",
       "env": {
-        "EXPO_PUBLIC_IOS_URL_SCHEME": "com.googleusercontent.apps.989994337201-v68moe6gb6qrni608ik4or3v3gm50g6t",
-        "EXPO_PUBLIC_GOOGLE_CLIEND_ID": "989994337201-v68moe6gb6qrni608ik4or3v3gm50g6t.apps.googleusercontent.com",
-        "EXPO_PUBLIC_HASURA_ADMIN_SECRET": "pJ2phmrIbdbIQykYquk2iltkkwb7300sivzDcDgyAL8RIpYqaF5okt60kh1UYF9O",
-        "EXPO_PUBLIC_HASURA_URI": "https://prod-patattumi.hasura.app/v1/graphql",
-        "EXPO_PUBLIC_AUTH_SECRET": "b5277aefe58b08d05d799f4177a3fd6135d95e9e23074c8ad6b2d81b5d6a5198",
-        "EXPO_PUBLIC_DATA_KOREAN_PUBLIC_HOLIDAY_API_KEY": "9822b39da2da2adb070f54659859e614b1ce79f35118e9e315c687de43b8fd39"
+        "APP_VARIANT": "development",
+        "IOS_URL_SCHEME": "com.googleusercontent.apps.989994337201-v68moe6gb6qrni608ik4or3v3gm50g6t",
+        "GOOGLE_CLIENT_ID": "989994337201-v68moe6gb6qrni608ik4or3v3gm50g6t.apps.googleusercontent.com",
+        "HASURA_ADMIN_SECRET": "pJ2phmrIbdbIQykYquk2iltkkwb7300sivzDcDgyAL8RIpYqaF5okt60kh1UYF9O",
+        "HASURA_URI": "https://prod-patattumi.hasura.app/v1/graphql",
+        "GOOGLE_IOS_CLIENT_ID": "989994337201-v68moe6gb6qrni608ik4or3v3gm50g6t.apps.googleusercontent.com",
+        "AUTH_SECRET": "b5277aefe58b08d05d799f4177a3fd6135d95e9e23074c8ad6b2d81b5d6a5198",
+        "DATA_KOREAN_PUBLIC_HOLIDAY_API_KEY": "9822b39da2da2adb070f54659859e614b1ce79f35118e9e315c687de43b8fd39"
       }
     },
     "preview": {
@@ -22,12 +24,14 @@
     "production": {
       "autoIncrement": true,
       "env": {
-        "EXPO_PUBLIC_IOS_URL_SCHEME": "com.googleusercontent.apps.989994337201-v68moe6gb6qrni608ik4or3v3gm50g6t",
-        "EXPO_PUBLIC_GOOGLE_CLIEND_ID": "989994337201-v68moe6gb6qrni608ik4or3v3gm50g6t.apps.googleusercontent.com",
-        "EXPO_PUBLIC_HASURA_ADMIN_SECRET": "pJ2phmrIbdbIQykYquk2iltkkwb7300sivzDcDgyAL8RIpYqaF5okt60kh1UYF9O",
-        "EXPO_PUBLIC_HASURA_URI": "https://prod-patattumi.hasura.app/v1/graphql",
-        "EXPO_PUBLIC_AUTH_SECRET": "b5277aefe58b08d05d799f4177a3fd6135d95e9e23074c8ad6b2d81b5d6a5198",
-        "EXPO_PUBLIC_DATA_KOREAN_PUBLIC_HOLIDAY_API_KEY": "9822b39da2da2adb070f54659859e614b1ce79f35118e9e315c687de43b8fd39"
+        "APP_VARIANT": "production",
+        "GOOGLE_IOS_CLIENT_ID": "989994337201-v68moe6gb6qrni608ik4or3v3gm50g6t.apps.googleusercontent.com",
+        "IOS_URL_SCHEME": "com.googleusercontent.apps.989994337201-v68moe6gb6qrni608ik4or3v3gm50g6t",
+        "GOOGLE_CLIENT_ID": "989994337201-v68moe6gb6qrni608ik4or3v3gm50g6t.apps.googleusercontent.com",
+        "HASURA_ADMIN_SECRET": "pJ2phmrIbdbIQykYquk2iltkkwb7300sivzDcDgyAL8RIpYqaF5okt60kh1UYF9O",
+        "HASURA_URI": "https://prod-patattumi.hasura.app/v1/graphql",
+        "AUTH_SECRET": "b5277aefe58b08d05d799f4177a3fd6135d95e9e23074c8ad6b2d81b5d6a5198",
+        "DATA_KOREAN_PUBLIC_HOLIDAY_API_KEY": "9822b39da2da2adb070f54659859e614b1ce79f35118e9e315c687de43b8fd39"
       }
     }
   },

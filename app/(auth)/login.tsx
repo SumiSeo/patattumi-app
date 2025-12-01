@@ -1,5 +1,6 @@
 import PatattumiLogo from "@/assets/images/favicon.png";
 import AppleLogin from "@/components/Auth/AppleLogin";
+import GoogleLogin from "@/components/Auth/GoogleLogin";
 import Spacer from "@/components/Spacer";
 import ThemedError from "@/components/ThemedError";
 import ThemedLogo from "@/components/ThemedLogo";
@@ -14,16 +15,6 @@ const Login = () => {
 
   const [error, setError] = useState<string | null>(null);
 
-  const fakeLogin = async () => {
-    setError(null);
-    try {
-      const fake = "001433.54aa1ea53ed54e49a58e792388df6ccd.1346";
-      await appleSignIn(fake);
-    } catch (error: any) {
-      setError(error.message);
-    }
-  };
-
   useEffect(() => {
     setError(null);
   }, []);
@@ -35,8 +26,7 @@ const Login = () => {
       <ThemedText title={true} style={{ fontSize: 30 }}>
         Patattumi
       </ThemedText>
-      <Spacer height={10} />
-      <Spacer height={30} />
+      <Spacer height={20} />
       <ThemedText style={{ fontSize: 14, textAlign: "center" }}>
         Découvrez la langue et la culture coréenne
       </ThemedText>
@@ -44,9 +34,8 @@ const Login = () => {
         de façon ludique en vous inscrivant.
       </ThemedText>
       <Spacer height={30} />
-      <Spacer height={10} />
       <AppleLogin setError={setError} />
-      <Spacer height={20} />
+      <GoogleLogin setError={setError} />
       {error !== null && (
         <ThemedError>
           <ThemedText

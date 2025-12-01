@@ -8,7 +8,7 @@ import ThemedView from "../ThemedView";
 import ThemedButton from "../ThmedButton";
 
 const DeleteAccount = () => {
-  const { user, appleDeleteUser } = useUser();
+  const { user, appleDeleteUser, googleDeleteUser } = useUser();
 
   const [open, setOpen] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -17,7 +17,10 @@ const DeleteAccount = () => {
     setModalVisible(true);
   };
   const confrimDeleteUser = async () => {
-    if (user?.id) await appleDeleteUser(user?.id);
+    if (user?.id) {
+      if (user?.provider === "google") await googleDeleteUser(user?.id);
+      else await appleDeleteUser(user?.id);
+    }
   };
   return (
     <ThemedView>
