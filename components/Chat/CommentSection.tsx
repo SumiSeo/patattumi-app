@@ -17,6 +17,7 @@ export type PublicationComment = {
   id: string;
   author: string;
   content: string;
+  created_at: string;
 };
 
 interface LifeInFranceComments {
@@ -35,6 +36,7 @@ export type CommentType = {
   id: string;
   author: string;
   content: string;
+  created_at: string;
 };
 
 export type CommentSectionProps = {
@@ -103,7 +105,16 @@ const CommentSection = ({ location, id }: CommentSectionProps) => {
             <Image source={patate} style={styles.avatar} />
           )}
           <View style={styles.commentContent}>
-            <Text style={styles.author}>{comment.author}</Text>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <Text style={styles.author}>{comment.author}</Text>
+              <Text style={styles.date}>{comment.created_at}</Text>
+            </View>
             <Text style={styles.content}>{comment.content}</Text>
           </View>
         </View>
@@ -127,6 +138,7 @@ const CommentSection = ({ location, id }: CommentSectionProps) => {
             flexDirection: "row",
             gap: 4,
             alignItems: "center",
+            marginBottom: 3,
           }}
         >
           <Ionicons size={15} name="chatbubble-outline" />
@@ -183,6 +195,10 @@ const styles = StyleSheet.create({
   },
   content: {
     fontSize: 10,
+    color: "#000",
+  },
+  date: {
+    fontSize: 9,
     color: "#000",
   },
   writeButton: {

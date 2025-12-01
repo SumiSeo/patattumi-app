@@ -42,6 +42,7 @@ export const QUERY_COMMENTS_IN_FRANCE_BY_ID = gql`
       id
       author
       content
+      created_at
     }
   }
 `;
@@ -51,6 +52,7 @@ export const QUERY_COMMENTS_IN_KOREA_BY_ID = gql`
       id
       author
       content
+      created_at
     }
   }
 `;
@@ -61,6 +63,7 @@ export const QUERY_COMMENTS_IN_FRANCOPHONE_BY_ID = gql`
       id
       author
       content
+      created_at
     }
   }
 `;
