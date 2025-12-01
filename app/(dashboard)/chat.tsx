@@ -120,7 +120,6 @@ const Chat = () => {
         <View style={styles.profileNav}>
           <ThemedText title>Chat</ThemedText>
         </View>
-
         <View style={styles.location}>
           <ChatLocation
             location={location}

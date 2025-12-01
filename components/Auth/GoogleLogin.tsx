@@ -34,9 +34,14 @@ const GoogleLogin = ({ setError }: LoginProps) => {
       setIsInProgress(true);
       await GoogleSignin.hasPlayServices();
       const response = await GoogleSignin.signIn();
+
       if (isSuccessResponse(response)) {
         const { idToken, user } = response.data;
         const { name, email, id } = user;
+
+        const formData = new FormData();
+
+        if (idToken) formData.append("token", idToken);
 
         const exists = await googleUserExists(id);
         if (exists) {

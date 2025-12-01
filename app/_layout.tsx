@@ -9,11 +9,23 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet } from "react-native";
 
+const userJwt = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlN1bWkiLCJodHRwczovL2hhc3VyYS5pby9qd3QvY2xhaW1zIjp7IngtaGFzdXJhLWRlZmF1bHQtcm9sZSI6InVzZXIiLCJ4LWhhc3VyYS1hbGxvd2VkLXJvbGVzIjpbInVzZXIiLCJhZG1pbiJdLCJ4LWhhc3VyYS11c2VyLWlkIjoiZGIyNmZjMWItMzczNi00YWFlLTg5MjQtMzhiODY4MzliZWZlIn0sImlhdCI6MTc2NDU5MjAyNiwiZXhwIjoxNzY0NTk1NjI2fQ._jqzfpQCNfmNwcOwCLL4PH5HzLuUxgaFu_nW66QQFyQ`;
+
+// const client = new ApolloClient({
+//   link: new HttpLink({
+//     uri: Constants.expoConfig?.extra?.HASURA_URI,
+//     headers: {
+//       "x-hasura-admin-secret": Constants.expoConfig?.extra?.HASURA_SECRET,
+//     },
+//   }),
+//   cache: new InMemoryCache(),
+// });
+
 const client = new ApolloClient({
   link: new HttpLink({
     uri: Constants.expoConfig?.extra?.HASURA_URI,
     headers: {
-      "x-hasura-admin-secret": Constants.expoConfig?.extra?.HASURA_SECRET,
+      Authorization: `Bearer ${userJwt}`,
     },
   }),
   cache: new InMemoryCache(),

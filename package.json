@@ -43,7 +43,7 @@
     "fast-xml-parser": "^5.3.2",
     "graphql": "^16.12.0",
     "install": "^0.13.0",
-    "jose": "^6.1.2",
+    "jsonwebtoken": "^9.0.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-native": "0.81.5",
@@ -59,6 +59,7 @@
     "solarlunar": "^2.0.7"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/react": "~19.1.0",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~10.0.0",
