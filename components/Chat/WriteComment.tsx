@@ -45,7 +45,12 @@ const WriteComment = ({
       try {
         if (country === "korea") {
           await insertCommentKorea({
-            variables: { postId: id, author: user?.name, content: comment },
+            variables: {
+              postId: id,
+              author: user?.name,
+              content: comment,
+              author_id: user?.id,
+            },
             refetchQueries: [
               {
                 query: QUERY_COMMENTS_IN_KOREA_BY_ID,
@@ -55,7 +60,12 @@ const WriteComment = ({
           });
         } else if (country === "france") {
           await insertCommentFrance({
-            variables: { postId: id, author: user?.name, content: comment },
+            variables: {
+              postId: id,
+              author: user?.name,
+              content: comment,
+              author_id: user?.id,
+            },
             refetchQueries: [
               {
                 query: QUERY_COMMENTS_IN_FRANCE_BY_ID,
@@ -65,7 +75,12 @@ const WriteComment = ({
           });
         } else {
           await insertCommentFrancophone({
-            variables: { postId: id, author: user?.name, content: comment },
+            variables: {
+              postId: id,
+              author: user?.name,
+              content: comment,
+              author_id: user?.id,
+            },
             refetchQueries: [
               {
                 query: QUERY_COMMENTS_IN_FRANCOPHONE_BY_ID,

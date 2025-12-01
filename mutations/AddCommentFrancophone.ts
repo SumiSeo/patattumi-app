@@ -1,9 +1,19 @@
 import { gql } from "@apollo/client";
 
 const INSERT_COMMENT_IN_FRANCOPHONE_PUBLICATION = gql`
-  mutation InsertCommentFrancophone($postId: String!, $author: String!, $content: String!) {
+  mutation InsertCommentFrancophone(
+    $postId: String!
+    $author: String!
+    $content: String!
+    $author_id: uuid!
+  ) {
     insert_comments_life_in_francophone_one(
-      object: { post_id: $postId, author: $author, content: $content }
+      object: {
+        post_id: $postId
+        author: $author
+        content: $content
+        author_id: $author_id
+      }
     ) {
       author
       content

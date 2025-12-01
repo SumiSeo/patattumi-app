@@ -120,7 +120,7 @@ const Chat = () => {
         <View style={styles.profileNav}>
           <ThemedText title>Chat</ThemedText>
         </View>
-        {loading && <ThemedLoader />}
+
         <View style={styles.location}>
           <ChatLocation
             location={location}
@@ -134,7 +134,6 @@ const Chat = () => {
             </View>
           </Pressable>
         </View>
-
         <ThemedModal
           visible={modalVisible}
           onDismiss={() => setModalVisible(false)}
@@ -145,7 +144,8 @@ const Chat = () => {
             country={location}
           />
         </ThemedModal>
-        {publications && createPublications()}
+        {loading && <ThemedLoader />}
+        {!loading && publications && createPublications()}
       </ScrollView>
     </ThemedView>
   );

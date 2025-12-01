@@ -28,13 +28,13 @@ const WritePublicaton = ({
   const { user } = useUser();
   const [title, setTitle] = useState("");
   const [comment, setComment] = useState("");
-  const [insertCommentFrance, { loading: loadingFrance }] = useMutation(
+  const [insertPublicationFrance, { loading: loadingFrance }] = useMutation(
     INSERT_FRANCE_PUBLICATION
   );
-  const [insertCommentKorea, { loading: loadingKorea }] = useMutation(
+  const [insertPublicationKorea, { loading: loadingKorea }] = useMutation(
     INSERT_KOREA_PUBLICATION
   );
-  const [insertCommentFrancophone, { loading: loadingFrancophone }] =
+  const [insertPublicationFrancophone, { loading: loadingFrancophone }] =
     useMutation(INSERT_FRANCOPHONE_PUBLICATION);
 
   const loading = loadingFrance || loadingKorea;
@@ -43,12 +43,13 @@ const WritePublicaton = ({
     if (comment && user?.name) {
       try {
         if (country === "korea") {
-          await insertCommentKorea({
+          await insertPublicationKorea({
             variables: {
               author: user?.name,
               title: title,
               content: comment,
               id: uuid(),
+              author_id: user?.id,
             },
             refetchQueries: [
               {
@@ -57,12 +58,13 @@ const WritePublicaton = ({
             ],
           });
         } else if (country === "france") {
-          await insertCommentFrance({
+          await insertPublicationFrance({
             variables: {
               author: user?.name,
               title: title,
               content: comment,
               id: uuid(),
+              author_id: user?.id,
             },
             refetchQueries: [
               {
@@ -71,12 +73,13 @@ const WritePublicaton = ({
             ],
           });
         } else {
-          await insertCommentFrancophone({
+          await insertPublicationFrancophone({
             variables: {
               author: user?.name,
               title: title,
               content: comment,
               id: uuid(),
+              author_id: user?.id,
             },
             refetchQueries: [
               {
