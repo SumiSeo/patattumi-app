@@ -6,9 +6,16 @@ const INSERT_FRANCOPHONE_PUBLICATION = gql`
     $title: String!
     $author: String!
     $id: String!
+    $author_id: uuid!
   ) {
     insert_life_in_francophone_one(
-      object: { title: $title, content: $content, author: $author, id: $id }
+      object: {
+        title: $title
+        content: $content
+        author: $author
+        id: $id
+        author_id: $author_id
+      }
     ) {
       id
     }
