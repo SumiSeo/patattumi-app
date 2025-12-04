@@ -1,3 +1,4 @@
+import AdBanner from "@/components/AdMob/AdBanner";
 import Logout from "@/components/Profile/Logout";
 import ProfileAssetCard from "@/components/Profile/ProfileAssetCard";
 import UserAvatar from "@/components/Profile/UserAvatar";
@@ -68,6 +69,7 @@ const Profile = () => {
         />
       </View>
       {displayProfileAssets()}
+      <AdBanner />
     </ThemedView>
   );
 };

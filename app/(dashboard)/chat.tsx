@@ -1,5 +1,6 @@
 import patate from "@/assets/images/patate-baby.jpg";
 import patattumi from "@/assets/images/patattumi.jpg";
+import AdBanner from "@/components/AdMob/AdBanner";
 import ChatLocation from "@/components/Chat/ChatLocation";
 import CommentSection from "@/components/Chat/CommentSection";
 import WritePublicaton from "@/components/Chat/WritePublicaton";
@@ -169,6 +170,7 @@ const Chat = () => {
         {loading && <ThemedLoader />}
         {!loading && publications && createPublications()}
       </ScrollView>
+      <AdBanner />
     </ThemedView>
   );
 };

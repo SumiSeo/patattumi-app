@@ -1,4 +1,5 @@
 import games from "@/app/datas/courseKoreanCulture.json";
+import AdBanner from "@/components/AdMob/AdBanner";
 import Spacer from "@/components/Spacer";
 import ThemedCard from "@/components/ThemedCard";
 import ThemedText from "@/components/ThemedText";
@@ -52,6 +53,7 @@ const KoreanCulture = () => {
         data={games}
         keyExtractor={(item) => item.id.toString()}
       />
+      <AdBanner />
     </ThemedView>
   );
 };

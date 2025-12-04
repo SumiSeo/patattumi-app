@@ -1,4 +1,5 @@
 import courses from "@/app/datas/courseKoreanLanguage.json";
+import AdBanner from "@/components/AdMob/AdBanner";
 import Spacer from "@/components/Spacer";
 import ThemedCard from "@/components/ThemedCard";
 import ThemedText from "@/components/ThemedText";
@@ -49,6 +50,7 @@ const KoreanLanguage = () => {
         data={courses}
         keyExtractor={(item) => item.id.toString()}
       />
+      <AdBanner />
     </ThemedView>
   );
 };
