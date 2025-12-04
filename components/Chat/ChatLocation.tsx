@@ -1,60 +1,47 @@
-import { Ionicons } from "@expo/vector-icons";
-import React from "react";
-import { Pressable, StyleSheet } from "react-native";
+import { Picker } from "@react-native-picker/picker";
+import React, { useEffect, useState } from "react";
+import { View } from "react-native";
+import ThemedButton from "../ThemedButton";
 import ThemedText from "../ThemedText";
 
 export type ChatLocationProps = {
   location: string;
-  handleChatLocation: () => void;
+  handleChatLocation: (value: string) => void;
+  onClose: () => void;
 };
 
-const ChatLocation = ({ location, handleChatLocation }: ChatLocationProps) => {
-  const getIconName = () => {
-    switch (location) {
-      case "france":
-        return "location-outline";
-      case "korea":
-        return "location";
-      case "francophone":
-        return "globe-outline";
-      default:
-        return "location-outline";
-    }
-  };
+const ChatLocation = ({
+  location,
+  handleChatLocation,
+  onClose,
+}: ChatLocationProps) => {
+  const [selectedLocation, setSelectedLocation] = useState(location);
 
-  const getLocationLabel = () => {
-    switch (location) {
-      case "france":
-        return "France";
-      case "korea":
-        return "Corée";
-      case "francophone":
-        return "Francophone";
-      default:
-        return "";
-    }
+  useEffect(() => {
+    setSelectedLocation(location);
+  }, [location]);
+
+  const confirmLocation = () => {
+    handleChatLocation(selectedLocation);
+    onClose();
   };
 
   return (
-    <Pressable onPress={handleChatLocation} style={styles.container}>
-      <Ionicons size={20} name={getIconName()} />
-      <ThemedText title style={styles.text}>
-        {getLocationLabel()}
+    <View>
+      <ThemedText title style={{ fontSize: 20 }}>
+        Où êtes-vous ?
       </ThemedText>
-    </Pressable>
+      <Picker
+        selectedValue={selectedLocation}
+        onValueChange={(itemValue) => setSelectedLocation(itemValue)}
+      >
+        <Picker.Item label="France" value="france" />
+        <Picker.Item label="Corée" value="korea" />
+        <Picker.Item label="Francophone" value="francophone" />
+      </Picker>
+      <ThemedButton text="Confirmer" handleSubmit={confirmLocation} />
+    </View>
   );
 };
 
 export default ChatLocation;
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    justifyContent: "flex-end",
-    flexDirection: "row",
-  },
-  text: {
-    fontSize: 14,
-    marginLeft: 2,
-  },
-});

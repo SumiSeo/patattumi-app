@@ -13,8 +13,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import ThemedButton from "../ThemedButton";
 import ThemedText from "../ThemedText";
-import ThemedButton from "../ThmedButton";
 
 const chipStyle = (selected: boolean) => ({
   paddingVertical: 4,

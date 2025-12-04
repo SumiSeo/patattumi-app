@@ -11,8 +11,8 @@ import { useUser } from "@/hooks/useUser";
 import { useMutation } from "@apollo/client/react";
 import React, { useState } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
+import ThemedButton from "../ThemedButton";
 import ThemedText from "../ThemedText";
-import ThemedButton from "../ThmedButton";
 
 export type WriteCommentProps = {
   id: string;

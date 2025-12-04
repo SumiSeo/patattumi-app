@@ -35,8 +35,14 @@ const Urgence = () => {
   const handleOpen = () => setModalVisible(true);
 
   return (
-    <ThemedView>
-      <Pressable onPress={handleOpen}>
+    <>
+      <Pressable
+        onPress={handleOpen}
+        style={{
+          minWidth: 40,
+          alignItems: "flex-end",
+        }}
+      >
         <Ionicons size={18} name="arrow-forward-outline" />
       </Pressable>
 
@@ -46,28 +52,33 @@ const Urgence = () => {
         onDismiss={() => setModalVisible(false)}
       >
         <ScrollView>
-          <View style={{flexDirection:"row", alignItems:"center"}}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Ionicons name="call-outline" size={18} />
-            <ThemedText title style={{ fontSize: 16, marginVertical: 10 , marginLeft:5}}>
+            <ThemedText
+              title
+              style={{ fontSize: 14, marginVertical: 8, marginLeft: 5 }}
+            >
               Numéros d&apos;urgence en Corée du Sud
             </ThemedText>
           </View>
-          {koreanEmergencyContacts.map((contact,i) => (
+          {koreanEmergencyContacts.map((contact, i) => (
             <ThemedView key={contact.id} style={{ marginTop: 20 }}>
               <ThemedText style={{ fontWeight: "bold", fontSize: 15 }}>
-                {i+1}. {contact.label}
+                {i + 1}. {contact.label}
               </ThemedText>
-              <ThemedText style={{ color: "#007AFF", marginVertical: 4 ,fontSize:14}}>
+              <ThemedText
+                style={{ color: "#007AFF", marginVertical: 4, fontSize: 14 }}
+              >
                 {contact.number}
               </ThemedText>
-              <ThemedText style={{ fontSize: 16, color: "#555",marginTop:6 }}>
+              <ThemedText style={{ fontSize: 16, color: "#555", marginTop: 6 }}>
                 {contact.description}
               </ThemedText>
             </ThemedView>
           ))}
         </ScrollView>
       </ThemedModal>
-    </ThemedView>
+    </>
   );
 };
 

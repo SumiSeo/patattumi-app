@@ -10,9 +10,9 @@ import {
   View,
 } from "react-native";
 import Spacer from "../Spacer";
+import ThemedButton from "../ThemedButton";
 import ThemedModal from "../ThemedModal";
 import ThemedText from "../ThemedText";
-import ThemedButton from "../ThmedButton";
 
 const characterOptions = [
   "beau",
