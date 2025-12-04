@@ -55,19 +55,23 @@ const ProfileAssetCard = ({
         />
         <ThemedText style={{ fontSize: 14 }}>{title}</ThemedText>
       </View>
-      <ThemedText style={{ fontSize: 14 }}>
-        {userInfo[value as UserInfoValue] ??
-          (() => {
-            if (id === -1) return <DeleteAccount />;
-            if (id === -2) return <Urgence />;
 
-            return (
-              <Pressable onPress={() => router.push(`/culture/${id}`)}>
-                <Ionicons size={18} name="arrow-forward-outline" />
-              </Pressable>
-            );
-          })()}
-      </ThemedText>
+      {userInfo[value as UserInfoValue] ??
+        (() => {
+          if (id === -1) return <DeleteAccount />;
+          if (id === -2) return <Urgence />;
+          return (
+            <Pressable
+              onPress={() => router.push(`/culture/${id}`)}
+              style={{
+                minWidth: 40,
+                alignItems: "flex-end",
+              }}
+            >
+              <Ionicons size={18} name="arrow-forward-outline" />
+            </Pressable>
+          );
+        })()}
     </View>
   );
 };
