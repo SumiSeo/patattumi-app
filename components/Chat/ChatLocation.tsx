@@ -1,60 +1,34 @@
-import { Ionicons } from "@expo/vector-icons";
-import React from "react";
-import { Pressable, StyleSheet } from "react-native";
+import { Picker } from "@react-native-picker/picker";
+import React, { useState } from "react";
+import { View } from "react-native";
 import ThemedText from "../ThemedText";
 
 export type ChatLocationProps = {
   location: string;
-  handleChatLocation: () => void;
+  handleChatLocation: (value: string) => void;
 };
 
 const ChatLocation = ({ location, handleChatLocation }: ChatLocationProps) => {
-  const getIconName = () => {
-    switch (location) {
-      case "france":
-        return "location-outline";
-      case "korea":
-        return "location";
-      case "francophone":
-        return "globe-outline";
-      default:
-        return "location-outline";
-    }
-  };
-
-  const getLocationLabel = () => {
-    switch (location) {
-      case "france":
-        return "France";
-      case "korea":
-        return "Corée";
-      case "francophone":
-        return "Francophone";
-      default:
-        return "";
-    }
-  };
+  const [selectedLocation, setSelectedLocation] = useState(location);
 
   return (
-    <Pressable onPress={handleChatLocation} style={styles.container}>
-      <Ionicons size={20} name={getIconName()} />
-      <ThemedText title style={styles.text}>
-        {getLocationLabel()}
+    <View>
+      <ThemedText title style={{ fontSize: 20 }}>
+        Où êtes-vous ?
       </ThemedText>
-    </Pressable>
+      <Picker
+        selectedValue={selectedLocation}
+        onValueChange={(itemValue) => {
+          setSelectedLocation(itemValue);
+          handleChatLocation(itemValue);
+        }}
+      >
+        <Picker.Item label="France" value="france" />
+        <Picker.Item label="Corée" value="korea" />
+        <Picker.Item label="Francophone" value="francophone" />
+      </Picker>
+    </View>
   );
 };
 
 export default ChatLocation;
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    justifyContent: "flex-end",
-    flexDirection: "row",
-  },
-  text: {
-    fontSize: 14,
-    marginLeft: 2,
-  },
-});

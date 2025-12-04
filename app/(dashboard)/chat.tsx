@@ -15,6 +15,7 @@ import {
 } from "@/queries/ChatQuery";
 import { dateFormatter } from "@/utils/games/dateFormatter";
 import { useQuery } from "@apollo/client/react";
+import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
 import { Image, Pressable, ScrollView, StyleSheet, View } from "react-native";
 interface Publication {
@@ -64,6 +65,14 @@ const Chat = () => {
   }, [data, location]);
 
   const locations = ["france", "korea", "francophone"] as const;
+
+  const [openLocation, setOpenLocation] = useState(false);
+  const [modalLocationVisible, setModalLocationVisible] = useState(false);
+
+  const handleOpen = () => {
+    setOpenLocation(true);
+    setModalLocationVisible(true);
+  };
 
   const handleChatLocation = () => {
     setLocation((prev) => {
@@ -119,20 +128,23 @@ const Chat = () => {
       <ScrollView>
         <View style={styles.profileNav}>
           <ThemedText title>Chat</ThemedText>
-        </View>
-
-        <View style={styles.location}>
-          <ChatLocation
-            location={location}
-            handleChatLocation={handleChatLocation}
-          />
-          <Pressable onPress={handleSubmit}>
-            <View style={styles.writeButton}>
-              <ThemedText title style={{ fontSize: 12, color: "white" }}>
-                Écrire
-              </ThemedText>
-            </View>
-          </Pressable>
+          <View style={styles.icons}>
+            <Pressable onPress={handleOpen}>
+              <Ionicons size={24} name="compass-outline" />
+            </Pressable>
+            <ThemedModal
+              visible={modalLocationVisible}
+              onDismiss={() => setModalLocationVisible(false)}
+            >
+              <ChatLocation
+                location={location}
+                handleChatLocation={handleChatLocation}
+              />
+            </ThemedModal>
+            <Pressable onPress={handleSubmit}>
+              <Ionicons size={24} name="create-outline" />
+            </Pressable>
+          </View>
         </View>
         <ThemedModal
           visible={modalVisible}
@@ -157,7 +169,9 @@ const styles = StyleSheet.create({
   profileNav: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 10,
+    alignItems: "center",
+    marginBottom: 7,
+    marginHorizontal: 1,
   },
   card: {
     margin: 5,
@@ -181,6 +195,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
+
   avatar: {
     width: 20,
     height: 20,
@@ -188,17 +203,9 @@ const styles = StyleSheet.create({
     marginRight: 5,
     marginTop: 2,
   },
-  writeButton: {
-    backgroundColor: "black",
-    padding: 8,
-    borderRadius: 10,
-    alignSelf: "flex-start",
-    marginLeft: 10,
-    marginBottom: 5,
-  },
-  location: {
+
+  icons: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    margin: 5,
+    gap: 4,
   },
 });
