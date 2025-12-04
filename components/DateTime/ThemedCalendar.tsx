@@ -1,5 +1,6 @@
 import koreanHolidayJson from "@/app/datas/koreanHoliday.json";
 import dayjs from "dayjs";
+import Constants from "expo-constants";
 import { XMLParser } from "fast-xml-parser";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, Dimensions, Text, View } from "react-native";
@@ -69,7 +70,8 @@ export default function KoreaHoliday() {
   const [holiday, setHoliday] = useState<HolidyData[]>(fixedDays);
   const [loading, setLoading] = useState(false);
 
-  const serviceKey = process.env.DATA_KOREAN_PUBLIC_HOLIDAY_API_KEY;
+  const serviceKey =
+    Constants.expoConfig?.extra?.DATA_KOREAN_PUBLIC_HOLIDAY_API_KEY;
   const koreanHoliday: Record<string, HolidayInfo> = koreanHolidayJson;
   const fetchHoliday = async () => {
     setLoading(true);
