@@ -4,9 +4,9 @@ import React, { useCallback, useState } from "react";
 import { View } from "react-native";
 import ThemedDateTimePicker from "../DateTime/ThemedDateTimePicker";
 import Spacer from "../Spacer";
+import ThemedButton from "../ThemedButton";
 import ThemedModal from "../ThemedModal";
 import ThemedText from "../ThemedText";
-import ThemedButton from "../ThmedButton";
 
 const AnimalTotem = () => {
   const [confirmDate, setConfirmDate] = useState<Date | null>(null);

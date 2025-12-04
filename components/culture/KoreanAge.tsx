@@ -3,9 +3,9 @@ import { useFocusEffect } from "@react-navigation/native";
 import React, { useCallback, useState } from "react";
 import ThemedDateTimePicker from "../DateTime/ThemedDateTimePicker";
 import Spacer from "../Spacer";
+import ThemedButton from "../ThemedButton";
 import ThemedModal from "../ThemedModal";
 import ThemedText from "../ThemedText";
-import ThemedButton from "../ThmedButton";
 
 const KoreanAge = () => {
   const [open, setOpen] = useState(false);

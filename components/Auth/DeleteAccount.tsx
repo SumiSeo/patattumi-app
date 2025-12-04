@@ -2,9 +2,9 @@ import { useUser } from "@/hooks/useUser";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { Pressable } from "react-native";
+import ThemedButton from "../ThemedButton";
 import ThemedModal from "../ThemedModal";
 import ThemedText from "../ThemedText";
-import ThemedButton from "../ThmedButton";
 
 const DeleteAccount = () => {
   const { user, appleDeleteUser, googleDeleteUser } = useUser();

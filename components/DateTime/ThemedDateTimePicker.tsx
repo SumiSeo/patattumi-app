@@ -2,8 +2,8 @@ import DateTimePicker, {
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
 import React, { useState } from "react";
+import ThemedButton from "../ThemedButton";
 import ThemedCard from "../ThemedCard";
-import ThemedButton from "../ThmedButton";
 
 type ThemedDateTimePickerProps = {
   open: boolean;

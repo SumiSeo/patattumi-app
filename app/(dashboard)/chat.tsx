@@ -127,7 +127,9 @@ const Chat = () => {
     <ThemedView safe={true}>
       <ScrollView>
         <View style={styles.profileNav}>
-          <ThemedText title>Chat</ThemedText>
+          <ThemedText title style={{ fontSize: 20 }}>
+            Chat in {location.slice(0, 1).toUpperCase() + location.slice(1)}
+          </ThemedText>
           <View style={styles.icons}>
             <Pressable onPress={handleOpen}>
               <Ionicons size={24} name="compass-outline" />
@@ -137,6 +139,7 @@ const Chat = () => {
               onDismiss={() => setModalLocationVisible(false)}
             >
               <ChatLocation
+                onClose={() => setModalLocationVisible(false)}
                 location={location}
                 handleChatLocation={handleChatLocation}
               />
