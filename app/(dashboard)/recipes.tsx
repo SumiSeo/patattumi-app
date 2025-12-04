@@ -1,3 +1,4 @@
+import AdBanner from "@/components/AdMob/AdBanner";
 import Spacer from "@/components/Spacer";
 import ThemedCard from "@/components/ThemedCard";
 import ThemedLoader from "@/components/ThemedLoader";
@@ -53,6 +54,7 @@ const RecipesComp = () => {
             data={recipes}
             keyExtractor={(item) => item.id.toString()}
           />
+          <AdBanner />
         </>
       ) : (
         <ThemedLoader />
