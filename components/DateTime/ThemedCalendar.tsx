@@ -2,9 +2,11 @@ import koreanHolidayJson from "@/app/datas/koreanHoliday.json";
 import dayjs from "dayjs";
 import { XMLParser } from "fast-xml-parser";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, ScrollView, Text, View } from "react-native";
+import { ActivityIndicator, Dimensions, Text, View } from "react-native";
 import { Calendar } from "react-native-calendars";
+import ThemedCard from "../ThemedCard";
 
+const screenWidth = Dimensions.get("window").width;
 type HolidyData = {
   dataName: string | null;
   locdate: string | null;
@@ -69,7 +71,6 @@ export default function KoreaHoliday() {
 
   const serviceKey = process.env.DATA_KOREAN_PUBLIC_HOLIDAY_API_KEY;
   const koreanHoliday: Record<string, HolidayInfo> = koreanHolidayJson;
-
   const fetchHoliday = async () => {
     setLoading(true);
     try {
@@ -127,56 +128,56 @@ export default function KoreaHoliday() {
   );
 
   return (
-    <ScrollView>
-      <Calendar
-        onMonthChange={onMonthChange}
-        markedDates={marked}
-        markingType="dot"
-        theme={{
-          todayTextColor: "#4a90e2",
-          arrowColor: "#4a90e2",
-        }}
-        style={{
-          borderRadius: 12,
-          elevation: 2,
-        }}
-      />
+    <ThemedCard style={{ paddingHorizontal: 20 }}>
+      <View
+        style={{ width: screenWidth - 80, height: (screenWidth - 40) * 0.9 }}
+      >
+        <Calendar
+          onMonthChange={onMonthChange}
+          markedDates={marked}
+          markingType="dot"
+          theme={{
+            todayTextColor: "#4a90e2",
+            arrowColor: "#4a90e2",
+          }}
+        />
+      </View>
+      <View style={{ marginTop: 10 }}>
+        {loading && <ActivityIndicator size="small" color="black" />}
+        {!loading &&
+          listForMonth.map((hol) => {
+            const date = dayjs(hol.locdate).format("YYYY-MM-DD");
+            const info = hol.dataName
+              ? (koreanHoliday[hol.dataName] as HolidayInfo)
+              : null;
 
-      {loading && <ActivityIndicator size="small" color="black" />}
-
-      {!loading &&
-        listForMonth.map((hol) => {
-          const date = dayjs(hol.locdate).format("YYYY-MM-DD");
-          const info = hol.dataName
-            ? (koreanHoliday[hol.dataName] as HolidayInfo)
-            : null;
-
-          return (
-            <View
-              key={hol.locdate}
-              style={{ marginVertical: 4, paddingHorizontal: 6 }}
-            >
-              <Text
-                style={{
-                  fontWeight: "bold",
-                  color: hol.isPublic ? "red" : "green",
-                }}
-              >
-                • {date}: {hol.dataName}
-              </Text>
-              <Text
-                style={{
-                  marginTop:1,
-                  marginLeft:10,
-                  fontSize:12,
-                  color: hol.isPublic ? "red" : "green",
-                }}
-              >
-                {info?.fr} {info?.signification ? `: ${info?.signification}` : info?.signification}
-              </Text>
-            </View>
-          );
-        })}
-    </ScrollView>
+            return (
+              <>
+                <Text
+                  style={{
+                    fontWeight: "bold",
+                    color: hol.isPublic ? "red" : "green",
+                  }}
+                >
+                  • {date}: {hol.dataName}
+                </Text>
+                <Text
+                  style={{
+                    marginTop: 1,
+                    marginLeft: 10,
+                    fontSize: 10,
+                    color: hol.isPublic ? "red" : "green",
+                  }}
+                >
+                  {info?.fr}{" "}
+                  {info?.signification
+                    ? `: ${info?.signification}`
+                    : info?.signification}
+                </Text>
+              </>
+            );
+          })}
+      </View>
+    </ThemedCard>
   );
 }

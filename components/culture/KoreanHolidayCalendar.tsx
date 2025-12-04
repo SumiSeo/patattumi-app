@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import ThemedCalendar from "../DateTime/ThemedCalendar";
 import Spacer from "../Spacer";
+import ThemedButton from "../ThemedButton";
+import ThemedModal from "../ThemedModal";
 import ThemedText from "../ThemedText";
 
 const KoreanHolidayCalendar = () => {
+  const [open, setOpen] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const handleSubmit = () => {
+    setOpen(true);
+    setModalVisible(true);
+  };
   return (
     <>
       <ThemedText style={{ marginTop: 10 }}>
@@ -17,7 +25,13 @@ const KoreanHolidayCalendar = () => {
         ou Chuseok, de nombreuses boutiques peuvent être fermées.
       </ThemedText>
       <Spacer height={10} />
-      <ThemedCalendar />
+      <ThemedButton handleSubmit={handleSubmit} />
+      <ThemedModal
+        visible={modalVisible}
+        onDismiss={() => setModalVisible(false)}
+      >
+        <ThemedCalendar />
+      </ThemedModal>
     </>
   );
 };
