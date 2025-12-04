@@ -3,6 +3,7 @@ import patattumi from "@/assets/images/patattumi.jpg";
 import ChatLocation from "@/components/Chat/ChatLocation";
 import CommentSection from "@/components/Chat/CommentSection";
 import WritePublicaton from "@/components/Chat/WritePublicaton";
+import Spacer from "@/components/Spacer";
 import ThemedCard from "@/components/ThemedCard";
 import ThemedLoader from "@/components/ThemedLoader";
 import ThemedModal from "@/components/ThemedModal";
@@ -128,7 +129,11 @@ const Chat = () => {
       <ScrollView>
         <View style={styles.profileNav}>
           <ThemedText title style={{ fontSize: 20 }}>
-            Chat in {location.slice(0, 1).toUpperCase() + location.slice(1)}
+            {location === "korea"
+              ? "Chat en Corée"
+              : `Chat en ${
+                  location.slice(0, 1).toUpperCase() + location.slice(1)
+                }`}
           </ThemedText>
           <View style={styles.icons}>
             <Pressable onPress={handleOpen}>
@@ -149,6 +154,8 @@ const Chat = () => {
             </Pressable>
           </View>
         </View>
+        <Spacer height={20} />
+
         <ThemedModal
           visible={modalVisible}
           onDismiss={() => setModalVisible(false)}
