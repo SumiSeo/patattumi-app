@@ -56,7 +56,7 @@ const Urgence = () => {
             <Ionicons name="call-outline" size={18} />
             <ThemedText
               title
-              style={{ fontSize: 16, marginVertical: 10, marginLeft: 5 }}
+              style={{ fontSize: 14, marginVertical: 8, marginLeft: 5 }}
             >
               Numéros d&apos;urgence en Corée du Sud
             </ThemedText>
