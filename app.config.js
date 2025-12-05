@@ -11,6 +11,7 @@ export default ({ config }) => {
     ...config,
 
     scheme,
+    runtimeVersion: "1.0.0",
 
     ios: {
       ...(config.ios ?? {}),
