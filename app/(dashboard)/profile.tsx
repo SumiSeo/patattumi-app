@@ -7,7 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, View } from "react-native";
 const Profile = () => {
   const profileAssets = [
-    { name: "person", title: "Prénom", value: "koreanName", id: 4 },
+    { name: "person", title: "Prenom", value: "koreanName", id: 4 },
     { name: "age", title: "Âge", value: "koreanAge", id: 2 },
     { name: "animal", title: "Animal totem", value: "koreanTotem", id: 1 },
     {
