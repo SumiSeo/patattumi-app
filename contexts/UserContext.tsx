@@ -1,4 +1,3 @@
-import fetchLogin from "@/app/api/auth/googleLogin";
 import {
   ADD_APPLE_USER_ONE,
   ADD_GOOGLE_USER_ONE,
@@ -133,6 +132,18 @@ export function UserProvider({ children }: UserProviderProps) {
     }
   }
 
+  // async function fetchLogin() {
+  //   if (u) {
+  //     const response = await fetchLogin(
+  //       u?.email,
+  //       u?.name,
+  //       "google",
+  //       providerId
+  //     );
+  //     console.log("#########", response);
+  //   }
+  // }
+
   async function googleSignIn(providerId: string) {
     try {
       const googleData = await getGoogleUser({
@@ -150,16 +161,6 @@ export function UserProvider({ children }: UserProviderProps) {
 
       if (userData.error) throw new Error(userData.error.message);
       const u = userData.data?.users_by_pk;
-      if (u) {
-        const response = await fetchLogin(
-          u?.email,
-          u?.name,
-          "google",
-          providerId
-        );
-        console.log("#########", response);
-      }
-
       console.log(u);
       if (!u) throw new Error("Something went wrong with Google Login");
       const userObj = {
