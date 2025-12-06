@@ -1,16 +1,13 @@
 import appleUserFetch from "@/app/api/auth/appleUserFetch";
 import googleUserFetch from "@/app/api/auth/googleUserFetch";
+import providerSignIn from "@/app/api/auth/login";
 import register from "@/app/api/auth/register";
 import fetchUserById from "@/app/api/users/getUser";
-import { ADD_APPLE_USER_ONE, ADD_USER_ONE } from "@/mutations/AddUser";
 import {
   DELETE_GOOGLE_USER_ONE,
   DELETE_USER_ONE,
 } from "@/mutations/DeleteUser";
 import {
-  InsertAppleUserData,
-  InsertUserData,
-  InsertUserVars,
   UserContextType,
   UserProviderProps,
   UserType,
@@ -28,16 +25,10 @@ export function UserProvider({ children }: UserProviderProps) {
   const [deleteUser] = useMutation(DELETE_USER_ONE);
   const [deleteGoogleUser] = useMutation(DELETE_GOOGLE_USER_ONE);
 
-  // insert
-  const [InsertUser] = useMutation<InsertUserData, InsertUserVars>(
-    ADD_USER_ONE
-  );
-  const [InsertAppleUser] =
-    useMutation<InsertAppleUserData>(ADD_APPLE_USER_ONE);
-
   async function getInitialUserValue() {
     try {
       const value = await AsyncStorage.getItem("user");
+      console.log("Value", value);
       if (value) {
         const userObj = JSON.parse(value);
         if (value) setUser(userObj);
@@ -53,43 +44,22 @@ export function UserProvider({ children }: UserProviderProps) {
     getInitialUserValue();
   }, []);
 
-  async function googleSignIn(userId: string, providerId: string) {
+  async function signIn(userId: string, provider: string, providerId: string) {
     try {
-      const googleUser = await fetchUserById(userId);
-      if (!googleUser)
-        throw new Error("Something went wrong with Google Login.");
+      const providerUser = await providerSignIn(provider, providerId);
+      const token = providerUser.access_token;
+      const u = await fetchUserById(userId);
+      if (!u) throw new Error("Something went wrong with Apple Login.");
       const userObj = {
-        id: googleUser.id,
-        name: googleUser.name,
-        email: googleUser.email,
-        korean_name: googleUser.korean_name,
-        age: googleUser.age,
-        totem: googleUser.totem,
-        role: googleUser.role,
-        provider: googleUser.provider,
-      };
-      setUser(userObj);
-      await AsyncStorage.setItem("user", JSON.stringify(userObj));
-    } catch (e: any) {
-      throw Error(e.message);
-    } finally {
-      setAuthChecked(true);
-    }
-  }
-
-  async function appleSignIn(userId: string, providerId: string) {
-    try {
-      const appleUser = await fetchUserById(userId);
-      if (!appleUser) throw new Error("Something went wrong with Apple Login.");
-      const userObj = {
-        id: appleUser.id,
-        name: appleUser.name,
-        email: appleUser.email,
-        korean_name: appleUser.korean_name,
-        age: appleUser.age,
-        totem: appleUser.totem,
-        role: appleUser.role,
-        provider: appleUser.provider,
+        id: u.id,
+        name: u.name,
+        email: u.email,
+        korean_name: u?.korean_name,
+        age: u.age,
+        totem: u.totem,
+        role: u.role,
+        provider: u.provider,
+        token: token,
       };
       setUser(userObj);
       await AsyncStorage.setItem("user", JSON.stringify(userObj));
@@ -121,44 +91,26 @@ export function UserProvider({ children }: UserProviderProps) {
     }
   }
 
-  async function appleRegister(
-    email: string,
-    name: string,
-    provider_id: string
-  ) {
-    try {
-      const result = await InsertUser({
-        variables: {
-          email,
-          name,
-          provider: "apple",
-        },
-      });
-      if (result) {
-        const id = result.data?.insert_users_one?.id;
-        await InsertAppleUser({
-          variables: {
-            provider_id: provider_id,
-            user_id: id,
-          },
-        });
-
-        if (provider_id) await appleSignIn(user_id, provider_id);
-      }
-    } catch (e) {
-      if (e instanceof Error) throw Error(e.message);
-    }
-  }
-
   async function googleRegister(
-    user_id: string,
     email: string,
     name: string,
     provider_id: string
   ) {
     try {
       const response = await register(email, name, "google", provider_id);
-      if (response) await googleSignIn(user_id, provider_id);
+      if (response) await signIn(response.id, "google", provider_id);
+    } catch (e) {
+      if (e instanceof Error) throw Error(e.message);
+    }
+  }
+  async function appleRegister(
+    email: string,
+    name: string,
+    provider_id: string
+  ) {
+    try {
+      const response = await register(email, name, "apple", provider_id);
+      if (response) await signIn(response.id, "apple", provider_id);
     } catch (e) {
       if (e instanceof Error) throw Error(e.message);
     }
@@ -195,16 +147,15 @@ export function UserProvider({ children }: UserProviderProps) {
     <UserContext.Provider
       value={{
         user,
-        appleSignIn,
         logout,
         appleRegister,
         authChecked,
         appleDeleteUser,
         userExists,
-        googleSignIn,
         googleUserExists,
         googleRegister,
         googleDeleteUser,
+        signIn,
       }}
     >
       {children}

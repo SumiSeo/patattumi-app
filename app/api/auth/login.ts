@@ -2,27 +2,29 @@ import Constants from "expo-constants";
 
 const { DEV_PATATTUMI_API_URL, PROD_PATATTUMI_API_URL } =
   Constants.expoConfig?.extra ?? {};
-console.log("ISDEV ? ", __DEV__);
+
 export const API_URL = __DEV__ ? DEV_PATATTUMI_API_URL : PROD_PATATTUMI_API_URL;
 
-interface LoginResponse {
-    user_id:string
+interface SignInResponse {
+  access_token: string;
+  token_type: string;
+  email: string;
+  role: string;
+  id: string;
 }
 
-type LoginProps = {
-  provider_id: string;
-};
-
-const appleLogin = async ({
-  provider_id,
-}: LoginProps): Promise<LoginResponse> => {
+const providerSignIn = async (
+  provider: string,
+  provider_id: string
+): Promise<SignInResponse> => {
   try {
-    const response = await fetch(`${API_URL}/apple/${provider_id}`, {
-      method: "GET",
+    const response = await fetch(`${API_URL}/login/`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        provider,
         provider_id,
       }),
     });
@@ -31,12 +33,12 @@ const appleLogin = async ({
       const errData = await response.json();
       throw new Error(errData.detail || "Failed to Sign UP");
     }
-    const data: LoginResponse = await response.json();
+    const data: SignInResponse = await response.json();
     return data;
   } catch (error: any) {
-    console.error("Apple login error:", error.message);
+    console.error("Sign UP error:", error.message);
     throw error;
   }
 };
 
-export default appleLogin;
+export default providerSignIn;

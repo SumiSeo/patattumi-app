@@ -10,6 +10,7 @@ interface RegisterResponse {
   token_type: string;
   email: string;
   role: string;
+  id: string;
 }
 
 // Google 로그인 후 서버에 토큰 보내고 JWT 받기

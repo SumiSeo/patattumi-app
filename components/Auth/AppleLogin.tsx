@@ -2,7 +2,6 @@ import { useUser } from "@/hooks/useUser";
 import * as AppleAuthentication from "expo-apple-authentication";
 import { StyleSheet, View } from "react-native";
 import uuid from "react-uuid";
-
 interface CodedError extends Error {
   code?: string;
 }
@@ -11,7 +10,7 @@ type LoginProps = {
 };
 
 export default function AppleLogin({ setError }: LoginProps) {
-  const { appleSignIn, appleRegister, userExists } = useUser();
+  const { signIn, appleRegister, userExists } = useUser();
   return (
     <View>
       <AppleAuthentication.AppleAuthenticationButton
@@ -44,7 +43,7 @@ export default function AppleLogin({ setError }: LoginProps) {
                   );
                 }
               } else {
-                if (providerId) await appleSignIn(appleUser, providerId);
+                if (providerId) await signIn(appleUser, "apple", providerId);
               }
             }
           } catch (e) {
