@@ -114,15 +114,14 @@ export function UserProvider({ children }: UserProviderProps) {
       if (userData.error) throw new Error(userData.error.message);
       const u = userData.data?.users_by_pk;
       if (!u) throw new Error("Something went wrong!");
+      console.log(u);
       const userObj = {
         id: u.id,
         name: u.name,
         email: u.email,
-        korean_name: u.korean_name,
-        age: u.age,
-        totem: u.totem,
-        language: u.language,
-        points: u.points,
+        korean_name: u.korean_name ?? "",
+        age: u.age ?? "",
+        totem: u.totem ?? "",
         role: u.role,
         provider: u.provider,
       };
@@ -140,7 +139,6 @@ export function UserProvider({ children }: UserProviderProps) {
       const googleUser = await fetchUserById(userId);
       if (!googleUser)
         throw new Error("Something went wrong with Google Login.");
-
       const userObj = {
         id: googleUser.id,
         name: googleUser.name,
