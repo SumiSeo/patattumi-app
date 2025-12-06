@@ -132,17 +132,6 @@ export function UserProvider({ children }: UserProviderProps) {
     }
   }
 
-  // async function fetchLogin() {
-  //   if (u) {
-  //     const response = await fetchLogin(
-  //       u?.email,
-  //       u?.name,
-  //       "google",
-  //       providerId
-  //     );
-  //     console.log("#########", response);
-  //   }
-  // }
 
   async function googleSignIn(providerId: string) {
     try {

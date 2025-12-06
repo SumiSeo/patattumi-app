@@ -1,29 +1,32 @@
+import Constants from "expo-constants";
 
-// FastAPI 서버 URL
-const API_URL = "http://127.0.0.1:8000"; // 실제 서버 주소로 바꿔야 함
+const { DEV_PATATTUMI_API_URL, PROD_PATATTUMI_API_URL } =
+  Constants.expoConfig?.extra ?? {};
+console.log("ISDEV ? ", __DEV__);
+export const API_URL = __DEV__ ? DEV_PATATTUMI_API_URL : PROD_PATATTUMI_API_URL;
 
-interface GoogleLoginResponse {
+interface RegisterResponse {
   access_token: string;
   token_type: string;
   email: string;
   role: string;
 }
 
-type fetchLoginProps = {
+type RegisterProps = {
   email: string;
   name: string;
   provider: string;
   provider_id: string;
 };
+
 // Google 로그인 후 서버에 토큰 보내고 JWT 받기
-const fetchLogin = async (
-  email: string,
-  name: string,
-  provider: string,
-  provider_id: string
-): Promise<GoogleLoginResponse> => {
+const register = async ({
+  email,
+  name,
+  provider,
+  provider_id,
+}: RegisterProps): Promise<RegisterResponse> => {
   try {
-    console.log("called")
     const response = await fetch(`${API_URL}/users/`, {
       method: "POST",
       headers: {
@@ -34,15 +37,17 @@ const fetchLogin = async (
         name,
         provider,
         provider_id,
+        age: "",
+        korean_name: "",
+        totem: "",
       }),
     });
 
     if (!response.ok) {
       const errData = await response.json();
-      throw new Error(errData.detail || "Failed to login");
+      throw new Error(errData.detail || "Failed to Sign UP");
     }
-
-    const data: GoogleLoginResponse = await response.json();
+    const data: RegisterResponse = await response.json();
     return data;
   } catch (error: any) {
     console.error("Google login error:", error.message);
@@ -50,4 +55,4 @@ const fetchLogin = async (
   }
 };
 
-export default fetchLogin;
+export default register;
