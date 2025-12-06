@@ -5,7 +5,7 @@ const { DEV_PATATTUMI_API_URL, PROD_PATATTUMI_API_URL } =
 
 export const API_URL = __DEV__ ? DEV_PATATTUMI_API_URL : PROD_PATATTUMI_API_URL;
 
-interface SignInResponse {
+interface LoginResponse {
   access_token: string;
   token_type: string;
   email: string;
@@ -16,9 +16,9 @@ interface SignInResponse {
 const providerSignIn = async (
   provider: string,
   provider_id: string
-): Promise<SignInResponse> => {
+): Promise<LoginResponse> => {
   try {
-    const response = await fetch(`${API_URL}/login/`, {
+    const response = await fetch(`${API_URL}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,12 +31,12 @@ const providerSignIn = async (
 
     if (!response.ok) {
       const errData = await response.json();
-      throw new Error(errData.detail || "Failed to Sign UP");
+      throw new Error(errData.detail || "Failed to LogIn");
     }
-    const data: SignInResponse = await response.json();
+    const data: LoginResponse = await response.json();
     return data;
   } catch (error: any) {
-    console.error("Sign UP error:", error.message);
+    console.error("Login error:", error.message);
     throw error;
   }
 };
