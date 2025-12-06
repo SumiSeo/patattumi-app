@@ -18,10 +18,11 @@ export type UserType = {
 
 export type UserContextType = {
   user: UserType | null;
-  userExists: (providerId: string) => Promise<boolean>;
+  userExists: (providerId: string) => Promise<string | null>;
   googleUserExists: (providerId: string) => Promise<string | null>;
-  appleSignIn: (roviderId: string) => Promise<void>;
+  appleSignIn: (userId: string, providerId: string) => Promise<void>;
   appleRegister: (
+    user_id: string,
     email: string,
     name: string,
     provider_id: string

@@ -29,13 +29,13 @@ export default function AppleLogin({ setError }: LoginProps) {
               ],
             });
             if (credential) {
-              const result = await userExists(credential.user);
+              const appleUser = await userExists(credential.user);
               const providerId = credential.user;
-              if (!result) {
+              if (!appleUser) {
                 if (credential.email) {
                   const email = credential.email;
                   const name = `${credential.fullName?.givenName} ${credential.fullName?.familyName}`;
-                  await appleRegister(email, name, providerId);
+                  if (appleUser) await appleRegister(email, name, providerId);
                 } else {
                   await appleRegister(
                     "",
@@ -44,7 +44,7 @@ export default function AppleLogin({ setError }: LoginProps) {
                   );
                 }
               } else {
-                if (providerId) await appleSignIn(providerId);
+                if (providerId) await appleSignIn(appleUser, providerId);
               }
             }
           } catch (e) {

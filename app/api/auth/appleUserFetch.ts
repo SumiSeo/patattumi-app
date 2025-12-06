@@ -10,21 +10,18 @@ interface LoginResponse {
 }
 
 
-const appleLogin = async (providerId:string): Promise<LoginResponse> => {
+const appleUserFetch = async (providerId: string): Promise<LoginResponse> => {
   try {
-    const response = await fetch(`${API_URL}/apple/${providerId}`, {
+    const response = await fetch(`${API_URL}/users/apple/${providerId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        provider_id: providerId,
-      }),
     });
 
     if (!response.ok) {
       const errData = await response.json();
-      throw new Error(errData.detail || "Failed to Sign UP");
+      throw new Error(errData.detail || "Failed to LOGIN");
     }
     const data: LoginResponse = await response.json();
     return data;
@@ -34,4 +31,4 @@ const appleLogin = async (providerId:string): Promise<LoginResponse> => {
   }
 };
 
-export default appleLogin;
+export default appleUserFetch;
