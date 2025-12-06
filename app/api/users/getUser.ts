@@ -12,32 +12,27 @@ interface UserResponse {
   age: string;
   korean_name: string;
   totem: string;
+  role: string;
+  provider: string;
 }
 
-type LoginProps = {
-  id: string;
-};
-
-const fetchUserById = async ({ id }: LoginProps): Promise<UserResponse> => {
+const fetchUserById = async (userId: string): Promise<UserResponse> => {
   try {
-    const response = await fetch(`${API_URL}/user/${id}`, {
+    const response = await fetch(`${API_URL}/users/${userId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        id,
-      }),
     });
 
     if (!response.ok) {
       const errData = await response.json();
-      throw new Error(errData.detail || "Failed to Sign UP");
+      throw new Error(errData.detail || "Failed to fetch User");
     }
     const data: UserResponse = await response.json();
     return data;
   } catch (error: any) {
-    console.error("Google login error:", error.message);
+    console.error("Fetch User error:", error.message);
     throw error;
   }
 };

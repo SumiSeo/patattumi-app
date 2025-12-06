@@ -9,13 +9,10 @@ interface LoginResponse {
     user_id:string
 }
 
-type LoginProps = {
-  providerId: string;
-};
 
-const googleUserFetch = async (providerId: string): Promise<LoginResponse> => {
+const appleLogin = async (providerId:string): Promise<LoginResponse> => {
   try {
-    const response = await fetch(`${API_URL}/google/${providerId}`, {
+    const response = await fetch(`${API_URL}/apple/${providerId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -32,9 +29,9 @@ const googleUserFetch = async (providerId: string): Promise<LoginResponse> => {
     const data: LoginResponse = await response.json();
     return data;
   } catch (error: any) {
-    console.error("Google login error:", error.message);
+    console.error("Apple login error:", error.message);
     throw error;
   }
 };
 
-export default googleUserFetch;
+export default appleLogin;

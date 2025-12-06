@@ -1,3 +1,6 @@
+import googleUserFetch from "@/app/api/auth/googleUserFetch";
+import register from "@/app/api/auth/register";
+import fetchUserById from "@/app/api/users/getUser";
 import {
   ADD_APPLE_USER_ONE,
   ADD_GOOGLE_USER_ONE,
@@ -132,38 +135,23 @@ export function UserProvider({ children }: UserProviderProps) {
     }
   }
 
-
-  async function googleSignIn(providerId: string) {
+  async function googleSignIn(userId: string, providerId: string) {
     try {
-      const googleData = await getGoogleUser({
-        variables: { provider_id: providerId },
-      });
-      if (googleData.error) throw new Error(googleData.error.message);
+      const googleUser = await fetchUserById(userId);
+      if (!googleUser)
+        throw new Error("Something went wrong with Google Login.");
 
-      const userId = googleData.data?.google_users_by_pk?.user_id;
-      if (!userId) throw new Error("Something went wrong with Google Login.");
-
-      console.log(userId);
-      const userData = await getUserById({
-        variables: { id: userId },
-      });
-
-      if (userData.error) throw new Error(userData.error.message);
-      const u = userData.data?.users_by_pk;
-      console.log(u);
-      if (!u) throw new Error("Something went wrong with Google Login");
       const userObj = {
-        id: u.id,
-        name: u.name,
-        email: u.email,
-        korean_name: u.korean_name,
-        age: u.age,
-        totem: u.totem,
-        language: u.language,
-        points: u.points,
-        role: u.role,
-        provider: u.provider,
+        id: googleUser.id,
+        name: googleUser.name,
+        email: googleUser.email,
+        korean_name: googleUser.korean_name,
+        age: googleUser.age,
+        totem: googleUser.totem,
+        role: googleUser.role,
+        provider: googleUser.provider,
       };
+
       setUser(userObj);
       await AsyncStorage.setItem("user", JSON.stringify(userObj));
     } catch (e: any) {
@@ -175,15 +163,9 @@ export function UserProvider({ children }: UserProviderProps) {
 
   async function googleUserExists(providerId: string) {
     try {
-      const googleData = await getGoogleUser({
-        variables: { provider_id: providerId },
-      });
-      if (
-        googleData?.data?.google_users_by_pk !== null &&
-        googleData?.data?.google_users_by_pk !== undefined
-      )
-        return true;
-      else return false;
+      const googleData = await googleUserFetch(providerId);
+      if (googleData?.user_id) return googleData?.user_id;
+      else return null;
     } catch (e: any) {
       throw Error(e.message);
     }
@@ -219,29 +201,14 @@ export function UserProvider({ children }: UserProviderProps) {
   }
 
   async function googleRegister(
+    user_id: string,
     email: string,
     name: string,
     provider_id: string
   ) {
     try {
-      const result = await InsertUser({
-        variables: {
-          email,
-          name,
-          provider: "google",
-        },
-      });
-      if (result) {
-        const id = result.data?.insert_users_one?.id;
-        await InsertGoogleUser({
-          variables: {
-            provider_id: provider_id,
-            user_id: id,
-          },
-        });
-
-        if (provider_id) await googleSignIn(provider_id);
-      }
+      const response = await register(email, name, "google", provider_id);
+      if (response) await googleSignIn(user_id, provider_id);
     } catch (e) {
       if (e instanceof Error) throw Error(e.message);
     }

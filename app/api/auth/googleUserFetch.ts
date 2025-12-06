@@ -9,25 +9,19 @@ interface LoginResponse {
     user_id:string
 }
 
-type LoginProps = {
-  providerId: string;
-};
 
 const googleUserFetch = async (providerId: string): Promise<LoginResponse> => {
   try {
-    const response = await fetch(`${API_URL}/google/${providerId}`, {
+    const response = await fetch(`${API_URL}/users/google/${providerId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        provider_id: providerId,
-      }),
     });
 
     if (!response.ok) {
       const errData = await response.json();
-      throw new Error(errData.detail || "Failed to Sign UP");
+      throw new Error(errData.detail || "Failed to LOGIN");
     }
     const data: LoginResponse = await response.json();
     return data;

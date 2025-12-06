@@ -12,20 +12,13 @@ interface RegisterResponse {
   role: string;
 }
 
-type RegisterProps = {
-  email: string;
-  name: string;
-  provider: string;
-  provider_id: string;
-};
-
 // Google 로그인 후 서버에 토큰 보내고 JWT 받기
-const register = async ({
-  email,
-  name,
-  provider,
-  provider_id,
-}: RegisterProps): Promise<RegisterResponse> => {
+const register = async (
+  email: string,
+  name: string,
+  provider: string,
+  provider_id: string
+): Promise<RegisterResponse> => {
   try {
     const response = await fetch(`${API_URL}/users/`, {
       method: "POST",
@@ -50,7 +43,7 @@ const register = async ({
     const data: RegisterResponse = await response.json();
     return data;
   } catch (error: any) {
-    console.error("Google login error:", error.message);
+    console.error("Sign UP error:", error.message);
     throw error;
   }
 };
