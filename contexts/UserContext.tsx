@@ -1,18 +1,15 @@
 import appleUserFetch from "@/app/api/auth/appleUserFetch";
+import deleteAppleUser from "@/app/api/auth/deleteAppleUser";
+import deleteGoogleUser from "@/app/api/auth/deleteGoogleUser";
 import googleUserFetch from "@/app/api/auth/googleUserFetch";
 import providerSignIn from "@/app/api/auth/login";
 import register from "@/app/api/auth/register";
 import fetchUserById from "@/app/api/users/getUser";
 import {
-  DELETE_GOOGLE_USER_ONE,
-  DELETE_USER_ONE,
-} from "@/mutations/DeleteUser";
-import {
   UserContextType,
   UserProviderProps,
   UserType,
 } from "@/types/UserContextType";
-import { useMutation } from "@apollo/client/react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createContext, useEffect, useState } from "react";
 export const UserContext = createContext<UserContextType | null>(null);
@@ -20,10 +17,6 @@ export const UserContext = createContext<UserContextType | null>(null);
 export function UserProvider({ children }: UserProviderProps) {
   const [user, setUser] = useState<UserType | null>(null);
   const [authChecked, setAuthChecked] = useState<boolean>(false);
-
-  // delete
-  const [deleteUser] = useMutation(DELETE_USER_ONE);
-  const [deleteGoogleUser] = useMutation(DELETE_GOOGLE_USER_ONE);
 
   async function getInitialUserValue() {
     try {
@@ -127,7 +120,6 @@ export function UserProvider({ children }: UserProviderProps) {
     provider_id: string
   ) {
     try {
-      console.log(email);
       const response = await register(email, name, "apple", provider_id);
       if (response) {
         const token = response.access_token;
@@ -158,23 +150,15 @@ export function UserProvider({ children }: UserProviderProps) {
   }
 
   async function appleDeleteUser(id: string) {
-    const result = await deleteUser({
-      variables: {
-        id,
-      },
-    });
-    if (result) {
+    const result = await deleteAppleUser(id);
+    if (result === null) {
       await logout();
     }
   }
 
   async function googleDeleteUser(id: string) {
-    const result = await deleteGoogleUser({
-      variables: {
-        id,
-      },
-    });
-    if (result) {
+    const result = await deleteGoogleUser(id);
+    if (result === null) {
       await logout();
     }
   }

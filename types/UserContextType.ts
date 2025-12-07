@@ -17,8 +17,6 @@ export type UserType = {
 };
 
 
-
-
 export type UserContextType = {
   user: UserType | null;
   userExists: (providerId: string) => Promise<string | null>;
@@ -42,57 +40,4 @@ export type UserContextType = {
     provider: string,
     providerId: string
   ) => Promise<void>;
-};
-
-export type AppleUserData = {
-  apple_users_by_pk: {
-    user_id: string;
-  } | null;
-};
-
-export type GoogleUserData = {
-  google_users_by_pk: {
-    user_id: string;
-  } | null;
-};
-export type UserData = {
-  users_by_pk: {
-    id: string;
-    name: string;
-    email: string;
-    language?: string;
-    korean_name?: string;
-    age?: string;
-    totem?: string;
-    points?: number;
-    role?: string;
-    provider?: string;
-  } | null;
-};
-
-export type InsertUserData = {
-  insert_users_one: {
-    id: string;
-    name: string;
-    email: string;
-    provider: string;
-  } | null;
-};
-
-export type InsertAppleUserData = {
-  insert_apple_users_one: {
-    provider_id: string;
-  } | null;
-};
-
-export type InsertGoogleUserData = {
-  insert_google_users_one: {
-    provider_id: string;
-  } | null;
-};
-
-export type InsertUserVars = {
-  email: string;
-  name: string;
-  provider: string;
 };
