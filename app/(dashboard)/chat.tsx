@@ -9,6 +9,7 @@ import ThemedModal from "@/components/ThemedModal";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
 import { useUser } from "@/hooks/useUser";
+import { PostResponseList } from "@/types/post/PostType";
 import { dateFormatter } from "@/utils/games/dateFormatter";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
@@ -16,23 +17,6 @@ import { Image, Pressable, ScrollView, StyleSheet, View } from "react-native";
 import getPosts from "../api/posts/getPostsFrance";
 import getPostsFrancophone from "../api/posts/getPostsFrancophone";
 import getPostsKorea from "../api/posts/getPostsKorea";
-
-export type User = {
-  name: string;
-  email: string;
-};
-interface PostResponse {
-  id: number;
-  title: string;
-  content: string;
-  created_at: string;
-  owner: User;
-}
-
-interface PostResponseList {
-  datas: PostResponse[];
-  count: number;
-}
 
 const Chat = () => {
   const [location, setLocation] = useState<string>("france");
@@ -97,7 +81,7 @@ const Chat = () => {
   const createPublications = () => {
     return publications?.datas?.map((publication) => {
       return (
-        <ThemedCard key={publication?.owner.email} style={styles.card}>
+        <ThemedCard key={publication?.id} style={styles.card}>
           <View style={styles.cardBox}>
             <View style={styles.cardBox}>
               {publication?.owner.name === "patattumi" ? (

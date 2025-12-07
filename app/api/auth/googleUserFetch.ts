@@ -1,13 +1,9 @@
+import { LoginResponse } from "@/types/auth/UserType";
 import Constants from "expo-constants";
 
 const { DEV_PATATTUMI_API_URL, PROD_PATATTUMI_API_URL } =
   Constants.expoConfig?.extra ?? {};
 const API_URL = __DEV__ ? DEV_PATATTUMI_API_URL : PROD_PATATTUMI_API_URL;
-
-interface LoginResponse {
-    user_id:string
-}
-
 
 const googleUserFetch = async (providerId: string): Promise<LoginResponse> => {
   try {

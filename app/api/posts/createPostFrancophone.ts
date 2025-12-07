@@ -1,19 +1,9 @@
-import Constants from "expo-constants";
+import { PostResponse } from "@/types/post/PostType";
 
+import Constants from "expo-constants";
 const { DEV_PATATTUMI_API_URL, PROD_PATATTUMI_API_URL } =
   Constants.expoConfig?.extra ?? {};
 const API_URL = __DEV__ ? DEV_PATATTUMI_API_URL : PROD_PATATTUMI_API_URL;
-
-type User = {
-  name: string;
-  email: string;
-};
-interface PostResponse {
-  title: string;
-  content: string;
-  created_at: string;
-  owner: User;
-}
 
 const createPostFrancophone = async (
   title: string,

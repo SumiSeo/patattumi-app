@@ -1,19 +1,9 @@
+import { RegisterResponse } from "@/types/auth/UserType";
 import Constants from "expo-constants";
-
 const { DEV_PATATTUMI_API_URL, PROD_PATATTUMI_API_URL } =
   Constants.expoConfig?.extra ?? {};
 const API_URL = __DEV__ ? DEV_PATATTUMI_API_URL : PROD_PATATTUMI_API_URL;
 
-
-interface RegisterResponse {
-  access_token: string;
-  token_type: string;
-  email: string;
-  role: string;
-  id: string;
-}
-
-// Google 로그인 후 서버에 토큰 보내고 JWT 받기
 const register = async (
   email: string,
   name: string,
