@@ -14,6 +14,7 @@ interface PostResponse {
   content: string;
   created_at: string;
   owner: User;
+  id: number;
 }
 
 interface PostResponseList {
@@ -30,9 +31,10 @@ const getPosts = async (token: string): Promise<PostResponseList> => {
         Authorization: `Bearer ${token}`,
       },
     });
-
     const responseText = await response.text();
-
+    if (response.status === 404) {
+      return { datas: [], count: 0 };
+    }
     if (!response.ok) {
       let errMsg = "Failed to fetch posts in france";
       try {

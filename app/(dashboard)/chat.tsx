@@ -9,73 +9,68 @@ import ThemedModal from "@/components/ThemedModal";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
 import { useUser } from "@/hooks/useUser";
-import {
-  QUERY_LIFE_IN_FRANCE,
-  QUERY_LIFE_IN_FRANCOPHONE,
-  QUERY_LIFE_IN_KOREA,
-} from "@/queries/ChatQuery";
 import { dateFormatter } from "@/utils/games/dateFormatter";
-import { useQuery } from "@apollo/client/react";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
 import { Image, Pressable, ScrollView, StyleSheet, View } from "react-native";
 import getPosts from "../api/posts/getPostsFrance";
-interface Publication {
-  id: string;
-  author: string;
-  created_at: string;
+import getPostsFrancophone from "../api/posts/getPostsFrancophone";
+import getPostsKorea from "../api/posts/getPostsKorea";
+
+export type User = {
+  name: string;
+  email: string;
+};
+interface PostResponse {
+  id: number;
   title: string;
   content: string;
+  created_at: string;
+  owner: User;
 }
 
-interface LifeInFrancophoneData {
-  life_in_francophone: Publication[];
-}
-interface LifeInFranceData {
-  life_in_france: Publication[];
+interface PostResponseList {
+  datas: PostResponse[];
+  count: number;
 }
 
-interface LifeInKoreaData {
-  life_in_korea: Publication[];
-}
 const Chat = () => {
   const [location, setLocation] = useState<string>("france");
-  const [publications, setPublications] = useState<Publication[]>([]);
+  const [publications, setPublications] = useState<PostResponseList | null>(
+    null
+  );
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const { user } = useUser();
-  const { data, loading, refetch } = useQuery<
-    LifeInFranceData | LifeInKoreaData | LifeInFrancophoneData
-  >(
-    location === "france"
-      ? QUERY_LIFE_IN_FRANCE
-      : location === "korea"
-      ? QUERY_LIFE_IN_KOREA
-      : QUERY_LIFE_IN_FRANCOPHONE
-  );
 
   useEffect(() => {
     const fetchChat = async () => {
-      if (user) {
-        const data = await getPosts(user.token);
-        console.log(data);
+      setLoading(true);
+      if (!user) return;
+      try {
+        let data;
+        if (location === "france") {
+          data = await getPosts(user.token);
+        } else if (location === "korea") {
+          data = await getPostsKorea(user.token);
+        } else if (location === "francophone") {
+          data = await getPostsFrancophone(user.token);
+        }
+
+        if (data) {
+          setPublications({ datas: data.datas, count: data.count });
+          setLoading(false);
+        }
+      } catch (err) {
+        console.error("Failed to fetch posts:", err);
       }
     };
 
     fetchChat();
-    if (data) {
-      if (location === "france" && "life_in_france" in data) {
-        setPublications(data.life_in_france);
-      } else if (location === "korea" && "life_in_korea" in data) {
-        setPublications(data.life_in_korea);
-      } else if (location === "francophone" && "life_in_francophone" in data) {
-        setPublications(data.life_in_francophone);
-      }
-    }
-  }, [data, location]);
+  }, [location, user]);
 
   const locations = ["france", "korea", "francophone"] as const;
-
   const [openLocation, setOpenLocation] = useState(false);
   const [modalLocationVisible, setModalLocationVisible] = useState(false);
 
@@ -92,7 +87,6 @@ const Chat = () => {
       const nextIndex = (currentIndex + 1) % locations.length;
       return locations[nextIndex];
     });
-    refetch();
   };
 
   const handleSubmit = () => {
@@ -101,18 +95,18 @@ const Chat = () => {
   };
 
   const createPublications = () => {
-    return publications.map((publication) => {
+    return publications?.datas?.map((publication) => {
       return (
-        <ThemedCard key={publication?.id} style={styles.card}>
+        <ThemedCard key={publication?.owner.email} style={styles.card}>
           <View style={styles.cardBox}>
             <View style={styles.cardBox}>
-              {publication.author === "patattumi" ? (
+              {publication?.owner.name === "patattumi" ? (
                 <Image source={patattumi} style={styles.avatar} />
               ) : (
                 <Image source={patate} style={styles.avatar} />
               )}
               <ThemedText title style={{ fontSize: 12, color: "#333" }}>
-                {publication.author}
+                {publication.owner.name}
               </ThemedText>
             </View>
             <ThemedText style={{ fontSize: 8, color: "#333" }}>
@@ -127,7 +121,7 @@ const Chat = () => {
               {publication.content}
             </ThemedText>
           </View>
-          <CommentSection location={location} id={publication.id} />
+          <CommentSection location={location} id={publication?.id} />
         </ThemedCard>
       );
     });
@@ -191,24 +185,19 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 12,
     backgroundColor: "#fff",
-    boxSizing: "border-box",
-
     // iOS shadow
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.15,
     shadowRadius: 4,
-
     // Android shadow
     elevation: 4,
   },
-
   cardBox: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
-
   avatar: {
     width: 20,
     height: 20,
@@ -216,9 +205,8 @@ const styles = StyleSheet.create({
     marginRight: 5,
     marginTop: 2,
   },
-
   icons: {
     flexDirection: "row",
-    gap: 4,
+    // gap 제거, 대신 개별 아이템에 margin 적용
   },
 });

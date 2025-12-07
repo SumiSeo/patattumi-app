@@ -15,7 +15,7 @@ import ThemedButton from "../ThemedButton";
 import ThemedText from "../ThemedText";
 
 export type WriteCommentProps = {
-  id: string;
+  id: number;
   country: string;
   setModalVisible: (modalVisible: boolean) => void;
   setOpen: (open: boolean) => void;

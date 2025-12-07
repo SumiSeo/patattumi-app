@@ -8,18 +8,25 @@ type User = {
   name: string;
   email: string;
 };
+
 interface PostResponse {
   title: string;
   content: string;
   created_at: string;
-  id: string;
-  author: string;
   owner: User;
+  id: number;
 }
 
-const getPost = async (token: string, id: number): Promise<PostResponse> => {
+interface PostResponseList {
+  datas: PostResponse[];
+  count: number;
+}
+
+const getPostsFrancophone = async (
+  token: string
+): Promise<PostResponseList> => {
   try {
-    const response = await fetch(`${API_URL}/posts/france/${id}`, {
+    const response = await fetch(`${API_URL}/posts/francophone/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -27,9 +34,11 @@ const getPost = async (token: string, id: number): Promise<PostResponse> => {
       },
     });
     const responseText = await response.text();
-
+    if (response.status === 404) {
+      return { datas: [], count: 0 };
+    }
     if (!response.ok) {
-      let errMsg = "Failed to fetch posts in france";
+      let errMsg = "Failed to fetch posts in francophone";
       try {
         const errData = JSON.parse(responseText);
         errMsg = errData.detail || errMsg;
@@ -38,12 +47,14 @@ const getPost = async (token: string, id: number): Promise<PostResponse> => {
       }
       throw new Error(errMsg);
     }
-    const data: PostResponse = JSON.parse(responseText);
+
+    const data: PostResponseList = responseText
+      ? JSON.parse(responseText)
+      : { datas: [], count: 0 };
     return data;
   } catch (error: any) {
-    console.error("Sign UP error:", error.message);
+    console.error("Failed to fetch posts in francophone:", error.message);
     throw error;
   }
 };
-
-export default getPost;
+export default getPostsFrancophone;

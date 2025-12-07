@@ -41,7 +41,7 @@ export type CommentType = {
 
 export type CommentSectionProps = {
   location: string;
-  id: string;
+  id: number;
 };
 
 const CommentSection = ({ location, id }: CommentSectionProps) => {
