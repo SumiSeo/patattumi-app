@@ -4,28 +4,32 @@ export interface RecipeProviderProps {
   children: ReactNode;
 }
 
-export type RecipeType = {
+export interface RecipeResponse {
   id: number;
   name: string;
   description: string;
-  image: string;
-  youtube: string;
+  img: string;
+  is_vegeterain: boolean;
+  contains_pork: boolean;
   insta: string;
   tiktok: string;
-  recipe: string;
-};
-
-export type RecipeContextType = {
-  recipe: RecipeType | null;
-  recipes: RecipeType[];
-  fetchRecipes: () => Promise<void>;
-  fetchRecipeById: (id: number) => Promise<RecipeType | null>;
-};
+  youtube: string;
+  recipe: string | null | undefined;
+}
 
 export type RecipesResponse = {
-  recipes: RecipeType[];
+  datas: RecipeResponse[];
+  count: number;
+};
+export type RecipeResponseList = {
+  datas: RecipeResponse[];
+  count: number;
+} | null;
+
+export type RecipeContextType = {
+  recipes: RecipeResponseList;
+  fetchRecipes: () => Promise<void>;
+  fetchRecipeById: (id: number) => Promise<RecipeResponse | null>;
 };
 
-export type RecipeByIdResponse = {
-  recipes_by_pk: RecipeType | null;
-};
+

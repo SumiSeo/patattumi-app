@@ -21,7 +21,6 @@ export function UserProvider({ children }: UserProviderProps) {
   async function getInitialUserValue() {
     try {
       const value = await AsyncStorage.getItem("user");
-      console.log(value);
       if (value) {
         const userObj = JSON.parse(value);
         if (value) setUser(userObj);

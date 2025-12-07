@@ -11,14 +11,13 @@ import { FlatList, Image, Pressable, StyleSheet, View } from "react-native";
 const RecipesComp = () => {
   const { recipes, fetchRecipes } = useRecipe();
   const router = useRouter();
-
   useEffect(() => {
     fetchRecipes();
   }, [fetchRecipes]);
 
   return (
     <ThemedView safe={true}>
-      {recipes.length > 0 ? (
+      {recipes?.count && recipes.count > 0 ? (
         <>
           <ThemedText title>Recettes</ThemedText>
           <Spacer height={20} />
@@ -50,7 +49,7 @@ const RecipesComp = () => {
               </Pressable>
             )}
             contentContainerStyle={styles.list}
-            data={recipes}
+            data={recipes.datas}
             keyExtractor={(item) => item.id.toString()}
           />
         </>
