@@ -20,6 +20,8 @@ import getPostsKorea from "../api/posts/getPostsKorea";
 
 const Chat = () => {
   const [location, setLocation] = useState<string>("france");
+  const [newlyPublished, setNewlyPublished] =
+    useState<React.SetStateAction<boolean>>(false);
   const [publications, setPublications] = useState<PostResponseList | null>(
     null
   );
@@ -28,31 +30,27 @@ const Chat = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const { user } = useUser();
 
+  const fetchChat = async () => {
+    if (!user) return;
+    setLoading(true);
+    try {
+      let data;
+      if (location === "france") data = await getPosts(user.token);
+      else if (location === "korea") data = await getPostsKorea(user.token);
+      else if (location === "francophone")
+        data = await getPostsFrancophone(user.token);
+
+      if (data) setPublications({ datas: data.datas, count: data.count });
+    } catch (err) {
+      console.error("Failed to fetch posts:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchChat = async () => {
-      setLoading(true);
-      if (!user) return;
-      try {
-        let data;
-        if (location === "france") {
-          data = await getPosts(user.token);
-        } else if (location === "korea") {
-          data = await getPostsKorea(user.token);
-        } else if (location === "francophone") {
-          data = await getPostsFrancophone(user.token);
-        }
-
-        if (data) {
-          setPublications({ datas: data.datas, count: data.count });
-          setLoading(false);
-        }
-      } catch (err) {
-        console.error("Failed to fetch posts:", err);
-      }
-    };
-
     fetchChat();
-  }, [location, user]);
+  }, [location, user, newlyPublished]);
 
   const locations = ["france", "korea", "francophone"] as const;
   const [openLocation, setOpenLocation] = useState(false);
@@ -61,16 +59,6 @@ const Chat = () => {
   const handleOpen = () => {
     setOpenLocation(true);
     setModalLocationVisible(true);
-  };
-
-  const handleChatLocation = () => {
-    setLocation((prev) => {
-      const currentIndex = locations.indexOf(
-        prev as (typeof locations)[number]
-      );
-      const nextIndex = (currentIndex + 1) % locations.length;
-      return locations[nextIndex];
-    });
   };
 
   const handleSubmit = () => {
@@ -129,7 +117,7 @@ const Chat = () => {
               <ChatLocation
                 onClose={() => setModalLocationVisible(false)}
                 location={location}
-                handleChatLocation={handleChatLocation}
+                handleChatLocation={(value) => setLocation(value)}
               />
             </ThemedModal>
             <Pressable onPress={handleSubmit}>
@@ -142,6 +130,7 @@ const Chat = () => {
           onDismiss={() => setModalVisible(false)}
         >
           <WritePublicaton
+            setNewlyPublished={setNewlyPublished}
             setModalVisible={setModalVisible}
             setOpen={setOpen}
             country={location}

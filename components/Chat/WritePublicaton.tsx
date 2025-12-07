@@ -10,6 +10,7 @@ import ThemedText from "../ThemedText";
 export type WriteCommentProps = {
   country: string;
   setModalVisible: (modalVisible: boolean) => void;
+  setNewlyPublished: React.Dispatch<React.SetStateAction<boolean>>;
   setOpen: (open: boolean) => void;
 };
 
@@ -17,6 +18,7 @@ const WritePublicaton = ({
   country,
   setModalVisible,
   setOpen,
+  setNewlyPublished,
 }: WriteCommentProps) => {
   const { user } = useUser();
   const [title, setTitle] = useState("");
@@ -34,6 +36,7 @@ const WritePublicaton = ({
         } else {
           await createPostFrancophone(title, comment, user?.token);
         }
+        setNewlyPublished((prev) => !prev);
         setComment("");
         setModalVisible(false);
         setOpen(false);
