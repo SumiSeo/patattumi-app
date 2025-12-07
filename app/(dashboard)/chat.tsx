@@ -8,6 +8,7 @@ import ThemedLoader from "@/components/ThemedLoader";
 import ThemedModal from "@/components/ThemedModal";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
+import { useUser } from "@/hooks/useUser";
 import {
   QUERY_LIFE_IN_FRANCE,
   QUERY_LIFE_IN_FRANCOPHONE,
@@ -18,6 +19,7 @@ import { useQuery } from "@apollo/client/react";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
 import { Image, Pressable, ScrollView, StyleSheet, View } from "react-native";
+import getPosts from "../api/posts/getPostsFrance";
 interface Publication {
   id: string;
   author: string;
@@ -41,7 +43,7 @@ const Chat = () => {
   const [publications, setPublications] = useState<Publication[]>([]);
   const [open, setOpen] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-
+  const { user } = useUser();
   const { data, loading, refetch } = useQuery<
     LifeInFranceData | LifeInKoreaData | LifeInFrancophoneData
   >(
@@ -53,6 +55,14 @@ const Chat = () => {
   );
 
   useEffect(() => {
+    const fetchChat = async () => {
+      if (user) {
+        const data = await getPosts(user.token);
+        console.log(data);
+      }
+    };
+
+    fetchChat();
     if (data) {
       if (location === "france" && "life_in_france" in data) {
         setPublications(data.life_in_france);

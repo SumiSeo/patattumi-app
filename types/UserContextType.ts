@@ -14,6 +14,7 @@ export type UserType = {
   points?: number;
   role?: string;
   provider?: string;
+  token: string;
 };
 
 
