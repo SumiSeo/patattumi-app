@@ -15,13 +15,13 @@ interface PostResponse {
   owner: User;
 }
 
-const createPostFrance = async (
+const createPostFrancophone = async (
   title: string,
   content: string,
   token: string
 ): Promise<PostResponse> => {
   try {
-    const response = await fetch(`${API_URL}/posts/france/`, {
+    const response = await fetch(`${API_URL}/posts/francophone/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,9 +40,9 @@ const createPostFrance = async (
     const data: PostResponse = await response.json();
     return data;
   } catch (error: any) {
-    console.error("Failed to create Post in France:", error.message);
+    console.error("Failed to create Post in Francophone:", error.message);
     throw error;
   }
 };
 
-export default createPostFrance;
+export default createPostFrancophone;
