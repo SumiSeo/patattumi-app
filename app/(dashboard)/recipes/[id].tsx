@@ -57,12 +57,12 @@ const RecipeDetail = () => {
             }}
           />
           <ThemedText style={{ marginVertical: 15, fontSize: 18 }} title>
-            {recipe?.name}
+            {recipe?.name.replaceAll("'", "")}
           </ThemedText>
           <ThemedText
             style={{ fontSize: 13, fontWeight: "bold", marginBottom: 25 }}
           >
-            {recipe?.description}
+            {recipe?.description.replaceAll("'", "")}
           </ThemedText>
           {recipe?.recipe && chunkRecipe(recipe?.recipe)}
           <View style={{ alignSelf: "flex-start" }}>
