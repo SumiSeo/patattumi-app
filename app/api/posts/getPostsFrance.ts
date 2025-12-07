@@ -8,6 +8,7 @@ type User = {
   name: string;
   email: string;
 };
+
 interface PostResponse {
   title: string;
   content: string;
@@ -15,9 +16,12 @@ interface PostResponse {
   owner: User;
 }
 
-const getPosts = async (
-  token: string,
-): Promise<PostResponse> => {
+interface PostResponseList {
+  datas: PostResponse[];
+  count: number;
+}
+
+const getPosts = async (token: string): Promise<PostResponseList> => {
   try {
     const response = await fetch(`${API_URL}/posts/france/`, {
       method: "GET",
@@ -26,16 +30,27 @@ const getPosts = async (
         Authorization: `Bearer ${token}`,
       },
     });
+
+    const responseText = await response.text();
+
     if (!response.ok) {
-      const errData = await response.json();
-      throw new Error(errData.detail || "Failed to Fetch posts in france");
+      let errMsg = "Failed to fetch posts in france";
+      try {
+        const errData = JSON.parse(responseText);
+        errMsg = errData.detail || errMsg;
+      } catch {
+        errMsg = responseText;
+      }
+      throw new Error(errMsg);
     }
-    const data: PostResponse = await response.json();
+
+    const data: PostResponseList = responseText
+      ? JSON.parse(responseText)
+      : { datas: [], count: 0 };
     return data;
   } catch (error: any) {
-    console.error("Faile to fetch posts in france:", error.message);
+    console.error("Failed to fetch posts in france:", error.message);
     throw error;
   }
 };
-
 export default getPosts;
