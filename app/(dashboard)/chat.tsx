@@ -25,8 +25,10 @@ const Chat = () => {
   const [publications, setPublications] = useState<PostResponseList | null>(
     null
   );
-  const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [openLocation, setOpenLocation] = useState(false);
+  const [modalLocationVisible, setModalLocationVisible] = useState(false);
+  const [open, setOpen] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const { user } = useUser();
 
@@ -51,10 +53,6 @@ const Chat = () => {
   useEffect(() => {
     fetchChat();
   }, [location, user, newlyPublished]);
-
-  const locations = ["france", "korea", "francophone"] as const;
-  const [openLocation, setOpenLocation] = useState(false);
-  const [modalLocationVisible, setModalLocationVisible] = useState(false);
 
   const handleOpen = () => {
     setOpenLocation(true);
