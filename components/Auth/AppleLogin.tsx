@@ -1,6 +1,7 @@
 import { useUser } from "@/hooks/useUser";
 import * as AppleAuthentication from "expo-apple-authentication";
 import { StyleSheet, View } from "react-native";
+import uuid from "react-uuid";
 interface CodedError extends Error {
   code?: string;
 }
@@ -29,19 +30,22 @@ export default function AppleLogin({ setError }: LoginProps) {
             if (credential) {
               const appleUser = await userExists(credential.user);
               const providerId = credential.user;
-              if (!appleUser) {
+              if (appleUser === null) {
                 if (credential.email) {
                   const email = credential.email;
                   const name = `${credential.fullName?.givenName} ${credential.fullName?.familyName}`;
-                  await appleRegister(email, name, providerId);
+                  console.log(email);
+                  console.log(name);
+                  console.log(providerId);
+                  if (email && name && providerId)
+                    await appleRegister(email, name, providerId);
+                } else {
+                  await appleRegister(
+                    `${uuid().slice(0, 8)}@apple.com`,
+                    "user_" + uuid().slice(0, 8),
+                    providerId
+                  );
                 }
-                // else {
-                //   await appleRegister(
-                //     "",
-                //     "user_" + uuid().slice(0, 8),
-                //     providerId
-                //   );
-                // }
               } else {
                 if (providerId) await signIn(appleUser, "apple", providerId);
               }

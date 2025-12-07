@@ -28,6 +28,7 @@ export function UserProvider({ children }: UserProviderProps) {
   async function getInitialUserValue() {
     try {
       const value = await AsyncStorage.getItem("user");
+      console.log(value);
       if (value) {
         const userObj = JSON.parse(value);
         if (value) setUser(userObj);
@@ -97,19 +98,55 @@ export function UserProvider({ children }: UserProviderProps) {
   ) {
     try {
       const response = await register(email, name, "google", provider_id);
-      if (response) await signIn(response.id, "google", provider_id);
+      if (response) {
+        const token = response.access_token;
+        const u = await fetchUserById(response.id);
+        if (!u) throw new Error("Something went wrong with Google Login.");
+        const userObj = {
+          id: u.id,
+          name: u.name,
+          email: u.email,
+          korean_name: u?.korean_name,
+          age: u.age,
+          totem: u.totem,
+          role: u.role,
+          provider: u.provider,
+          token: token,
+        };
+        setUser(userObj);
+        await AsyncStorage.setItem("user", JSON.stringify(userObj));
+      }
     } catch (e) {
       if (e instanceof Error) throw Error(e.message);
     }
   }
+
   async function appleRegister(
     email: string,
     name: string,
     provider_id: string
   ) {
     try {
+      console.log(email);
       const response = await register(email, name, "apple", provider_id);
-      if (response) await signIn(response.id, "apple", provider_id);
+      if (response) {
+        const token = response.access_token;
+        const u = await fetchUserById(response.id);
+        if (!u) throw new Error("Something went wrong with Apple Login.");
+        const userObj = {
+          id: u.id,
+          name: u.name,
+          email: u.email,
+          korean_name: u?.korean_name,
+          age: u.age,
+          totem: u.totem,
+          role: u.role,
+          provider: u.provider,
+          token: token,
+        };
+        setUser(userObj);
+        await AsyncStorage.setItem("user", JSON.stringify(userObj));
+      }
     } catch (e) {
       if (e instanceof Error) throw Error(e.message);
     }

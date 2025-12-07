@@ -2,8 +2,8 @@ import Constants from "expo-constants";
 
 const { DEV_PATATTUMI_API_URL, PROD_PATATTUMI_API_URL } =
   Constants.expoConfig?.extra ?? {};
-console.log("ISDEV ? ", __DEV__);
-export const API_URL = __DEV__ ? DEV_PATATTUMI_API_URL : PROD_PATATTUMI_API_URL;
+const API_URL = __DEV__ ? DEV_PATATTUMI_API_URL : PROD_PATATTUMI_API_URL;
+
 
 interface RegisterResponse {
   access_token: string;
