@@ -20,6 +20,8 @@ export function UserProvider({ children }: UserProviderProps) {
 
   async function getInitialUserValue() {
     try {
+      const token = await AsyncStorage.getItem("token");
+      if (token) await logout();
       const value = await AsyncStorage.getItem("user");
       if (value) {
         const userObj = JSON.parse(value);
