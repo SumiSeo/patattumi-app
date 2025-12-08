@@ -1,14 +1,7 @@
-import INSERT_COMMENT_IN_FRANCE_PUBLICATION from "@/mutations/AddCommentFrance";
-import INSERT_COMMENT_IN_FRANCOPHONE_PUBLICATION from "@/mutations/AddCommentFrancophone";
-import INSERT_COMMENT_IN_KOREA_PUBLICATION from "@/mutations/AddCommentKorea";
-import {
-  QUERY_COMMENTS_IN_FRANCE_BY_ID,
-  QUERY_COMMENTS_IN_FRANCOPHONE_BY_ID,
-  QUERY_COMMENTS_IN_KOREA_BY_ID,
-} from "@/queries/ChatQuery";
-
+import createCommentFrance from "@/app/api/comments/createCommentFrance";
+import createCommentFrancophone from "@/app/api/comments/createCommentFrancophone";
+import createCommentKorea from "@/app/api/comments/createCommentKorea";
 import { useUser } from "@/hooks/useUser";
-import { useMutation } from "@apollo/client/react";
 import React, { useState } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 import ThemedButton from "../ThemedButton";
@@ -29,66 +22,20 @@ const WriteComment = ({
 }: WriteCommentProps) => {
   const { user } = useUser();
   const [comment, setComment] = useState("");
-  const [insertCommentFrance, { loading: loadingFrance }] = useMutation(
-    INSERT_COMMENT_IN_FRANCE_PUBLICATION
-  );
-  const [insertCommentKorea, { loading: loadingKorea }] = useMutation(
-    INSERT_COMMENT_IN_KOREA_PUBLICATION
-  );
-  const [insertCommentFrancophone, { loading: loadingFrancophone }] =
-    useMutation(INSERT_COMMENT_IN_FRANCOPHONE_PUBLICATION);
-
-  const loading = loadingFrance || loadingKorea || loadingFrancophone;
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async () => {
     if (comment && user?.name) {
       try {
+        setLoading(true);
         if (country === "korea") {
-          await insertCommentKorea({
-            variables: {
-              postId: id,
-              author: user?.name,
-              content: comment,
-              author_id: user?.id,
-            },
-            refetchQueries: [
-              {
-                query: QUERY_COMMENTS_IN_KOREA_BY_ID,
-                variables: { postId: id },
-              },
-            ],
-          });
+          await createCommentKorea(id, comment, user.token);
         } else if (country === "france") {
-          await insertCommentFrance({
-            variables: {
-              postId: id,
-              author: user?.name,
-              content: comment,
-              author_id: user?.id,
-            },
-            refetchQueries: [
-              {
-                query: QUERY_COMMENTS_IN_FRANCE_BY_ID,
-                variables: { postId: id },
-              },
-            ],
-          });
+          await createCommentFrance(id, comment, user.token);
         } else {
-          await insertCommentFrancophone({
-            variables: {
-              postId: id,
-              author: user?.name,
-              content: comment,
-              author_id: user?.id,
-            },
-            refetchQueries: [
-              {
-                query: QUERY_COMMENTS_IN_FRANCOPHONE_BY_ID,
-                variables: { postId: id },
-              },
-            ],
-          });
+          await createCommentFrancophone(id, comment, user.token);
         }
+        setLoading(false);
         setComment("");
         setModalVisible(false);
         setOpen(false);

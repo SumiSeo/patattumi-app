@@ -30,7 +30,7 @@ const Chat = () => {
   const [modalLocationVisible, setModalLocationVisible] = useState(false);
   const [open, setOpen] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const { user } = useUser();
+  const { user, logout } = useUser();
 
   const fetchChat = async () => {
     if (!user) return;
@@ -45,6 +45,9 @@ const Chat = () => {
       if (data) setPublications({ datas: data.datas, count: data.count });
     } catch (err) {
       console.error("Failed to fetch posts:", err);
+      if (err === "Token Expired") {
+        await logout();
+      }
     } finally {
       setLoading(false);
     }

@@ -34,6 +34,9 @@ const getPostsFrancophone = async (
       },
     });
     const responseText = await response.text();
+    if (response.status === 401) {
+      throw new Error("Token Expired");
+    }
     if (response.status === 404) {
       return { datas: [], count: 0 };
     }

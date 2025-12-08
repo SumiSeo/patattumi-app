@@ -17,7 +17,10 @@ export function RecipeProvider({ children }: RecipeProviderProps) {
       if (result?.datas)
         setRecipes({ datas: result?.datas, count: result.count });
     } catch (err) {
-      if (err instanceof Error) console.error(err.message);
+      if (err instanceof Error) {
+        console.error(err.message);
+        throw new Error(err.message);
+      }
     }
   }, [getRecipes]);
 
