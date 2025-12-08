@@ -22,29 +22,43 @@ const WriteComment = ({
   setOpen,
   setNewlyPublished,
 }: WriteCommentProps) => {
-  const { user } = useUser();
+  const { user, logout } = useUser();
   const [comment, setComment] = useState("");
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async () => {
-    if (comment && user?.name) {
-      try {
-        setLoading(true);
-        if (country === "korea") {
+    if (!comment || !user?.name) return;
+
+    setLoading(true);
+
+    try {
+      switch (country) {
+        case "korea":
           await createCommentKorea(id, comment, user.token);
-        } else if (country === "france") {
+          break;
+        case "france":
           await createCommentFrance(id, comment, user.token);
-        } else if (country === "francophone") {
+          break;
+        case "francophone":
           await createCommentFrancophone(id, comment, user.token);
-        }
-        setNewlyPublished((prev) => !prev);
-        setComment("");
-        setModalVisible(false);
-        setOpen(false);
-        setLoading(false);
-      } catch (e) {
-        if (e instanceof Error) console.log(e);
+          break;
+        default:
+          console.warn("Unknown country:", country);
+          return;
       }
+      setNewlyPublished((prev) => !prev);
+      setComment("");
+      setModalVisible(false);
+      setOpen(false);
+    } catch (err: any) {
+      if (err.message === "Token Expired") {
+        await logout();
+        return;
+      }
+
+      console.error("Failed to create comment:", err.message || err);
+    } finally {
+      setLoading(false);
     }
   };
 

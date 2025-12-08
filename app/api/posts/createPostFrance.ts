@@ -23,6 +23,9 @@ const createPostFrance = async (
       }),
     });
 
+    if (response.status === 401) {
+      throw new Error("Token Expired");
+    }
     if (!response.ok) {
       const errData = await response.json();
       throw new Error(errData.detail || "Failed to Create Post");

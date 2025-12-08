@@ -43,11 +43,12 @@ const Chat = () => {
         data = await getPostsFrancophone(user.token);
 
       if (data) setPublications({ datas: data.datas, count: data.count });
-    } catch (err) {
-      console.error("Failed to fetch posts:", err);
-      if (err === "Token Expired") {
+    } catch (err: any) {
+      if (err.message === "Token Expired") {
         await logout();
+        return;
       }
+      throw err;
     } finally {
       setLoading(false);
     }

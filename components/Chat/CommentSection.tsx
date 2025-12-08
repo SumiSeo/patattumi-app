@@ -22,13 +22,13 @@ export type CommentSectionProps = {
 };
 
 const CommentSection = ({ location, id }: CommentSectionProps) => {
+  const { user, logout } = useUser();
   const [comments, setComments] = useState<CommentResponseList | null>(null);
   const [showComments, setShowComments] = useState(false);
   const [open, setOpen] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [newlyPublished, setNewlyPublished] =
     useState<React.SetStateAction<boolean>>(false);
-  const { user } = useUser();
   const handleSubmit = () => {
     setOpen(true);
     setModalVisible(true);
@@ -36,16 +36,28 @@ const CommentSection = ({ location, id }: CommentSectionProps) => {
 
   const fetchComments = async () => {
     if (!user) return;
-
-    if (location === "france") {
-      const data = await getCommentsFrance(id, user.token);
+    try {
+      let data: CommentResponseList | null = null;
+      switch (location) {
+        case "france":
+          data = await getCommentsFrance(id, user.token);
+          break;
+        case "korea":
+          data = await getCommentsKorea(id, user.token);
+          break;
+        case "francophone":
+          data = await getCommentsFrancophone(id, user.token);
+          break;
+        default:
+          data = { datas: [], count: 0 };
+      }
       setComments(data);
-    } else if (location === "korea") {
-      const data = await getCommentsKorea(id, user.token);
-      setComments(data);
-    } else if (location === "francophone") {
-      const data = await getCommentsFrancophone(id, user.token);
-      setComments(data);
+    } catch (err: any) {
+      if (err.message === "Token Expired") {
+        await logout();
+        return;
+      }
+      console.error("Failed to fetch comments:", err.message);
     }
   };
 
