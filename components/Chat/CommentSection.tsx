@@ -1,4 +1,6 @@
 import getCommentsFrance from "@/app/api/comments/getCommentsFrance";
+import getCommentsFrancophone from "@/app/api/comments/getCommentsFrancophone";
+import getCommentsKorea from "@/app/api/comments/getCommentsKorea";
 import patate from "@/assets/images/patate-baby.jpg";
 import patattumi from "@/assets/images/patattumi.jpg";
 import { useUser } from "@/hooks/useUser";
@@ -33,21 +35,23 @@ const CommentSection = ({ location, id }: CommentSectionProps) => {
   };
 
   const fetchComments = async () => {
-    if (location === "france" && user) {
-      const data = await getCommentsFrance(id, user?.token);
-      setComments({ datas: data.datas, count: data.count });
-    } else if (location === "korea" && user) {
-      const data = await getCommentsFrance(id, user?.token);
-      setComments({ datas: data.datas, count: data.count });
-    } else if (location === "francophone" && user) {
-      const data = await getCommentsFrance(id, user?.token);
-      setComments({ datas: data.datas, count: data.count });
+    if (!user) return;
+
+    if (location === "france") {
+      const data = await getCommentsFrance(id, user.token);
+      setComments(data);
+    } else if (location === "korea") {
+      const data = await getCommentsKorea(id, user.token);
+      setComments(data);
+    } else if (location === "francophone") {
+      const data = await getCommentsFrancophone(id, user.token);
+      setComments(data);
     }
   };
 
   useEffect(() => {
     fetchComments();
-  }, [location, user]);
+  }, [location, user, newlyPublished, id]);
 
   const handleShowComments = () => {
     setShowComments(!showComments);

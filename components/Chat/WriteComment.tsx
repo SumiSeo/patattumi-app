@@ -34,7 +34,7 @@ const WriteComment = ({
           await createCommentKorea(id, comment, user.token);
         } else if (country === "france") {
           await createCommentFrance(id, comment, user.token);
-        } else {
+        } else if (country === "francophone") {
           await createCommentFrancophone(id, comment, user.token);
         }
         setNewlyPublished((prev) => !prev);
