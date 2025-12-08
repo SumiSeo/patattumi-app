@@ -11,6 +11,7 @@ export type WriteCommentProps = {
   id: number;
   country: string;
   setModalVisible: (modalVisible: boolean) => void;
+  setNewlyPublished: React.Dispatch<React.SetStateAction<boolean>>;
   setOpen: (open: boolean) => void;
 };
 
@@ -19,6 +20,7 @@ const WriteComment = ({
   country,
   setModalVisible,
   setOpen,
+  setNewlyPublished,
 }: WriteCommentProps) => {
   const { user } = useUser();
   const [comment, setComment] = useState("");
@@ -35,10 +37,11 @@ const WriteComment = ({
         } else {
           await createCommentFrancophone(id, comment, user.token);
         }
-        setLoading(false);
+        setNewlyPublished((prev) => !prev);
         setComment("");
         setModalVisible(false);
         setOpen(false);
+        setLoading(false);
       } catch (e) {
         if (e instanceof Error) console.log(e);
       }
