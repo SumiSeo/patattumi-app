@@ -1,11 +1,11 @@
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import {
-    Linking,
-    Pressable,
-    ScrollView,
-    TouchableOpacity,
-    View,
+  Linking,
+  Pressable,
+  ScrollView,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import ThemedModal from "../ThemedModal";
 import ThemedText from "../ThemedText";
@@ -61,16 +61,16 @@ const Support = () => {
       >
         <ScrollView>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Ionicons name="heart-outline" size={18} />
+            <Ionicons name="heart" size={18} />
             <ThemedText
               title
-              style={{ fontSize: 14, marginVertical: 8, marginLeft: 5 }}
+              style={{ fontSize: 14, marginVertical: 4, marginLeft: 5 }}
             >
-              Rejoignez l&apos;aventure Patattumi.
+              Rejoignez l&apos;aventure de Patattumi.
             </ThemedText>
           </View>
           {koreanEmergencyContacts.map((contact, i) => (
-            <ThemedView key={contact.id} style={{ marginTop: 30 }}>
+            <ThemedView key={contact.id} style={{ marginTop: 20 }}>
               <ThemedText style={{ fontWeight: "bold", fontSize: 15 }}>
                 {i + 1}. {contact.label}
               </ThemedText>
@@ -79,7 +79,9 @@ const Support = () => {
               >
                 {contact.description}
               </ThemedText>
-              <ThemedText style={{ fontSize: 12, marginVertical: 3,fontWeight:"bold"}}>
+              <ThemedText
+                style={{ fontSize: 12, marginVertical: 3, fontWeight: "bold" }}
+              >
                 En cliquant sur ce lien, vous serez redirigé vers une page
                 externe.
               </ThemedText>

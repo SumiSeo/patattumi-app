@@ -110,7 +110,7 @@ const Chat = () => {
           </ThemedText>
           <View style={styles.icons}>
             <Pressable onPress={handleOpen}>
-              <Ionicons size={24} name="compass-outline" />
+              <Ionicons size={26} name="compass-outline" />
             </Pressable>
             <ThemedModal
               visible={modalLocationVisible}
@@ -123,7 +123,7 @@ const Chat = () => {
               />
             </ThemedModal>
             <Pressable onPress={handleSubmit}>
-              <Ionicons size={24} name="create-outline" />
+              <Ionicons size={26} name="create-outline" />
             </Pressable>
           </View>
         </View>
@@ -182,6 +182,7 @@ const styles = StyleSheet.create({
   },
   icons: {
     flexDirection: "row",
-    // gap 제거, 대신 개별 아이템에 margin 적용
+    gap: 4,
+    marginRight: 2,
   },
 });
