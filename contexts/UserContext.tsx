@@ -1,30 +1,15 @@
+import appleUserFetch from "@/app/api/auth/appleUserFetch";
+import deleteAppleUser from "@/app/api/auth/deleteAppleUser";
+import deleteGoogleUser from "@/app/api/auth/deleteGoogleUser";
+import googleUserFetch from "@/app/api/auth/googleUserFetch";
+import providerSignIn from "@/app/api/auth/login";
+import register from "@/app/api/auth/register";
+import fetchUserById from "@/app/api/users/getUser";
 import {
-  ADD_APPLE_USER_ONE,
-  ADD_GOOGLE_USER_ONE,
-  ADD_USER_ONE,
-} from "@/mutations/AddUser";
-import {
-  DELETE_GOOGLE_USER_ONE,
-  DELETE_USER_ONE,
-} from "@/mutations/DeleteUser";
-import {
-  QUERY_APPLE_USER,
-  QUERY_GOOGLE_USER,
-  QUERY_USER_ONE,
-} from "@/queries/UserQuery";
-import {
-  AppleUserData,
-  GoogleUserData,
-  InsertAppleUserData,
-  InsertGoogleUserData,
-  InsertUserData,
-  InsertUserVars,
   UserContextType,
-  UserData,
   UserProviderProps,
   UserType,
 } from "@/types/UserContextType";
-import { useLazyQuery, useMutation } from "@apollo/client/react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createContext, useEffect, useState } from "react";
 export const UserContext = createContext<UserContextType | null>(null);
@@ -33,36 +18,10 @@ export function UserProvider({ children }: UserProviderProps) {
   const [user, setUser] = useState<UserType | null>(null);
   const [authChecked, setAuthChecked] = useState<boolean>(false);
 
-  // delete
-  const [deleteUser] = useMutation(DELETE_USER_ONE);
-  const [deleteGoogleUser] = useMutation(DELETE_GOOGLE_USER_ONE);
-
-  // insert
-  const [InsertUser] = useMutation<InsertUserData, InsertUserVars>(
-    ADD_USER_ONE
-  );
-  const [InsertAppleUser] =
-    useMutation<InsertAppleUserData>(ADD_APPLE_USER_ONE);
-  const [InsertGoogleUser] =
-    useMutation<InsertGoogleUserData>(ADD_GOOGLE_USER_ONE);
-
-  //queries
-  const [getAppleUser] = useLazyQuery<AppleUserData>(QUERY_APPLE_USER, {
-    fetchPolicy: "network-only",
-    errorPolicy: "all",
-  });
-  const [getGoogleUser] = useLazyQuery<GoogleUserData>(QUERY_GOOGLE_USER, {
-    fetchPolicy: "network-only",
-    errorPolicy: "all",
-  });
-
-  const [getUserById] = useLazyQuery<UserData>(QUERY_USER_ONE, {
-    fetchPolicy: "network-only",
-    errorPolicy: "all",
-  });
-
   async function getInitialUserValue() {
     try {
+      const token = await AsyncStorage.getItem("token");
+      if (token) await logout();
       const value = await AsyncStorage.getItem("user");
       if (value) {
         const userObj = JSON.parse(value);
@@ -79,87 +38,22 @@ export function UserProvider({ children }: UserProviderProps) {
     getInitialUserValue();
   }, []);
 
-  async function userExists(providerId: string) {
+  async function signIn(userId: string, provider: string, providerId: string) {
     try {
-      const appleData = await getAppleUser({
-        variables: { provider_id: providerId },
-      });
-      if (
-        appleData?.data?.apple_users_by_pk !== null &&
-        appleData?.data?.apple_users_by_pk !== undefined
-      )
-        return true;
-      else return false;
-    } catch (e: any) {
-      throw Error(e.message);
-    }
-  }
-
-  async function appleSignIn(providerId: string) {
-    try {
-      const appleData = await getAppleUser({
-        variables: { provider_id: providerId },
-      });
-      if (appleData.error) throw new Error(appleData.error.message);
-
-      const userId = appleData.data?.apple_users_by_pk?.user_id;
-      if (!userId) throw new Error("Something went wrong!");
-
-      const userData = await getUserById({
-        variables: { id: userId },
-      });
-      if (userData.error) throw new Error(userData.error.message);
-      const u = userData.data?.users_by_pk;
-      if (!u) throw new Error("Something went wrong!");
+      const providerUser = await providerSignIn(provider, providerId);
+      const token = providerUser.access_token;
+      const u = await fetchUserById(userId);
+      if (!u) throw new Error("Something went wrong with Apple Login.");
       const userObj = {
         id: u.id,
         name: u.name,
         email: u.email,
-        korean_name: u.korean_name,
+        korean_name: u?.korean_name,
         age: u.age,
         totem: u.totem,
-        language: u.language,
-        points: u.points,
         role: u.role,
         provider: u.provider,
-      };
-      setUser(userObj);
-      await AsyncStorage.setItem("user", JSON.stringify(userObj));
-    } catch (e: any) {
-      throw Error(e.message);
-    } finally {
-      setAuthChecked(true);
-    }
-  }
-
-  async function googleSignIn(providerId: string) {
-    try {
-      const googleData = await getGoogleUser({
-        variables: { provider_id: providerId },
-      });
-      if (googleData.error) throw new Error(googleData.error.message);
-
-      const userId = googleData.data?.google_users_by_pk?.user_id;
-      if (!userId) throw new Error("Something went wrong with Google Login.");
-
-      const userData = await getUserById({
-        variables: { id: userId },
-      });
-
-      if (userData.error) throw new Error(userData.error.message);
-      const u = userData.data?.users_by_pk;
-      if (!u) throw new Error("Something went wrong with Google Login");
-      const userObj = {
-        id: u.id,
-        name: u.name,
-        email: u.email,
-        korean_name: u.korean_name,
-        age: u.age,
-        totem: u.totem,
-        language: u.language,
-        points: u.points,
-        role: u.role,
-        provider: u.provider,
+        token: token,
       };
       setUser(userObj);
       await AsyncStorage.setItem("user", JSON.stringify(userObj));
@@ -172,46 +66,22 @@ export function UserProvider({ children }: UserProviderProps) {
 
   async function googleUserExists(providerId: string) {
     try {
-      const googleData = await getGoogleUser({
-        variables: { provider_id: providerId },
-      });
-      if (
-        googleData?.data?.google_users_by_pk !== null &&
-        googleData?.data?.google_users_by_pk !== undefined
-      )
-        return true;
-      else return false;
+      const googleData = await googleUserFetch(providerId);
+      if (googleData?.user_id) return googleData?.user_id;
+      else return null;
     } catch (e: any) {
       throw Error(e.message);
     }
   }
 
-  async function appleRegister(
-    email: string,
-    name: string,
-    provider_id: string
-  ) {
+  async function userExists(providerId: string) {
     try {
-      const result = await InsertUser({
-        variables: {
-          email,
-          name,
-          provider: "apple",
-        },
-      });
-      if (result) {
-        const id = result.data?.insert_users_one?.id;
-        await InsertAppleUser({
-          variables: {
-            provider_id: provider_id,
-            user_id: id,
-          },
-        });
+      const appleData = await appleUserFetch(providerId);
 
-        if (provider_id) await appleSignIn(provider_id);
-      }
-    } catch (e) {
-      if (e instanceof Error) throw Error(e.message);
+      if (appleData?.user_id) return appleData?.user_id;
+      else return null;
+    } catch (e: any) {
+      throw Error(e.message);
     }
   }
 
@@ -221,23 +91,54 @@ export function UserProvider({ children }: UserProviderProps) {
     provider_id: string
   ) {
     try {
-      const result = await InsertUser({
-        variables: {
-          email,
-          name,
-          provider: "google",
-        },
-      });
-      if (result) {
-        const id = result.data?.insert_users_one?.id;
-        await InsertGoogleUser({
-          variables: {
-            provider_id: provider_id,
-            user_id: id,
-          },
-        });
+      const response = await register(email, name, "google", provider_id);
+      if (response) {
+        const token = response.access_token;
+        const u = await fetchUserById(response.id);
+        if (!u) throw new Error("Something went wrong with Google Login.");
+        const userObj = {
+          id: u.id,
+          name: u.name,
+          email: u.email,
+          korean_name: u?.korean_name,
+          age: u.age,
+          totem: u.totem,
+          role: u.role,
+          provider: u.provider,
+          token: token,
+        };
+        setUser(userObj);
+        await AsyncStorage.setItem("user", JSON.stringify(userObj));
+      }
+    } catch (e) {
+      if (e instanceof Error) throw Error(e.message);
+    }
+  }
 
-        if (provider_id) await googleSignIn(provider_id);
+  async function appleRegister(
+    email: string,
+    name: string,
+    provider_id: string
+  ) {
+    try {
+      const response = await register(email, name, "apple", provider_id);
+      if (response) {
+        const token = response.access_token;
+        const u = await fetchUserById(response.id);
+        if (!u) throw new Error("Something went wrong with Apple Login.");
+        const userObj = {
+          id: u.id,
+          name: u.name,
+          email: u.email,
+          korean_name: u?.korean_name,
+          age: u.age,
+          totem: u.totem,
+          role: u.role,
+          provider: u.provider,
+          token: token,
+        };
+        setUser(userObj);
+        await AsyncStorage.setItem("user", JSON.stringify(userObj));
       }
     } catch (e) {
       if (e instanceof Error) throw Error(e.message);
@@ -250,23 +151,15 @@ export function UserProvider({ children }: UserProviderProps) {
   }
 
   async function appleDeleteUser(id: string) {
-    const result = await deleteUser({
-      variables: {
-        id,
-      },
-    });
-    if (result) {
+    const result = await deleteAppleUser(id);
+    if (result === null) {
       await logout();
     }
   }
 
   async function googleDeleteUser(id: string) {
-    const result = await deleteGoogleUser({
-      variables: {
-        id,
-      },
-    });
-    if (result) {
+    const result = await deleteGoogleUser(id);
+    if (result === null) {
       await logout();
     }
   }
@@ -275,16 +168,15 @@ export function UserProvider({ children }: UserProviderProps) {
     <UserContext.Provider
       value={{
         user,
-        appleSignIn,
         logout,
         appleRegister,
         authChecked,
         appleDeleteUser,
         userExists,
-        googleSignIn,
         googleUserExists,
         googleRegister,
         googleDeleteUser,
+        signIn,
       }}
     >
       {children}

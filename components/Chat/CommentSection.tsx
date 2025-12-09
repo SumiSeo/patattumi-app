@@ -1,11 +1,14 @@
+import getCommentsFrance from "@/app/api/comments/getCommentsFrance";
+import getCommentsFrancophone from "@/app/api/comments/getCommentsFrancophone";
+import getCommentsKorea from "@/app/api/comments/getCommentsKorea";
 import patate from "@/assets/images/patate-baby.jpg";
 import patattumi from "@/assets/images/patattumi.jpg";
+import { useUser } from "@/hooks/useUser";
 import {
-  QUERY_COMMENTS_IN_FRANCE_BY_ID,
-  QUERY_COMMENTS_IN_FRANCOPHONE_BY_ID,
-  QUERY_COMMENTS_IN_KOREA_BY_ID,
-} from "@/queries/ChatQuery";
-import { useQuery } from "@apollo/client/react";
+  CommentResponse,
+  CommentResponseList,
+} from "@/types/comment/commentType";
+import { dateFormatter } from "@/utils/games/dateFormatter";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
@@ -13,113 +16,89 @@ import ThemedModal from "../ThemedModal";
 import ThemedText from "../ThemedText";
 import WriteComment from "./WriteComment";
 
-export type PublicationComment = {
-  id: string;
-  author: string;
-  content: string;
-  created_at: string;
-};
-
-interface LifeInFranceComments {
-  comments_life_in_france: PublicationComment[];
-}
-
-interface LifeInKoreaComments {
-  comments_life_in_korea: PublicationComment[];
-}
-
-interface LifeInFrancophoneComments {
-  comments_life_in_francophone: PublicationComment[];
-}
-
-export type CommentType = {
-  id: string;
-  author: string;
-  content: string;
-  created_at: string;
-};
-
 export type CommentSectionProps = {
   location: string;
-  id: string;
+  id: number;
 };
 
 const CommentSection = ({ location, id }: CommentSectionProps) => {
-  const [comments, setComments] = useState<CommentType[]>([]);
+  const { user, logout } = useUser();
+  const [comments, setComments] = useState<CommentResponseList | null>(null);
   const [showComments, setShowComments] = useState(false);
-  const [count, setCount] = useState(0);
   const [open, setOpen] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-
-  const { data: franceData } = useQuery<LifeInFranceComments>(
-    QUERY_COMMENTS_IN_FRANCE_BY_ID,
-    {
-      variables: { postId: id },
-      skip: location !== "france",
-    }
-  );
-
-  const { data: koreaData } = useQuery<LifeInKoreaComments>(
-    QUERY_COMMENTS_IN_KOREA_BY_ID,
-    {
-      variables: { postId: id },
-      skip: location !== "korea",
-    }
-  );
-
-  const { data: francophoneData } = useQuery<LifeInFrancophoneComments>(
-    QUERY_COMMENTS_IN_FRANCOPHONE_BY_ID,
-    {
-      variables: { postId: id },
-      skip: location !== "francophone",
-    }
-  );
+  const [newlyPublished, setNewlyPublished] =
+    useState<React.SetStateAction<boolean>>(false);
   const handleSubmit = () => {
     setOpen(true);
     setModalVisible(true);
   };
 
-  useEffect(() => {
-    let newComments: CommentType[] = [];
-    if (location === "france" && franceData) {
-      newComments = franceData.comments_life_in_france;
-    } else if (location === "korea" && koreaData) {
-      newComments = koreaData.comments_life_in_korea;
-    } else if (location === "francophone" && francophoneData) {
-      newComments = francophoneData.comments_life_in_francophone;
+  const fetchComments = async () => {
+    if (!user) return;
+    try {
+      let data: CommentResponseList | null = null;
+      switch (location) {
+        case "france":
+          data = await getCommentsFrance(id, user.token);
+          break;
+        case "korea":
+          data = await getCommentsKorea(id, user.token);
+          break;
+        case "francophone":
+          data = await getCommentsFrancophone(id, user.token);
+          break;
+        default:
+          data = { datas: [], count: 0 };
+      }
+      setComments(data);
+    } catch (err: any) {
+      if (err.message === "Token Expired") {
+        await logout();
+        return;
+      }
+      console.error("Failed to fetch comments:", err.message);
     }
-    setComments(newComments);
-    setCount(newComments.length);
-  }, [franceData, koreaData, location, francophoneData]);
+  };
+
+  useEffect(() => {
+    fetchComments();
+  }, [location, user, newlyPublished, id]);
 
   const handleShowComments = () => {
     setShowComments(!showComments);
   };
+
   const createCommentsList = () => {
-    return comments.map((comment: CommentType) => {
-      return (
-        <View key={comment.id} style={styles.commentBox}>
-          {comment.author === "patattumi" ? (
-            <Image source={patattumi} style={styles.avatar} />
-          ) : (
-            <Image source={patate} style={styles.avatar} />
-          )}
-          <View style={styles.commentContent}>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              <Text style={styles.author}>{comment.author}</Text>
-              <Text style={styles.date}>{comment.created_at}</Text>
+    return (
+      comments &&
+      comments?.datas?.map((comment: CommentResponse) => {
+        return (
+          <View key={comment.id} style={styles.commentBox}>
+            {comment.owner.name.toLowerCase() === "patattumi" ? (
+              <Image source={patattumi} style={styles.avatar} />
+            ) : (
+              <Image source={patate} style={styles.avatar} />
+            )}
+            <View style={styles.commentContent}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Text style={styles.author}>{comment.author}</Text>
+                <Text style={styles.date}>
+                  {dateFormatter(comment.created_at)}
+                </Text>
+              </View>
+              <Text style={styles.content}>{comment.content}</Text>
             </View>
-            <Text style={styles.content}>{comment.content}</Text>
           </View>
-        </View>
-      );
-    });
+        );
+      })
+    );
   };
 
   return (
@@ -143,7 +122,7 @@ const CommentSection = ({ location, id }: CommentSectionProps) => {
         >
           <Ionicons size={15} name="chatbubble-outline" />
           <ThemedText title style={{ fontSize: 13 }}>
-            {count}
+            {comments?.count}
           </ThemedText>
         </Pressable>
         <Pressable onPress={handleSubmit}>
@@ -162,6 +141,7 @@ const CommentSection = ({ location, id }: CommentSectionProps) => {
             setOpen={setOpen}
             id={id}
             country={location}
+            setNewlyPublished={setNewlyPublished}
           />
         </ThemedModal>
       </View>

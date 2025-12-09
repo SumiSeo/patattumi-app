@@ -1,22 +1,16 @@
+import createPostFrance from "@/app/api/posts/createPostFrance";
+import createPostFrancophone from "@/app/api/posts/createPostFrancophone";
+import createPostKorea from "@/app/api/posts/createPostKorea";
 import { useUser } from "@/hooks/useUser";
-import INSERT_FRANCE_PUBLICATION from "@/mutations/AddPublicationFrance";
-import INSERT_FRANCOPHONE_PUBLICATION from "@/mutations/AddPublicationFrancophone";
-import INSERT_KOREA_PUBLICATION from "@/mutations/AddPublicationKorea";
-import {
-  QUERY_LIFE_IN_FRANCE,
-  QUERY_LIFE_IN_FRANCOPHONE,
-  QUERY_LIFE_IN_KOREA,
-} from "@/queries/ChatQuery";
-import { useMutation } from "@apollo/client/react";
 import React, { useState } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
-import uuid from "react-uuid";
 import ThemedButton from "../ThemedButton";
 import ThemedText from "../ThemedText";
 
 export type WriteCommentProps = {
   country: string;
   setModalVisible: (modalVisible: boolean) => void;
+  setNewlyPublished: React.Dispatch<React.SetStateAction<boolean>>;
   setOpen: (open: boolean) => void;
 };
 
@@ -24,76 +18,46 @@ const WritePublicaton = ({
   country,
   setModalVisible,
   setOpen,
+  setNewlyPublished,
 }: WriteCommentProps) => {
-  const { user } = useUser();
+  const { user, logout } = useUser();
   const [title, setTitle] = useState("");
   const [comment, setComment] = useState("");
-  const [insertPublicationFrance, { loading: loadingFrance }] = useMutation(
-    INSERT_FRANCE_PUBLICATION
-  );
-  const [insertPublicationKorea, { loading: loadingKorea }] = useMutation(
-    INSERT_KOREA_PUBLICATION
-  );
-  const [insertPublicationFrancophone, { loading: loadingFrancophone }] =
-    useMutation(INSERT_FRANCOPHONE_PUBLICATION);
-
-  const loading = loadingFrance || loadingKorea;
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async () => {
-    if (comment && user?.name) {
-      try {
-        if (country === "korea") {
-          await insertPublicationKorea({
-            variables: {
-              author: user?.name,
-              title: title,
-              content: comment,
-              id: uuid(),
-              author_id: user?.id,
-            },
-            refetchQueries: [
-              {
-                query: QUERY_LIFE_IN_KOREA,
-              },
-            ],
-          });
-        } else if (country === "france") {
-          await insertPublicationFrance({
-            variables: {
-              author: user?.name,
-              title: title,
-              content: comment,
-              id: uuid(),
-              author_id: user?.id,
-            },
-            refetchQueries: [
-              {
-                query: QUERY_LIFE_IN_FRANCE,
-              },
-            ],
-          });
-        } else {
-          await insertPublicationFrancophone({
-            variables: {
-              author: user?.name,
-              title: title,
-              content: comment,
-              id: uuid(),
-              author_id: user?.id,
-            },
-            refetchQueries: [
-              {
-                query: QUERY_LIFE_IN_FRANCOPHONE,
-              },
-            ],
-          });
-        }
-        setComment("");
-        setModalVisible(false);
-        setOpen(false);
-      } catch (e) {
-        if (e instanceof Error) console.log(e);
+    if (!comment || !user?.name) return;
+
+    setLoading(true);
+
+    try {
+      switch (country) {
+        case "korea":
+          await createPostKorea(title, comment, user.token);
+          break;
+        case "france":
+          await createPostFrance(title, comment, user.token);
+          break;
+        case "francophone":
+          await createPostFrancophone(title, comment, user.token);
+          break;
+        default:
+          console.warn("Unknown country:", country);
+          return;
       }
+
+      setNewlyPublished((prev) => !prev);
+      setComment("");
+      setModalVisible(false);
+      setOpen(false);
+    } catch (err: any) {
+      if (err.message === "Token Expired") {
+        await logout();
+        return;
+      }
+      console.error("Failed to create post:", err.message || err);
+    } finally {
+      setLoading(false);
     }
   };
 

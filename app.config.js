@@ -53,6 +53,8 @@ export default ({ config }) => {
       GOOGLE_IOS_CLIENT_ID: process.env.GOOGLE_IOS_CLIENT_ID,
       DATA_KOREAN_PUBLIC_HOLIDAY_API_KEY:
         process.env.DATA_KOREAN_PUBLIC_HOLIDAY_API_KEY,
+      DEV_PATATTUMI_API_URL: process.env.DEV_PATATTUMI_API_URL,
+      PROD_PATATTUMI_API_URL: process.env.PROD_PATATTUMI_API_URL,
     },
 
     plugins: [

@@ -1,5 +1,5 @@
 import { Picker } from "@react-native-picker/picker";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { View } from "react-native";
 import ThemedButton from "../ThemedButton";
 import ThemedText from "../ThemedText";
@@ -17,10 +17,6 @@ const ChatLocation = ({
 }: ChatLocationProps) => {
   const [selectedLocation, setSelectedLocation] = useState(location);
 
-  useEffect(() => {
-    setSelectedLocation(location);
-  }, [location]);
-
   const confirmLocation = () => {
     handleChatLocation(selectedLocation);
     onClose();
@@ -33,7 +29,7 @@ const ChatLocation = ({
       </ThemedText>
       <Picker
         selectedValue={selectedLocation}
-        onValueChange={(itemValue) => setSelectedLocation(itemValue)}
+        onValueChange={(itemValue: string) => setSelectedLocation(itemValue)}
       >
         <Picker.Item label="France" value="france" />
         <Picker.Item label="Corée" value="korea" />

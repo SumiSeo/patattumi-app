@@ -8,81 +8,59 @@ import ThemedLoader from "@/components/ThemedLoader";
 import ThemedModal from "@/components/ThemedModal";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
-import {
-  QUERY_LIFE_IN_FRANCE,
-  QUERY_LIFE_IN_FRANCOPHONE,
-  QUERY_LIFE_IN_KOREA,
-} from "@/queries/ChatQuery";
+import { useUser } from "@/hooks/useUser";
+import { PostResponseList } from "@/types/post/PostType";
 import { dateFormatter } from "@/utils/games/dateFormatter";
-import { useQuery } from "@apollo/client/react";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
 import { Image, Pressable, ScrollView, StyleSheet, View } from "react-native";
-interface Publication {
-  id: string;
-  author: string;
-  created_at: string;
-  title: string;
-  content: string;
-}
+import getPosts from "../api/posts/getPostsFrance";
+import getPostsFrancophone from "../api/posts/getPostsFrancophone";
+import getPostsKorea from "../api/posts/getPostsKorea";
 
-interface LifeInFrancophoneData {
-  life_in_francophone: Publication[];
-}
-interface LifeInFranceData {
-  life_in_france: Publication[];
-}
-
-interface LifeInKoreaData {
-  life_in_korea: Publication[];
-}
 const Chat = () => {
   const [location, setLocation] = useState<string>("france");
-  const [publications, setPublications] = useState<Publication[]>([]);
-  const [open, setOpen] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
-
-  const { data, loading, refetch } = useQuery<
-    LifeInFranceData | LifeInKoreaData | LifeInFrancophoneData
-  >(
-    location === "france"
-      ? QUERY_LIFE_IN_FRANCE
-      : location === "korea"
-      ? QUERY_LIFE_IN_KOREA
-      : QUERY_LIFE_IN_FRANCOPHONE
+  const [newlyPublished, setNewlyPublished] =
+    useState<React.SetStateAction<boolean>>(false);
+  const [publications, setPublications] = useState<PostResponseList | null>(
+    null
   );
-
-  useEffect(() => {
-    if (data) {
-      if (location === "france" && "life_in_france" in data) {
-        setPublications(data.life_in_france);
-      } else if (location === "korea" && "life_in_korea" in data) {
-        setPublications(data.life_in_korea);
-      } else if (location === "francophone" && "life_in_francophone" in data) {
-        setPublications(data.life_in_francophone);
-      }
-    }
-  }, [data, location]);
-
-  const locations = ["france", "korea", "francophone"] as const;
-
+  const [loading, setLoading] = useState(false);
   const [openLocation, setOpenLocation] = useState(false);
   const [modalLocationVisible, setModalLocationVisible] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const { user, logout } = useUser();
+
+  const fetchChat = async () => {
+    if (!user) return;
+    setLoading(true);
+    try {
+      let data;
+      if (location === "france") data = await getPosts(user.token);
+      else if (location === "korea") data = await getPostsKorea(user.token);
+      else if (location === "francophone")
+        data = await getPostsFrancophone(user.token);
+
+      if (data) setPublications({ datas: data.datas, count: data.count });
+    } catch (err: any) {
+      if (err.message === "Token Expired") {
+        await logout();
+        return;
+      }
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchChat();
+  }, [location, user, newlyPublished]);
 
   const handleOpen = () => {
     setOpenLocation(true);
     setModalLocationVisible(true);
-  };
-
-  const handleChatLocation = () => {
-    setLocation((prev) => {
-      const currentIndex = locations.indexOf(
-        prev as (typeof locations)[number]
-      );
-      const nextIndex = (currentIndex + 1) % locations.length;
-      return locations[nextIndex];
-    });
-    refetch();
   };
 
   const handleSubmit = () => {
@@ -91,12 +69,12 @@ const Chat = () => {
   };
 
   const createPublications = () => {
-    return publications.map((publication) => {
+    return publications?.datas?.map((publication) => {
       return (
         <ThemedCard key={publication?.id} style={styles.card}>
           <View style={styles.cardBox}>
             <View style={styles.cardBox}>
-              {publication.author === "patattumi" ? (
+              {publication?.owner.name.toLowerCase() === "patattumi" ? (
                 <Image source={patattumi} style={styles.avatar} />
               ) : (
                 <Image source={patate} style={styles.avatar} />
@@ -117,7 +95,7 @@ const Chat = () => {
               {publication.content}
             </ThemedText>
           </View>
-          <CommentSection location={location} id={publication.id} />
+          <CommentSection location={location} id={publication?.id} />
         </ThemedCard>
       );
     });
@@ -132,7 +110,7 @@ const Chat = () => {
           </ThemedText>
           <View style={styles.icons}>
             <Pressable onPress={handleOpen}>
-              <Ionicons size={24} name="compass-outline" />
+              <Ionicons size={26} name="compass-outline" />
             </Pressable>
             <ThemedModal
               visible={modalLocationVisible}
@@ -141,11 +119,11 @@ const Chat = () => {
               <ChatLocation
                 onClose={() => setModalLocationVisible(false)}
                 location={location}
-                handleChatLocation={handleChatLocation}
+                handleChatLocation={(value) => setLocation(value)}
               />
             </ThemedModal>
             <Pressable onPress={handleSubmit}>
-              <Ionicons size={24} name="create-outline" />
+              <Ionicons size={26} name="create-outline" />
             </Pressable>
           </View>
         </View>
@@ -154,6 +132,7 @@ const Chat = () => {
           onDismiss={() => setModalVisible(false)}
         >
           <WritePublicaton
+            setNewlyPublished={setNewlyPublished}
             setModalVisible={setModalVisible}
             setOpen={setOpen}
             country={location}
@@ -181,24 +160,19 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 12,
     backgroundColor: "#fff",
-    boxSizing: "border-box",
-
     // iOS shadow
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.15,
     shadowRadius: 4,
-
     // Android shadow
     elevation: 4,
   },
-
   cardBox: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
-
   avatar: {
     width: 20,
     height: 20,
@@ -206,9 +180,9 @@ const styles = StyleSheet.create({
     marginRight: 5,
     marginTop: 2,
   },
-
   icons: {
     flexDirection: "row",
     gap: 4,
+    marginRight: 2,
   },
 });

@@ -1,30 +1,26 @@
+import getRecipe from "@/app/api/recipes/getRecipe";
 import SocialMedia from "@/components/SocialMedia";
 import ThemedCard from "@/components/ThemedCard";
-import ThemedLoader from "@/components/ThemedLoader";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
-import { QUERY_RECIPE } from "@/queries/RecipeQuery";
-import { RecipeType } from "@/types/RecipeContextType";
-import { useQuery } from "@apollo/client/react";
+import { RecipeResponse } from "@/types/RecipeContextType";
 import { useLocalSearchParams } from "expo-router";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Image, ScrollView, StyleSheet, View } from "react-native";
 
 const RecipeDetail = () => {
   const { id } = useLocalSearchParams();
-  const { data, loading, error } = useQuery<{ recipes_by_pk: RecipeType }>(
-    QUERY_RECIPE,
-    {
-      variables: { id: Number(id) },
-      fetchPolicy: "network-only",
-    }
-  );
+  const [recipe, setRecipe] = useState<RecipeResponse | null>(null);
 
-  if (loading) return <ThemedLoader />;
-  if (error) return <ThemedText>Erreur: {error.message}</ThemedText>;
-
-  const recipeInfo = data?.recipes_by_pk;
-  if (!recipeInfo) return <ThemedText>Recette non trouvée</ThemedText>;
+  useEffect(() => {
+    const fetchRecipe = async () => {
+      if (id) {
+        const data = await getRecipe(Number(id));
+        setRecipe(data);
+      }
+    };
+    fetchRecipe();
+  });
 
   const chunkRecipe = (recipe: string | null) => {
     const ingredients = recipe?.indexOf("1");
@@ -51,7 +47,7 @@ const RecipeDetail = () => {
         <ThemedCard style={styles.card}>
           <Image
             source={{
-              uri: `https://media.aboutsauce.com/${recipeInfo.id}.jpg?quality=100`,
+              uri: `https://media.aboutsauce.com/${recipe?.id}.jpg?quality=100`,
             }}
             style={{
               width: 250,
@@ -61,20 +57,20 @@ const RecipeDetail = () => {
             }}
           />
           <ThemedText style={{ marginVertical: 15, fontSize: 18 }} title>
-            {recipeInfo.name}
+            {recipe?.name.replaceAll("'", "")}
           </ThemedText>
           <ThemedText
             style={{ fontSize: 13, fontWeight: "bold", marginBottom: 25 }}
           >
-            {recipeInfo.description}
+            {recipe?.description.replaceAll("'", "")}
           </ThemedText>
-          {chunkRecipe(recipeInfo.recipe)}
+          {recipe?.recipe && chunkRecipe(recipe?.recipe)}
           <View style={{ alignSelf: "flex-start" }}>
             <SocialMedia
               title="Voir la vidéo de la recette.(cette vidéo s'ouvrira dans une page externe)"
-              youtube={recipeInfo.youtube}
-              tiktok={recipeInfo.tiktok}
-              insta={recipeInfo.insta}
+              youtube={recipe?.youtube}
+              tiktok={recipe?.tiktok}
+              insta={recipe?.insta}
             />
           </View>
         </ThemedCard>

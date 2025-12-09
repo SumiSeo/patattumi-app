@@ -6,13 +6,10 @@ import ThemedError from "@/components/ThemedError";
 import ThemedLogo from "@/components/ThemedLogo";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
-import { useUser } from "@/hooks/useUser";
 import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 
 const Login = () => {
-  const { appleSignIn } = useUser();
-
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {

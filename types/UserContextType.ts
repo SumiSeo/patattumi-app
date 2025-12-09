@@ -14,13 +14,14 @@ export type UserType = {
   points?: number;
   role?: string;
   provider?: string;
+  token: string;
 };
+
 
 export type UserContextType = {
   user: UserType | null;
-  userExists: (providerId: string) => Promise<boolean>;
-  googleUserExists: (providerId: string) => Promise<boolean>;
-  appleSignIn: (providerId: string) => Promise<void>;
+  userExists: (providerId: string) => Promise<string | null>;
+  googleUserExists: (providerId: string) => Promise<string | null>;
   appleRegister: (
     email: string,
     name: string,
@@ -35,58 +36,9 @@ export type UserContextType = {
   authChecked: boolean;
   appleDeleteUser: (id: string) => Promise<void>;
   googleDeleteUser: (id: string) => Promise<void>;
-  googleSignIn: (providerId: string) => Promise<void>;
-};
-
-export type AppleUserData = {
-  apple_users_by_pk: {
-    user_id: string;
-  } | null;
-};
-
-export type GoogleUserData = {
-  google_users_by_pk: {
-    user_id: string;
-  } | null;
-};
-export type UserData = {
-  users_by_pk: {
-    id: string;
-    name: string;
-    email: string;
-    language?: string;
-    korean_name?: string;
-    age?: string;
-    totem?: string;
-    points?: number;
-    role?: string;
-    provider?: string;
-  } | null;
-};
-
-export type InsertUserData = {
-  insert_users_one: {
-    id: string;
-    name: string;
-    email: string;
-    provider: string;
-  } | null;
-};
-
-export type InsertAppleUserData = {
-  insert_apple_users_one: {
-    provider_id: string;
-  } | null;
-};
-
-export type InsertGoogleUserData = {
-  insert_google_users_one: {
-    provider_id: string;
-  } | null;
-};
-
-export type InsertUserVars = {
-  email: string;
-  name: string;
-  provider: string;
+  signIn: (
+    userId: string,
+    provider: string,
+    providerId: string
+  ) => Promise<void>;
 };
