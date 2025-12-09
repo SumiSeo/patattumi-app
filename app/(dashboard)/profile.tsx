@@ -4,8 +4,10 @@ import UserAvatar from "@/components/Profile/UserAvatar";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
 import { Ionicons } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 const Profile = () => {
+  const { t } = useTranslation();
   const profileAssets = [
     { name: "person", title: "Prénom", value: "koreanName", id: 4 },
     { name: "age", title: "Âge", value: "koreanAge", id: 2 },
@@ -42,6 +44,7 @@ const Profile = () => {
       id: -1,
     },
   ];
+
   const displayProfileAssets = () => {
     return profileAssets.map((asset) => {
       return (
@@ -49,7 +52,7 @@ const Profile = () => {
           id={asset.id}
           key={asset.name}
           name={asset.name}
-          title={asset.title}
+          title={t(`profil.${asset.name}`)}
           value={asset.value}
         />
       );
@@ -58,7 +61,7 @@ const Profile = () => {
   return (
     <ThemedView safe={true}>
       <View style={styles.profileNav}>
-        <ThemedText title>Profil</ThemedText>
+        <ThemedText title>{t("nav.profil")}</ThemedText>
         <Logout />
       </View>
       <UserAvatar />

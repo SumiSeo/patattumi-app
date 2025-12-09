@@ -15,8 +15,8 @@ const resources = {
 const languageCode: string = Localization.getLocales()[0]?.languageCode || 'en';
 
 i18n.use(initReactI18next).init({
-  lng: languageCode,              
-  fallbackLng: 'en',
+  lng: languageCode,
+  fallbackLng: "fr",
   resources,
   interpolation: {
     escapeValue: false,

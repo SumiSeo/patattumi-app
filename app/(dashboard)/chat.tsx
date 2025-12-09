@@ -13,6 +13,7 @@ import { PostResponseList } from "@/types/post/PostType";
 import { dateFormatter } from "@/utils/games/dateFormatter";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Image, Pressable, ScrollView, StyleSheet, View } from "react-native";
 import getPosts from "../api/posts/getPostsFrance";
 import getPostsFrancophone from "../api/posts/getPostsFrancophone";
@@ -31,7 +32,7 @@ const Chat = () => {
   const [open, setOpen] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const { user, logout } = useUser();
-
+  const { t } = useTranslation();
   const fetchChat = async () => {
     if (!user) return;
     setLoading(true);
@@ -106,7 +107,9 @@ const Chat = () => {
       <ScrollView>
         <View style={styles.profileNav}>
           <ThemedText title style={{ fontSize: 20 }}>
-            Chat in {location.slice(0, 1).toUpperCase() + location.slice(1)}
+            {t("nav.chat") +
+              location.slice(0, 1).toUpperCase() +
+              location.slice(1)}
           </ThemedText>
           <View style={styles.icons}>
             <Pressable onPress={handleOpen}>

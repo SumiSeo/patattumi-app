@@ -1,50 +1,26 @@
 {
-  "signin": {
-    "description": "All information about sauces",
-    "email": "email",
-    "password": "password",
-    "button": "Sign In",
-    "signup_page": "Create a new Account"
+  "layout": {
+    "culture": "Culture",
+    "language": "Language",
+    "chat": "Chat",
+    "recipes": "Recipes",
+    "profil": "Profile"
   },
-  "signup": {
-    "name": "name",
-    "email": "email",
-    "password": "password",
-    "button": "Sign Up",
-    "signin_page": "Go back to Sign In"
+  "profil": {
+    "person": "Name",
+    "age": "Age",
+    "animal": "Korean Zodiac Animal",
+    "support": "Support Patattumi",
+    "language": "App Language",
+    "rule": "Rules",
+    "urgence": "Emergency Contacts",
+    "delete": "Delete Account"
   },
-  "dashboard": {
-    "search": "Search",
-    "chatbot": "Sauce Bot",
-    "history": "History",
-    "profile": "Profile",
-    "tasted": "My favorite sauces",
-    "logout": "Logout",
-    "search_sauces": "Search Sauces..."
-  },
-  "sauce_types": {
-    "ketchup": "Ketchup",
-    "mayonnaise": "Mayonnaise",
-    "chili_sauce": "Chili Sauce",
-    "tomato_sauce": "Tomato Sauce",
-    "barbecue_sauce": "Barbecue Sauce",
-    "hot_sauce": "Hot Sauce",
-    "fish_sauce": "Fish Sauce",
-    "oyster_sauce": "Oyster Sauce",
-    "mustard": "Mustard",
-    "soy_sauce": "Soy Sauce"
-  },
-  "sauce_info": {
-    "no_ingredients": "Unable to load sauce ingredients.",
-    "ingredients": "Composition"
-  },
-  "user": {
-    "edit_profil": "Edit Profile",
-    "save": "Save",
-    "delete_account": "Delete Account",
-    "delete": "Delete",
-    "type_delete": "Please type 'DELETE' to confirm.",
-    "invalid_input": "Invalid input. Please try again.",
-    "deleted": "Your account has been successfully deleted."
+  "nav": {
+    "culture": "Culture & Travel",
+    "language": "Learn Korean",
+    "chat": "Chat ",
+    "recipes": "Korean Recipes",
+    "profil": "Profile"
   }
 }

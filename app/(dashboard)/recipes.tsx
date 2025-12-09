@@ -6,10 +6,12 @@ import ThemedView from "@/components/ThemedView";
 import { useRecipe } from "@/hooks/useRecipes";
 import { useRouter } from "expo-router";
 import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { FlatList, Image, Pressable, StyleSheet, View } from "react-native";
 
 const RecipesComp = () => {
   const { recipes, fetchRecipes } = useRecipe();
+  const { t } = useTranslation();
   const router = useRouter();
   useEffect(() => {
     fetchRecipes();
@@ -18,7 +20,7 @@ const RecipesComp = () => {
     <ThemedView safe={true}>
       {recipes?.count && recipes.count > 0 ? (
         <>
-          <ThemedText title>Recettes</ThemedText>
+          <ThemedText title>{t("nav.recipes")}</ThemedText>
           <Spacer height={20} />
           <FlatList
             renderItem={({ item }) => (
