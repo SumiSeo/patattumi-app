@@ -17,6 +17,18 @@ const Profile = () => {
       id: -3,
     },
     {
+      name: "language",
+      title: "Langue préférée",
+      value: "language",
+      id: -4,
+    },
+    {
+      name: "rule",
+      title: "Régle à respecter",
+      value: "rule",
+      id: -5,
+    },
+    {
       name: "urgence",
       title: "Urgence",
       value: "urgence",
