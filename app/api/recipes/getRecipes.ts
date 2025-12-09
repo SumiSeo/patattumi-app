@@ -8,7 +8,7 @@ const API_URL = __DEV__ ? DEV_PATATTUMI_API_URL : PROD_PATATTUMI_API_URL;
 
 const getRecipes = async (): Promise<RecipeResponseList> => {
   try {
-    const response = await fetch(`${API_URL}/recipes`, {
+    const response = await fetch(`${API_URL}/recipes/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
