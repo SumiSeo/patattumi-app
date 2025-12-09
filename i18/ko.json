@@ -1,0 +1,50 @@
+{
+  "signin": {
+    "description": "소스에 관한 모든 정보",
+    "email": "이메일",
+    "password": "비밀번호",
+    "button": "로그인",
+    "signup_page": "회원가입하기"
+  },
+  "signup": {
+    "name": "이름",
+    "email": "이메일",
+    "password": "비밀번호",
+    "button": "회원가입",
+    "signin_page": "로그인 화면으로 돌아가기"
+  },
+  "dashboard": {
+    "search": "검색",
+    "chatbot": "소스봇",
+    "history": "내 소스",
+    "profile": "프로필",
+    "tasted": "내가 애정하는 소스",
+    "logout": "로그아웃",
+    "search_sauces": "소스 검색하기"
+  },
+  "sauce_types": {
+    "ketchup": "케첩",
+    "mayonnaise": "마요네즈",
+    "chili_sauce": "칠리 소스",
+    "tomato_sauce": "토마토 소스",
+    "barbecue_sauce": "바베큐 소스",
+    "hot_sauce": "핫소스",
+    "fish_sauce": "생선 소스",
+    "oyster_sauce": "굴소스",
+    "mustard": "머스타드",
+    "soy_sauce": "간장"
+  },
+  "sauce_info": {
+    "no_ingredients": "재료 정보를 불러올 수 없습니다.",
+    "ingredients": "구성 성분"
+  },
+  "user": {
+    "edit_profil": "프로필 수정",
+    "save": "저장하기",
+    "delete_account": "계정 삭제",
+    "delete": "삭제하기",
+    "type_delete": "'삭제'를 입력해 주세요.",
+    "invalid_input": "입력값이 유효하지 않습니다.",
+    "deleted": "계정이 성공적으로 삭제되었습니다."
+  }
+}

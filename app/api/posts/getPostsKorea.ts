@@ -14,6 +14,7 @@ interface PostResponse {
   title: string;
   content: string;
   created_at: string;
+  author: string;
   owner: User;
 }
 

@@ -1,0 +1,50 @@
+{
+  "signin": {
+    "description": "Toutes les informations sur les sauces",
+    "email": "email",
+    "password": "mot de passe",
+    "button": "se connecter",
+    "signup_page": "créer un compte"
+  },
+  "signup": {
+    "name": "nom",
+    "email": "email",
+    "password": "mot de passe",
+    "button": "s'inscrire",
+    "signin_page": "retour à la page de connexion"
+  },
+  "dashboard": {
+    "search": "Recherche",
+    "chatbot": "Sauce Bot",
+    "history": "Mes sauces",
+    "profile": "Profil",
+    "tasted": "Mes sauces préférées",
+    "logout": "déconnexion",
+    "search_sauces": "Rechercher des sauces..."
+  },
+  "sauce_types": {
+    "ketchup": "Ketchup",
+    "mayonnaise": "Mayonnaise",
+    "chili_sauce": "Sauce chili",
+    "tomato_sauce": "Sauce tomate",
+    "barbecue_sauce": "Sauce barbecue",
+    "hot_sauce": "Sauce piquante",
+    "fish_sauce": "Sauce de poisson",
+    "oyster_sauce": "Sauce d’huître",
+    "mustard": "Moutarde",
+    "soy_sauce": "Sauce soja"
+  },
+  "sauce_info": {
+    "no_ingredients": "Impossible de charger les ingrédients de la sauce.",
+    "ingredients": "Composition"
+  },
+  "user": {
+    "edit_profil": "Modifier le profil",
+    "save": "Enregistrer",
+    "delete_account": "Supprimer le compte",
+    "delete": "Supprimer",
+    "type_delete": "Veuillez taper « SUPPRIMER » pour confirmer.",
+    "invalid_input": "Veuillez saisir un champ valide.",
+    "deleted": "Votre compte a été supprimé."
+  }
+}

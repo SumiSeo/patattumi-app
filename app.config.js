@@ -48,8 +48,6 @@ export default ({ config }) => {
       eas: {
         projectId: "cadbabd6-b763-487b-9497-3e198c9ac77e",
       },
-      HASURA_SECRET: process.env.HASURA_ADMIN_SECRET,
-      HASURA_URI: process.env.HASURA_URI,
       GOOGLE_IOS_CLIENT_ID: process.env.GOOGLE_IOS_CLIENT_ID,
       DATA_KOREAN_PUBLIC_HOLIDAY_API_KEY:
         process.env.DATA_KOREAN_PUBLIC_HOLIDAY_API_KEY,
@@ -66,6 +64,7 @@ export default ({ config }) => {
             "com.googleusercontent.apps.989994337201-v68moe6gb6qrni608ik4or3v3gm50g6t",
         },
       ],
+      "expo-localization", // 이렇게 배열 안에 바로 추가
     ],
   };
 };
