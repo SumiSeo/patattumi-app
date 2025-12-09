@@ -6,6 +6,7 @@ export type User = {
 export interface CommentResponse {
   content: string;
   created_at: string;
+  author: string;
   owner: User;
   id: number;
 }

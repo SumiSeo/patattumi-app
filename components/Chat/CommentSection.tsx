@@ -88,7 +88,7 @@ const CommentSection = ({ location, id }: CommentSectionProps) => {
                   justifyContent: "space-between",
                 }}
               >
-                <Text style={styles.author}>{comment.owner.name}</Text>
+                <Text style={styles.author}>{comment.author}</Text>
                 <Text style={styles.date}>
                   {dateFormatter(comment.created_at)}
                 </Text>
