@@ -74,13 +74,13 @@ const Chat = () => {
         <ThemedCard key={publication?.id} style={styles.card}>
           <View style={styles.cardBox}>
             <View style={styles.cardBox}>
-              {publication?.owner.name === "patattumi" ? (
+              {publication?.owner.name.toLowerCase() === "patattumi" ? (
                 <Image source={patattumi} style={styles.avatar} />
               ) : (
                 <Image source={patate} style={styles.avatar} />
               )}
               <ThemedText title style={{ fontSize: 12, color: "#333" }}>
-                {publication.owner.name}
+                {publication.author}
               </ThemedText>
             </View>
             <ThemedText style={{ fontSize: 8, color: "#333" }}>

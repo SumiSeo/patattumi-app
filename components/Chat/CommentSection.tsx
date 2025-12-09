@@ -75,7 +75,7 @@ const CommentSection = ({ location, id }: CommentSectionProps) => {
       comments?.datas?.map((comment: CommentResponse) => {
         return (
           <View key={comment.id} style={styles.commentBox}>
-            {comment.owner.name === "patattumi" ? (
+            {comment.owner.name.toLowerCase() === "patattumi" ? (
               <Image source={patattumi} style={styles.avatar} />
             ) : (
               <Image source={patate} style={styles.avatar} />

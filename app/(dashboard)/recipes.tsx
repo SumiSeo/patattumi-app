@@ -14,7 +14,6 @@ const RecipesComp = () => {
   useEffect(() => {
     fetchRecipes();
   }, [fetchRecipes]);
-console.log(recipes);
   return (
     <ThemedView safe={true}>
       {recipes?.count && recipes.count > 0 ? (

@@ -3,10 +3,11 @@ export type User = {
   email: string;
 };
 export interface PostResponse {
-  id:number;
+  id: number;
   title: string;
   content: string;
   created_at: string;
+  author: string;
   owner: User;
 }
 
