@@ -10,7 +10,7 @@ type LoginProps = {
 };
 
 export default function AppleLogin({ setError }: LoginProps) {
-  const { signIn, appleRegister, userExists } = useUser();
+  const { appleRegister } = useUser();
   return (
     <View>
       <AppleAuthentication.AppleAuthenticationButton
@@ -28,23 +28,18 @@ export default function AppleLogin({ setError }: LoginProps) {
               ],
             });
             if (credential) {
-              const appleUser = await userExists(credential.user);
               const providerId = credential.user;
-              if (appleUser === null) {
-                if (credential.email) {
-                  const email = credential.email;
-                  const name = `${credential.fullName?.givenName} ${credential.fullName?.familyName}`;
-                  if (email && name && providerId)
-                    await appleRegister(email, name, providerId);
-                } else {
-                  await appleRegister(
-                    `${uuid().slice(0, 8)}@apple.com`,
-                    "user_" + uuid().slice(0, 8),
-                    providerId
-                  );
-                }
+              if (credential.email) {
+                const email = credential.email;
+                const name = `${credential.fullName?.givenName} ${credential.fullName?.familyName}`;
+                if (email && name && providerId)
+                  await appleRegister(email, name, providerId);
               } else {
-                if (providerId) await signIn(appleUser, "apple", providerId);
+                await appleRegister(
+                  `${uuid().slice(0, 8)}@apple.com`,
+                  "user_" + uuid().slice(0, 8),
+                  providerId
+                );
               }
             }
           } catch (e) {

@@ -1,8 +1,5 @@
-import appleUserFetch from "@/app/api/auth/appleUserFetch";
 import deleteAppleUser from "@/app/api/auth/deleteAppleUser";
 import deleteGoogleUser from "@/app/api/auth/deleteGoogleUser";
-import googleUserFetch from "@/app/api/auth/googleUserFetch";
-import providerSignIn from "@/app/api/auth/login";
 import register from "@/app/api/auth/register";
 import fetchUserById from "@/app/api/users/getUser";
 import {
@@ -38,53 +35,6 @@ export function UserProvider({ children }: UserProviderProps) {
     getInitialUserValue();
   }, []);
 
-  async function signIn(userId: string, provider: string, providerId: string) {
-    try {
-      const providerUser = await providerSignIn(provider, providerId);
-      const token = providerUser.access_token;
-      const u = await fetchUserById(userId);
-      if (!u) throw new Error("Something went wrong with Apple Login.");
-      const userObj = {
-        id: u.id,
-        name: u.name,
-        email: u.email,
-        korean_name: u?.korean_name,
-        age: u.age,
-        totem: u.totem,
-        role: u.role,
-        provider: u.provider,
-        token: token,
-      };
-      setUser(userObj);
-      await AsyncStorage.setItem("user", JSON.stringify(userObj));
-    } catch (e: any) {
-      throw Error(e.message);
-    } finally {
-      setAuthChecked(true);
-    }
-  }
-
-  async function googleUserExists(providerId: string) {
-    try {
-      const googleData = await googleUserFetch(providerId);
-      if (googleData?.user_id) return googleData?.user_id;
-      else return null;
-    } catch (e: any) {
-      throw Error(e.message);
-    }
-  }
-
-  async function userExists(providerId: string) {
-    try {
-      const appleData = await appleUserFetch(providerId);
-
-      if (appleData?.user_id) return appleData?.user_id;
-      else return null;
-    } catch (e: any) {
-      throw Error(e.message);
-    }
-  }
-
   async function googleRegister(
     email: string,
     name: string,
@@ -112,6 +62,8 @@ export function UserProvider({ children }: UserProviderProps) {
       }
     } catch (e) {
       if (e instanceof Error) throw Error(e.message);
+    } finally {
+      setAuthChecked(true);
     }
   }
 
@@ -142,6 +94,8 @@ export function UserProvider({ children }: UserProviderProps) {
       }
     } catch (e) {
       if (e instanceof Error) throw Error(e.message);
+    } finally {
+      setAuthChecked(true);
     }
   }
 
@@ -172,11 +126,8 @@ export function UserProvider({ children }: UserProviderProps) {
         appleRegister,
         authChecked,
         appleDeleteUser,
-        userExists,
-        googleUserExists,
         googleRegister,
         googleDeleteUser,
-        signIn,
       }}
     >
       {children}

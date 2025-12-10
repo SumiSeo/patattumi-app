@@ -17,7 +17,7 @@ interface LoginProps {
   setError: (err: string | null) => void;
 }
 const GoogleLogin = ({ setError }: LoginProps) => {
-  const { signIn, googleUserExists, googleRegister } = useUser();
+  const { googleRegister } = useUser();
   const [isInProgress, setIsInProgress] = useState(false);
 
   useEffect(() => {
@@ -37,13 +37,7 @@ const GoogleLogin = ({ setError }: LoginProps) => {
       if (isSuccessResponse(response)) {
         const { idToken, user } = response.data;
         const { name, email, id } = user;
-
-        const user_id = await googleUserExists(id);
-        if (user_id) {
-          await signIn(user_id, "google", id);
-        } else {
-          if (name && email && id) await googleRegister(email, name, id);
-        }
+        if (name && email && id) await googleRegister(email, name, id);
       } else {
         throw new Error("Google login failed");
       }
