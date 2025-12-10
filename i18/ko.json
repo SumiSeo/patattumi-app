@@ -1,0 +1,26 @@
+{
+  "layout": {
+    "culture": "문화",
+    "language": "한국어",
+    "chat": "채팅",
+    "recipes": "레시피",
+    "profil": "사용자"
+  },
+  "profil": {
+    "person": "이름",
+    "age": "나이",
+    "animal": "동물띠",
+    "support": "빠따뚜미 후원하기",
+    "language": "어플리케이션 언어",
+    "rule": "이용 규칙",
+    "urgence": "긴급 연락망",
+    "delete": "계정 삭제하기"
+  },
+  "nav": {
+    "culture": "문화 & 여행",
+    "language": "한국어 배우기",
+    "chat": "채팅 ",
+    "recipes": "한국 음식 레시피",
+    "profil": "프로필"
+  }
+}

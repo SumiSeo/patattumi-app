@@ -1,9 +1,12 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import UserOnly from "../(auth)/UserOnly";
 
 const DashboardLayout = () => {
+  const { t } = useTranslation();
+
   return (
     <UserOnly>
       <Tabs
@@ -20,7 +23,7 @@ const DashboardLayout = () => {
         <Tabs.Screen
           name="koreanCulture"
           options={{
-            title: "Culture",
+            title: t("layout.culture"),
             tabBarIcon: ({ focused }) => (
               <Ionicons
                 size={20}
@@ -33,7 +36,7 @@ const DashboardLayout = () => {
         <Tabs.Screen
           name="koreanLanguage"
           options={{
-            title: "Langue",
+            title: t("layout.language"),
             tabBarIcon: ({ focused }) => (
               <Ionicons
                 size={20}
@@ -46,7 +49,7 @@ const DashboardLayout = () => {
         <Tabs.Screen
           name="chat"
           options={{
-            title: "Chat",
+            title: t("layout.chat"),
             tabBarIcon: ({ focused }) => (
               <Ionicons
                 size={20}
@@ -59,7 +62,7 @@ const DashboardLayout = () => {
         <Tabs.Screen
           name="recipes"
           options={{
-            title: "Recettes",
+            title: t("layout.recipes"),
             tabBarIcon: ({ focused }) => (
               <Ionicons
                 size={20}
@@ -72,7 +75,7 @@ const DashboardLayout = () => {
         <Tabs.Screen
           name="profile"
           options={{
-            title: "Profil",
+            title: t("layout.profil"),
             tabBarIcon: ({ focused }) => (
               <Ionicons
                 size={20}

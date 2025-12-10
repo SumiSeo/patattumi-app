@@ -3,6 +3,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { Pressable, StyleSheet, View } from "react-native";
 import DeleteAccount from "../Auth/DeleteAccount";
+import Language from "../ProfileExtraComp/Language";
+import Rule from "../ProfileExtraComp/Rule";
 import Support from "../ProfileExtraComp/Support";
 import Urgence from "../ProfileExtraComp/Urgence";
 import ThemedText from "../ThemedText";
@@ -28,7 +30,9 @@ const ProfileAssetCard = ({
     size: "shirt-outline",
     age: "hourglass-outline",
     animal: "bug-outline",
-    urgence: "alert-circle-outline",
+    urgence: "call-outline",
+    language: "language-outline",
+    rule: "information-circle-outline",
     delete: "trash-outline",
     support: "heart-outline",
   } as const;
@@ -62,6 +66,8 @@ const ProfileAssetCard = ({
         if (id === -1) return <DeleteAccount />;
         if (id === -2) return <Urgence />;
         if (id === -3) return <Support />;
+        if (id === -4) return <Language />;
+        if (id === -5) return <Rule />;
         else
           return (
             <Pressable

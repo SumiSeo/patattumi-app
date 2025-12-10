@@ -1,0 +1,26 @@
+{
+  "layout": {
+    "culture": "Culture",
+    "language": "Langue",
+    "chat": "Chat",
+    "recipes": "Recettes",
+    "profil": "Profil"
+  },
+  "profil": {
+    "person": "Prénom",
+    "age": "Âge",
+    "animal": "Animal totem",
+    "support": "Soutien Patattumi",
+    "language": "Langue préférée",
+    "rule": "Régle à respecter",
+    "urgence": "Urgence",
+    "delete": "Supprimer mon compte"
+  },
+  "nav": {
+    "culture": "Culture & Voyage",
+    "language": "Apprendre le coréen",
+    "chat": "Chat ",
+    "recipes": "Recettes",
+    "profil": "Profil"
+  }
+}

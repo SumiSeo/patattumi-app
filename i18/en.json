@@ -1,0 +1,26 @@
+{
+  "layout": {
+    "culture": "Culture",
+    "language": "Language",
+    "chat": "Chat",
+    "recipes": "Recipes",
+    "profil": "Profile"
+  },
+  "profil": {
+    "person": "Name",
+    "age": "Age",
+    "animal": "Korean Zodiac Animal",
+    "support": "Support Patattumi",
+    "language": "App Language",
+    "rule": "Rules",
+    "urgence": "Emergency Contacts",
+    "delete": "Delete Account"
+  },
+  "nav": {
+    "culture": "Culture & Travel",
+    "language": "Learn Korean",
+    "chat": "Chat ",
+    "recipes": "Korean Recipes",
+    "profil": "Profile"
+  }
+}

@@ -6,14 +6,16 @@ import ThemedView from "@/components/ThemedView";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { FlatList, Pressable, StyleSheet, View } from "react-native";
 
 const KoreanLanguage = () => {
   const router = useRouter();
+  const { t } = useTranslation();
 
   return (
     <ThemedView safe={true}>
-      <ThemedText title>Apprendre le coréen</ThemedText>
+      <ThemedText title>{t("nav.language")}</ThemedText>
       <Spacer height={20} />
       <FlatList
         renderItem={({ item }) => (
