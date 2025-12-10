@@ -15,10 +15,12 @@
         "AUTH_SECRET": "b5277aefe58b08d05d799f4177a3fd6135d95e9e23074c8ad6b2d81b5d6a5198",
         "DATA_KOREAN_PUBLIC_HOLIDAY_API_KEY": "9822b39da2da2adb070f54659859e614b1ce79f35118e9e315c687de43b8fd39",
         "DEV_PATATTUMI_API_URL": "http://127.0.0.1:8000"
-      }
+      },
+      "channel": "development"
     },
     "preview": {
-      "distribution": "internal"
+      "distribution": "internal",
+      "channel": "preview"
     },
     "production": {
       "autoIncrement": true,
@@ -30,7 +32,8 @@
         "AUTH_SECRET": "b5277aefe58b08d05d799f4177a3fd6135d95e9e23074c8ad6b2d81b5d6a5198",
         "DATA_KOREAN_PUBLIC_HOLIDAY_API_KEY": "9822b39da2da2adb070f54659859e614b1ce79f35118e9e315c687de43b8fd39",
         "PROD_PATATTUMI_API_URL": "https://api.aboutsauce.com"
-      }
+      },
+      "channel": "production"
     }
   },
   "submit": {
