@@ -5,6 +5,7 @@ import ThemedLoader from "@/components/ThemedLoader";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
 import { useRecipe } from "@/hooks/useRecipes";
+import { RecipeResponse } from "@/types/RecipeContextType";
 import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -14,7 +15,7 @@ const filters = [
   {
     name: "vegetarian",
     icon: "leaf-outline" as const,
-    value: "is_vegetarian",
+    value: "is_vegeterian",
   },
   {
     name: "pork",
@@ -42,10 +43,12 @@ const filters = [
     value: "is_guide",
   },
 ];
-
 const RecipesComp = () => {
   const [selected, setSelected] = useState<string[] | null>([]);
   const { recipes, fetchRecipes } = useRecipe();
+  const [selectedRecipes, setSelectedRecipes] = useState<
+    RecipeResponse[] | null
+  >(null);
   const { t } = useTranslation();
   const router = useRouter();
 
@@ -54,8 +57,38 @@ const RecipesComp = () => {
   }, [fetchRecipes]);
 
   useEffect(() => {
-    console.log(selected);
-  }, [selected]);
+    if (!selected || selected.length === 0) {
+      setSelectedRecipes(recipes?.datas || []);
+      return;
+    }
+
+    const filtered = recipes?.datas.filter((recipe) => {
+      // 선택된 필터가 하나라도 없으면 무조건 포함
+      if (!selected || selected.length === 0) return true;
+
+      // 모든 선택 필터가 각 조건을 만족해야 포함
+      return selected.every((filter) => {
+        switch (filter) {
+          case "is_vegeterian":
+            return recipe.is_vegeterian === true;
+          case "contains_pork":
+            return recipe.contains_pork === false;
+          case "contains_beef":
+            return recipe.contains_beef === false;
+          case "contains_fish":
+            return recipe.contains_fish === true;
+          case "is_dessert":
+            return recipe.is_dessert === true;
+          case "is_guide":
+            return recipe.is_guide === true;
+          default:
+            return true;
+        }
+      });
+    });
+    setSelectedRecipes(filtered || []);
+  }, [selected, recipes]);
+
   return (
     <ThemedView safe={true}>
       {recipes?.count && recipes.count > 0 ? (
@@ -97,7 +130,7 @@ const RecipesComp = () => {
               </Pressable>
             )}
             contentContainerStyle={styles.list}
-            data={recipes.datas}
+            data={selectedRecipes || []}
             keyExtractor={(item) => item.id.toString()}
           />
         </>
