@@ -12,7 +12,7 @@ const resources = {
   fr: { translation: fr },
 };
 
-const languageCode: string = Localization.getLocales()[0]?.languageCode || 'en';
+const languageCode: string = Localization.getLocales()[0]?.languageCode || "fr";
 
 i18n.use(initReactI18next).init({
   lng: languageCode,

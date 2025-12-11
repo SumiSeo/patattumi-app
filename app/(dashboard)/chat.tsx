@@ -113,7 +113,7 @@ const Chat = () => {
           </ThemedText>
           <View style={styles.icons}>
             <Pressable onPress={handleOpen}>
-              <Ionicons size={26} name="compass-outline" />
+              <Ionicons size={26} name="options-outline" />
             </Pressable>
             <ThemedModal
               visible={modalLocationVisible}

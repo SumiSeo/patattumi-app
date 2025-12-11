@@ -22,6 +22,16 @@
     "chat": "Chat ",
     "recipes": "Recettes",
     "profil": "Profil",
-    "filter": "Filtre"
+    "filter": "Filtres"
+  },
+  "filter": {
+    "Category": "Catégorie",
+    "Ingredients": "Ingrédients",
+    "vegetarian": "Végétarien",
+    "pork": "Sans porc",
+    "beef": "Sans boeuf",
+    "fish": "Contient du poisson",
+    "dessert": "Dessert",
+    "guide": "Guide culinaire"
   }
 }

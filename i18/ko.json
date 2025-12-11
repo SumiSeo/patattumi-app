@@ -21,6 +21,17 @@
     "language": "한국어 배우기",
     "chat": "채팅 ",
     "recipes": "한국 음식 레시피",
-    "profil": "프로필"
+    "profil": "프로필",
+    "filter": "필터"
+  },
+  "filter": {
+    "Category": "카테고리",
+    "Ingredients": "재료",
+    "vegetarian": "베지테리언",
+    "pork": "돼지고기 없음",
+    "beef": "소고기 없음",
+    "fish": "생선 포함",
+    "dessert": "디저트",
+    "guide": "요리 백서"
   }
 }
