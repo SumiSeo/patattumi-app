@@ -63,10 +63,8 @@ const RecipesComp = () => {
     }
 
     const filtered = recipes?.datas.filter((recipe) => {
-      // 선택된 필터가 하나라도 없으면 무조건 포함
       if (!selected || selected.length === 0) return true;
 
-      // 모든 선택 필터가 각 조건을 만족해야 포함
       return selected.every((filter) => {
         switch (filter) {
           case "is_vegeterian":
