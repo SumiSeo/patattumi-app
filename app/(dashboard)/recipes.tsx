@@ -6,24 +6,67 @@ import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
 import { useRecipe } from "@/hooks/useRecipes";
 import { useRouter } from "expo-router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FlatList, Image, Pressable, StyleSheet, View } from "react-native";
 
+const filters = [
+  {
+    name: "vegetarian",
+    icon: "leaf-outline" as const,
+    value: "is_vegetarian",
+  },
+  {
+    name: "pork",
+    icon: "paw-outline" as const,
+    value: "contains_pork",
+  },
+  {
+    name: "beef",
+    icon: "paw-outline" as const,
+    value: "contains_beef",
+  },
+  {
+    name: "fish",
+    icon: "fish-outline" as const,
+    value: "contains_fish",
+  },
+  {
+    name: "dessert",
+    icon: "cafe-outline" as const,
+    value: "is_dessert",
+  },
+  {
+    name: "guide",
+    icon: "newspaper-outline" as const,
+    value: "is_guide",
+  },
+];
+
 const RecipesComp = () => {
+  const [selected, setSelected] = useState<string[] | null>([]);
   const { recipes, fetchRecipes } = useRecipe();
   const { t } = useTranslation();
   const router = useRouter();
+
   useEffect(() => {
     fetchRecipes();
   }, [fetchRecipes]);
+
+  useEffect(() => {
+    console.log(selected);
+  }, [selected]);
   return (
     <ThemedView safe={true}>
       {recipes?.count && recipes.count > 0 ? (
         <>
           <View style={styles.profileNav}>
             <ThemedText title>{t("nav.recipes")}</ThemedText>
-            <ThemedFilter />
+            <ThemedFilter
+              selected={selected}
+              setSelected={setSelected}
+              filters={filters}
+            />
           </View>
           <Spacer height={20} />
           <FlatList

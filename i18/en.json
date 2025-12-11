@@ -32,6 +32,7 @@
     "beef": "Without beef",
     "fish": "Contains fish",
     "dessert": "Dessert",
-    "guide": "Culinary Guide"
+    "guide": "Culinary Guide",
+    "button": "Apply Filters"
   }
 }
