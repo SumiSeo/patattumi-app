@@ -1,5 +1,6 @@
 import Spacer from "@/components/Spacer";
 import ThemedCard from "@/components/ThemedCard";
+import ThemedFilter from "@/components/ThemedFilter";
 import ThemedLoader from "@/components/ThemedLoader";
 import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
@@ -20,7 +21,10 @@ const RecipesComp = () => {
     <ThemedView safe={true}>
       {recipes?.count && recipes.count > 0 ? (
         <>
-          <ThemedText title>{t("nav.recipes")}</ThemedText>
+          <View style={styles.profileNav}>
+            <ThemedText title>{t("nav.recipes")}</ThemedText>
+            <ThemedFilter />
+          </View>
           <Spacer height={20} />
           <FlatList
             renderItem={({ item }) => (
@@ -64,6 +68,12 @@ const RecipesComp = () => {
 export default RecipesComp;
 
 const styles = StyleSheet.create({
+  profileNav: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginRight: 1,
+  },
   list: {
     backgroundColor: "white",
   },
