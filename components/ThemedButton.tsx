@@ -34,8 +34,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 80,
     paddingVertical: 12,
     cursor: "pointer",
-    borderRadius: 20,
-    marginHorizontal: 10,
+    borderRadius: 10,
   },
   pressed: {
     opacity: 0.8,

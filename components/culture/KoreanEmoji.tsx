@@ -2,12 +2,12 @@ import emojisHangeul from "@/app/datas/emojiHangeul.json";
 import { useFocusEffect } from "@react-navigation/native";
 import React, { useCallback, useState } from "react";
 import {
-    Pressable,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput,
-    View,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
 } from "react-native";
 import ThemedQuote from "../ThemedQuote";
 import ThemedText from "../ThemedText";
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#000",
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderRadius: 20,
+    borderRadius: 10,
     marginBottom: 12,
   },
   buttonText: {

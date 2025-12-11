@@ -9,6 +9,7 @@ import {
     ViewStyle,
 } from "react-native";
 import Spacer from "./Spacer";
+import ThemedButton from "./ThemedButton";
 import ThemedModal from "./ThemedModal";
 import ThemedText from "./ThemedText";
 
@@ -24,6 +25,7 @@ const ThemedFilter: React.FC<ThemedFilterProps> = ({
 }) => {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState<string[] | null>([]);
   const [modalVisible, setModalVisible] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -63,10 +65,20 @@ const ThemedFilter: React.FC<ThemedFilterProps> = ({
   ];
   const createFilter = () => {
     return filters.map((filter) => {
+      const isSelected = selected?.includes(filter.value); // 선택 여부 확인
+
+      const toggleFilter = () => {
+        if (!selected) return setSelected([filter.value]);
+        if (isSelected) {
+          setSelected(selected.filter((v) => v !== filter.value));
+        } else {
+          setSelected([...selected, filter.value]);
+        }
+      };
+
       return (
-        <>
+        <Pressable key={filter.value} onPress={toggleFilter}>
           <View
-            key={filter.name}
             style={{
               flexDirection: "row",
               alignItems: "center",
@@ -81,11 +93,14 @@ const ThemedFilter: React.FC<ThemedFilterProps> = ({
               />
               <ThemedText>{t(`filter.${filter.name}`)}</ThemedText>
             </View>
-            <Ionicons size={21} name="ellipse-outline" />
-            {/* /<Ionicons size={21} name="checkmark-circle-outline" /> */}
+
+            <Ionicons
+              size={21}
+              name={isSelected ? "checkmark-circle-outline" : "ellipse-outline"}
+            />
           </View>
           <Spacer height={8} />
-        </>
+        </Pressable>
       );
     });
   };
@@ -104,6 +119,8 @@ const ThemedFilter: React.FC<ThemedFilterProps> = ({
         </ThemedText>
         <Spacer height={20} />
         {createFilter()}
+        <Spacer height={20} />
+        <ThemedButton />
       </ThemedModal>
     </View>
   );
