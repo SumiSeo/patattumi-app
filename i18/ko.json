@@ -26,8 +26,6 @@
     "filter": "필터"
   },
   "filter": {
-    "Category": "카테고리",
-    "Ingredients": "재료",
     "vegetarian": "베지테리언",
     "pork": "돼지고기 없음",
     "beef": "소고기 없음",
@@ -35,5 +33,12 @@
     "dessert": "디저트",
     "guide": "요리 백서",
     "button": "필터 적용하기"
+  },
+  "chat": {
+    "write": "작성하기",
+    "title": "제목",
+    "content": "본문",
+    "comment": "댓글",
+    "loading:": "Loading..."
   }
 }

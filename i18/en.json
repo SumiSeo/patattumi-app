@@ -35,5 +35,11 @@
     "dessert": "Dessert",
     "guide": "Culinary Guide",
     "button": "Apply Filters"
+  },
+  "chat": {
+    "write": "Write",
+    "title": "Title",
+    "content": "Content",
+    "comment": "Comment"
   }
 }

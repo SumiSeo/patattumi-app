@@ -3,6 +3,7 @@ import createPostFrancophone from "@/app/api/posts/createPostFrancophone";
 import createPostKorea from "@/app/api/posts/createPostKorea";
 import { useUser } from "@/hooks/useUser";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, TextInput, View } from "react-native";
 import ThemedButton from "../ThemedButton";
 import ThemedText from "../ThemedText";
@@ -20,6 +21,7 @@ const WritePublicaton = ({
   setOpen,
   setNewlyPublished,
 }: WriteCommentProps) => {
+  const { t } = useTranslation();
   const { user, logout } = useUser();
   const [title, setTitle] = useState("");
   const [comment, setComment] = useState("");
@@ -68,20 +70,20 @@ const WritePublicaton = ({
       </ThemedText>
       <TextInput
         style={styles.input}
-        placeholder="Titre..."
+        placeholder={t("chat.title")}
         value={title}
         onChangeText={setTitle}
         multiline
       />
       <TextInput
         style={[styles.input, { height: 200, marginBottom: 10 }]}
-        placeholder="Votre contenu..."
+        placeholder={t("chat.content")}
         value={comment}
         onChangeText={setComment}
         multiline
       />
       <ThemedButton
-        text={loading ? "Loading..." : "Écrire"}
+        text={loading ? t("chat.loading") : t("chat.write")}
         handleSubmit={handleSubmit}
         disabled={loading}
       />

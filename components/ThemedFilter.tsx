@@ -61,7 +61,6 @@ const ThemedFilter: React.FC<ThemedFilterProps> = ({
           setTempSelected([...tempSelected, filter.value]);
         }
       };
-
       return (
         <Pressable key={filter.value} onPress={toggleFilter}>
           <View

@@ -3,6 +3,7 @@ import createCommentFrancophone from "@/app/api/comments/createCommentFrancophon
 import createCommentKorea from "@/app/api/comments/createCommentKorea";
 import { useUser } from "@/hooks/useUser";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, TextInput, View } from "react-native";
 import ThemedButton from "../ThemedButton";
 import ThemedText from "../ThemedText";
@@ -22,6 +23,7 @@ const WriteComment = ({
   setOpen,
   setNewlyPublished,
 }: WriteCommentProps) => {
+  const { t } = useTranslation();
   const { user, logout } = useUser();
   const [comment, setComment] = useState("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -69,13 +71,13 @@ const WriteComment = ({
       </ThemedText>
       <TextInput
         style={styles.input}
-        placeholder="Votre commentaire..."
+        placeholder={t("chat.comment")}
         value={comment}
         onChangeText={setComment}
         multiline
       />
       <ThemedButton
-        text={loading ? "Loading..." : "Écrire"}
+        text={loading ? t("chat.loading") : t("chat.write")}
         handleSubmit={handleSubmit}
         disabled={loading}
       />
