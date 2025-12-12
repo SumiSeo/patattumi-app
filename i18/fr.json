@@ -45,6 +45,8 @@
   "courses": {
     "culture": "Cours de culture",
     "travel": "Astuces pour voyager en Corée",
-    "blog": "Journal K-Culture"
+    "blog": "Journal K-Culture",
+    "korean": "Apprendre le coréen",
+    "explain": "Description du cours de coréen"
   }
 }

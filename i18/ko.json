@@ -44,6 +44,8 @@
   "courses": {
     "culture": "한국 문화 배우기",
     "travel": "한국 여행 꿀팁",
-    "blog": "K-문화 다이어리"
+    "blog": "K-문화 다이어리",
+    "korean": "한국말 배우기",
+    "explain": "한국말 수업 설명"
   }
 }

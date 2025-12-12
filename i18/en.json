@@ -45,6 +45,8 @@
   "courses": {
     "culture": "Learn Korean Culture",
     "travel": "Korea Travel Tips",
-    "blog": "K-Culture Diary"
+    "blog": "K-Culture Diary",
+    "korean": "Learn Korean",
+    "explain": "Korean Class Description"
   }
 }
