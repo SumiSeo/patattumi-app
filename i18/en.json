@@ -14,7 +14,8 @@
     "language": "App Language",
     "rule": "Rules",
     "urgence": "Emergency Contacts",
-    "delete": "Delete Account"
+    "delete": "Delete Account",
+    "font": "My favorite Font"
   },
   "nav": {
     "culture": "Culture & Travel",

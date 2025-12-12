@@ -14,7 +14,8 @@
     "language": "어플리케이션 언어",
     "rule": "이용 규칙",
     "urgence": "긴급 연락망",
-    "delete": "계정 삭제하기"
+    "delete": "계정 삭제하기",
+    "font": "폰트 설정"
   },
   "nav": {
     "culture": "문화 & 여행",

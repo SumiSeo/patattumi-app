@@ -14,7 +14,8 @@
     "language": "Langue préférée",
     "rule": "Régle à respecter",
     "urgence": "Urgence",
-    "delete": "Supprimer mon compte"
+    "delete": "Supprimer mon compte",
+    "font": "Police préférée"
   },
   "nav": {
     "culture": "Culture & Voyage",

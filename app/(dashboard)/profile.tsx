@@ -13,16 +13,22 @@ const Profile = () => {
     { name: "age", title: "Âge", value: "koreanAge", id: 2 },
     { name: "animal", title: "Animal totem", value: "koreanTotem", id: 1 },
     {
-      name: "support",
-      title: "Soutien Patattumi",
-      value: "support",
-      id: -3,
-    },
-    {
       name: "language",
       title: "Langue préférée",
       value: "language",
       id: -4,
+    },
+    {
+      name: "font",
+      title: "Police préférée",
+      value: "font",
+      id: -6,
+    },
+    {
+      name: "support",
+      title: "Soutien Patattumi",
+      value: "support",
+      id: -3,
     },
     {
       name: "rule",

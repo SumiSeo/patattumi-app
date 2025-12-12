@@ -3,6 +3,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { Pressable, StyleSheet, View } from "react-native";
 import DeleteAccount from "../Auth/DeleteAccount";
+import FontOption from "../ProfileExtraComp/FontOption";
 import Language from "../ProfileExtraComp/Language";
 import Rule from "../ProfileExtraComp/Rule";
 import Support from "../ProfileExtraComp/Support";
@@ -35,6 +36,7 @@ const ProfileAssetCard = ({
     rule: "information-circle-outline",
     delete: "trash-outline",
     support: "heart-outline",
+    font: "text-outline",
   } as const;
 
   const userInfo = {
@@ -68,6 +70,7 @@ const ProfileAssetCard = ({
         if (id === -3) return <Support />;
         if (id === -4) return <Language />;
         if (id === -5) return <Rule />;
+        if (id === -6) return <FontOption />;
         else
           return (
             <Pressable
