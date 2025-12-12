@@ -28,6 +28,7 @@ import ThemedVlog from "@/components/Vlog/ThemedVlog";
 import { Vlog } from "@/types/ThemedVlogPType";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Image, ScrollView, StyleSheet } from "react-native";
 
 const images = {
@@ -48,6 +49,7 @@ const images = {
 
 const CultureDetail = () => {
   const { id } = useLocalSearchParams();
+  const { t } = useTranslation();
   const key = id as keyof typeof images;
   const selectedData = data.find((d) => d.id === Number(id)) as Vlog;
 
@@ -72,7 +74,12 @@ const CultureDetail = () => {
       <ScrollView contentContainerStyle={{ padding: 10 }}>
         <ThemedCard style={styles.card}>
           <ThemedText title style={{ fontSize: 16, marginBottom: 10 }}>
-            {selectedData?.course}
+            {selectedData.type === "culture" &&
+              selectedData.course + " " + t("courses.culture")}
+            {selectedData.type === "travel" &&
+              selectedData.course + " " + t("courses.travel")}
+            {selectedData.type === "blog" &&
+              selectedData.course + " " + t("courses.blog")}
           </ThemedText>
           <ThemedText title style={{ fontSize: 13 }}>
             {selectedData?.title}

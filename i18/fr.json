@@ -41,5 +41,10 @@
     "title": "Titre",
     "content": "Contenu",
     "comment": "Commentaire"
+  },
+  "courses": {
+    "culture": "Cours de culture",
+    "travel": "Astuces pour voyager en Corée",
+    "blog": "Journal K-Culture"
   }
 }

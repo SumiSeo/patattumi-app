@@ -40,5 +40,10 @@
     "content": "본문",
     "comment": "댓글",
     "loading:": "Loading..."
+  },
+  "courses": {
+    "culture": "한국 문화 배우기",
+    "travel": "한국 여행 꿀팁",
+    "blog": "K-문화 다이어리"
   }
 }

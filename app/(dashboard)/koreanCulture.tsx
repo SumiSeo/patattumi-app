@@ -32,7 +32,12 @@ const KoreanCulture = () => {
               )}
               <View style={{ marginLeft: 10 }}>
                 <ThemedText title style={{ fontSize: 17, marginBottom: 4 }}>
-                  {item.course}
+                  {item.type === "culture" &&
+                    item.course + " " + t("courses.culture")}
+                  {item.type === "travel" &&
+                    item.course + " " + t("courses.travel")}
+                  {item.type === "blog" &&
+                    item.course + " " + t("courses.blog")}
                 </ThemedText>
                 <ThemedText
                   numberOfLines={2}
