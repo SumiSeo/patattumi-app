@@ -29,7 +29,10 @@ const KoreanLanguage = () => {
               )}
               <View style={{ marginLeft: 10 }}>
                 <ThemedText title style={{ fontSize: 17, marginBottom: 4 }}>
-                  {item.course}
+                  {item.type === "korean" &&
+                    item.course + " " + t("courses.korean")}
+                  {item.type === "explain" &&
+                    item.course + " " + t("courses.explain")}
                 </ThemedText>
                 <ThemedText
                   numberOfLines={2}

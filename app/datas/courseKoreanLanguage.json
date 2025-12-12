@@ -1,85 +1,85 @@
 [
   {
     "id": 1,
-    "type": "question",
-    "course": "Cours de coréen 01.",
+    "type": "korean",
+    "course": "01.",
     "title": "Apprenez des EASY expression coréennes en 100 secondes",
     "description": "Découvrez des EASY expressions coréennes, apprenez leur prononciation et comprenez leur signification pour les utiliser facilement au quotidien"
   },
   {
     "id": 2,
-    "type": "solution",
-    "course": "Explication de coréen 01.",
+    "type": "explain",
+    "course": "01.",
     "title": "Apprenez des EASY expression coréennes.",
     "description": "Découvrez des EASY expressions coréennes, apprenez leur prononciation et comprenez leur signification pour les utiliser facilement au quotidien"
   },
   {
     "id": 3,
-    "type": "question",
-    "course": "Cours de coréen 02.",
+    "type": "korean",
+    "course": "02.",
     "title": "Apprenez 10 expressions coréennes pratiques en 100 secondes",
     "description": "En seulement 100 secondes, découvrez et mémorisez 10 expressions coréennes utiles pour vos conversations quotidiennes "
   },
   {
     "id": 4,
-    "type": "solution",
-    "course": "Explication de coréen 02.",
+    "type": "explain",
+    "course": "02.",
     "title": "Apprenez 10 expressions coréennes pratiques en 100 secondes",
     "description": "En seulement 100 secondes, découvrez et mémorisez 10 expressions coréennes utiles pour vos conversations quotidiennes "
   },
   {
     "id": 5,
-    "type": "question",
-    "course": "Cours de coréen 03.",
+    "type": "korean",
+    "course": "03.",
     "title": "Apprenez 10 argots coréens en 100 secondes.",
     "description": "En seulement 100 secondes, découvrez et mémorisez 10 expressions argots coréens utiles pour votre quotidien !"
   },
   {
     "id": 6,
-    "type": "solution",
-    "course": "Explication de coréen 03.",
+    "type": "explain",
+    "course": "03.",
     "title": "Apprenez 10 argots coréens en 100 secondes.",
     "description": "En seulement 100 secondes, découvrez et mémorisez 10 expressions argots coréens utiles pour votre quotidien !"
   },
   {
     "id": 7,
-    "type": "question",
-    "course": "Cours de coréen 04.",
+    "type": "korean",
+    "course": "04.",
     "title": "Apprenez 10 mots coréens pour l'hôpital en 100 secondes",
     "description": " Découvrez des mots coréens pratiques pour l'hôpital, apprenez leur prononciation et comprenez leur signification pour les utiliser facilement lors de vos visites médicales."
   },
   {
     "id": 8,
-    "type": "solution",
-    "course": "Explication de coréen 04.",
+    "type": "explain",
+    "course": "04.",
     "title": "Apprenez 10 mots coréens pour l'hôpital en 100 secondes",
     "description": " Découvrez des mots coréens pratiques pour l'hôpital, apprenez leur prononciation et comprenez leur signification pour les utiliser facilement lors de vos visites médicales."
   },
   {
     "id": 9,
-    "type": "question",
-    "course": "Cours de coréen 05.",
+    "type": "korean",
+    "course": "05.",
     "title": "Apprenez 10 mots coréens pour les transports en commun en 100 secondes",
     "description": "Découvrez des mots coréens pratiques pour les transports en commun, apprenez leur prononciation et comprenez leur signification pour les utiliser facilement lors de vos trajets en bus, métro ou train "
   },
   {
     "id": 10,
-    "type": "solution",
-    "course": "Explication de coréen 05.",
+    "type": "explain",
+    "course": "05.",
     "title": "Apprenez 10 mots coréens pour les transports en commun en 100 secondes",
     "description": "Découvrez des mots coréens pratiques pour les transports en commun, apprenez leur prononciation et comprenez leur signification pour les utiliser facilement lors de vos trajets en bus, métro ou train "
   },
   {
     "id": 11,
-    "type": "question",
-    "course": "Cours de coréen 06.",
+    "type": "korean",
+    "course": "06.",
     "title": "Apprenez 10 mots coréens numériques essentiels en 100 secondes",
     "description": "Découvrez les mots coréens les plus utilisés dans le monde numérique avec leur prononciation et leur signification pour les intégrer naturellement dans votre quotidien digital"
   },
   {
     "id": 12,
-    "type": "solution",
-    "course": "Explication de coréen 06.",
+    "type": "explain",
+    "course": "06.",
     "title": "Apprenez 10 mots coréens numériques essentiels en 100 secondes",
     "description": "Découvrez les mots coréens les plus utilisés dans le monde numérique avec leur prononciation et leur signification pour les intégrer naturellement dans votre quotidien digital"
   }

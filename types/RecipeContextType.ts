@@ -9,8 +9,12 @@ export interface RecipeResponse {
   name: string;
   description: string;
   img: string;
-  is_vegeterain: boolean;
+  is_vegeterian: boolean;
   contains_pork: boolean;
+  contains_beef: boolean;
+  contains_fish: boolean;
+  is_dessert: boolean;
+  is_guide: boolean;
   insta: string;
   tiktok: string;
   youtube: string;

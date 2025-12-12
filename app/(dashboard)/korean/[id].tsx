@@ -18,6 +18,7 @@ import ThemedText from "@/components/ThemedText";
 import ThemedView from "@/components/ThemedView";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Image, ScrollView, StyleSheet } from "react-native";
 const images = {
   "1": img1,
@@ -35,6 +36,7 @@ const images = {
 } as const;
 
 const KoreanLessonDetail = () => {
+  const { t } = useTranslation();
   const { id } = useLocalSearchParams();
   const key = id as keyof typeof images;
   const selectedData = data.find((item) => item.id === Number(id));
@@ -57,7 +59,10 @@ const KoreanLessonDetail = () => {
       <ScrollView contentContainerStyle={{ padding: 10 }}>
         <ThemedCard style={styles.card}>
           <ThemedText title style={{ fontSize: 16, marginBottom: 10 }}>
-            {selectedData?.course}
+            {selectedData?.type === "korean" &&
+              selectedData?.course + " " + t("courses.korean")}
+            {selectedData?.type === "explain" &&
+              selectedData?.course + " " + t("courses.explain")}
           </ThemedText>
           <ThemedText title style={{ fontSize: 13 }}>
             {selectedData?.title}

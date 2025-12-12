@@ -14,13 +14,39 @@
     "language": "Langue préférée",
     "rule": "Régle à respecter",
     "urgence": "Urgence",
-    "delete": "Supprimer mon compte"
+    "delete": "Supprimer mon compte",
+    "font": "Police préférée"
   },
   "nav": {
     "culture": "Culture & Voyage",
     "language": "Apprendre le coréen",
     "chat": "Chat ",
     "recipes": "Recettes",
-    "profil": "Profil"
+    "profil": "Profil",
+    "filter": "Filtres"
+  },
+  "filter": {
+    "Category": "Catégorie",
+    "Ingredients": "Ingrédients",
+    "vegetarian": "Végétarien",
+    "pork": "Sans porc",
+    "beef": "Sans boeuf",
+    "fish": "Contient du poisson",
+    "dessert": "Dessert",
+    "guide": "Guide culinaire",
+    "button": "Appliquer les filtres"
+  },
+  "chat": {
+    "write": "Écrire",
+    "title": "Titre",
+    "content": "Contenu",
+    "comment": "Commentaire"
+  },
+  "courses": {
+    "culture": "Cours de culture",
+    "travel": "Astuces pour voyager en Corée",
+    "blog": "Journal K-Culture",
+    "korean": "Apprendre le coréen",
+    "explain": "Description du cours de coréen"
   }
 }

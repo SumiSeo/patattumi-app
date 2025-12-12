@@ -14,13 +14,39 @@
     "language": "App Language",
     "rule": "Rules",
     "urgence": "Emergency Contacts",
-    "delete": "Delete Account"
+    "delete": "Delete Account",
+    "font": "My favorite Font"
   },
   "nav": {
     "culture": "Culture & Travel",
     "language": "Learn Korean",
     "chat": "Chat ",
     "recipes": "Korean Recipes",
-    "profil": "Profile"
+    "profil": "Profile",
+    "filter": "Filters"
+  },
+  "filter": {
+    "Category": "Category",
+    "Ingredients": "Ingredients",
+    "vegetarian": "Vegetarian",
+    "pork": "Without pork",
+    "beef": "Without beef",
+    "fish": "Contains fish",
+    "dessert": "Dessert",
+    "guide": "Culinary Guide",
+    "button": "Apply Filters"
+  },
+  "chat": {
+    "write": "Write",
+    "title": "Title",
+    "content": "Content",
+    "comment": "Comment"
+  },
+  "courses": {
+    "culture": "Learn Korean Culture",
+    "travel": "Korea Travel Tips",
+    "blog": "K-Culture Diary",
+    "korean": "Learn Korean",
+    "explain": "Korean Class Description"
   }
 }

@@ -11,6 +11,7 @@ import {
 import { dateFormatter } from "@/utils/games/dateFormatter";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import ThemedModal from "../ThemedModal";
 import ThemedText from "../ThemedText";
@@ -22,6 +23,7 @@ export type CommentSectionProps = {
 };
 
 const CommentSection = ({ location, id }: CommentSectionProps) => {
+  const { t } = useTranslation();
   const { user, logout } = useUser();
   const [comments, setComments] = useState<CommentResponseList | null>(null);
   const [showComments, setShowComments] = useState(false);
@@ -128,7 +130,7 @@ const CommentSection = ({ location, id }: CommentSectionProps) => {
         <Pressable onPress={handleSubmit}>
           <View style={styles.writeButton}>
             <ThemedText title style={{ fontSize: 9, color: "white" }}>
-              Écrire
+              {t("chat.write")}
             </ThemedText>
           </View>
         </Pressable>
