@@ -62,28 +62,29 @@ const RecipesComp = () => {
       return;
     }
 
-    const filtered = recipes?.datas.filter((recipe) => {
-      if (!selected || selected.length === 0) return true;
+   const filtered = recipes?.datas.filter((recipe) => {
+     if (!selected || selected.length === 0) return true;
 
-      return selected.every((filter) => {
-        switch (filter) {
-          case "is_vegeterian":
-            return recipe.is_vegeterian === true;
-          case "contains_pork":
-            return recipe.contains_pork === false;
-          case "contains_beef":
-            return recipe.contains_beef === false;
-          case "contains_fish":
-            return recipe.contains_fish === true;
-          case "is_dessert":
-            return recipe.is_dessert === true;
-          case "is_guide":
-            return recipe.is_guide === true;
-          default:
-            return true;
-        }
-      });
-    });
+     return selected.some((filter) => {
+       switch (filter) {
+         case "is_vegeterian":
+           return recipe.is_vegeterian === true;
+         case "contains_pork":
+           return recipe.contains_pork !== true;
+         case "contains_beef":
+           return recipe.contains_beef !== true;
+         case "contains_fish":
+           return recipe.contains_fish === true;
+         case "is_dessert":
+           return recipe.is_dessert === true;
+         case "is_guide":
+           return recipe.is_guide === true;
+         default:
+           return true;
+       }
+     });
+   });
+
     setSelectedRecipes(filtered || []);
   }, [selected, recipes]);
 
