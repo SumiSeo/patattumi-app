@@ -1,4 +1,5 @@
 import ThemedView from "@/components/ThemedView";
+import { FontProvider } from "@/contexts/FontContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { RecipeProvider } from "@/contexts/RecipeContext";
 import { UserProvider } from "@/contexts/UserContext";
@@ -10,28 +11,30 @@ import { StyleSheet } from "react-native";
 const RootLayout = () => {
   return (
     <LanguageProvider>
-      <UserProvider>
-        <RecipeProvider>
-          <ThemedView safe={true}>
-            <StatusBar style="auto" />
-            <Stack
-              screenOptions={{
-                headerTintColor: "#333",
-              }}
-            >
-              <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-              <Stack.Screen
-                name="(dashboard)"
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="index"
-                options={{ title: "Home", headerShown: false }}
-              />
-            </Stack>
-          </ThemedView>
-        </RecipeProvider>
-      </UserProvider>
+      <FontProvider>
+        <UserProvider>
+          <RecipeProvider>
+            <ThemedView safe={true}>
+              <StatusBar style="auto" />
+              <Stack
+                screenOptions={{
+                  headerTintColor: "#333",
+                }}
+              >
+                <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+                <Stack.Screen
+                  name="(dashboard)"
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="index"
+                  options={{ title: "Home", headerShown: false }}
+                />
+              </Stack>
+            </ThemedView>
+          </RecipeProvider>
+        </UserProvider>
+      </FontProvider>
     </LanguageProvider>
   );
 };

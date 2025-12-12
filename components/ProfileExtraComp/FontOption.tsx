@@ -1,45 +1,57 @@
+import { useFont } from "@/hooks/useFont";
 import { useLanguage } from "@/hooks/useLanguage";
-import * as Font from "expo-font";
-import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import React from "react";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 const FontOption = () => {
-  const [isReady, setIsReady] = useState(false);
-
-  useEffect(() => {
-    const loadFonts = async () => {
-      await Font.loadAsync({
-        cuteFont: require("../../assets/fonts/ChangwonDangamRound.otf"),
-        traditionalFont: require("../../assets/fonts/Shilla_Culture(M).otf"),
-      });
-      setIsReady(true);
-    };
-
-    loadFonts();
-  }, []);
-
+  const { isReady, setFont } = useFont();
   const { setLanguage } = useLanguage();
 
-  // 언어 옵션 리스트
-  const languages = [
-    { code: "ko", flag: "🇰🇷" },
-    { code: "fr", flag: "🇫🇷" },
-    { code: "en", flag: "🇬🇧" },
-  ];
+  const changeFontAndLanguage = (fontName: string, lang: string) => {
+    setFont(fontName);
+    setLanguage(lang);
+  };
 
   return (
     <View>
-      {/* {languages.map((lang) => (
-        <TouchableOpacity
-          key={lang.code}
-          onPress={() => setLanguage(lang.code)}
-        >
-          <ThemedText style={styles.flag}>{lang.flag}</ThemedText>
-        </TouchableOpacity>
-      ))} */}
       {isReady && (
-        <View>
-          <Text style={{ fontFamily: "cuteFont" }}>안녕</Text>
+        <View
+          style={{
+            flexDirection: "row",
+            gap: 6,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Pressable onPress={() => changeFontAndLanguage("default", "ko")}>
+            <Text
+              style={[styles.fontText, { fontFamily: "default", fontSize: 14 }]}
+            >
+              가
+            </Text>
+          </Pressable>
+          <Pressable onPress={() => changeFontAndLanguage("cuteFont", "ko")}>
+            <Text
+              style={[
+                styles.fontText,
+                { fontFamily: "cuteFont", fontSize: 13 },
+              ]}
+            >
+              가
+            </Text>
+          </Pressable>
+          <Pressable
+            onPress={() => changeFontAndLanguage("traditionalFont", "ko")}
+          >
+            <Text
+              style={[
+                styles.fontText,
+                { fontFamily: "traditionalFont", fontSize: 16 },
+              ]}
+            >
+              가
+            </Text>
+          </Pressable>
         </View>
       )}
     </View>
@@ -48,4 +60,8 @@ const FontOption = () => {
 
 export default FontOption;
 
-
+const styles = StyleSheet.create({
+  fontText: {
+    fontSize: 16,
+  },
+});
