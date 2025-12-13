@@ -107,7 +107,7 @@ const RecipesComp = () => {
                 <ThemedCard style={styles.card}>
                   <Image
                     source={{
-                      uri: `https://media.aboutsauce.com/${item.id}.jpg?quality=10`,
+                      uri: `https://media.aboutsauce.com/${item.img}.jpg?quality=10`,
                     }}
                     style={{ width: 60, height: 60, borderRadius: 10 }}
                   />
