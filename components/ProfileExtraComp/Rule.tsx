@@ -1,11 +1,11 @@
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import {
-    Linking,
-    Pressable,
-    ScrollView,
-    TouchableOpacity,
-    View,
+  Linking,
+  Pressable,
+  ScrollView,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import ThemedModal from "../ThemedModal";
 import ThemedText from "../ThemedText";
@@ -29,7 +29,7 @@ const rules = [
     label: "Suggestion de Patattumi",
     description:
       "Cet espace a été créé par PATATTUMI😉, mais il est destiné à toutes les personnes qui aiment la Corée. Si vous souhaitez me contacter, veuillez utiliser la section Contact.",
-    contact: "https://patattumi.com/",
+    contact: "https://patattumi.com/suggestions",
   },
 ];
 
