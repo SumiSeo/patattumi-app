@@ -126,7 +126,11 @@ const Chat = () => {
               />
             </ThemedModal>
             <Pressable onPress={handleSubmit}>
-              <Ionicons size={26} name="create-outline" />
+              <Ionicons
+                style={{ marginBottom: 2 }}
+                size={26}
+                name="create-outline"
+              />
             </Pressable>
           </View>
         </View>
@@ -185,6 +189,8 @@ const styles = StyleSheet.create({
   },
   icons: {
     flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     gap: 4,
     marginRight: 2,
   },

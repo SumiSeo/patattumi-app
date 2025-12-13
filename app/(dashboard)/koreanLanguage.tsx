@@ -21,10 +21,10 @@ const KoreanLanguage = () => {
         renderItem={({ item }) => (
           <Pressable onPress={() => router.push(`/korean/${item.id}`)}>
             <ThemedCard style={styles.card}>
-              {item.type === "question" && (
+              {item.type === "korean" && (
                 <Ionicons size={35} name="alarm-outline" />
               )}
-              {item.type === "solution" && (
+              {item.type === "explain" && (
                 <Ionicons size={35} name="bulb-outline" />
               )}
               <View style={{ marginLeft: 10 }}>
